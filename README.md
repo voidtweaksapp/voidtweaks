@@ -11,8 +11,8 @@
 
 <br>
 
-<a href="https://github.com/voidtweaksapp/voidtweaks/releases/latest"><img src="https://img.shields.io/github/v/release/voidtweaksapp/voidtweaks?style=flat-square&color=27272A&label=версия" alt="Версия"></a>
-<a href="https://github.com/voidtweaksapp/voidtweaks/releases"><img src="https://img.shields.io/github/downloads/voidtweaksapp/voidtweaks/total?style=flat-square&color=3F3F46&label=скачиваний" alt="Скачивания"></a>
+<a href="https://github.com/voidtweaksapp/voidtweaks/releases/latest"><img src="https://img.shields.io/github/v/release/voidtweaksapp/voidtweaks?style=flat-square&color=27272A&label=%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F" alt="Версия"></a>
+<a href="https://github.com/voidtweaksapp/voidtweaks/releases"><img src="https://img.shields.io/github/downloads/voidtweaksapp/voidtweaks/total?style=flat-square&color=3F3F46&label=%D1%81%D0%BA%D0%B0%D1%87%D0%B8%D0%B2%D0%B0%D0%BD%D0%B8%D0%B9" alt="Скачивания"></a>
 <img src="https://img.shields.io/badge/Windows-10%20%2F%2011%20x64-52525B?style=flat-square" alt="Windows 10 / 11 x64">
 
 </div>
