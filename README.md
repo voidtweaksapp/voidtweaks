@@ -1,11 +1,11 @@
 <div align="center">
 
-<img src="docs/readme/hero.png" alt="VOID TWEAKS — бесплатный оптимизатор Windows 10 / 11" width="100%">
+<img src="docs/readme/hero.png" alt="VOIDTWEAKS — бесплатный оптимизатор Windows 10 / 11" width="100%">
 
 <br><br>
 
 <a href="https://github.com/voidtweaksapp/voidtweaks/releases/latest/download/VOIDTWEAKSInstaller.exe"><img src="docs/readme/btn_download.png" alt="Скачать для Windows" height="48"></a>&nbsp;
-<a href="https://voidtweaksapp.github.io/voidtweaks/"><img src="docs/readme/btn_site.png" alt="Сайт" height="48"></a>&nbsp;
+<a href="https://voidtweaksapp.github.io/voidtweaks/"><img src="docs/readme/btn_site.png" alt="VOIDTWEAKS — официальный сайт" height="48"></a>&nbsp;
 <a href="https://www.youtube.com/@VoidTweaksApp"><img src="docs/readme/btn_youtube.png" alt="YouTube" height="48"></a>&nbsp;
 <a href="https://t.me/disxrm"><img src="docs/readme/btn_telegram.png" alt="Telegram" height="48"></a>
 
@@ -17,6 +17,8 @@
 
 </div>
 
+**Официальный сайт: [VOIDTWEAKS — оптимизатор Windows 10/11](https://voidtweaksapp.github.io/voidtweaks/)**
+
 ## Честный замер
 
 <img src="docs/readme/stats.png" alt="−26% процессов, −31% служб, −402 МБ ОЗУ" width="100%">
@@ -25,9 +27,9 @@
 
 ## Возможности
 
-<img src="docs/readme/features.png" alt="Возможности VOID TWEAKS" width="100%">
+<img src="docs/readme/features.png" alt="Возможности VOIDTWEAKS" width="100%">
 
-<img src="docs/readme/screenshot.png" alt="Окно VOID TWEAKS" width="100%">
+<img src="docs/readme/screenshot.png" alt="Окно VOIDTWEAKS" width="100%">
 
 ## Системные требования
 
@@ -38,7 +40,7 @@
 
 ## Обратная связь
 
-Нашли ошибку? Создайте [Issue](https://github.com/voidtweaksapp/voidtweaks/issues): версия VOID TWEAKS, версия Windows, конфигурация ПК и шаги до проблемы.
+Нашли ошибку? Создайте [Issue](https://github.com/voidtweaksapp/voidtweaks/issues): версия VOIDTWEAKS, версия Windows, конфигурация ПК и шаги до проблемы.
 Не прикладывайте в открытый Issue ключи лицензии, токены и персональные данные.
 
-<div align="center"><sub>VOID TWEAKS · Windows optimization & system tuning</sub></div>
+<div align="center"><sub>VOIDTWEAKS · Windows optimization & system tuning</sub></div>
