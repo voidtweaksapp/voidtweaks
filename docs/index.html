@@ -48,7 +48,7 @@
   "screenshot": "https://voidtweaksapp.github.io/voidtweaks/readme/screenshot.png",
   "sameAs": [
     "https://github.com/voidtweaksapp/voidtweaks",
-    "https://t.me/disxrm",
+    "https://github.com/voidtweaksapp/voidtweaks/issues",
     "https://www.youtube.com/@VoidTweaksApp"
   ],
   "publisher": {
@@ -86,7 +86,7 @@
       "sameAs": [
         "https://github.com/voidtweaksapp",
         "https://github.com/voidtweaksapp/voidtweaks",
-        "https://t.me/disxrm",
+        "https://github.com/voidtweaksapp/voidtweaks/issues",
         "https://www.youtube.com/@VoidTweaksApp"
       ]
     }
@@ -318,6 +318,34 @@ section.block { padding: 96px 0; }
 .pro-list b { color: #fff; }
 .pay { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; margin-top: 14px; font-size: 13px; color: var(--text-3); }
 
+/* ---------- benchmark ---------- */
+.bench-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.bench-stat { padding: 26px 24px; border-radius: var(--radius); background: linear-gradient(180deg, #101013 0%, #0B0B0D 100%); border: 1px solid var(--line); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+.bench-stat.light { background: #F4F4F5; border-color: #fff; color: #09090B; }
+.bench-stat b { display: block; font-size: clamp(32px, 4vw, 46px); line-height: 1; letter-spacing: -1.8px; font-weight: 800; }
+.bench-stat span { display: block; margin-top: 10px; font-size: 15px; font-weight: 600; }
+.bench-stat small { display: block; margin-top: 8px; font-size: 12px; color: var(--text-3); }
+.bench-stat.light small { color: #52525B; }
+.bench-fps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 14px; padding: 22px 26px; }
+.bench-fps b { display: block; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+.bench-fps span { display: block; margin-top: 4px; font-size: 13px; color: var(--text-2); }
+.bench-note { margin: 14px auto 0; max-width: 760px; text-align: center; font-size: 12.5px; line-height: 1.6; color: var(--text-3); }
+@media (max-width: 760px) { .bench-grid { grid-template-columns: 1fr; } .bench-fps { grid-template-columns: 1fr; gap: 16px; } }
+
+/* ---------- file check ---------- */
+.file-check { margin-top: 18px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: #08080A; }
+.file-check .fc-top { display: flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 800; letter-spacing: 0.8px; text-transform: uppercase; color: var(--text-2); }
+.file-check .fc-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--success); box-shadow: 0 0 12px rgba(34,197,94,0.6); }
+.file-check .fc-row { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+.file-check code { flex: 1; min-width: 0; font-family: ui-monospace, Consolas, monospace; font-size: 11px; color: var(--text-2); overflow-wrap: anywhere; line-height: 1.5; }
+.file-check .fc-copy { flex-shrink: 0; height: 30px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: transparent; color: var(--text-2); font-size: 11.5px; font-weight: 600; cursor: pointer; }
+.file-check .fc-copy:hover { color: #fff; border-color: #52525B; }
+.file-check .fc-note { margin: 10px 0 0; font-size: 12px; line-height: 1.55; color: var(--text-3); }
+.file-check details { margin-top: 10px; font-size: 12px; color: var(--text-3); }
+.file-check summary { cursor: pointer; color: var(--text-2); }
+.file-check details p { margin: 8px 0 0; }
+.file-check details code { display: block; margin-top: 6px; padding: 8px; border-radius: 8px; background: #0D0D0F; border: 1px solid var(--line); font-size: 10.5px; }
+
 /* ---------- faq ---------- */
 .faq-wrap { display: grid; grid-template-columns: 1fr 1.6fr; gap: 56px; align-items: start; }
 @media (max-width: 860px) { .faq-wrap { grid-template-columns: 1fr; gap: 28px; } }
@@ -417,7 +445,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
 <!-- ================= HERO ================= -->
 <section class="hero">
   <div class="container">
-    <a href="#download" class="badge"><i></i><span data-i18n="hero_badge">VOIDTWEAKS · версия</span> <b data-ver>1.0.1</b></a>
+    <a href="#download" class="badge"><i></i><span data-i18n="hero_badge">VOIDTWEAKS · версия</span> <b data-ver>1.0.3</b></a>
     <h1 data-i18n-html="hero_title"><span class="line">Чистая Windows.</span><span class="line muted">Больше FPS. Меньше задержек.</span></h1>
     <p class="lead" data-i18n="hero_lead">VOID TWEAKS отключает телеметрию и лишние службы, настраивает систему под игры и откатывает любое изменение в один клик.</p>
     <div class="actions">
@@ -465,6 +493,28 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
     <div class="fact"><b>0</b><span data-i18n="fact4">вмешательств в файлы игр</span></div>
   </div>
 </div>
+
+<!-- ================= BENCHMARK ================= -->
+<section class="block" id="benchmark" style="padding-bottom:0">
+  <div class="container">
+    <div class="head">
+      <div class="eyebrow" data-i18n="bench_eyebrow">Честный замер</div>
+      <h2 data-i18n="bench_title">Без магии. Просто цифры</h2>
+      <p data-i18n="bench_desc">Один и тот же ПК до и после VOID TWEAKS. Замеры с методикой, а не обещания.</p>
+    </div>
+    <div class="bench-grid">
+      <div class="bench-stat light"><b>−26%</b><span data-i18n="bench_p1">процессов</span><small>110 → 81</small></div>
+      <div class="bench-stat"><b>−31%</b><span data-i18n="bench_p2">служб</span><small>75 → 52</small></div>
+      <div class="bench-stat"><b data-i18n="bench_p3_b">−402 МБ</b><span data-i18n="bench_p3">ОЗУ после загрузки</span><small data-i18n="bench_p3_s">3646 → 3244 МБ</small></div>
+    </div>
+    <div class="card bench-fps">
+      <div><b>283 → 288</b><span data-i18n="bench_fps">FPS в CS2, +1.5%</span></div>
+      <div><b data-i18n="bench_low_b">1% low</b><span data-i18n="bench_low">в пределах погрешности</span></div>
+      <div><b data-i18n="bench_runs_b">3 прогона</b><span data-i18n="bench_runs">PresentMon, Dust2, 1280×960</span></div>
+    </div>
+    <p class="bench-note" data-i18n="bench_note">Ryzen 5 5600 + GTX 1650, Windows 11. Метрики сняты через 3 минуты после загрузки. Результат зависит от конфигурации.</p>
+  </div>
+</section>
 
 <!-- ================= FEATURES ================= -->
 <section class="block" id="features">
@@ -614,15 +664,15 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
     <div class="faq-side">
       <div class="eyebrow">FAQ</div>
       <h2 data-i18n="faq_title">Частые вопросы</h2>
-      <p data-i18n="faq_side">Не нашли ответ? Напишите — отвечаем лично.</p>
-      <a href="https://t.me/disxrm" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="faq_cta">Написать в Telegram</a>
+      <p data-i18n="faq_side">Не нашли ответ? Откройте issue на GitHub — ответим там.</p>
+      <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="faq_cta">Задать вопрос на GitHub</a>
     </div>
     <div class="faq">
       <details><summary><span data-i18n="faq_q1">Это безопасно для системы?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a1">Да. Твики применяются через официальные API Windows, а перед первым изменением создаётся точка восстановления. Откатить можно отдельный твик или всю сессию.</div></details>
       <details><summary><span data-i18n="faq_q2">Могут ли забанить в играх?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a2">Нет. VOID TWEAKS не трогает файлы игр, не внедряется в процессы и не меняет их память — только настройки системы и реестра.</div></details>
       <details><summary><span data-i18n="faq_q3">Windows пишет «Система Windows защитила ваш компьютер»</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a3">Это SmartScreen — он предупреждает о любых новых программах. Скачивайте установщик только с этой страницы или из GitHub Releases, нажмите «Подробнее» → «Выполнить в любом случае».</div></details>
       <details><summary><span data-i18n="faq_q4">Нужен ли PRO для обычной оптимизации?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a4">Нет. Твики, мониторинг, автозагрузка и встроенные утилиты бесплатны навсегда. PRO нужен для прерываний, GPU-разделов и раннего доступа.</div></details>
-      <details><summary><span data-i18n="faq_q5">Как оплатить и получить ключ?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n-html="faq_a5">Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится прямо на странице — вставьте его в приложение. Вопросы — в <a href="https://t.me/disxrm" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">Telegram</a>.</div></details>
+      <details><summary><span data-i18n="faq_q5">Как оплатить и получить ключ?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n-html="faq_a5">Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится прямо на странице — вставьте его в приложение. Вопросы — в <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.</div></details>
     </div>
     </div>
   </div>
@@ -635,18 +685,30 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
       <div class="card dl-main">
         <img src="logo.png" alt="" width="56" height="56" loading="lazy">
         <h3 data-i18n="dl_title">Скачать VOID TWEAKS</h3>
-        <div class="meta"><span data-i18n="dl_version">Версия</span> <b data-ver>1.0.1</b> · Windows x64 · <span data-asset-size>186 МБ</span></div>
+        <div class="meta"><span data-i18n="dl_version">Версия</span> <b data-ver>1.0.3</b> · Windows x64 · <span data-asset-size>106 МБ</span></div>
         <a href="https://github.com/voidtweaksapp/voidtweaks/releases/latest/download/VOIDTWEAKSInstaller.exe" class="btn btn-primary btn-lg btn-block" id="downloadBtn">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.75 3.25a.75.75 0 0 0-1.5 0v10.94l-4.22-4.22a.75.75 0 0 0-1.06 1.06l5.5 5.5a.75.75 0 0 0 1.06 0l5.5-5.5a.75.75 0 0 0-1.06-1.06l-4.22 4.22V3.25Z"/><path d="M4 15.75a.75.75 0 0 0-1.5 0v2.5A3.25 3.25 0 0 0 5.75 21.5h12.5A3.25 3.25 0 0 0 21.5 18.25v-2.5a.75.75 0 0 0-1.5 0v2.5c0 .966-.784 1.75-1.75 1.75H5.75c-.966 0-1.75-.784-1.75-1.75v-2.5Z"/></svg>
           <span data-i18n="dl_btn">Скачать установщик</span>
         </a>
+        <div class="file-check">
+          <div class="fc-top"><span class="fc-dot"></span><span data-i18n="file_title">Проверка файла</span></div>
+          <div class="fc-row">
+            <code id="fileSha" data-sha>c29527a6eb68f6ff81bf5c9cd40c1cc877fe9895709d7ef70d5117acbfcf26fe</code>
+            <button type="button" class="fc-copy" id="copySha" data-i18n="file_copy">Копировать</button>
+          </div>
+          <p class="fc-note" data-i18n="file_note">Сверьте хеш после скачивания — так вы убедитесь, что файл не подменили.</p>
+          <details>
+            <summary data-i18n="file_how">Как проверить</summary>
+            <p><span data-i18n="file_how_text">PowerShell:</span> <code>Get-FileHash .\VOIDTWEAKSInstaller.exe -Algorithm SHA256</code></p>
+          </details>
+        </div>
         <ul class="req">
           <li data-i18n="req1">Windows 10 / 11, 64-bit</li>
           <li data-i18n="req2">Права администратора</li>
           <li data-i18n="req3">.NET 10 и драйвер PawnIO ставятся автоматически</li>
           <li data-i18n="req4">~250 МБ на системном диске</li>
         </ul>
-        <div class="dl-count" data-count-wrap data-min="100" hidden><span data-i18n="dl_downloads">Скачано</span> <b data-download-count>—</b></div>
+        <div class="dl-count" data-count-wrap data-min="1" hidden><span data-i18n="dl_downloads">Скачано</span> <b data-download-count>—</b></div>
       </div>
       <div class="card news" id="logList">
         <h4 data-i18n="log_title">Что нового</h4>
@@ -664,7 +726,8 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
     <nav>
       <a href="#features" data-i18n="nav_features">Возможности</a>
       <a href="#pricing" data-i18n="nav_pricing">Тарифы</a>
-      <a href="https://t.me/disxrm" target="_blank" rel="noopener" data-i18n="foot_tg">Поддержка в Telegram</a>
+      <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" data-i18n="foot_support">Поддержка на GitHub</a>
+      <a href="https://www.youtube.com/@VoidTweaksApp" target="_blank" rel="noopener" data-i18n="foot_yt">YouTube</a>
     </nav>
     <span>© 2026 VoidTweaks</span>
   </div>
@@ -703,7 +766,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
     <div class="ord-state s-error">
       <h3 data-i18n="ord_err_t">Что-то пошло не так</h3>
       <p id="ordErr"></p>
-      <a href="https://t.me/disxrm" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="foot_tg">Поддержка в Telegram</a>
+      <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="foot_support">Поддержка на GitHub</a>
       <button type="button" class="btn btn-ghost" data-ord-close data-i18n="ord_close">Закрыть</button>
     </div>
   </div>
@@ -720,7 +783,7 @@ const I18N = {
     hero_title: '<span class="line">Чистая Windows.</span><span class="line muted">Больше FPS. Меньше задержек.</span>',
     viz_tw3: 'Энергосбережение USB', viz_tw3d: 'Мышь и клавиатура без задержек после простоя',
     viz_ping: 'Пинг<b>14 ms</b>', viz_on: 'вкл', viz_off: 'выкл',
-    faq_side: 'Не нашли ответ? Напишите — отвечаем лично.', faq_cta: 'Написать в Telegram',
+    faq_side: 'Не нашли ответ? Откройте issue на GitHub — ответим там.', faq_cta: 'Задать вопрос на GitHub',
     hero_lead: 'VOID TWEAKS отключает телеметрию и лишние службы, настраивает систему под игры и откатывает любое изменение в один клик.',
     cta_free: 'Скачать бесплатно', cta_pro: 'PRO от 99 ₽',
     hero_note: 'Бесплатная версия навсегда · <b>Windows 10 / 11 x64</b>',
@@ -748,6 +811,13 @@ const I18N = {
     p3_desc: 'Один платёж — PRO навсегда. Дешевле, чем полгода на тарифе «Месяц».', p3_cta: 'Купить навсегда',
     pro_list: '<b>PRO открывает:</b> управление прерываниями (MSI, IRQ), разделы NVIDIA и AMD, скрытые твики, бета-версии и приоритетные обновления.',
     pay1: 'Оплата через ЮKassa — карты и СБП', pay2: 'Ключ привязывается к ПК по HWID',
+    bench_eyebrow: 'Честный замер',
+    bench_title: 'Без магии. Просто цифры',
+    bench_desc: 'Один и тот же ПК до и после VOID TWEAKS. Замеры с методикой, а не обещания.',
+    bench_p1: 'процессов', bench_p2: 'служб', bench_p3: 'ОЗУ после загрузки', bench_p3_b: '−402 МБ', bench_p3_s: '3646 → 3244 МБ',
+    bench_fps: 'FPS в CS2, +1.5%', bench_low_b: '1% low', bench_low: 'в пределах погрешности',
+    bench_runs_b: '3 прогона', bench_runs: 'PresentMon, Dust2, 1280×960',
+    bench_note: 'Ryzen 5 5600 + GTX 1650, Windows 11. Метрики сняты через 3 минуты после загрузки. Результат зависит от конфигурации.',
     faq_title: 'Частые вопросы',
     faq_q1: 'Это безопасно для системы?',
     faq_a1: 'Да. Твики применяются через официальные API Windows, а перед первым изменением создаётся точка восстановления. Откатить можно отдельный твик или всю сессию.',
@@ -758,13 +828,16 @@ const I18N = {
     faq_q4: 'Нужен ли PRO для обычной оптимизации?',
     faq_a4: 'Нет. Твики, мониторинг, автозагрузка и встроенные утилиты бесплатны навсегда. PRO нужен для прерываний, GPU-разделов и раннего доступа.',
     faq_q5: 'Как оплатить и получить ключ?',
-    faq_a5: 'Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится прямо на странице — вставьте его в приложение. Вопросы — в <a href="https://t.me/disxrm" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">Telegram</a>.',
+    faq_a5: 'Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится прямо на странице — вставьте его в приложение. Вопросы — в <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.',
     dl_title: 'Скачать VOID TWEAKS', dl_version: 'Версия', dl_btn: 'Скачать установщик', dl_downloads: 'Скачано',
+    file_title: 'Проверка файла', file_copy: 'Копировать',
+    file_note: 'Сверьте хеш после скачивания — так вы убедитесь, что файл не подменили.',
+    file_how: 'Как проверить', file_how_text: 'PowerShell:',
     req1: 'Windows 10 / 11, 64-bit', req2: 'Права администратора',
     req3: '.NET 10 и драйвер PawnIO ставятся автоматически', req4: '~250 МБ на системном диске',
     log_title: 'Что нового', log_loading: 'Загружаем релизы…',
     log_empty: 'Не удалось загрузить релизы.', log_all: 'Все версии на GitHub →',
-    foot_tg: 'Поддержка в Telegram',
+    foot_support: 'Поддержка на GitHub', foot_yt: 'YouTube',
     ord_wait_t: 'Проверяем оплату…', ord_wait_d: 'Обычно это занимает несколько секунд. Не закрывайте страницу.',
     ord_done_t: 'Оплата прошла успешно', ord_copy: 'Скопировать ключ', ord_copied: 'Скопировано',
     ord_steps: '<li>Скачайте и установите программу</li><li>Запустите VOIDTWEAKS.exe и нажмите «Запустить оптимизацию»</li><li>Вставьте ключ в появившееся окно</li><li>Нажмите «Активировать»</li>',
@@ -784,7 +857,7 @@ const I18N = {
     hero_title: '<span class="line">Clean Windows.</span><span class="line muted">More FPS. Less latency.</span>',
     viz_tw3: 'USB power saving', viz_tw3d: 'Mouse and keyboard without wake-up lag',
     viz_ping: 'Ping<b>14 ms</b>', viz_on: 'on', viz_off: 'off',
-    faq_side: 'Didn’t find an answer? Message us — we reply personally.', faq_cta: 'Message on Telegram',
+    faq_side: 'Didn’t find an answer? Open a GitHub issue — we’ll reply there.', faq_cta: 'Ask on GitHub',
     hero_lead: 'VOID TWEAKS disables telemetry and useless services, tunes the system for gaming and rolls back any change in one click.',
     cta_free: 'Download free', cta_pro: 'PRO from 99 ₽',
     hero_note: 'Free version forever · <b>Windows 10 / 11 x64</b>',
@@ -812,6 +885,13 @@ const I18N = {
     p3_desc: 'One payment — PRO forever. Costs less than six months on the monthly plan.', p3_cta: 'Buy lifetime',
     pro_list: '<b>PRO unlocks:</b> interrupt control (MSI, IRQ), NVIDIA and AMD sections, hidden tweaks, betas and priority updates.',
     pay1: 'Payment via YooKassa — cards and SBP', pay2: 'Key binds to your PC via HWID',
+    bench_eyebrow: 'Honest benchmark',
+    bench_title: 'No magic. Just numbers',
+    bench_desc: 'The same PC before and after VOID TWEAKS. Measured with a method, not promises.',
+    bench_p1: 'processes', bench_p2: 'services', bench_p3: 'RAM after boot', bench_p3_b: '−402 MB', bench_p3_s: '3646 → 3244 MB',
+    bench_fps: 'CS2 FPS, +1.5%', bench_low_b: '1% low', bench_low: 'within margin of error',
+    bench_runs_b: '3 runs', bench_runs: 'PresentMon, Dust2, 1280×960',
+    bench_note: 'Ryzen 5 5600 + GTX 1650, Windows 11. Metrics taken 3 minutes after boot. Results vary by configuration.',
     faq_title: 'FAQ',
     faq_q1: 'Is it safe for my system?',
     faq_a1: 'Yes. Tweaks go through official Windows APIs and a restore point is created before the first change. Roll back a single tweak or the whole session.',
@@ -822,13 +902,16 @@ const I18N = {
     faq_q4: 'Do I need PRO for basic optimization?',
     faq_a4: 'No. Tweaks, monitoring, startup manager and built-in utilities are free forever. PRO is for interrupts, GPU sections and early access.',
     faq_q5: 'How do I pay and get my key?',
-    faq_a5: 'Payment goes through YooKassa. After paying you return to the site and the key appears right on the page — paste it into the app. Questions — on <a href="https://t.me/disxrm" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">Telegram</a>.',
+    faq_a5: 'Payment goes through YooKassa. After paying you return to the site and the key appears right on the page — paste it into the app. Questions — on <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.',
     dl_title: 'Download VOID TWEAKS', dl_version: 'Version', dl_btn: 'Download installer', dl_downloads: 'Downloaded',
+    file_title: 'File check', file_copy: 'Copy',
+    file_note: 'Compare the hash after downloading to make sure the file was not replaced.',
+    file_how: 'How to check', file_how_text: 'PowerShell:',
     req1: 'Windows 10 / 11, 64-bit', req2: 'Administrator rights',
     req3: '.NET 10 and the PawnIO driver install automatically', req4: '~250 MB on the system drive',
     log_title: 'What’s new', log_loading: 'Loading releases…',
     log_empty: 'Could not load releases.', log_all: 'All versions on GitHub →',
-    foot_tg: 'Telegram support',
+    foot_support: 'GitHub support', foot_yt: 'YouTube',
     ord_wait_t: 'Checking your payment…', ord_wait_d: 'Usually takes a few seconds. Keep this page open.',
     ord_done_t: 'Payment received', ord_copy: 'Copy key', ord_copied: 'Copied',
     ord_steps: '<li>Download and install the app</li><li>Launch it and click “Run optimization”</li><li>Paste the key into the window that appears</li><li>Click “Activate”</li>',
@@ -866,6 +949,23 @@ function applyLang(lang) {
   applyLang(lang === 'en' ? 'en' : 'ru');
   document.getElementById('langToggle').addEventListener('click', () =>
     applyLang(document.documentElement.lang === 'en' ? 'ru' : 'en'));
+})();
+
+/* SHA-256 copy */
+(() => {
+  const btn = document.getElementById('copySha');
+  const code = document.getElementById('fileSha');
+  if (!btn || !code) return;
+  btn.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(code.textContent.trim()); }
+    catch {
+      const r = document.createRange(); r.selectNodeContents(code);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    }
+    const old = btn.textContent;
+    btn.textContent = '✓';
+    setTimeout(() => { btn.textContent = old; }, 1500);
+  });
 })();
 
 /* ============================================================
@@ -995,7 +1095,7 @@ function applyLang(lang) {
     draft: !!r.draft, prerelease: !!r.prerelease,
     published_at: r.published_at,
     body: String(r.body || '').slice(0, 4000),
-    assets: (r.assets || []).map(a => ({ name: a.name, size: a.size, download_count: a.download_count || 0 }))
+    assets: (r.assets || []).map(a => ({ name: a.name, size: a.size, download_count: a.download_count || 0, digest: a.digest || '' }))
   });
 
   function readCache() {
@@ -1052,6 +1152,15 @@ function applyLang(lang) {
     el.textContent = Math.round(asset.size / 1048576) + (docLang() === 'en' ? ' MB' : ' МБ');
   }
 
+  function renderSha() {
+    const rel = latestStable();
+    if (!rel) return;
+    const assets = rel.assets || [];
+    const asset = assets.find(a => /installer\.exe$/i.test(a.name)) || assets.find(a => /\.exe$/i.test(a.name));
+    const digest = (asset?.digest || '').replace(/^sha256:/i, '');
+    if (digest) document.querySelectorAll('[data-sha]').forEach(el => { el.textContent = digest; });
+  }
+
   function renderCounter() {
     let total = 0;
     if (releases) total = releases.reduce((s, r) => s + (r.assets || []).reduce((x, a) => x + (a.download_count || 0), 0), 0);
@@ -1097,7 +1206,7 @@ function applyLang(lang) {
   }
 
   function renderAll() {
-    [renderVersion, renderSize, renderCounter, renderLog].forEach(fn => {
+    [renderVersion, renderSize, renderSha, renderCounter, renderLog].forEach(fn => {
       try { fn(); } catch (e) { console.warn('render failed:', fn.name, e); }
     });
   }

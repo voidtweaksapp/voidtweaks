@@ -6,8 +6,7 @@
 
 <a href="https://github.com/voidtweaksapp/voidtweaks/releases/latest/download/VOIDTWEAKSInstaller.exe"><img src="docs/readme/btn_download.png" alt="Скачать для Windows" height="48"></a>&nbsp;
 <a href="https://voidtweaksapp.github.io/voidtweaks/"><img src="docs/readme/btn_site.png" alt="VOIDTWEAKS — официальный сайт" height="48"></a>&nbsp;
-<a href="https://www.youtube.com/@VoidTweaksApp"><img src="docs/readme/btn_youtube.png" alt="YouTube" height="48"></a>&nbsp;
-<a href="https://t.me/disxrm"><img src="docs/readme/btn_telegram.png" alt="Telegram" height="48"></a>
+<a href="https://www.youtube.com/@VoidTweaksApp"><img src="docs/readme/btn_youtube.png" alt="YouTube" height="48"></a>
 
 <br>
 
