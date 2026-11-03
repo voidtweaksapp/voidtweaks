@@ -11,6 +11,7 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 <meta name="theme-color" content="#030303" />
 <meta name="color-scheme" content="dark" />
+<script>document.documentElement.classList.add('js');try{if(new URLSearchParams(location.search).get('fx')==='full')document.documentElement.classList.add('fx-force');}catch(e){}window.setTimeout(function(){if(!window.__voidFx)document.documentElement.classList.remove('js');},2500);</script>
 <link rel="canonical" href="https://voidtweaksapp.github.io/voidtweaks/" />
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://voidtweaksapp.github.io/voidtweaks/sitemap.xml" />
 <meta property="og:type" content="website" />
@@ -18,20 +19,19 @@
 <meta property="og:title" content="VOIDTWEAKS — оптимизатор Windows 10/11 для игр" />
 <meta property="og:description" content="Бесплатный оптимизатор Windows: 180+ твиков, откат в один клик, Game Configs, драйверы NVIDIA и AMD. Больше FPS, меньше задержек." />
 <meta property="og:url" content="https://voidtweaksapp.github.io/voidtweaks/" />
-<meta property="og:image" content="https://voidtweaksapp.github.io/voidtweaks/readme/hero.png" />
-<meta property="og:image:width" content="1600" />
-<meta property="og:image:height" content="440" />
+<meta property="og:image" content="https://voidtweaksapp.github.io/voidtweaks/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="VOIDTWEAKS — оптимизатор Windows" />
 <meta property="og:locale" content="ru_RU" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="VOIDTWEAKS — оптимизатор Windows 10/11 для игр" />
 <meta name="twitter:description" content="180+ твиков, откат в один клик, Game Configs, драйверы NVIDIA и AMD." />
-<meta name="twitter:image" content="https://voidtweaksapp.github.io/voidtweaks/readme/hero.png" />
-<link rel="icon" type="image/png" href="logo.png">
-<link rel="apple-touch-icon" href="logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="twitter:image" content="https://voidtweaksapp.github.io/voidtweaks/og.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="logo-192.png">
+<link rel="apple-touch-icon" href="logo-192.png">
+<link rel="preload" href="fonts/onest-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/onest-800.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -93,7 +93,62 @@
   ]
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "ru-RU",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Это безопасно для системы?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Да. Твики применяются через официальные API Windows, а перед первым изменением создаётся точка восстановления. Откатить можно отдельный твик или всю сессию."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Могут ли забанить в играх?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. VOID TWEAKS не трогает файлы игр, не внедряется в процессы и не меняет их память — только настройки системы и реестра."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Windows пишет «Система Windows защитила ваш компьютер»",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Это SmartScreen — он предупреждает о любых новых программах. Скачивайте установщик только с этой страницы или из GitHub Releases, нажмите «Подробнее» → «Выполнить в любом случае»."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Нужен ли PRO для обычной оптимизации?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. Твики, мониторинг, автозагрузка и встроенные утилиты бесплатны навсегда. PRO нужен для прерываний, GPU-разделов и раннего доступа."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как оплатить и получить ключ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится прямо на странице — вставьте его в приложение. Вопросы — в GitHub Issues."
+      }
+    }
+  ]
+}
+</script>
 <style>
+/* Self-hosted Onest — no Google Fonts request, stable in RU. */
+@font-face { font-family: 'Onest'; src: url('fonts/onest-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Onest'; src: url('fonts/onest-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Onest'; src: url('fonts/onest-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Onest'; src: url('fonts/onest-700.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Onest'; src: url('fonts/onest-800.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
 /* ============================================================
    TOKENS — из App.xaml приложения VOID TWEAKS
 ============================================================ */
@@ -125,6 +180,7 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; }
 img { max-width: 100%; }
 [hidden] { display: none !important; }
+.sr-only { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
 ::selection { background: rgba(255,255,255,0.22); }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
 
@@ -296,7 +352,7 @@ section.block { padding: 96px 0; }
 .free .pr { font-size: 24px; font-weight: 800; }
 .free .ds { font-size: 14px; color: var(--text-2); }
 .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-@media (max-width: 900px) { .plans { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; } .plan.best { order: -1; } }
+@media (max-width: 900px) { .plans { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; } }
 .plan { padding: 28px 24px 24px; display: flex; flex-direction: column; position: relative; }
 .plan.best {
   border-color: transparent;
@@ -319,18 +375,64 @@ section.block { padding: 96px 0; }
 .pay { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; margin-top: 14px; font-size: 13px; color: var(--text-3); }
 
 /* ---------- benchmark ---------- */
-.bench-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.bench-stat { padding: 26px 24px; border-radius: var(--radius); background: linear-gradient(180deg, #101013 0%, #0B0B0D 100%); border: 1px solid var(--line); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+.bench-switch {
+  position: relative; display: grid; grid-template-columns: 1fr 1fr;
+  width: max-content; max-width: 100%; margin: 22px auto 0; padding: 4px;
+  border: 1px solid var(--line-2); border-radius: 12px; background: #0A0A0C;
+}
+.bench-switch::before {
+  content: ""; position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px);
+  border-radius: 9px; background: #fff; box-shadow: 0 6px 18px -10px rgba(255,255,255,.55);
+  transition: transform .38s cubic-bezier(.16,1,.3,1);
+}
+.bench-switch[data-bench="after"]::before { transform: translateX(100%); }
+.bench-switch button {
+  position: relative; z-index: 1; min-width: 134px; height: 34px; padding: 0 14px;
+  border: 0; border-radius: 9px; background: transparent; color: var(--text-3);
+  font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: color .22s ease;
+}
+.bench-switch button:hover { color: var(--text-2); }
+.bench-switch button.on { color: #09090B; }
+.bench-hint { margin: 10px auto 0; text-align: center; font-size: 12px; line-height: 1.5; color: var(--text-3); }
+.bench-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 22px; }
+.bench-stat {
+  padding: 24px; border-radius: var(--radius);
+  background: linear-gradient(180deg, #101013 0%, #0B0B0D 100%);
+  border: 1px solid var(--line); box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+.bench-stat:hover { border-color: rgba(255,255,255,.20); }
 .bench-stat.light { background: #F4F4F5; border-color: #fff; color: #09090B; }
-.bench-stat b { display: block; font-size: clamp(32px, 4vw, 46px); line-height: 1; letter-spacing: -1.8px; font-weight: 800; }
-.bench-stat span { display: block; margin-top: 10px; font-size: 15px; font-weight: 600; }
-.bench-stat small { display: block; margin-top: 8px; font-size: 12px; color: var(--text-3); }
+.bench-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
+.bench-label { font-size: 11.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: var(--text-2); }
+.bench-delta {
+  flex-shrink: 0; padding: 4px 8px; border-radius: 100px;
+  background: rgba(34,197,94,.10); color: #86EFAC;
+  font-size: 11.5px; font-weight: 800; white-space: nowrap;
+}
+.bench-stat.light .bench-label { color: #52525B; }
+.bench-stat.light .bench-delta { background: rgba(22,163,74,.10); color: #15803D; }
+.bench-value { display: flex; align-items: baseline; gap: 7px; }
+.bench-value b { font-size: clamp(42px, 5.2vw, 58px); line-height: .95; letter-spacing: -2.6px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.bench-value .unit { font-size: 14px; font-weight: 700; color: var(--text-2); }
+.bench-stat.light .bench-value .unit { color: #52525B; }
+.bench-stat small { display: block; margin-top: 12px; font-size: 12px; color: var(--text-3); }
 .bench-stat.light small { color: #52525B; }
-.bench-fps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 14px; padding: 22px 26px; }
-.bench-fps b { display: block; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
-.bench-fps span { display: block; margin-top: 4px; font-size: 13px; color: var(--text-2); }
+.bench-fps { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; align-items: center; margin-top: 14px; padding: 24px 26px; }
+.bench-fps .bench-value b { font-size: clamp(38px, 4.4vw, 48px); }
+.bench-fps-side { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding-left: 26px; border-left: 1px solid var(--line); }
+.bench-fps-side b { display: block; font-size: 15px; font-weight: 800; letter-spacing: -.2px; }
+.bench-fps-side span { display: block; margin-top: 5px; font-size: 12.5px; line-height: 1.45; color: var(--text-2); }
 .bench-note { margin: 14px auto 0; max-width: 760px; text-align: center; font-size: 12.5px; line-height: 1.6; color: var(--text-3); }
-@media (max-width: 760px) { .bench-grid { grid-template-columns: 1fr; } .bench-fps { grid-template-columns: 1fr; gap: 16px; } }
+@media (max-width: 760px) {
+  .bench-grid { grid-template-columns: 1fr; }
+  .bench-fps { grid-template-columns: 1fr; gap: 20px; }
+  .bench-fps-side { grid-template-columns: 1fr 1fr; padding-left: 0; padding-top: 18px; border-left: 0; border-top: 1px solid var(--line); }
+  .bench-switch { width: 100%; }
+  .bench-switch button { min-width: 0; }
+}
+@media (max-width: 420px) { .bench-fps-side { grid-template-columns: 1fr; gap: 14px; } }
 
 /* ---------- file check ---------- */
 .file-check { margin-top: 18px; padding: 16px; border: 1px solid var(--line); border-radius: 14px; background: #08080A; }
@@ -345,6 +447,29 @@ section.block { padding: 96px 0; }
 .file-check summary { cursor: pointer; color: var(--text-2); }
 .file-check details p { margin: 8px 0 0; }
 .file-check details code { display: block; margin-top: 6px; padding: 8px; border-radius: 8px; background: #0D0D0F; border: 1px solid var(--line); font-size: 10.5px; }
+
+/* ---------- download trust ---------- */
+.trust { margin-top: 14px; border: 1px solid var(--line); border-radius: 14px; background: #08080A; overflow: hidden; }
+.trust details { margin: 0; }
+.trust summary { list-style: none; cursor: pointer; display: flex; align-items: flex-start; gap: 10px; padding: 13px 14px; }
+.trust summary::-webkit-details-marker { display: none; }
+.trust-ico { width: 22px; height: 22px; flex-shrink: 0; color: var(--text-2); margin-top: 1px; }
+.trust-summary { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.trust-line { font-size: 12.5px; line-height: 1.5; color: var(--text-2); }
+.trust-more { font-size: 12.5px; line-height: 1.4; font-weight: 700; color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.trust-chev { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; color: var(--text-3); transition: transform .3s cubic-bezier(.16,1,.3,1); }
+.trust details[open] .trust-chev { transform: rotate(180deg); }
+.trust-body { padding: 0 14px 15px; border-top: 1px solid var(--line); }
+.trust-intro { margin: 12px 0; font-size: 12px; line-height: 1.6; color: var(--text-3); }
+.trust-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px; }
+.trust-steps li { display: flex; gap: 10px; }
+.trust-n { width: 20px; height: 20px; flex-shrink: 0; margin-top: 1px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line-2); background: var(--surface-2); color: var(--text-2); font-size: 10.5px; font-weight: 800; }
+.trust-steps b { display: block; margin-bottom: 3px; font-size: 12.5px; line-height: 1.4; font-weight: 700; color: #fff; }
+.trust-steps p { margin: 0; font-size: 12px; line-height: 1.55; color: var(--text-3); }
+.trust-steps code { display: block; margin-top: 6px; padding: 7px 8px; border-radius: 8px; background: #0D0D0F; border: 1px solid var(--line); font-family: ui-monospace, Consolas, monospace; font-size: 10px; line-height: 1.5; color: var(--text-2); overflow-wrap: anywhere; }
+.trust-steps a { display: inline-block; margin-top: 6px; font-size: 12px; font-weight: 700; color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.trust-note { display: flex; gap: 7px; margin: 13px 0 0; font-size: 11.5px; line-height: 1.5; color: var(--text-3); }
+.trust-note svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 1px; }
 
 /* ---------- faq ---------- */
 .faq-wrap { display: grid; grid-template-columns: 1fr 1.6fr; gap: 56px; align-items: start; }
@@ -397,6 +522,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
 .foot nav a:hover { color: #fff; }
 
 /* ---------- checkout modal ---------- */
+body.modal-open { overflow: hidden; }
 .ord-backdrop { position: fixed; inset: 0; z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(0,0,0,0.82); }
 .ord-backdrop.open { display: flex; }
 .ord-card { position: relative; width: 100%; max-width: 440px; max-height: calc(100dvh - 40px); overflow-y: auto; padding: 34px 26px 26px; text-align: center; }
@@ -415,6 +541,192 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
 .ord-state p.ord-plan { margin: 10px 0 16px; font-size: 13px; color: var(--text-3); }
 .ord-steps { margin: 22px 0 14px; padding-left: 20px; text-align: left; font-size: 13.5px; line-height: 1.65; color: var(--text-2); }
 .ord-state p.ord-warn { margin: 0 0 6px; text-align: left; font-size: 12.5px; color: var(--warning); }
+
+/* ---------- language switch: view transitions ---------- */
+::view-transition-group(root) { animation-duration: .26s; animation-timing-function: cubic-bezier(.16,1,.3,1); }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .26s; animation-timing-function: cubic-bezier(.16,1,.3,1); }
+::view-transition-old(root) { animation-name: vtOut; }
+::view-transition-new(root) { animation-name: vtIn; }
+@keyframes vtOut { to { opacity: 0; transform: translateY(-3px); } }
+@keyframes vtIn { from { opacity: 0; transform: translateY(5px); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
+</style>
+<style id="fx-2026">
+/* ============================================================
+   FX 2026 — isolated layer. Nothing here changes existing logic.
+============================================================ */
+:root { --fx-ease: cubic-bezier(.16,1,.3,1); --fx-ink: #8B95FF; }
+html { scrollbar-color: #3F3F46 #030303; scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #030303; }
+::-webkit-scrollbar-thumb { background: #2A2A2E; border: 2px solid #030303; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #52525B; }
+
+/* film grain */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 999; pointer-events: none;
+  opacity: .028; background-size: 160px 160px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+
+/* scroll progress */
+.fx-progress { position: fixed; inset: 0 0 auto; height: 2px; z-index: 250; pointer-events: none; }
+.fx-progress i { display: block; height: 100%; transform-origin: 0 50%; transform: scaleX(var(--p, 0)); background: linear-gradient(90deg, rgba(255,255,255,.25), #fff 65%, rgba(255,255,255,.55)); }
+
+/* nav — fully transparent at rest; the hero stage slides under it, so there is no seam */
+.nav {
+  background: transparent; border-bottom: 0; margin-bottom: -64px;
+  -webkit-backdrop-filter: none; backdrop-filter: none;
+  transition: background-color .35s ease, box-shadow .35s ease;
+}
+.nav.scrolled {
+  background: rgba(3,3,3,.48); border-bottom-color: transparent;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: 0 18px 50px -34px rgba(0,0,0,.95);
+}
+.nav-links a { position: relative; transition: color .2s ease; }
+.nav-links a::after {
+  content: ""; position: absolute; left: 12px; right: 12px; bottom: 5px; height: 1px;
+  background: linear-gradient(90deg, transparent, #fff 35%, #fff 65%, transparent);
+  transform: scaleX(0); transform-origin: 50% 50%; transition: transform .4s var(--fx-ease);
+}
+.nav-links a.active { color: #fff; }
+.nav-links a.active::after { transform: scaleX(1); }
+
+/* hero stage — the glow starts at the very top of the page, so the transparent nav shares the same backdrop */
+body {
+  background-color: #030303;
+  background-image: radial-gradient(ellipse 60% 48% at 50% 64px, rgba(255,255,255,.065), transparent 70%);
+  background-repeat: no-repeat;
+  background-size: 100% 1000px;
+  background-position: 50% 0;
+}
+.hero { position: relative; isolation: isolate; background: transparent; padding-top: 160px; }
+@media (max-width: 720px) { .hero { padding-top: 120px; } }
+.hero > .container { position: relative; z-index: 1; }
+.hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 130px; z-index: 0; pointer-events: none; background: linear-gradient(180deg, transparent, #030303); }
+.hero-fx { position: absolute; pointer-events: none; opacity: 0; transition: opacity 1.6s ease; }
+.hero-shader { inset: 0; width: 100%; height: 100%; z-index: 0; }
+.hero-shader.ready { opacity: 1; }
+.hero-orb {
+  left: 50%; top: 0; width: min(1800px, 160vw); height: min(1400px, 125vw);
+  z-index: 0; transform: translate(-50%, -50%);
+}
+.hero-orb.ready { opacity: .82; }
+@media (max-width: 760px) {
+  .hero-orb { display: none; }
+  /* preview-only force mode shows the 3D scene in a narrow pane; phones keep the light version */
+  html.fx-force .hero-orb { display: block; }
+}
+
+/* preview depth */
+.preview { position: relative; perspective: 1400px; box-shadow: 0 50px 140px -80px rgba(139,149,255,.45); }
+.preview .app { transform-style: preserve-3d; transition: transform .6s var(--fx-ease); animation: fxFloat 9s ease-in-out 2.6s infinite; }
+.preview.tilting .app { transition: transform .12s linear; }
+@keyframes fxFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+
+/* headline */
+.hero h1 { text-wrap: balance; }
+.hero .lead, .head p, .bench-note { text-wrap: pretty; }
+.hero h1 .line:first-child {
+  background: linear-gradient(100deg, #fff 0%, #fff 36%, #C9CEDE 50%, #fff 64%, #fff 100%);
+  background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.badge i { animation: fxPulse 2.8s ease-out infinite; }
+@keyframes fxPulse {
+  0% { box-shadow: 0 0 0 0 rgba(34,197,94,.55); }
+  70% { box-shadow: 0 0 0 7px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+
+/* buttons */
+.btn { transition: transform .25s var(--fx-ease), box-shadow .3s ease, background-color .15s ease, border-color .15s ease, color .15s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0) scale(.985); }
+.btn-primary:hover { background: var(--grad-white); box-shadow: 0 12px 44px -16px rgba(255,255,255,.55); }
+.btn-gray:hover { box-shadow: 0 12px 36px -22px rgba(0,0,0,.9); }
+
+/* cards + sections */
+.feat, .plan, .free, .dl-main, .news { transition: border-color .35s ease, box-shadow .35s ease, transform .35s var(--fx-ease); }
+.feat:hover { border-color: rgba(255,255,255,.22); box-shadow: 0 28px 70px -46px rgba(255,255,255,.3), inset 0 1px 0 rgba(255,255,255,.08); }
+.ico { transition: transform .45s var(--fx-ease), box-shadow .45s ease; }
+.feat:hover .ico { transform: translateY(-2px) rotate(-2deg); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 16px 34px -14px rgba(0,0,0,1); }
+.fact { transition: background-color .3s ease; }
+.fact:hover { background: rgba(255,255,255,.018); }
+.plan:hover { transform: translateY(-3px); border-color: rgba(255,255,255,.22); box-shadow: 0 34px 80px -50px rgba(255,255,255,.22); }
+.plan.best:hover { box-shadow: 0 40px 100px -46px rgba(255,255,255,.3); }
+
+/* rotating glint on the best plan */
+@property --fx-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.plan.best::before {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: conic-gradient(from var(--fx-a, 0deg), transparent 0deg, rgba(255,255,255,.62) 26deg, transparent 62deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); mask-composite: exclude;
+  animation: fxSpin 9s linear infinite;
+}
+@keyframes fxSpin { to { --fx-a: 360deg; } }
+
+/* benchmark */
+.bench-stat b { font-variant-numeric: tabular-nums; }
+
+/* faq + download + footer details */
+.faq summary svg { transition: transform .3s var(--fx-ease), color .3s ease; }
+.faq details:hover summary { color: #fff; }
+.dl-main img { filter: drop-shadow(0 0 26px rgba(255,255,255,.20)); }
+.file-check .fc-dot { animation: fxPulse 3.4s ease-out infinite; }
+.foot nav a { position: relative; transition: color .2s ease; }
+.foot nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px; background: #fff;
+  transform: scaleX(0); transform-origin: 0 50%; transition: transform .35s var(--fx-ease);
+}
+.foot nav a:hover { color: #fff; }
+.foot nav a:hover::after { transform: scaleX(1); }
+.wordmark { will-change: transform; }
+
+/* reveal — only when JS is alive; the head script removes .js if the FX layer dies */
+.js :is(.head, .facts .fact, .bench-stat, .bench-fps, .bench-note, .bench-switch, .bench-hint, .feat, .free, .plan, .pro-list, .pay, .faq-side, .faq details, .dl-main, .news, .wordmark) {
+  opacity: 0; translate: 0 26px; filter: blur(7px);
+}
+.js :is(.head, .facts .fact, .bench-stat, .bench-fps, .bench-note, .bench-switch, .bench-hint, .feat, .free, .plan, .pro-list, .pay, .faq-side, .faq details, .dl-main, .news, .wordmark).in {
+  animation: fxReveal .9s var(--fx-ease) var(--d, 0s) both;
+}
+@keyframes fxReveal {
+  from { opacity: 0; translate: 0 26px; filter: blur(7px); }
+  to { opacity: 1; translate: 0 0; filter: blur(0); }
+}
+
+/* entrance */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .badge { animation: fxFadeUp .8s var(--fx-ease) .05s both; }
+  .hero h1 .line { animation: fxLine 1.05s var(--fx-ease) both; }
+  .hero h1 .line:nth-child(2) { animation-delay: .14s; }
+  .hero h1 .line:first-child { animation: fxLine 1.05s var(--fx-ease) both, fxSheen 12s linear 2s infinite; }
+  .hero .lead { animation: fxFadeUp .9s var(--fx-ease) .26s both; }
+  .hero .actions { animation: fxFadeUp .9s var(--fx-ease) .34s both; }
+  .hero .note { animation: fxFadeUp .9s var(--fx-ease) .42s both; }
+  .hero .preview { animation: fxPreview 1.2s var(--fx-ease) .30s both; }
+}
+@keyframes fxFadeUp { from { opacity: 0; translate: 0 18px; filter: blur(6px); } to { opacity: 1; translate: 0 0; filter: blur(0); } }
+@keyframes fxLine { from { opacity: 0; translate: 0 34px; filter: blur(14px); } to { opacity: 1; translate: 0 0; filter: blur(0); } }
+@keyframes fxPreview { from { opacity: 0; translate: 0 46px; scale: .985; } to { opacity: 1; translate: 0 0; scale: 1; } }
+@keyframes fxSheen { 0% { background-position: 180% 0; } 55%, 100% { background-position: -80% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html:not(.fx-force) { scroll-behavior: auto; }
+  html:not(.fx-force).js :is(.head, .facts .fact, .bench-stat, .bench-fps, .bench-note, .bench-switch, .bench-hint, .feat, .free, .plan, .pro-list, .pay, .faq-side, .faq details, .dl-main, .news, .wordmark) {
+    opacity: 1 !important; translate: none !important; filter: none !important; animation: none !important;
+  }
+  html:not(.fx-force) .hero .badge, html:not(.fx-force) .hero h1 .line, html:not(.fx-force) .hero .lead, html:not(.fx-force) .hero .actions, html:not(.fx-force) .hero .note, html:not(.fx-force) .hero .preview { animation: none !important; opacity: 1 !important; translate: none !important; filter: none !important; }
+  html:not(.fx-force) .hero h1 .line:first-child { background: none; color: #fff; }
+  html:not(.fx-force) .plan.best::before { display: none; }
+  html:not(.fx-force) .badge i, html:not(.fx-force) .file-check .fc-dot { animation: none !important; }
+  html:not(.fx-force) .preview .app { transition: none; animation: none !important; }
+  /* preview-only: keep a gentle sheen even when the OS asks for reduced motion */
+  html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infinite; }
+}
 </style>
 </head>
 <body>
@@ -427,14 +739,14 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
 
 <header class="nav">
   <div class="container nav-inner">
-    <a href="#top" class="brand"><img src="logo.png" alt="" width="28" height="28"><span>VOID TWEAKS</span></a>
+    <a href="#top" class="brand"><img src="logo-112.png" alt="" width="28" height="28"><span>VOID TWEAKS</span></a>
     <nav class="nav-links" aria-label="Разделы">
       <a href="#features" data-i18n="nav_features">Возможности</a>
       <a href="#pricing" data-i18n="nav_pricing">Тарифы</a>
       <a href="#faq" data-i18n="nav_faq">FAQ</a>
     </nav>
     <div class="nav-cta">
-      <button class="lang-toggle" id="langToggle" aria-label="Switch language"><span id="langCurrent">RU</span></button>
+      <button class="lang-toggle" id="langToggle" aria-label="Switch language" data-i18n-aria="lang_switch"><span id="langCurrent">RU</span></button>
       <a href="#download" class="btn btn-primary" data-i18n="nav_download">Скачать</a>
     </div>
   </div>
@@ -459,7 +771,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
 
     <div class="preview" aria-hidden="true">
       <div class="app">
-        <div class="app-bar"><div class="t"><img src="logo.png" alt="">VOID TWEAKS</div><div class="wc"><span>—</span><span>☐</span><span>✕</span></div></div>
+        <div class="app-bar"><div class="t"><img src="logo-112.png" alt="">VOID TWEAKS</div><div class="wc"><span>—</span><span>☐</span><span>✕</span></div></div>
         <div class="app-side">
           <div class="app-nav on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3.5l2.5-6.5L13 18l2.5-6.5H21"/></svg><span data-i18n="app_home">Главная</span></div>
           <div class="app-nav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg><span data-i18n="app_opt">Оптимизация</span></div>
@@ -502,17 +814,41 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
       <h2 data-i18n="bench_title">Без магии. Просто цифры</h2>
       <p data-i18n="bench_desc">Один и тот же ПК до и после VOID TWEAKS. Замеры с методикой, а не обещания.</p>
     </div>
+    <div class="bench-switch" data-bench="before" role="group" aria-label="Сравнение до и после" data-i18n-aria="bench_aria">
+      <button type="button" data-bench-state="before" class="on" aria-pressed="true"><span data-i18n="bench_before">Windows 11</span></button>
+      <button type="button" data-bench-state="after" aria-pressed="false"><span data-i18n="bench_after">VOIDTWEAKS</span></button>
+    </div>
+    <p class="bench-hint" data-i18n="bench_hint">Переключите, чтобы сравнить состояние системы до и после оптимизации.</p>
     <div class="bench-grid">
-      <div class="bench-stat light"><b>−26%</b><span data-i18n="bench_p1">процессов</span><small>110 → 81</small></div>
-      <div class="bench-stat"><b>−31%</b><span data-i18n="bench_p2">служб</span><small>75 → 52</small></div>
-      <div class="bench-stat"><b data-i18n="bench_p3_b">−402 МБ</b><span data-i18n="bench_p3">ОЗУ после загрузки</span><small data-i18n="bench_p3_s">3646 → 3244 МБ</small></div>
+      <div class="bench-stat light">
+        <div class="bench-top"><span class="bench-label" data-i18n="bench_p1">процессов</span><span class="bench-delta" data-i18n="bench_d1">−26%</span></div>
+        <div class="bench-value"><b data-bench-value data-before="110" data-after="81">110</b></div>
+        <small data-i18n="bench_p1_s">110 → 81</small>
+      </div>
+      <div class="bench-stat">
+        <div class="bench-top"><span class="bench-label" data-i18n="bench_p2">служб</span><span class="bench-delta" data-i18n="bench_d2">−31%</span></div>
+        <div class="bench-value"><b data-bench-value data-before="75" data-after="52">75</b></div>
+        <small data-i18n="bench_p2_s">75 → 52</small>
+      </div>
+      <div class="bench-stat">
+        <div class="bench-top"><span class="bench-label" data-i18n="bench_p3">ОЗУ после загрузки</span><span class="bench-delta" data-i18n="bench_d3">−402 МБ</span></div>
+        <div class="bench-value"><b data-bench-value data-before="3646" data-after="3244">3646</b><span class="unit" data-i18n="bench_mb">МБ</span></div>
+        <small data-i18n="bench_p3_s">3646 → 3244 МБ</small>
+      </div>
     </div>
     <div class="card bench-fps">
-      <div><b>283 → 288</b><span data-i18n="bench_fps">FPS в CS2, +1.5%</span></div>
-      <div><b data-i18n="bench_low_b">1% low</b><span data-i18n="bench_low">в пределах погрешности</span></div>
-      <div><b data-i18n="bench_runs_b">3 прогона</b><span data-i18n="bench_runs">PresentMon, Dust2, 1280×960</span></div>
+      <div class="bench-fps-main">
+        <div class="bench-top"><span class="bench-label" data-i18n="bench_fps_label">FPS в CS2</span><span class="bench-delta" data-i18n="bench_d4">+1.5%</span></div>
+        <div class="bench-value"><b data-bench-value data-before="283" data-after="288">283</b><span class="unit">FPS</span></div>
+        <small data-i18n="bench_fps_s">283 → 288, тот же профиль</small>
+      </div>
+      <div class="bench-fps-side">
+        <div><b data-i18n="bench_low_b">1% low</b><span data-i18n="bench_low">в пределах погрешности</span></div>
+        <div><b data-i18n="bench_runs_b">3 прогона</b><span data-i18n="bench_runs">PresentMon, Dust2, 1280×960</span></div>
+      </div>
     </div>
     <p class="bench-note" data-i18n="bench_note">Ryzen 5 5600 + GTX 1650, Windows 11. Метрики сняты через 3 минуты после загрузки. Результат зависит от конфигурации.</p>
+    <p class="sr-only" id="benchLive" aria-live="polite"></p>
   </div>
 </section>
 
@@ -683,18 +1019,63 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
   <div class="container">
     <div class="dl">
       <div class="card dl-main">
-        <img src="logo.png" alt="" width="56" height="56" loading="lazy">
+        <img src="logo-112.png" alt="" width="56" height="56" loading="lazy">
         <h3 data-i18n="dl_title">Скачать VOID TWEAKS</h3>
         <div class="meta"><span data-i18n="dl_version">Версия</span> <b data-ver>1.0.3</b> · Windows x64 · <span data-asset-size>106 МБ</span></div>
         <a href="https://github.com/voidtweaksapp/voidtweaks/releases/latest/download/VOIDTWEAKSInstaller.exe" class="btn btn-primary btn-lg btn-block" id="downloadBtn">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.75 3.25a.75.75 0 0 0-1.5 0v10.94l-4.22-4.22a.75.75 0 0 0-1.06 1.06l5.5 5.5a.75.75 0 0 0 1.06 0l5.5-5.5a.75.75 0 0 0-1.06-1.06l-4.22 4.22V3.25Z"/><path d="M4 15.75a.75.75 0 0 0-1.5 0v2.5A3.25 3.25 0 0 0 5.75 21.5h12.5A3.25 3.25 0 0 0 21.5 18.25v-2.5a.75.75 0 0 0-1.5 0v2.5c0 .966-.784 1.75-1.75 1.75H5.75c-.966 0-1.75-.784-1.75-1.75v-2.5Z"/></svg>
           <span data-i18n="dl_btn">Скачать установщик</span>
         </a>
+        <div class="trust">
+          <details>
+            <summary>
+              <svg class="trust-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.2c0 4.5 3 8.5 7.5 9.8 4.5-1.3 7.5-5.3 7.5-9.8V6L12 3Z"/><path d="m8.8 11.8 2.2 2.2 4.2-4.4"/></svg>
+              <span class="trust-summary">
+                <span class="trust-line" data-i18n="trust_line">Установщик не подписан цифровой подписью — SmartScreen может предупредить.</span>
+                <span class="trust-more" data-i18n="trust_more">Как убедиться, что файл наш</span>
+              </span>
+              <svg class="trust-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="trust-body">
+              <p class="trust-intro" data-i18n="trust_intro">Это ожидаемо для утилиты без платного сертификата. Три шага, чтобы убедиться, что файл настоящий:</p>
+              <ol class="trust-steps">
+                <li>
+                  <span class="trust-n">1</span>
+                  <div>
+                    <b data-i18n="trust_s1_t">Сверьте SHA-256</b>
+                    <p data-i18n="trust_s1_d">После скачивания выполните команду в PowerShell и сравните результат с хешем в блоке «Проверка файла» ниже.</p>
+                    <code>Get-FileHash .\VOIDTWEAKSInstaller.exe -Algorithm SHA256</code>
+                  </div>
+                </li>
+                <li>
+                  <span class="trust-n">2</span>
+                  <div>
+                    <b data-i18n="trust_s2_t">Скачивайте только с GitHub Releases</b>
+                    <p data-i18n="trust_s2_d">Наш единственный источник — официальный репозиторий. Не устанавливайте сборки со сторонних сайтов.</p>
+                    <a href="https://github.com/voidtweaksapp/voidtweaks/releases/latest" target="_blank" rel="noopener" data-i18n="trust_releases">GitHub Releases →</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="trust-n">3</span>
+                  <div>
+                    <b data-i18n="trust_s3_t">SmartScreen: «Подробнее» → «Выполнить в любом случае»</b>
+                    <p data-i18n="trust_s3_d">Windows покажет синее окно. Нажмите «Подробнее», затем «Выполнить в любом случае». Это не отключает защиту — вы разрешаете запуск только этого файла.</p>
+                  </div>
+                </li>
+              </ol>
+              <p class="trust-note">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 10.5v5M12 7.2v.1"/></svg>
+                <span data-i18n="trust_note">Мы никогда не просим отключать Defender или антивирус.</span>
+              </p>
+            </div>
+          </details>
+        </div>
         <div class="file-check">
           <div class="fc-top"><span class="fc-dot"></span><span data-i18n="file_title">Проверка файла</span></div>
           <div class="fc-row">
             <code id="fileSha" data-sha>c29527a6eb68f6ff81bf5c9cd40c1cc877fe9895709d7ef70d5117acbfcf26fe</code>
             <button type="button" class="fc-copy" id="copySha" data-i18n="file_copy">Копировать</button>
+            <span class="sr-only" id="shaStatus" aria-live="polite"></span>
           </div>
           <p class="fc-note" data-i18n="file_note">Сверьте хеш после скачивания — так вы убедитесь, что файл не подменили.</p>
           <details>
@@ -708,7 +1089,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
           <li data-i18n="req3">.NET 10 и драйвер PawnIO ставятся автоматически</li>
           <li data-i18n="req4">~250 МБ на системном диске</li>
         </ul>
-        <div class="dl-count" data-count-wrap data-min="1" hidden><span data-i18n="dl_downloads">Скачано</span> <b data-download-count>—</b></div>
+        <div class="dl-count" data-count-wrap data-min="1" aria-live="polite" aria-atomic="true" hidden><span data-i18n="dl_downloads">Скачано</span> <b data-download-count>—</b></div>
       </div>
       <div class="card news" id="logList">
         <h4 data-i18n="log_title">Что нового</h4>
@@ -722,7 +1103,7 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
 
 <footer>
   <div class="container foot">
-    <a href="#top" class="brand"><img src="logo.png" alt="" width="24" height="24" loading="lazy"><span>VOID TWEAKS</span></a>
+    <a href="#top" class="brand"><img src="logo-112.png" alt="" width="24" height="24" loading="lazy"><span>VOID TWEAKS</span></a>
     <nav>
       <a href="#features" data-i18n="nav_features">Возможности</a>
       <a href="#pricing" data-i18n="nav_pricing">Тарифы</a>
@@ -735,10 +1116,11 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
 </footer>
 
 <div class="ord-backdrop" id="ordModal" data-state="wait" role="dialog" aria-modal="true" aria-label="VOID TWEAKS">
-  <div class="card ord-card">
-    <button type="button" class="ord-x" data-ord-close aria-label="Закрыть">
+  <div class="card ord-card" tabindex="-1">
+    <button type="button" class="ord-x" data-ord-close aria-label="Закрыть" data-i18n-aria="ord_close_aria">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5.293 5.293a1 1 0 0 1 1.414 0L12 10.586l5.293-5.293a1 1 0 1 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L10.586 12 5.293 6.707a1 1 0 0 1 0-1.414Z"/></svg>
     </button>
+    <p class="sr-only" id="ordLive" aria-live="polite" aria-atomic="true"></p>
     <div class="ord-state s-wait">
       <div class="ord-spin" aria-hidden="true"></div>
       <h3 data-i18n="ord_wait_t">Проверяем оплату…</h3>
@@ -814,10 +1196,18 @@ const I18N = {
     bench_eyebrow: 'Честный замер',
     bench_title: 'Без магии. Просто цифры',
     bench_desc: 'Один и тот же ПК до и после VOID TWEAKS. Замеры с методикой, а не обещания.',
-    bench_p1: 'процессов', bench_p2: 'служб', bench_p3: 'ОЗУ после загрузки', bench_p3_b: '−402 МБ', bench_p3_s: '3646 → 3244 МБ',
-    bench_fps: 'FPS в CS2, +1.5%', bench_low_b: '1% low', bench_low: 'в пределах погрешности',
+    bench_before: 'Windows 11', bench_after: 'VOIDTWEAKS',
+    bench_aria: 'Сравнение до и после оптимизации',
+    bench_hint: 'Переключите, чтобы сравнить состояние системы до и после оптимизации.',
+    bench_p1: 'процессов', bench_p2: 'служб', bench_p3: 'ОЗУ после загрузки',
+    bench_p1_s: '110 → 81', bench_p2_s: '75 → 52', bench_p3_s: '3646 → 3244 МБ',
+    bench_mb: 'МБ', bench_d1: '−26%', bench_d2: '−31%', bench_d3: '−402 МБ', bench_d4: '+1.5%',
+    bench_fps_label: 'FPS в CS2', bench_fps_s: '283 → 288, тот же профиль',
+    bench_low_b: '1% low', bench_low: 'в пределах погрешности',
     bench_runs_b: '3 прогона', bench_runs: 'PresentMon, Dust2, 1280×960',
     bench_note: 'Ryzen 5 5600 + GTX 1650, Windows 11. Метрики сняты через 3 минуты после загрузки. Результат зависит от конфигурации.',
+    bench_live_before: 'Показаны значения Windows 11.',
+    bench_live_after: 'Показаны значения после VOIDTWEAKS.',
     faq_title: 'Частые вопросы',
     faq_q1: 'Это безопасно для системы?',
     faq_a1: 'Да. Твики применяются через официальные API Windows, а перед первым изменением создаётся точка восстановления. Откатить можно отдельный твик или всю сессию.',
@@ -830,9 +1220,22 @@ const I18N = {
     faq_q5: 'Как оплатить и получить ключ?',
     faq_a5: 'Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится прямо на странице — вставьте его в приложение. Вопросы — в <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.',
     dl_title: 'Скачать VOID TWEAKS', dl_version: 'Версия', dl_btn: 'Скачать установщик', dl_downloads: 'Скачано',
-    file_title: 'Проверка файла', file_copy: 'Копировать',
+    file_title: 'Проверка файла', file_copy: 'Копировать', file_copied: 'Скопировано',
     file_note: 'Сверьте хеш после скачивания — так вы убедитесь, что файл не подменили.',
     file_how: 'Как проверить', file_how_text: 'PowerShell:',
+    trust_line: 'Установщик не подписан цифровой подписью — SmartScreen может предупредить.',
+    trust_more: 'Как убедиться, что файл наш',
+    trust_intro: 'Это ожидаемо для утилиты без платного сертификата. Три шага, чтобы убедиться, что файл настоящий:',
+    trust_s1_t: 'Сверьте SHA-256',
+    trust_s1_d: 'После скачивания выполните команду в PowerShell и сравните результат с хешем в блоке «Проверка файла» ниже.',
+    trust_s2_t: 'Скачивайте только с GitHub Releases',
+    trust_s2_d: 'Наш единственный источник — официальный репозиторий. Не устанавливайте сборки со сторонних сайтов.',
+    trust_releases: 'GitHub Releases →',
+    trust_s3_t: 'SmartScreen: «Подробнее» → «Выполнить в любом случае»',
+    trust_s3_d: 'Windows покажет синее окно. Нажмите «Подробнее», затем «Выполнить в любом случае». Это не отключает защиту — вы разрешаете запуск только этого файла.',
+    trust_note: 'Мы никогда не просим отключать Defender или антивирус.',
+    lang_switch: 'Переключить на английский',
+    ord_close_aria: 'Закрыть',
     req1: 'Windows 10 / 11, 64-bit', req2: 'Права администратора',
     req3: '.NET 10 и драйвер PawnIO ставятся автоматически', req4: '~250 МБ на системном диске',
     log_title: 'Что нового', log_loading: 'Загружаем релизы…',
@@ -888,10 +1291,18 @@ const I18N = {
     bench_eyebrow: 'Honest benchmark',
     bench_title: 'No magic. Just numbers',
     bench_desc: 'The same PC before and after VOID TWEAKS. Measured with a method, not promises.',
-    bench_p1: 'processes', bench_p2: 'services', bench_p3: 'RAM after boot', bench_p3_b: '−402 MB', bench_p3_s: '3646 → 3244 MB',
-    bench_fps: 'CS2 FPS, +1.5%', bench_low_b: '1% low', bench_low: 'within margin of error',
+    bench_before: 'Windows 11', bench_after: 'VOIDTWEAKS',
+    bench_aria: 'Before and after comparison',
+    bench_hint: 'Switch to compare the system before and after optimization.',
+    bench_p1: 'processes', bench_p2: 'services', bench_p3: 'RAM after boot',
+    bench_p1_s: '110 → 81', bench_p2_s: '75 → 52', bench_p3_s: '3646 → 3244 MB',
+    bench_mb: 'MB', bench_d1: '−26%', bench_d2: '−31%', bench_d3: '−402 MB', bench_d4: '+1.5%',
+    bench_fps_label: 'CS2 FPS', bench_fps_s: '283 → 288, same profile',
+    bench_low_b: '1% low', bench_low: 'within margin of error',
     bench_runs_b: '3 runs', bench_runs: 'PresentMon, Dust2, 1280×960',
     bench_note: 'Ryzen 5 5600 + GTX 1650, Windows 11. Metrics taken 3 minutes after boot. Results vary by configuration.',
+    bench_live_before: 'Showing Windows 11 values.',
+    bench_live_after: 'Showing values after VOIDTWEAKS.',
     faq_title: 'FAQ',
     faq_q1: 'Is it safe for my system?',
     faq_a1: 'Yes. Tweaks go through official Windows APIs and a restore point is created before the first change. Roll back a single tweak or the whole session.',
@@ -904,9 +1315,22 @@ const I18N = {
     faq_q5: 'How do I pay and get my key?',
     faq_a5: 'Payment goes through YooKassa. After paying you return to the site and the key appears right on the page — paste it into the app. Questions — on <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.',
     dl_title: 'Download VOID TWEAKS', dl_version: 'Version', dl_btn: 'Download installer', dl_downloads: 'Downloaded',
-    file_title: 'File check', file_copy: 'Copy',
+    file_title: 'File check', file_copy: 'Copy', file_copied: 'Copied',
     file_note: 'Compare the hash after downloading to make sure the file was not replaced.',
     file_how: 'How to check', file_how_text: 'PowerShell:',
+    trust_line: 'The installer is not code-signed, so SmartScreen may warn you.',
+    trust_more: 'How to verify the file',
+    trust_intro: 'That is expected for a utility without a paid certificate. Three steps to make sure the file is genuine:',
+    trust_s1_t: 'Check the SHA-256',
+    trust_s1_d: 'After downloading, run this command in PowerShell and compare the result with the hash in the “File check” block below.',
+    trust_s2_t: 'Download only from GitHub Releases',
+    trust_s2_d: 'Our only source is the official repository. Do not install builds from third-party sites.',
+    trust_releases: 'GitHub Releases →',
+    trust_s3_t: 'SmartScreen: “More info” → “Run anyway”',
+    trust_s3_d: 'Windows will show a blue warning. Click “More info”, then “Run anyway”. This does not disable protection — you only allow this one file.',
+    trust_note: 'We never ask you to disable Defender or your antivirus.',
+    lang_switch: 'Switch to Russian',
+    ord_close_aria: 'Close',
     req1: 'Windows 10 / 11, 64-bit', req2: 'Administrator rights',
     req3: '.NET 10 and the PawnIO driver install automatically', req4: '~250 MB on the system drive',
     log_title: 'What’s new', log_loading: 'Loading releases…',
@@ -939,22 +1363,36 @@ function applyLang(lang) {
     const val = dict[el.dataset.i18nHtml];
     if (val !== undefined) el.innerHTML = val;
   });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const val = dict[el.dataset.i18nAria];
+    if (val !== undefined) el.setAttribute('aria-label', val);
+  });
   document.getElementById('langCurrent').textContent = lang === 'en' ? 'RU' : 'EN';
   try { localStorage.setItem('void-lang', lang); } catch {}
+  document.dispatchEvent(new CustomEvent('void:lang', { detail: { lang } }));
 }
 
 (() => {
   let lang = 'ru';
   try { lang = localStorage.getItem('void-lang') || 'ru'; } catch {}
   applyLang(lang === 'en' ? 'en' : 'ru');
-  document.getElementById('langToggle').addEventListener('click', () =>
-    applyLang(document.documentElement.lang === 'en' ? 'ru' : 'en'));
+  const button = document.getElementById('langToggle');
+  button.addEventListener('click', () => {
+    const next = document.documentElement.lang === 'en' ? 'ru' : 'en';
+    const run = () => applyLang(next);
+    if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.startViewTransition(run);
+    } else {
+      run();
+    }
+  });
 })();
 
 /* SHA-256 copy */
 (() => {
   const btn = document.getElementById('copySha');
   const code = document.getElementById('fileSha');
+  const status = document.getElementById('shaStatus');
   if (!btn || !code) return;
   btn.addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(code.textContent.trim()); }
@@ -964,7 +1402,11 @@ function applyLang(lang) {
     }
     const old = btn.textContent;
     btn.textContent = '✓';
-    setTimeout(() => { btn.textContent = old; }, 1500);
+    if (status) status.textContent = (I18N[document.documentElement.lang] || I18N.ru).file_copied || '';
+    setTimeout(() => {
+      btn.textContent = old;
+      if (status) status.textContent = '';
+    }, 1500);
   });
 })();
 
@@ -980,12 +1422,63 @@ function applyLang(lang) {
   const lang = () => (document.documentElement.lang === 'en' ? 'en' : 'ru');
   const t = k => I18N[lang()][k] || '';
   let timer = 0, current = '';
-
-  const open = state => { modal.dataset.state = state; modal.classList.add('open'); };
-  const showErr = msg => { $('ordErr').textContent = msg; open('error'); };
+  let lastFocus = null, opened = false, scrollbarPad = '';
+  const pageChrome = [
+    document.querySelector('header.nav'),
+    document.querySelector('main'),
+    document.querySelector('footer')
+  ].filter(Boolean);
+  const live = $('ordLive');
+  const isOpen = () => modal.classList.contains('open');
+  const announce = state => {
+    if (!live) return;
+    const key = { wait: 'ord_wait_t', done: 'ord_done_t', canceled: 'ord_canceled_t', slow: 'ord_slow_t', error: 'ord_err_t' }[state];
+    live.textContent = key ? t(key) : '';
+  };
+  function activate() {
+    if (opened) return;
+    opened = true;
+    lastFocus = document.activeElement;
+    scrollbarPad = document.body.style.paddingRight;
+    const gap = window.innerWidth - document.documentElement.clientWidth;
+    document.body.classList.add('modal-open');
+    if (gap > 0) document.body.style.paddingRight = gap + 'px';
+    pageChrome.forEach(el => { el.inert = true; });
+  }
+  function deactivate() {
+    if (!opened) return;
+    opened = false;
+    pageChrome.forEach(el => { el.inert = false; });
+    document.body.classList.remove('modal-open');
+    document.body.style.paddingRight = scrollbarPad;
+    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    lastFocus = null;
+  }
+  function focusModal() {
+    requestAnimationFrame(() => {
+      const stateEl = Array.from(modal.querySelectorAll('.ord-state')).find(el => getComputedStyle(el).display !== 'none');
+      const target = stateEl && stateEl.querySelector('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+      (target || modal.querySelector('.ord-x') || modal.querySelector('.ord-card')).focus();
+    });
+  }
+  const open = state => {
+    modal.dataset.state = state;
+    modal.classList.add('open');
+    modal.setAttribute('aria-busy', state === 'wait' ? 'true' : 'false');
+    activate();
+    announce(state);
+    focusModal();
+  };
+  const showErr = msg => {
+    $('ordErr').textContent = msg;
+    open('error');
+    if (live) live.textContent = msg;
+  };
   const close = () => {
     clearTimeout(timer);
     modal.classList.remove('open');
+    modal.setAttribute('aria-busy', 'false');
+    deactivate();
     try { localStorage.removeItem(STORE); } catch {}
     if (location.search.includes('order=')) history.replaceState(null, '', location.pathname + location.hash);
   };
@@ -1053,8 +1546,31 @@ function applyLang(lang) {
     setTimeout(() => { btn.textContent = t('ord_copy'); }, 1600);
   });
   document.addEventListener('keydown', e => {
+    if (!isOpen()) return;
+    if (e.key === 'Tab') {
+      const focusables = Array.from(modal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+        .filter(el => el.offsetParent !== null && getComputedStyle(el).visibility !== 'hidden');
+      if (!focusables.length) {
+        e.preventDefault();
+        modal.querySelector('.ord-card').focus();
+        return;
+      }
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (!modal.contains(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+      return;
+    }
     const st = modal.dataset.state;
-    if (e.key === 'Escape' && modal.classList.contains('open') && st !== 'wait' && st !== 'done') close();
+    if (e.key === 'Escape' && st !== 'wait' && st !== 'done') close();
   });
   window.addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
 
@@ -1212,7 +1728,7 @@ function applyLang(lang) {
   }
 
   // language switch: re-render texts that are generated here
-  document.getElementById('langToggle').addEventListener('click', () => setTimeout(renderAll, 0));
+  document.addEventListener('void:lang', renderAll);
 
   const cached = readCache();
   if (cached) { releases = cached.data; state = 'ready'; renderAll(); }
@@ -1236,6 +1752,733 @@ function applyLang(lang) {
   // after a click on the download button, re-check the counter a few times
   document.getElementById('downloadBtn').addEventListener('click', () =>
     [4000, 15000, 40000].forEach(ms => setTimeout(() => refresh(true), ms)));
+})();
+</script>
+
+<script id="bench-2026-js">
+/* ============================================================
+   BENCHMARK 2026 — before/after switch with real numbers only.
+============================================================ */
+(() => {
+  'use strict';
+  const section = document.getElementById('benchmark');
+  if (!section) return;
+  const root = document.documentElement;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const switchEl = section.querySelector('.bench-switch');
+  const buttons = Array.from(section.querySelectorAll('[data-bench-state]'));
+  const values = Array.from(section.querySelectorAll('[data-bench-value]'));
+  const live = document.getElementById('benchLive');
+  const frames = new WeakMap();
+  let state = 'before';
+
+  const fmt = n => String(Math.round(n));
+  const dict = () => (typeof I18N !== 'undefined' ? I18N[root.lang === 'en' ? 'en' : 'ru'] : null);
+
+  function animateValue(el, to, duration) {
+    const from = Number(el.dataset.current || 0);
+    el.dataset.current = String(to);
+    const prev = frames.get(el);
+    if (prev) cancelAnimationFrame(prev);
+    if (reduce || !duration || from === to) { el.textContent = fmt(to); return; }
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 4);
+      el.textContent = fmt(from + (to - from) * eased);
+      if (p < 1) frames.set(el, requestAnimationFrame(tick));
+      else el.textContent = fmt(to);
+    }
+    frames.set(el, requestAnimationFrame(tick));
+  }
+
+  function updateLive() {
+    if (!live || !dict()) return;
+    live.textContent = dict()[state === 'after' ? 'bench_live_after' : 'bench_live_before'] || '';
+  }
+
+  function setState(next, animate) {
+    if (next !== 'before' && next !== 'after') return;
+    state = next;
+    section.dataset.bench = state;
+    if (switchEl) switchEl.dataset.bench = state;
+    buttons.forEach(btn => {
+      const on = btn.dataset.benchState === state;
+      btn.classList.toggle('on', on);
+      btn.setAttribute('aria-pressed', String(on));
+    });
+    values.forEach(el => {
+      const to = Number(el.dataset[state === 'after' ? 'after' : 'before']);
+      if (Number.isFinite(to)) animateValue(el, to, animate ? 760 : 0);
+    });
+    updateLive();
+  }
+
+  buttons.forEach(btn => btn.addEventListener('click', () => setState(btn.dataset.benchState, true)));
+  if (switchEl) {
+    switchEl.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      e.preventDefault();
+      const next = state === 'before' ? 'after' : 'before';
+      setState(next, true);
+      const target = buttons.find(b => b.dataset.benchState === next);
+      if (target) target.focus();
+    });
+  }
+  document.addEventListener('void:lang', () => {
+    values.forEach(el => { el.textContent = fmt(Number(el.dataset.current || 0)); });
+    updateLive();
+  });
+
+  setState('before', false);
+
+  let started = false;
+  if (!reduce) {
+    const io = new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting || started) return;
+      started = true;
+      io.disconnect();
+      values.forEach(el => { el.dataset.current = '0'; el.textContent = fmt(0); });
+      setState(state, true);
+    }, { threshold: 0.2 });
+    io.observe(section);
+  }
+})();
+</script>
+
+<script id="fx-2026-js">
+/* ============================================================
+   FX 2026 — motion, depth and light.
+   Fully isolated: delete this block + #fx-2026 styles to revert.
+============================================================ */
+(() => {
+  'use strict';
+  window.__voidFx = true;
+  const doc = document;
+  const root = doc.documentElement;
+  const forceMotion = new URLSearchParams(location.search).get('fx') === 'full';
+  const reduce = !forceMotion && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const $ = (s, c = doc) => c.querySelector(s);
+  const $$ = (s, c = doc) => Array.from(c.querySelectorAll(s));
+
+  try {
+    /* ---------- reveal ---------- */
+    const revealSel = '.head, .facts .fact, .bench-stat, .bench-fps, .bench-note, .bench-switch, .bench-hint, .feat, .free, .plan, .pro-list, .pay, .faq-side, .faq details, .dl-main, .news, .wordmark';
+    const revealEls = $$(revealSel);
+
+    const stagger = (parent, child, step) => {
+      const box = $(parent);
+      if (!box) return;
+      $$(child, box).forEach((el, i) => el.style.setProperty('--d', (i * step) + 'ms'));
+    };
+    stagger('.facts', '.fact', 70);
+    stagger('.bench-grid', '.bench-stat', 80);
+    stagger('.features', '.feat', 55);
+    stagger('.plans', '.plan', 85);
+    stagger('.faq', 'details', 38);
+    const dl = $('.dl');
+    if (dl) Array.from(dl.children).forEach((el, i) => el.style.setProperty('--d', (i * 100) + 'ms'));
+
+    function reveal(el) {
+      el.classList.add('in');
+      el.style.opacity = '1'; // safety net if animations are unsupported
+    }
+
+    if (reduce) {
+      revealEls.forEach(reveal);
+    } else {
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          reveal(e.target);
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -5% 0px' });
+      revealEls.forEach(el => io.observe(el));
+    }
+
+    /* ---------- scroll progress, nav spy, wordmark drift ---------- */
+    const progress = doc.createElement('div');
+    progress.className = 'fx-progress';
+    progress.setAttribute('aria-hidden', 'true');
+    progress.innerHTML = '<i></i>';
+    doc.body.appendChild(progress);
+    const bar = progress.firstElementChild;
+    const nav = $('.nav');
+    const navLinks = $$('.nav-links a');
+    const sections = $$('section[id]').map(el => ({ el, id: el.id }));
+    const wordmark = $('.wordmark');
+    let wmVisible = false;
+
+    if (wordmark) {
+      const wmIO = new IntersectionObserver(entries => {
+        wmVisible = !!entries[0].isIntersecting;
+        wordmark.style.willChange = wmVisible && !reduce ? 'transform' : '';
+      }, { rootMargin: '300px' });
+      wmIO.observe(wordmark);
+    }
+
+    let ticking = false;
+    function frameScroll() {
+      ticking = false;
+      const max = root.scrollHeight - root.clientHeight;
+      const p = max > 0 ? clamp(root.scrollTop / max, 0, 1) : 0;
+      if (bar) bar.style.setProperty('--p', p.toFixed(4));
+      if (nav) nav.classList.toggle('scrolled', root.scrollTop > 8);
+
+      /* the wordmark is cropped by the footer edge — reveal it at the very bottom */
+      if (wordmark && !wordmark.classList.contains('in') && root.scrollTop + innerHeight >= root.scrollHeight - 6) {
+        reveal(wordmark);
+      }
+
+      if (navLinks.length) {
+        const y = root.scrollTop + innerHeight * 0.36;
+        let cur = '';
+        for (const s of sections) {
+          if (s.el.getBoundingClientRect().top + root.scrollTop <= y) cur = s.id;
+        }
+        navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
+      }
+
+      if (wordmark && wmVisible && !reduce) {
+        const r = wordmark.getBoundingClientRect();
+        const q = clamp(1 - (r.top + r.height * 0.5) / innerHeight, 0, 1);
+        wordmark.style.transform = 'translate3d(' + ((q - 0.5) * 26).toFixed(2) + 'px,0,0)';
+      }
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(frameScroll);
+    }
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll, { passive: true });
+    frameScroll();
+
+    /* ---------- 3D tilt on the app preview ---------- */
+    const preview = $('.preview');
+    const app = preview && $('.app', preview);
+    if (preview && app && canHover && !reduce) {
+      const MAX = 2.8;
+      let active = false;
+      preview.addEventListener('pointerenter', () => {
+        active = true;
+        preview.classList.add('tilting');
+        app.style.willChange = 'transform';
+      });
+      preview.addEventListener('pointermove', e => {
+        if (!active) return;
+        const r = preview.getBoundingClientRect();
+        const nx = clamp((e.clientX - r.left) / r.width, 0, 1);
+        const ny = clamp((e.clientY - r.top) / r.height, 0, 1);
+        const rx = (0.5 - ny) * MAX * 2;
+        const ry = (nx - 0.5) * MAX * 2;
+        app.style.transform = 'rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+      });
+      preview.addEventListener('pointerleave', () => {
+        active = false;
+        preview.classList.remove('tilting');
+        app.style.transform = '';
+        setTimeout(() => { if (!active) app.style.willChange = ''; }, 650);
+      });
+    }
+
+  } catch (err) {
+    root.classList.remove('js');
+    console.warn('FX layer disabled:', err);
+  }
+
+  /* ============================================================
+     WEBGL 1 — ambient shader
+  ============================================================ */
+  function initShader() {
+    const hero = $('.hero');
+    if (!hero) return;
+
+    const canvas = doc.createElement('canvas');
+    canvas.className = 'hero-fx hero-shader';
+    canvas.setAttribute('aria-hidden', 'true');
+    hero.insertBefore(canvas, hero.firstChild);
+
+    const gl = canvas.getContext('webgl', {
+      alpha: false, antialias: false, depth: false, stencil: false,
+      premultipliedAlpha: false, preserveDrawingBuffer: false, powerPreference: 'high-performance'
+    });
+    if (!gl) { canvas.remove(); return; }
+
+    const vs = `
+      attribute vec2 aPos;
+      varying vec2 vUv;
+      void main() {
+        vUv = aPos * 0.5 + 0.5;
+        gl_Position = vec4(aPos, 0.0, 1.0);
+      }
+    `;
+    const fs = `
+      precision highp float;
+      varying vec2 vUv;
+      uniform vec2 uRes;
+      uniform float uTime;
+      uniform vec2 uMouse;
+
+      float hash(vec2 p) {
+        p = fract(p * vec2(123.34, 456.21));
+        p += dot(p, p + 45.32);
+        return fract(p.x * p.y);
+      }
+      float noise(vec2 p) {
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        f = f * f * (3.0 - 2.0 * f);
+        float a = hash(i);
+        float b = hash(i + vec2(1.0, 0.0));
+        float c = hash(i + vec2(0.0, 1.0));
+        float d = hash(i + vec2(1.0, 1.0));
+        return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+      }
+      float fbm(vec2 p) {
+        float v = 0.0;
+        float a = 0.55;
+        mat2 rot = mat2(0.80, -0.60, 0.60, 0.80);
+        for (int i = 0; i < 3; i++) {
+          v += a * noise(p);
+          p = rot * p * 2.03 + 17.1;
+          a *= 0.5;
+        }
+        return v;
+      }
+      void main() {
+        vec2 uv = vUv;
+        float aspect = uRes.x / max(uRes.y, 1.0);
+        vec2 p = (uv - 0.5) * vec2(aspect, 1.0);
+        float t = uTime * 0.045;
+        vec2 mp = (uMouse - 0.5) * 0.16;
+        vec2 q = p * 1.35 + mp;
+        q += 0.32 * vec2(
+          fbm(q + vec2(t, -t * 0.7)),
+          fbm(q + vec2(5.2 - t, t * 0.55))
+        );
+        float n1 = fbm(q * 1.15 + vec2(t * 0.65, -t * 0.4));
+        float n2 = fbm(q * 2.2 - vec2(t * 0.3, t * 0.5));
+        float ribbon = smoothstep(0.38, 0.95, n1 * 0.7 + n2 * 0.3);
+        float d = length(p - vec2(0.0, 0.24));
+        float glow = exp(-d * d * 1.7);
+        vec3 tint = mix(vec3(0.52, 0.57, 0.82), vec3(1.0), ribbon);
+        vec3 col = tint * ribbon * glow * 0.46;
+        col += vec3(0.42, 0.48, 0.74) * glow * 0.075;
+        float band = exp(-abs(p.y + 0.30 + 0.08 * sin(p.x * 2.2 + t * 2.0)) * 14.0);
+        col += vec3(0.62, 0.70, 1.0) * band * (0.55 + 0.45 * ribbon) * 0.048;
+        float horizon = exp(-abs(p.y + 0.16) * 18.0) * exp(-abs(p.x) * 1.15);
+        col += vec3(0.72, 0.78, 1.0) * horizon * 0.046;
+        col += vec3(0.0115, 0.0115, 0.016);
+        col *= 1.0 - smoothstep(0.35, 1.25, length(p * vec2(0.9, 1.08)));
+        float g = hash(uv * uRes * 0.9 + fract(uTime) * 13.7) - 0.5;
+        col += g * 0.014;
+        gl_FragColor = vec4(col, 1.0);
+      }
+    `;
+
+    function compile(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.warn('FX shader compile:', gl.getShaderInfoLog(s));
+        gl.deleteShader(s);
+        return null;
+      }
+      return s;
+    }
+
+    const v = compile(gl.VERTEX_SHADER, vs);
+    const f = compile(gl.FRAGMENT_SHADER, fs);
+    if (!v || !f) { canvas.remove(); return; }
+    const prog = gl.createProgram();
+    gl.attachShader(prog, v);
+    gl.attachShader(prog, f);
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      console.warn('FX shader link:', gl.getProgramInfoLog(prog));
+      canvas.remove();
+      return;
+    }
+    gl.useProgram(prog);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    const aPos = gl.getAttribLocation(prog, 'aPos');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+    const uRes = gl.getUniformLocation(prog, 'uRes');
+    const uTime = gl.getUniformLocation(prog, 'uTime');
+    const uMouse = gl.getUniformLocation(prog, 'uMouse');
+
+    let W = 1, H = 1, visible = true, raf = 0;
+    const start = performance.now();
+    const mx = 0.5, my = 0.36;
+
+    function draw(now, force) {
+      if (!force && (!visible || doc.hidden)) return;
+      const t = reduce ? 8.0 : (now - start) / 1000;
+      gl.uniform1f(uTime, t);
+      gl.uniform2f(uRes, W, H);
+      gl.uniform2f(uMouse, mx, my);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      if (force) canvas.classList.add('ready');
+    }
+
+    function loop(now) {
+      raf = requestAnimationFrame(loop);
+      if (!visible || doc.hidden) return;
+      draw(now, false);
+    }
+    function startLoop() {
+      if (reduce) { draw(performance.now(), true); return; }
+      if (!raf) { raf = requestAnimationFrame(loop); }
+    }
+    function stopLoop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+    function layout() {
+      const r = hero.getBoundingClientRect();
+      const scale = innerWidth < 760 ? 0.4 : 0.5;
+      W = Math.max(1, Math.round(r.width * scale));
+      H = Math.max(1, Math.round(r.height * scale));
+      if (canvas.width !== W || canvas.height !== H) {
+        canvas.width = W;
+        canvas.height = H;
+        gl.viewport(0, 0, W, H);
+      }
+      draw(performance.now(), true);
+    }
+
+    let layoutRaf = 0;
+    const ro = new ResizeObserver(() => {
+      if (layoutRaf) return;
+      layoutRaf = requestAnimationFrame(() => { layoutRaf = 0; layout(); });
+    });
+    ro.observe(hero);
+
+    const io = new IntersectionObserver(entries => {
+      visible = !!entries[0].isIntersecting;
+      if (visible) startLoop(); else stopLoop();
+    }, { threshold: 0 });
+    io.observe(hero);
+
+    doc.addEventListener('visibilitychange', () => {
+      if (doc.hidden) stopLoop(); else if (visible) startLoop();
+    });
+
+    layout();
+    startLoop();
+  }
+
+  /* ============================================================
+     WEBGL 2 — rotating wireframe sphere (low-poly, 480 edges)
+  ============================================================ */
+  function initOrb() {
+    const hero = $('.hero');
+    const preview = $('.preview');
+    if (!hero || !preview) return;
+
+    const canvas = doc.createElement('canvas');
+    canvas.className = 'hero-fx hero-orb';
+    canvas.setAttribute('aria-hidden', 'true');
+    const shaderCanvas = $('.hero-shader', hero);
+    hero.insertBefore(canvas, shaderCanvas ? shaderCanvas.nextSibling : hero.firstChild);
+
+    const gl = canvas.getContext('webgl', {
+      alpha: true, antialias: true, depth: false, stencil: false,
+      premultipliedAlpha: false, preserveDrawingBuffer: false, powerPreference: 'high-performance'
+    });
+    if (!gl) { canvas.remove(); return; }
+
+    const vs = `
+      attribute vec3 aPos;
+      uniform float uTime;
+      uniform vec2 uRes;
+      uniform float uDpr;
+      uniform vec2 uMouse;
+      varying float vA;
+      void main() {
+        vec3 p = aPos;
+        float ay = uTime * 0.11 + (uMouse.x - 0.5) * 0.60;
+        float ax = sin(uTime * 0.08) * 0.18 + (uMouse.y - 0.5) * 0.45;
+        float cy = cos(ay);
+        float sy = sin(ay);
+        p = vec3(p.x * cy + p.z * sy, p.y, -p.x * sy + p.z * cy);
+        float cx = cos(ax);
+        float sx = sin(ax);
+        p = vec3(p.x, p.y * cx - p.z * sx, p.y * sx + p.z * cx);
+        float z = 2.9 + p.z;
+        float s = 2.7 / z;
+        float aspect = uRes.x / max(uRes.y, 1.0);
+        gl_Position = vec4(p.x * s / aspect, p.y * s, 0.0, 1.0);
+        float front = 1.0 - smoothstep(-1.0, 1.0, p.z);
+        vA = 0.08 + front * 0.50;
+        gl_PointSize = (1.0 + front * 1.7) * uDpr;
+      }
+    `;
+    const fs = `
+      precision mediump float;
+      varying float vA;
+      uniform vec3 uColor;
+      uniform float uAlpha;
+      uniform float uPoint;
+      void main() {
+        float a = vA * uAlpha;
+        if (uPoint > 0.5) {
+          float d = length(gl_PointCoord - vec2(0.5));
+          a *= 1.0 - smoothstep(0.15, 0.5, d);
+        }
+        gl_FragColor = vec4(uColor, a);
+      }
+    `;
+
+    function compile(type, src) {
+      const s = gl.createShader(type);
+      gl.shaderSource(s, src);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        console.warn('FX orb compile:', gl.getShaderInfoLog(s));
+        gl.deleteShader(s);
+        return null;
+      }
+      return s;
+    }
+
+    const v = compile(gl.VERTEX_SHADER, vs);
+    const f = compile(gl.FRAGMENT_SHADER, fs);
+    if (!v || !f) { canvas.remove(); return; }
+    const prog = gl.createProgram();
+    gl.attachShader(prog, v);
+    gl.attachShader(prog, f);
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      console.warn('FX orb link:', gl.getProgramInfoLog(prog));
+      canvas.remove();
+      return;
+    }
+    gl.useProgram(prog);
+
+    /* icosphere */
+    const t = (1 + Math.sqrt(5)) / 2;
+    let verts = [
+      [-1, t, 0], [1, t, 0], [-1, -t, 0], [1, -t, 0],
+      [0, -1, t], [0, 1, t], [0, -1, -t], [0, 1, -t],
+      [t, 0, -1], [t, 0, 1], [-t, 0, -1], [-t, 0, 1]
+    ].map(p => {
+      const l = Math.hypot(p[0], p[1], p[2]);
+      return [p[0] / l, p[1] / l, p[2] / l];
+    });
+    let faces = [
+      [0, 11, 5], [0, 5, 1], [0, 1, 7], [0, 7, 10], [0, 10, 11],
+      [1, 5, 9], [5, 11, 4], [11, 10, 2], [10, 7, 6], [7, 1, 8],
+      [3, 9, 4], [3, 4, 2], [3, 2, 6], [3, 6, 8], [3, 8, 9],
+      [4, 9, 5], [2, 4, 11], [6, 2, 10], [8, 6, 7], [9, 8, 1]
+    ];
+
+    for (let level = 0; level < 2; level++) {
+      const cache = new Map();
+      const next = [];
+      const mid = (a, b) => {
+        const key = a < b ? a + '_' + b : b + '_' + a;
+        if (cache.has(key)) return cache.get(key);
+        const va = verts[a], vb = verts[b];
+        let x = (va[0] + vb[0]) / 2, y = (va[1] + vb[1]) / 2, z = (va[2] + vb[2]) / 2;
+        const l = Math.hypot(x, y, z);
+        verts.push([x / l, y / l, z / l]);
+        const idx = verts.length - 1;
+        cache.set(key, idx);
+        return idx;
+      };
+      for (const [a, b, c] of faces) {
+        const ab = mid(a, b), bc = mid(b, c), ca = mid(c, a);
+        next.push([a, ab, ca], [b, bc, ab], [c, ca, bc], [ab, bc, ca]);
+      }
+      faces = next;
+    }
+
+    const edgeSet = new Set();
+    for (const [a, b, c] of faces) {
+      [[a, b], [b, c], [c, a]].forEach(([i, j]) => {
+        edgeSet.add(Math.min(i, j) + '_' + Math.max(i, j));
+      });
+    }
+    const edgeIndices = [];
+    edgeSet.forEach(k => {
+      const [a, b] = k.split('_').map(Number);
+      edgeIndices.push(a, b);
+    });
+
+    const flat = new Float32Array(verts.length * 3);
+    verts.forEach((p, i) => { flat[i * 3] = p[0]; flat[i * 3 + 1] = p[1]; flat[i * 3 + 2] = p[2]; });
+
+    /* dense starfield shell — same rotation, cheap single draw call */
+    const CLOUD = 1400;
+    const cloud = new Float32Array(CLOUD * 3);
+    for (let i = 0; i < CLOUD; i++) {
+      const y = 1 - (i / (CLOUD - 1)) * 2;
+      const r = Math.sqrt(Math.max(0, 1 - y * y));
+      const a = i * 2.399963229728653;
+      cloud[i * 3] = Math.cos(a) * r;
+      cloud[i * 3 + 1] = y;
+      cloud[i * 3 + 2] = Math.sin(a) * r;
+    }
+
+    /* orbital ring — a wide 3D ellipse framing the app preview */
+    const RING = 240;
+    const ring = new Float32Array(RING * 3);
+    const tilt = 1.05;
+    for (let i = 0; i < RING; i++) {
+      const a = (i / RING) * Math.PI * 2;
+      const x = Math.cos(a) * 1.15;
+      const y0 = Math.sin(a) * 1.15;
+      ring[i * 3] = x;
+      ring[i * 3 + 1] = y0 * Math.cos(tilt);
+      ring[i * 3 + 2] = y0 * Math.sin(tilt);
+    }
+
+    const vbuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, vbuf);
+    gl.bufferData(gl.ARRAY_BUFFER, flat, gl.STATIC_DRAW);
+    const cbuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, cbuf);
+    gl.bufferData(gl.ARRAY_BUFFER, cloud, gl.STATIC_DRAW);
+    const rbuf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, rbuf);
+    gl.bufferData(gl.ARRAY_BUFFER, ring, gl.STATIC_DRAW);
+    const ibuf = gl.createBuffer();
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibuf);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(edgeIndices), gl.STATIC_DRAW);
+
+    const aPos = gl.getAttribLocation(prog, 'aPos');
+    gl.enableVertexAttribArray(aPos);
+    gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
+
+    const uTime = gl.getUniformLocation(prog, 'uTime');
+    const uRes = gl.getUniformLocation(prog, 'uRes');
+    const uDpr = gl.getUniformLocation(prog, 'uDpr');
+    const uMouse = gl.getUniformLocation(prog, 'uMouse');
+    const uColor = gl.getUniformLocation(prog, 'uColor');
+    const uAlpha = gl.getUniformLocation(prog, 'uAlpha');
+    const uPoint = gl.getUniformLocation(prog, 'uPoint');
+    gl.uniform3f(uColor, 0.78, 0.83, 1.0);
+
+    let W = 1, H = 1, visible = true, raf = 0;
+    const start = performance.now();
+    const mx = 0.5, my = 0.5;
+    const mobile = window.matchMedia('(max-width: 760px)');
+
+    function place() {
+      const hr = hero.getBoundingClientRect();
+      const pr = preview.getBoundingClientRect();
+      const center = mobile.matches
+        ? pr.top - hr.top - 140
+        : pr.top - hr.top + pr.height * 0.46;
+      canvas.style.top = center.toFixed(1) + 'px';
+    }
+
+    function layout() {
+      place();
+      const r = canvas.getBoundingClientRect();
+      if (!r.width || !r.height) { canvas.classList.remove('ready'); return; }
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      W = Math.max(1, Math.round(r.width * dpr));
+      H = Math.max(1, Math.round(r.height * dpr));
+      if (canvas.width !== W || canvas.height !== H) {
+        canvas.width = W;
+        canvas.height = H;
+        gl.viewport(0, 0, W, H);
+      }
+      gl.uniform2f(uRes, W, H);
+      gl.uniform1f(uDpr, dpr);
+      draw(performance.now(), true);
+    }
+
+    function draw(now, force) {
+      if (!force && (!visible || doc.hidden || (mobile.matches && !forceMotion))) return;
+      if (!W || !H) return;
+      const t = reduce ? 12.0 : (now - start) / 1000;
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.useProgram(prog);
+      gl.uniform1f(uTime, t);
+      gl.uniform2f(uRes, W, H);
+      gl.uniform2f(uMouse, mx, my);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+      gl.enableVertexAttribArray(aPos);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, cbuf);
+      gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
+      gl.uniform1f(uPoint, 1);
+      gl.uniform1f(uAlpha, 0.55);
+      gl.drawArrays(gl.POINTS, 0, CLOUD);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, rbuf);
+      gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
+      gl.uniform1f(uPoint, 0);
+      gl.uniform1f(uAlpha, 0.72);
+      gl.drawArrays(gl.LINE_LOOP, 0, RING);
+
+      gl.bindBuffer(gl.ARRAY_BUFFER, vbuf);
+      gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
+      gl.uniform1f(uPoint, 0);
+      gl.uniform1f(uAlpha, 0.82);
+      gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ibuf);
+      gl.drawElements(gl.LINES, edgeIndices.length, gl.UNSIGNED_SHORT, 0);
+
+      gl.uniform1f(uPoint, 1);
+      gl.uniform1f(uAlpha, 1.0);
+      gl.drawArrays(gl.POINTS, 0, verts.length);
+
+      if (force) canvas.classList.add('ready');
+    }
+
+    function loop(now) {
+      raf = requestAnimationFrame(loop);
+      if (!visible || doc.hidden || (mobile.matches && !forceMotion)) return;
+      draw(now, false);
+    }
+    function startLoop() {
+      if (reduce) { draw(performance.now(), true); return; }
+      if (mobile.matches && !forceMotion) return;
+      if (!raf) { raf = requestAnimationFrame(loop); }
+    }
+    function stopLoop() { if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+    let layoutRaf = 0;
+    const ro = new ResizeObserver(() => {
+      if (layoutRaf) return;
+      layoutRaf = requestAnimationFrame(() => { layoutRaf = 0; layout(); });
+    });
+    ro.observe(hero);
+    ro.observe(preview);
+
+    const io = new IntersectionObserver(entries => {
+      visible = !!entries[0].isIntersecting;
+      if (visible) startLoop(); else stopLoop();
+    }, { threshold: 0 });
+    io.observe(hero);
+
+    mobile.addEventListener('change', () => {
+      if (mobile.matches && !forceMotion) stopLoop();
+      else if (visible) { layout(); startLoop(); }
+    });
+    doc.addEventListener('visibilitychange', () => {
+      if (doc.hidden) stopLoop(); else if (visible) startLoop();
+    });
+
+    layout();
+    startLoop();
+  }
+
+  try { initShader(); } catch (e) { console.warn('FX shader failed:', e); }
+  try { initOrb(); } catch (e) { console.warn('FX orb failed:', e); }
 })();
 </script>
 
