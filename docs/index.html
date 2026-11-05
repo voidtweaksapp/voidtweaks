@@ -11,7 +11,7 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 <meta name="theme-color" content="#030303" />
 <meta name="color-scheme" content="dark" />
-<script>document.documentElement.classList.add('js');try{if(new URLSearchParams(location.search).get('fx')==='full')document.documentElement.classList.add('fx-force');}catch(e){}window.setTimeout(function(){if(!window.__voidFx)document.documentElement.classList.remove('js');},2500);</script>
+<script>document.documentElement.classList.add('js');try{var fxMode=new URLSearchParams(location.search).get('fx');if(fxMode==='off')document.documentElement.classList.add('fx-static');else if(fxMode==='full')document.documentElement.classList.add('fx-force');}catch(e){}window.setTimeout(function(){if(!window.__voidFx)document.documentElement.classList.remove('js');},2500);</script>
 <link rel="canonical" href="https://voidtweaksapp.github.io/voidtweaks/" />
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://voidtweaksapp.github.io/voidtweaks/sitemap.xml" />
 <meta property="og:type" content="website" />
@@ -549,9 +549,7 @@ body.modal-open { overflow: hidden; }
 ::view-transition-new(root) { animation-name: vtIn; }
 @keyframes vtOut { to { opacity: 0; transform: translateY(-3px); } }
 @keyframes vtIn { from { opacity: 0; transform: translateY(5px); } }
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
-}
+html.fx-static ::view-transition-group(*), html.fx-static ::view-transition-old(*), html.fx-static ::view-transition-new(*) { animation: none !important; }
 </style>
 <style id="fx-2026">
 /* ============================================================
@@ -699,34 +697,30 @@ body {
 }
 
 /* entrance */
-@media (prefers-reduced-motion: no-preference) {
-  .hero .badge { animation: fxFadeUp .8s var(--fx-ease) .05s both; }
-  .hero h1 .line { animation: fxLine 1.05s var(--fx-ease) both; }
-  .hero h1 .line:nth-child(2) { animation-delay: .14s; }
-  .hero h1 .line:first-child { animation: fxLine 1.05s var(--fx-ease) both, fxSheen 12s linear 2s infinite; }
-  .hero .lead { animation: fxFadeUp .9s var(--fx-ease) .26s both; }
-  .hero .actions { animation: fxFadeUp .9s var(--fx-ease) .34s both; }
-  .hero .note { animation: fxFadeUp .9s var(--fx-ease) .42s both; }
-  .hero .preview { animation: fxPreview 1.2s var(--fx-ease) .30s both; }
-}
+.hero .badge { animation: fxFadeUp .8s var(--fx-ease) .05s both; }
+.hero h1 .line { animation: fxLine 1.05s var(--fx-ease) both; }
+.hero h1 .line:nth-child(2) { animation-delay: .14s; }
+.hero h1 .line:first-child { animation: fxLine 1.05s var(--fx-ease) both, fxSheen 12s linear 2s infinite; }
+.hero .lead { animation: fxFadeUp .9s var(--fx-ease) .26s both; }
+.hero .actions { animation: fxFadeUp .9s var(--fx-ease) .34s both; }
+.hero .note { animation: fxFadeUp .9s var(--fx-ease) .42s both; }
+.hero .preview { animation: fxPreview 1.2s var(--fx-ease) .30s both; }
 @keyframes fxFadeUp { from { opacity: 0; translate: 0 18px; filter: blur(6px); } to { opacity: 1; translate: 0 0; filter: blur(0); } }
 @keyframes fxLine { from { opacity: 0; translate: 0 34px; filter: blur(14px); } to { opacity: 1; translate: 0 0; filter: blur(0); } }
 @keyframes fxPreview { from { opacity: 0; translate: 0 46px; scale: .985; } to { opacity: 1; translate: 0 0; scale: 1; } }
 @keyframes fxSheen { 0% { background-position: 180% 0; } 55%, 100% { background-position: -80% 0; } }
 
-@media (prefers-reduced-motion: reduce) {
-  html:not(.fx-force) { scroll-behavior: auto; }
-  html:not(.fx-force).js :is(.head, .facts .fact, .bench-stat, .bench-fps, .bench-note, .bench-switch, .bench-hint, .feat, .free, .plan, .pro-list, .pay, .faq-side, .faq details, .dl-main, .news, .wordmark) {
-    opacity: 1 !important; translate: none !important; filter: none !important; animation: none !important;
-  }
-  html:not(.fx-force) .hero .badge, html:not(.fx-force) .hero h1 .line, html:not(.fx-force) .hero .lead, html:not(.fx-force) .hero .actions, html:not(.fx-force) .hero .note, html:not(.fx-force) .hero .preview { animation: none !important; opacity: 1 !important; translate: none !important; filter: none !important; }
-  html:not(.fx-force) .hero h1 .line:first-child { background: none; color: #fff; }
-  html:not(.fx-force) .plan.best::before { display: none; }
-  html:not(.fx-force) .badge i, html:not(.fx-force) .file-check .fc-dot { animation: none !important; }
-  html:not(.fx-force) .preview .app { transition: none; animation: none !important; }
-  /* preview-only: keep a gentle sheen even when the OS asks for reduced motion */
-  html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infinite; }
+html.fx-static { scroll-behavior: auto; }
+html.fx-static.js :is(.head, .facts .fact, .bench-stat, .bench-fps, .bench-note, .bench-switch, .bench-hint, .feat, .free, .plan, .pro-list, .pay, .faq-side, .faq details, .dl-main, .news, .wordmark) {
+  opacity: 1 !important; translate: none !important; filter: none !important; animation: none !important;
 }
+html.fx-static .hero .badge, html.fx-static .hero h1 .line, html.fx-static .hero .lead, html.fx-static .hero .actions, html.fx-static .hero .note, html.fx-static .hero .preview { animation: none !important; opacity: 1 !important; translate: none !important; filter: none !important; }
+html.fx-static .hero h1 .line:first-child { background: none; color: #fff; }
+html.fx-static .plan.best::before { display: none; }
+html.fx-static .badge i, html.fx-static .file-check .fc-dot { animation: none !important; }
+html.fx-static .preview .app { transition: none; animation: none !important; }
+/* preview-only: keep a gentle sheen in forced preview mode */
+html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infinite; }
 </style>
 </head>
 <body>
@@ -1380,7 +1374,7 @@ function applyLang(lang) {
   button.addEventListener('click', () => {
     const next = document.documentElement.lang === 'en' ? 'ru' : 'en';
     const run = () => applyLang(next);
-    if (document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (document.startViewTransition && !document.documentElement.classList.contains('fx-static')) {
       document.startViewTransition(run);
     } else {
       run();
@@ -1764,7 +1758,7 @@ function applyLang(lang) {
   const section = document.getElementById('benchmark');
   if (!section) return;
   const root = document.documentElement;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduce = root.classList.contains('fx-static');
   const switchEl = section.querySelector('.bench-switch');
   const buttons = Array.from(section.querySelectorAll('[data-bench-state]'));
   const values = Array.from(section.querySelectorAll('[data-bench-value]'));
@@ -1857,7 +1851,8 @@ function applyLang(lang) {
   const doc = document;
   const root = doc.documentElement;
   const forceMotion = new URLSearchParams(location.search).get('fx') === 'full';
-  const reduce = !forceMotion && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Motion is on by default. ?fx=off opts into a fully static page. */
+  const reduce = root.classList.contains('fx-static');
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
   const $ = (s, c = doc) => c.querySelector(s);
