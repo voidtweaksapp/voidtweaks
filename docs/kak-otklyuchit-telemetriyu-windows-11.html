@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как отключить телеметрию Windows 11 — пошагово и без вреда</title>
+<meta name="description" content="Полное руководство: какие настройки телеметрии Windows 11 можно отключить официально, что делает реестр, зачем нужна служба DiagTrack и где начинается риск.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://voidtweaksapp.github.io/voidtweaks/kak-otklyuchit-telemetriyu-windows-11.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Как отключить телеметрию Windows 11 — пошагово">
+<meta property="og:description" content="Что реально можно отключить, что делает реестр и где начинается риск.">
+<meta property="og:url" content="https://voidtweaksapp.github.io/voidtweaks/kak-otklyuchit-telemetriyu-windows-11.html">
+<meta property="og:image" content="https://voidtweaksapp.github.io/voidtweaks/og.png">
+<meta property="og:locale" content="ru_RU">
+<link rel="icon" type="image/png" sizes="192x192" href="logo-192.png">
+<link rel="preload" href="fonts/onest-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/onest-800.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Как отключить телеметрию Windows 11 — пошагово и без вреда",
+  "description": "Какие настройки телеметрии Windows 11 можно отключить официально, что делает реестр и где начинается риск.",
+  "inLanguage": "ru-RU",
+  "datePublished": "2026-11-07",
+  "dateModified": "2026-11-07",
+  "author": { "@type": "Organization", "name": "VOIDTWEAKS", "url": "https://voidtweaksapp.github.io/voidtweaks/" },
+  "publisher": { "@type": "Organization", "name": "VOIDTWEAKS", "url": "https://voidtweaksapp.github.io/voidtweaks/" },
+  "mainEntityOfPage": "https://voidtweaksapp.github.io/voidtweaks/kak-otklyuchit-telemetriyu-windows-11.html"
+}
+</script>
+<style>
+@font-face{font-family:'Onest';src:url('fonts/onest-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Onest';src:url('fonts/onest-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Onest';src:url('fonts/onest-800.woff2') format('woff2');font-weight:800;font-display:swap}
+:root{--bg:#030303;--surface:#0D0D0F;--line:#1F1F23;--line2:#2A2A2E;--text:#fff;--text2:#A1A1AA;--text3:#71717A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Onest',system-ui,'Segoe UI',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:#fff}
+.container{max-width:760px;margin:0 auto;padding:0 20px}
+header{padding:16px 0;border-bottom:1px solid var(--line)}
+header .brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:15px;text-decoration:none;color:#fff}
+header img{width:28px;height:28px}
+main{padding:44px 0 64px}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.1;letter-spacing:-.03em;margin:0 0 16px}
+.lead{font-size:18px;line-height:1.6;color:var(--text2);margin:0 0 10px}
+.meta{font-size:13px;color:var(--text3);margin-bottom:30px}
+h2{font-size:24px;line-height:1.2;letter-spacing:-.02em;margin:38px 0 12px}
+h3{font-size:18px;margin:24px 0 8px}
+p,li{color:var(--text2);font-size:16px}
+ul,ol{padding-left:22px;margin:10px 0}
+li{margin:7px 0}
+code{background:#131316;border:1px solid var(--line);padding:2px 6px;border-radius:6px;font-family:ui-monospace,Consolas,monospace;font-size:14px;color:#fff}
+.note{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.65;color:var(--text2)}
+.note b{color:#fff}
+.cta{margin:38px 0 8px;padding:26px 22px;border:1px solid var(--line2);border-radius:18px;background:linear-gradient(180deg,#101013,#0B0B0D);text-align:center}
+.cta h2{margin:0 0 8px;font-size:22px}
+.cta p{margin:0;font-size:14.5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 24px;border-radius:12px;background:#fff;color:#09090B;font-weight:700;font-size:15px;text-decoration:none;margin-top:16px}
+footer{border-top:1px solid var(--line);padding:24px 0;font-size:13px;color:var(--text3)}
+footer a{color:var(--text2)}
+</style>
+</head>
+<body>
+<header><div class="container"><a class="brand" href="./"><img src="logo-192.png" alt="">VOIDTWEAKS</a></div></header>
+<main class="container">
+  <p class="meta">Гайд · Windows 11 · обновлено 7 ноября 2026</p>
+  <h1>Как отключить телеметрию Windows 11 — пошагово и без вреда</h1>
+  <p class="lead">Windows 11 отправляет диагностические данные на серверы Microsoft. Часть можно отключить штатно, часть — через службы и реестр. Ниже — что реально работает, а где начинается риск сломать обновления или Store.</p>
+
+  <h2>Что вообще такое телеметрия Windows</h2>
+  <p>Это набор диагностических данных: сведения об ошибках, конфигурация устройства, установленные приложения и параметры системы. Microsoft делит их на <b>обязательные</b> (нужны для безопасности и обновлений) и <b>необязательные</b> (аналитика, реклама, улучшение продуктов).</p>
+  <p>Полностью выключить телеметрию на Windows 11 Home и Pro официально нельзя: система всё равно отправляет минимальный обязательный набор. Всё, что обещает «0 байт телеметрии» на домашней версии, — маркетинг. Но сократить объём данных и фоновую активность можно заметно.</p>
+
+  <h2>Шаг 1. Штатные настройки Windows</h2>
+  <p>Откройте <b>Параметры → Конфиденциальность и безопасность → Диагностика и отзывы</b> и измените:</p>
+  <ul>
+    <li><b>Отправка необязательных диагностических данных</b> — выключить.</li>
+    <li><b>Улучшение рукописного ввода и ввода с клавиатуры</b> — выключить.</li>
+    <li><b>Индивидуальные возможности</b> (tailored experiences) — выключить.</li>
+    <li><b>Частота запросов на отзыв</b> — «Никогда».</li>
+    <li><b>Просмотр диагностических данных</b> — выключить.</li>
+  </ul>
+  <p>Это безопасный минимум: ничего не ломается, обновления и Store работают как обычно.</p>
+
+  <h2>Шаг 2. Служба DiagTrack</h2>
+  <p>За телеметрию отвечает служба <code>DiagTrack</code> (Connected User Experiences and Telemetry). Её отключение — самый популярный совет, но у него есть нюансы.</p>
+  <p>Через <b>services.msc</b>: найдите «Подключённые пользовательские интерфейсы и телеметрия», тип запуска — «Отключена», затем остановите службу. Или в PowerShell от администратора:</p>
+  <pre><code>sc stop DiagTrack
+sc config DiagTrack start= disabled</code></pre>
+  <div class="note"><b>Важно:</b> на некоторых сборках DiagTrack участвует в работе Центра обновления и диагностики. Если после отключения начались странности с обновлениями — верните службу в автоматический режим. Поэтому такие изменения лучше делать с точкой восстановления.</div>
+
+  <h2>Шаг 3. Задачи планировщика</h2>
+  <p>Часть телеметрии запускается по расписанию. В <b>Планировщике заданий</b> перейдите в <code>Библиотека планировщика → Microsoft → Windows → Application Experience</code> и посмотрите задачи <code>Microsoft Compatibility Appraiser</code> и <code>ProgramDataUpdater</code>. Их можно отключить, но не удалять.</p>
+  <p>Там же в <code>Customer Experience Improvement Program</code> обычно находится <code>Consolidator</code>. Отключение этих задач безопасно для обычного пользователя.</p>
+
+  <h2>Шаг 4. Реестр: AllowTelemetry</h2>
+  <p>Классический совет — параметр <code>AllowTelemetry = 0</code> в ветке:</p>
+  <pre><code>HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection</code></pre>
+  <p>Но есть честная оговорка: на Windows 11 Home и Pro значение <code>0</code> трактуется как «обязательный минимум», а не «полностью выключено». Полный ноль доступен только в Enterprise и Education. Так что не ждите, что этот ключ уберёт всю сетевую активность.</p>
+
+  <h2>Шаг 5. Блокировка через firewall — не для новичков</h2>
+  <p>Можно заблокировать телеметрические домены правилами брандмауэра, но список адресов меняется, а побочный эффект — сломанные обновления, Store и часть функций. Если не готовы разбираться — пропустите этот шаг.</p>
+
+  <h2>Что в итоге даёт отключение телеметрии</h2>
+  <ul>
+    <li>меньше фоновой сетевой активности и обращений к диску;</li>
+    <li>чуть меньше нагрузки на слабых ПК и ноутбуках;</li>
+    <li>меньше данных уходит в Microsoft.</li>
+  </ul>
+  <p>На FPS в играх это влияет слабо — не ждите прибавки кадров. Основной эффект — приватность и фон.</p>
+
+  <div class="cta">
+    <h2>Не хотите делать всё вручную?</h2>
+    <p>VOIDTWEAKS отключает телеметрию, службы и задачи планировщика в один клик — с точкой восстановления и откатом любого изменения.</p>
+    <a class="btn" href="https://github.com/voidtweaksapp/voidtweaks/releases/latest/download/VOIDTWEAKSInstaller.exe">Скачать бесплатно</a>
+  </div>
+
+  <h2>Частые вопросы</h2>
+  <h3>Это безопасно?</h3>
+  <p>Штатные настройки — да. Служба DiagTrack и задачи планировщика — в большинстве случаев да, но делайте точку восстановления. Firewall-блокировка — на свой риск.</p>
+  <h3>Сломаются ли обновления Windows?</h3>
+  <p>При отключении только необязательных данных и DiagTrack — обычно нет. Если обновления начали сбоить, верните службу и настройки назад.</p>
+  <h3>Станут ли игры быстрее?</h3>
+  <p>Сама телеметрия — нет. Прирост может дать комплексная оптимизация фона, но измерять его нужно честно, а не на глаз.</p>
+</main>
+<footer><div class="container">© 2026 VOIDTWEAKS · <a href="./">На главную</a> · <a href="https://github.com/voidtweaksapp/voidtweaks">GitHub</a></div></footer>
+</body>
+</html>

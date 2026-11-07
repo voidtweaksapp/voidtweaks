@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Как повысить FPS в CS2 — что реально работает, а что плацебо</title>
+<meta name="description" content="Честный гайд по FPS в CS2: настройки Windows, драйвера, BIOS, параметры игры и замеры. Что даёт результат, а какие твики только вредят.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://voidtweaksapp.github.io/voidtweaks/kak-povysit-fps-v-cs2.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Как повысить FPS в CS2 — что реально работает">
+<meta property="og:description" content="Настройки Windows, драйвера, BIOS и игры, которые дают результат, и твики, которые ничего не меняют.">
+<meta property="og:url" content="https://voidtweaksapp.github.io/voidtweaks/kak-povysit-fps-v-cs2.html">
+<meta property="og:image" content="https://voidtweaksapp.github.io/voidtweaks/og.png">
+<meta property="og:locale" content="ru_RU">
+<link rel="icon" type="image/png" sizes="192x192" href="logo-192.png">
+<link rel="preload" href="fonts/onest-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/onest-800.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Как повысить FPS в CS2 — что реально работает, а что плацебо",
+  "description": "Честный гайд по FPS в CS2: настройки Windows, драйвера, BIOS, параметры игры и замеры.",
+  "inLanguage": "ru-RU",
+  "datePublished": "2026-11-07",
+  "dateModified": "2026-11-07",
+  "author": { "@type": "Organization", "name": "VOIDTWEAKS", "url": "https://voidtweaksapp.github.io/voidtweaks/" },
+  "publisher": { "@type": "Organization", "name": "VOIDTWEAKS", "url": "https://voidtweaksapp.github.io/voidtweaks/" },
+  "mainEntityOfPage": "https://voidtweaksapp.github.io/voidtweaks/kak-povysit-fps-v-cs2.html"
+}
+</script>
+<style>
+@font-face{font-family:'Onest';src:url('fonts/onest-400.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Onest';src:url('fonts/onest-600.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Onest';src:url('fonts/onest-800.woff2') format('woff2');font-weight:800;font-display:swap}
+:root{--bg:#030303;--surface:#0D0D0F;--line:#1F1F23;--line2:#2A2A2E;--text:#fff;--text2:#A1A1AA;--text3:#71717A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Onest',system-ui,'Segoe UI',sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:#fff}
+.container{max-width:760px;margin:0 auto;padding:0 20px}
+header{padding:16px 0;border-bottom:1px solid var(--line)}
+header .brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;font-size:15px;text-decoration:none;color:#fff}
+header img{width:28px;height:28px}
+main{padding:44px 0 64px}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.1;letter-spacing:-.03em;margin:0 0 16px}
+.lead{font-size:18px;line-height:1.6;color:var(--text2);margin:0 0 10px}
+.meta{font-size:13px;color:var(--text3);margin-bottom:30px}
+h2{font-size:24px;line-height:1.2;letter-spacing:-.02em;margin:38px 0 12px}
+h3{font-size:18px;margin:24px 0 8px}
+p,li{color:var(--text2);font-size:16px}
+ul,ol{padding-left:22px;margin:10px 0}
+li{margin:7px 0}
+code{background:#131316;border:1px solid var(--line);padding:2px 6px;border-radius:6px;font-family:ui-monospace,Consolas,monospace;font-size:14px;color:#fff}
+.note{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:16px 18px;margin:22px 0;font-size:14.5px;line-height:1.65;color:var(--text2)}
+.note b{color:#fff}
+.cta{margin:38px 0 8px;padding:26px 22px;border:1px solid var(--line2);border-radius:18px;background:linear-gradient(180deg,#101013,#0B0B0D);text-align:center}
+.cta h2{margin:0 0 8px;font-size:22px}
+.cta p{margin:0;font-size:14.5px}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 24px;border-radius:12px;background:#fff;color:#09090B;font-weight:700;font-size:15px;text-decoration:none;margin-top:16px}
+footer{border-top:1px solid var(--line);padding:24px 0;font-size:13px;color:var(--text3)}
+footer a{color:var(--text2)}
+</style>
+</head>
+<body>
+<header><div class="container"><a class="brand" href="./"><img src="logo-192.png" alt="">VOIDTWEAKS</a></div></header>
+<main class="container">
+  <p class="meta">Гайд · CS2 · обновлено 7 ноября 2026</p>
+  <h1>Как повысить FPS в CS2 — что реально работает, а что плацебо</h1>
+  <p class="lead">CS2 хорошо оптимизирована, поэтому «магические» твики дают мало. Но несколько настроек действительно влияют на кадры и плавность. Разберём по порядку — от железа до реестра.</p>
+
+  <div class="note"><b>Честно о цифрах:</b> в наших замерах (Ryzen 5 5600 + GTX 1650, 1280×960, PresentMon, 3 прогона) оптимизация Windows дала +1.5% среднего FPS (283 → 288). Разница в 1% low была в пределах погрешности. Если ждёте +50 кадров — сначала обновите железо, потом настройки.</div>
+
+  <h2>1. Проверьте, что монитор работает на своей частоте</h2>
+  <p>Самая частая проблема: монитор 144 или 240 Гц, а Windows отдаёт 60 Гц. Проверьте <b>Параметры → Система → Дисплей → Дополнительные параметры дисплея</b> и выберите максимальную частоту. В NVIDIA Control Panel / AMD Software убедитесь, что она же стоит в настройках разрешения.</p>
+
+  <h2>2. BIOS: XMP/EXPO и двухканальная память</h2>
+  <ul>
+    <li><b>XMP (Intel) / EXPO (AMD)</b> — включите профиль памяти. Без него память работает на базовой частоте, и в CS2 это заметно.</li>
+    <li><b>Два модуля вместо одного</b> — двухканальный режим даёт больше, чем любой твик реестра.</li>
+    <li><b>Resizable BAR</b> — включите, если поддерживается. Иногда даёт несколько процентов.</li>
+  </ul>
+
+  <h2>3. Драйвер видеокарты</h2>
+  <p>Поставьте свежий драйвер с чистой установкой. Для NVIDIA используйте <b>DDU</b> при переходе между крупными версиями. В настройках драйвера:</p>
+  <ul>
+    <li>режим управления электропитанием — «Предпочтителен максимальный производительность»;</li>
+    <li>вертикальная синхронизация — выключена (или G-Sync/FreeSync, если монитор поддерживает);</li>
+    <li>NVIDIA Reflex — включён в самой игре.</li>
+  </ul>
+
+  <h2>4. Windows: фон и питание</h2>
+  <ul>
+    <li>Схема питания — «Высокая производительность» или «Максимальная производительность».</li>
+    <li>Игровой режим Windows — включён.</li>
+    <li>Закройте браузер, мессенджеры, RGB-софт, оверлеи Discord/Steam — они едят кадры и внимание.</li>
+    <li>Отключите запись Game Bar, если не пользуетесь.</li>
+    <li>Проверьте автозагрузку: лишние программы в фоне — минус стабильность 1% low.</li>
+  </ul>
+
+  <h2>5. Настройки CS2</h2>
+  <ul>
+    <li><b>Разрешение и соотношение сторон</b> — 1280×960 (4:3) или 1920×1080. Чем ниже разрешение, тем выше FPS, но страдает картинка.</li>
+    <li><b>Тени</b> — низкие. Один из самых дорогих параметров.</li>
+    <li><b>MSAA</b> — 2x или 4x; 8x редко оправдан.</li>
+    <li><b>FSR</b> — выключите, если GPU справляется: он мылит картинку.</li>
+    <li><b>Вертикальная синхронизация</b> — выключена.</li>
+    <li><b>NVIDIA Reflex</b> — «Включён» или «Включён + Boost».</li>
+  </ul>
+
+  <h2>6. Параметры запуска: без фанатизма</h2>
+  <p>CS2 не любит старые советы из CS:GO. Параметры вроде <code>-threads</code>, <code>-fullscreen</code>, <code>-console</code> и <code>-novid</code> либо ничего не делают, либо устарели. Оставьте минимум, например <code>-high</code>, и проверяйте каждый параметр замерами, а не по советам с форумов.</p>
+
+  <h2>7. Что не работает (или вредит)</h2>
+  <ul>
+    <li><b>Отключение HPET</b> — в большинстве сценариев не даёт измеримого прироста, а иногда ухудшает стабильность.</li>
+    <li><b>Правка SvcHostSplitThreshold</b> — популярный твик, но эффект на FPS не доказан.</li>
+    <li><b>Массовое отключение служб</b> — можно сломать обновления, Store, звук или сеть.</li>
+    <li><b>«Игровые» бустеры из Microsoft Store</b> — чаще всего просто закрывают процессы, что вы можете сделать сами.</li>
+  </ul>
+
+  <h2>8. Как правильно мерить</h2>
+  <p>Один прогон ничего не значит. Используйте <b>PresentMon</b> или <b>CapFrameX</b>, одинаковый демо-ролик, одинаковые настройки и 3 прогона. Смотрите не только средний FPS, но и <b>1% low</b> — именно он отвечает за плавность.</p>
+
+  <div class="cta">
+    <h2>Хотите убрать фон одним кликом?</h2>
+    <p>VOIDTWEAKS применяет безопасные твики Windows, чистит автозагрузку и настраивает CS2 — с откатом любого изменения.</p>
+    <a class="btn" href="https://github.com/voidtweaksapp/voidtweaks/releases/latest/download/VOIDTWEAKSInstaller.exe">Скачать бесплатно</a>
+  </div>
+
+  <h2>Частые вопросы</h2>
+  <h3>Сколько FPS даёт оптимизация Windows?</h3>
+  <p>Обычно единицы процентов. Основной прирост даёт железо, разрешение и настройки игры. В наших замерах — +1.5% среднего FPS.</p>
+  <h3>Помогает ли отключение телеметрии?</h3>
+  <p>На FPS — почти нет. На фон и приватность — да.</p>
+  <h3>Стоит ли ставить «игровые» сборки Windows?</h3>
+  <p>Рискованно: они часто ломают обновления и безопасность. Безопаснее настроить обычную Windows и иметь возможность отката.</p>
+</main>
+<footer><div class="container">© 2026 VOIDTWEAKS · <a href="./">На главную</a> · <a href="https://github.com/voidtweaksapp/voidtweaks">GitHub</a></div></footer>
+</body>
+</html>
