@@ -1274,6 +1274,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
       <div class="ord-spin" aria-hidden="true"></div>
       <h3 data-i18n="ord_wait_t">Проверяем оплату…</h3>
       <p data-i18n="ord_wait_d">Обычно это занимает несколько секунд. Не закрывайте страницу.</p>
+      <button type="button" class="btn btn-ghost" data-ord-close data-i18n="ord_close">Закрыть</button>
     </div>
     <div class="ord-state s-done">
       <h3 data-i18n="ord_done_t">Оплата прошла успешно</h3>
@@ -1293,6 +1294,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
       <h3 data-i18n="ord_slow_t">Платёж ещё обрабатывается</h3>
       <p data-i18n="ord_slow_d">Если вы уже оплатили, подождите минуту и проверьте снова. Ключ не пропадёт.</p>
       <button type="button" class="btn btn-primary" id="ordRetry" data-i18n="ord_retry">Проверить снова</button>
+      <button type="button" class="btn btn-ghost" data-ord-close data-i18n="ord_close">Закрыть</button>
     </div>
     <div class="ord-state s-error">
       <h3 data-i18n="ord_err_t">Что-то пошло не так</h3>
@@ -1415,6 +1417,7 @@ const I18N = {
     ord_err_t: 'Что-то пошло не так', ord_close: 'Закрыть', ord_until: 'до',
     ord_connecting: 'Подключаем оплату…',
     ord_err_timeout: 'Сервер оплаты не отвечает. Проверьте соединение и попробуйте ещё раз.',
+    ord_err_network: 'Нет связи с сервером оплаты. Проверьте интернет — если не помогает, включите VPN и попробуйте снова.',
     ord_err_create: 'Не удалось создать платёж. Попробуйте ещё раз через минуту.',
     ord_err_notfound: 'Заказ не найден. Если вы оплатили, напишите в поддержку.',
     ord_err_support: 'Платёж прошёл, но заказ не удалось подтвердить. Напишите в поддержку — выдадим ключ вручную.',
@@ -1527,6 +1530,7 @@ const I18N = {
     ord_err_t: 'Something went wrong', ord_close: 'Close', ord_until: 'until',
     ord_connecting: 'Connecting…',
     ord_err_timeout: 'The payment server is not responding. Check your connection and try again.',
+    ord_err_network: 'Cannot reach the payment server. Check your internet — if it still fails, turn on a VPN and try again.',
     ord_err_create: 'Could not create the payment. Try again in a minute.',
     ord_err_notfound: 'Order not found. If you paid, contact support.',
     ord_err_support: 'Payment went through but the order could not be confirmed. Contact support and we will issue the key manually.',
@@ -1624,7 +1628,7 @@ function applyLang(lang) {
   let lastFocus = null, opened = false, scrollbarPad = '';
   const CHECKOUT_TIMEOUT = 45000;
   const ORDER_TIMEOUT = 15000;
-  const ORDER_LIMIT = 60000;
+  const ORDER_LIMIT = 30000;
   const fetchJSON = async (url, options = {}, ms = ORDER_TIMEOUT) => {
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), ms);
@@ -1761,7 +1765,7 @@ function applyLang(lang) {
     } catch (e) {
       btn.textContent = label;
       btn.style.pointerEvents = '';
-      showErr(t(e && e.name === 'AbortError' ? 'ord_err_timeout' : 'ord_err_create'));
+      showErr(t(e && e.name === 'AbortError' ? 'ord_err_timeout' : e instanceof TypeError ? 'ord_err_network' : 'ord_err_create'));
     } finally {
       clearTimeout(notice);
     }
@@ -1773,7 +1777,10 @@ function applyLang(lang) {
     a.addEventListener('click', e => { e.preventDefault(); warm(); buy(a.dataset.buy, a); });
   });
   modal.querySelectorAll('[data-ord-close]').forEach(el => el.addEventListener('click', () => {
-    close(modal.dataset.state === 'wait' || modal.dataset.state === 'slow');
+    const st = modal.dataset.state;
+    const keep = st === 'wait' || st === 'slow';
+    close(keep);
+    if (keep && current) setTimeout(() => poll(current, true), 2000);
   }));
   $('ordRetry').addEventListener('click', () => poll(current));
   $('ordCopy').addEventListener('click', async e => {
