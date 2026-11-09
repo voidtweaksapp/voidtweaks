@@ -1629,7 +1629,7 @@ function applyLang(lang) {
   let timer = 0, current = '';
   let lastFocus = null, opened = false, scrollbarPad = '';
   const CHECKOUT_TIMEOUT = 45000;
-  const ORDER_TIMEOUT = 15000;
+  const ORDER_TIMEOUT = 20000;
   const ORDER_LIMIT = 30000;
   const fetchJSON = async (url, options = {}, ms = ORDER_TIMEOUT) => {
     const ctrl = new AbortController();
@@ -1730,7 +1730,7 @@ function applyLang(lang) {
       open('slow');
     };
     const tick = async () => {
-      if (Date.now() > deadline) return slow(netFail);
+      if (Date.now() > deadline) return slow(netFail && failures >= 2);
       let r, d;
       try {
         ({ r, d } = await fetchJSON(API + '/api/order?token=' + encodeURIComponent(token), {}, ORDER_TIMEOUT));
