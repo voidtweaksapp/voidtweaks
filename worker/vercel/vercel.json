@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/api/warm" }
+  ],
+  "functions": {
+    "api/checkout.js": { "maxDuration": 60 },
+    "api/order.js": { "maxDuration": 60 }
+  }
+}
