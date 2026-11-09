@@ -5,6 +5,8 @@
   "functions": {
     "api/checkout.js": { "maxDuration": 60 },
     "api/order.js": { "maxDuration": 60 },
+    "api/account/keys.js": { "maxDuration": 30 },
+    "api/account/claim.js": { "maxDuration": 30 },
     "api/warm.js": { "maxDuration": 30 }
   }
 }

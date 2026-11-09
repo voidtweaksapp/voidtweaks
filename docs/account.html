@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Профиль — VOIDTWEAKS</title>
+<meta name="description" content="Личный кабинет VOIDTWEAKS: вход, регистрация и ваши лицензионные ключи." />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="theme-color" content="#030303" />
+<meta name="color-scheme" content="dark" />
+<link rel="icon" type="image/png" sizes="192x192" href="logo-192.png">
+<link rel="apple-touch-icon" href="logo-192.png">
+<link rel="preload" href="fonts/onest-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/onest-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/onest-800.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: 'Onest'; src: url('fonts/onest-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Onest'; src: url('fonts/onest-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Onest'; src: url('fonts/onest-600.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Onest'; src: url('fonts/onest-700.woff2') format('woff2'); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Onest'; src: url('fonts/onest-800.woff2') format('woff2'); font-weight: 800; font-style: normal; font-display: swap; }
+
+:root {
+  --bg: #030303;
+  --surface: #0D0D0F;
+  --surface-2: #131316;
+  --line: #1F1F23;
+  --line-2: #2A2A2E;
+  --text: #F5F5F7;
+  --text-2: #A1A1AA;
+  --text-3: #71717A;
+  --success: #4ADE80;
+  --danger: #F87171;
+  --warn: #FBBF24;
+  --grad-white: linear-gradient(180deg, #FFFFFF 0%, #D9D9E0 100%);
+  --radius: 16px;
+  --fx-ease: cubic-bezier(.22,1,.36,1);
+  --font: 'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; font-family: var(--font); color: var(--text);
+  background: var(--bg); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  background-image: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,255,255,.07), transparent 70%);
+  background-repeat: no-repeat;
+}
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+.container { width: min(100% - 32px, 1040px); margin: 0 auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* ---------- nav ---------- */
+.nav { position: sticky; top: 0; z-index: 100; background: rgba(3,3,3,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 15px; letter-spacing: -0.2px; }
+.brand img { width: 28px; height: 28px; }
+.nav-links { display: flex; gap: 4px; font-size: 14px; font-weight: 500; }
+.nav-links a { padding: 8px 12px; border-radius: 8px; color: var(--text-2); }
+.nav-links a:hover { color: #fff; }
+.nav-links a.active { color: #fff; }
+.nav-cta { display: flex; align-items: center; gap: 8px; }
+.nav .btn { height: 38px; padding: 0 16px; font-size: 13.5px; border-radius: 10px; }
+.nav-burger { display: none; width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line-2); background: transparent; position: relative; flex-shrink: 0; }
+.nav-burger span { position: absolute; left: 10px; right: 10px; height: 1.5px; border-radius: 2px; background: #fff; transition: transform .3s var(--fx-ease), opacity .2s ease; }
+.nav-burger span:nth-child(1) { top: 13px; }
+.nav-burger span:nth-child(2) { top: 18.5px; }
+.nav-burger span:nth-child(3) { top: 24px; }
+.nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.nav-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+.nav-drawer { display: none; }
+@media (max-width: 760px) {
+  .nav-links { display: none; }
+  .nav-burger { display: block; }
+  .nav-drawer.open {
+    display: block; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+    background: #070708; border-bottom: 1px solid var(--line);
+    padding: 6px 16px 18px; box-shadow: 0 30px 60px -20px rgba(0,0,0,.9);
+  }
+  .nav-drawer.open a { display: block; padding: 14px 4px; font-size: 16px; font-weight: 600; color: var(--text-2); border-bottom: 1px solid var(--line); }
+  .nav-drawer.open a:hover { color: #fff; }
+  .nav-drawer.open .drawer-cta { margin-top: 14px; border: 0; border-radius: 12px; text-align: center; background: var(--grad-white); color: #09090B; font-weight: 700; padding: 14px 16px; }
+}
+
+/* ---------- buttons ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; height: 48px; padding: 0 22px; border-radius: 12px; border: 1px solid transparent; font-weight: 600; font-size: 14.5px; white-space: nowrap; transition: background-color .15s ease, border-color .15s ease, color .15s ease, opacity .15s ease; }
+.btn-primary { background: var(--grad-white); color: #09090B; }
+.btn-primary:hover { background: #fff; }
+.btn-ghost { background: transparent; color: var(--text-2); border-color: var(--line-2); }
+.btn-ghost:hover { color: #fff; border-color: #52525B; }
+.btn-lg { height: 52px; padding: 0 26px; font-size: 15px; }
+.btn-block { width: 100%; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+
+/* ---------- layout ---------- */
+.account { padding: 56px 0 80px; }
+.account-head { max-width: 640px; margin: 0 auto 32px; text-align: center; }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--text-3); margin-bottom: 14px; }
+.eyebrow::before, .eyebrow::after { content: ""; width: 18px; height: 1px; background: var(--line-2); }
+.account-head h1 { font-size: clamp(30px, 5vw, 48px); line-height: 1.1; letter-spacing: -.03em; margin: 0 0 12px; font-weight: 800; }
+.account-head p { margin: 0; color: var(--text-2); font-size: 15.5px; line-height: 1.6; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
+
+/* ---------- auth ---------- */
+.auth-card { max-width: 440px; margin: 0 auto; padding: 26px; }
+.auth-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; margin-bottom: 22px; }
+.auth-tab { height: 38px; border: 0; border-radius: 9px; background: transparent; color: var(--text-3); font-weight: 600; font-size: 14px; }
+.auth-tab[aria-selected="true"] { background: #1A1A1E; color: #fff; box-shadow: 0 1px 0 rgba(255,255,255,.06) inset; }
+.field { margin-bottom: 14px; }
+.field label { display: block; margin-bottom: 7px; font-size: 13px; font-weight: 600; color: var(--text-2); }
+.field input {
+  width: 100%; height: 48px; padding: 0 14px; border-radius: 11px; border: 1px solid var(--line-2);
+  background: #09090B; color: #fff; outline: none; transition: border-color .15s ease, box-shadow .15s ease;
+}
+.field input::placeholder { color: #52525B; }
+.field input:focus { border-color: #52525B; box-shadow: 0 0 0 3px rgba(255,255,255,.06); }
+.field input:disabled { opacity: .6; }
+.form-note { margin: 12px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--text-3); }
+.form-msg { display: none; margin: 14px 0 0; padding: 11px 13px; border-radius: 10px; font-size: 13.5px; line-height: 1.45; }
+.form-msg.show { display: block; }
+.form-msg.ok { background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.22); color: #BBF7D0; }
+.form-msg.err { background: rgba(248,113,113,.08); border: 1px solid rgba(248,113,113,.22); color: #FECACA; }
+.form-msg.info { background: rgba(255,255,255,.04); border: 1px solid var(--line-2); color: var(--text-2); }
+.link-btn { display: inline; padding: 0; border: 0; background: none; color: var(--text-2); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.link-btn:hover { color: #fff; }
+.auth-alt { margin-top: 18px; text-align: center; font-size: 13px; color: var(--text-3); }
+
+/* ---------- dashboard ---------- */
+.dash-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
+.dash-user { min-width: 0; }
+.dash-user .label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-3); margin-bottom: 5px; }
+.dash-user .email { font-size: 18px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dash-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.dash-actions .btn { height: 40px; padding: 0 15px; font-size: 13.5px; border-radius: 10px; }
+.section-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 30px 0 12px; }
+.section-title h2 { margin: 0; font-size: 18px; letter-spacing: -.01em; }
+.section-title .count { color: var(--text-3); font-size: 13px; font-weight: 600; }
+.keys { display: grid; gap: 12px; }
+.key-card { padding: 18px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.key-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.key-value { font-family: ui-monospace, SFMono-Regular, 'Cascadia Code', Consolas, monospace; font-size: clamp(16px, 2.4vw, 20px); font-weight: 700; letter-spacing: .08em; line-height: 1.2; word-break: break-all; }
+.key-plan { color: var(--text-2); font-size: 13px; font-weight: 600; margin-top: 4px; }
+.key-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; }
+.key-badge i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.key-badge.active { color: #86EFAC; background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.2); }
+.key-badge.expired { color: #FCA5A5; background: rgba(248,113,113,.08); border: 1px solid rgba(248,113,113,.2); }
+.key-badge.inactive { color: #FCD34D; background: rgba(251,191,36,.08); border: 1px solid rgba(251,191,36,.2); }
+.key-meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.key-meta div { min-width: 0; }
+.key-meta .k { display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); margin-bottom: 4px; }
+.key-meta .v { font-size: 13.5px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.key-foot { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.key-foot .btn { height: 38px; padding: 0 14px; font-size: 13px; border-radius: 9px; }
+@media (max-width: 620px) {
+  .key-meta { grid-template-columns: 1fr 1fr; }
+  .key-top { align-items: stretch; }
+  .key-badge { align-self: flex-start; }
+}
+.empty { padding: 30px 20px; text-align: center; border: 1px dashed var(--line-2); border-radius: 14px; color: var(--text-3); }
+.empty strong { display: block; color: var(--text-2); font-size: 15px; margin-bottom: 5px; }
+.empty p { margin: 0 0 16px; font-size: 13.5px; line-height: 1.5; }
+.add-key { margin-top: 16px; padding: 18px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); }
+.add-key summary { cursor: pointer; font-size: 13.5px; font-weight: 600; color: var(--text-2); list-style: none; }
+.add-key summary::-webkit-details-marker { display: none; }
+.add-key summary::before { content: '+'; display: inline-block; width: 18px; color: var(--text-3); }
+.add-key[open] summary::before { content: '−'; }
+.add-key form { display: flex; gap: 8px; margin-top: 14px; }
+.add-key input { flex: 1; min-width: 0; height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line-2); background: #09090B; color: #fff; outline: none; font-family: ui-monospace, monospace; text-transform: uppercase; }
+.add-key input:focus { border-color: #52525B; }
+.add-key .btn { height: 44px; padding: 0 16px; border-radius: 10px; }
+@media (max-width: 560px) { .add-key form { flex-direction: column; } }
+.orders { display: grid; gap: 8px; }
+.order-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 14px; border-radius: 11px; background: var(--surface); border: 1px solid var(--line); font-size: 13px; }
+.order-row .left { min-width: 0; }
+.order-row .plan { font-weight: 600; color: var(--text-2); }
+.order-row .date { color: var(--text-3); font-size: 12px; margin-top: 2px; }
+.order-row .status { color: var(--text-3); font-size: 12px; white-space: nowrap; }
+.foot { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--text-3); font-size: 12.5px; }
+.foot .container { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.foot a:hover { color: #fff; }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="./" class="brand"><img src="logo-112.png" alt="" width="28" height="28"><span>VOID TWEAKS</span></a>
+    <nav class="nav-links" aria-label="Разделы">
+      <a href="./#features">Возможности</a>
+      <a href="./#how">Как это работает</a>
+      <a href="./#pricing">Тарифы</a>
+      <a href="./#faq">FAQ</a>
+      <a href="account.html" class="active" aria-current="page">Профиль</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="./#download" class="btn btn-primary">Скачать</a>
+      <button type="button" class="nav-burger" id="navBurger" aria-label="Меню" aria-controls="navDrawer" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-drawer" id="navDrawer">
+  <a href="./#features">Возможности</a>
+  <a href="./#how">Как это работает</a>
+  <a href="./#pricing">Тарифы</a>
+  <a href="./#faq">FAQ</a>
+  <a href="account.html">Профиль</a>
+  <a href="./#download" class="drawer-cta">Скачать</a>
+</div>
+
+<main class="account">
+  <div class="container">
+    <div class="account-head" id="pageHead">
+      <span class="eyebrow">Личный кабинет</span>
+      <h1 id="pageTitle">Мои ключи</h1>
+      <p id="pageLead">Войдите, чтобы видеть свои лицензии, сроки и привязку к ПК.</p>
+    </div>
+
+    <!-- AUTH -->
+    <section class="card auth-card" id="authPanel" aria-labelledby="authTitle">
+      <h2 class="sr-only" id="authTitle">Вход и регистрация</h2>
+      <div class="auth-tabs" role="tablist" aria-label="Вход или регистрация">
+        <button type="button" class="auth-tab" id="tabLogin" role="tab" aria-selected="true" aria-controls="loginForm">Вход</button>
+        <button type="button" class="auth-tab" id="tabRegister" role="tab" aria-selected="false" aria-controls="registerForm">Регистрация</button>
+      </div>
+
+      <form id="loginForm" autocomplete="on">
+        <div class="field">
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
+        </div>
+        <div class="field">
+          <label for="loginPassword">Пароль</label>
+          <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="loginBtn">Войти</button>
+        <div class="form-msg" id="loginMsg" role="status" aria-live="polite"></div>
+        <p class="form-note"><button type="button" class="link-btn" id="forgotBtn">Забыли пароль?</button></p>
+      </form>
+
+      <form id="registerForm" autocomplete="on" hidden>
+        <div class="field">
+          <label for="regEmail">Email</label>
+          <input id="regEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
+        </div>
+        <div class="field">
+          <label for="regPassword">Пароль</label>
+          <input id="regPassword" name="password" type="password" autocomplete="new-password" placeholder="Минимум 6 символов" minlength="6" required />
+        </div>
+        <div class="field">
+          <label for="regPassword2">Повторите пароль</label>
+          <input id="regPassword2" name="password2" type="password" autocomplete="new-password" placeholder="Ещё раз" minlength="6" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="registerBtn">Создать аккаунт</button>
+        <div class="form-msg" id="registerMsg" role="status" aria-live="polite"></div>
+        <p class="form-note">Регистрируясь, вы соглашаетесь с правилами сервиса. Ключи привязываются к аккаунту, а не к email.</p>
+      </form>
+
+      <div class="auth-alt" id="authAlt">Купить ключ можно без регистрации — <a href="./#pricing">на главной</a>.</div>
+    </section>
+
+    <!-- NEW PASSWORD (recovery) -->
+    <section class="card auth-card" id="recoveryPanel" hidden aria-labelledby="recoveryTitle">
+      <h2 id="recoveryTitle" style="margin:0 0 8px;font-size:22px;">Новый пароль</h2>
+      <p style="margin:0 0 20px;color:var(--text-2);font-size:14px;line-height:1.5;">Придумайте новый пароль для входа.</p>
+      <form id="recoveryForm">
+        <div class="field">
+          <label for="newPassword">Новый пароль</label>
+          <input id="newPassword" type="password" autocomplete="new-password" placeholder="Минимум 6 символов" minlength="6" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg" id="recoveryBtn">Сохранить пароль</button>
+        <div class="form-msg" id="recoveryMsg" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" hidden>
+      <div class="dash-head">
+        <div class="dash-user">
+          <span class="label">Вы вошли как</span>
+          <div class="email" id="userEmail">—</div>
+        </div>
+        <div class="dash-actions">
+          <a href="./#pricing" class="btn btn-primary">Купить ещё</a>
+          <button type="button" class="btn btn-ghost" id="logoutBtn">Выйти</button>
+        </div>
+      </div>
+      <div class="form-msg" id="dashMsg" role="status" aria-live="polite"></div>
+
+      <div class="section-title">
+        <h2>Ключи</h2>
+        <span class="count" id="keysCount"></span>
+      </div>
+      <div class="keys" id="keysList"></div>
+      <div class="empty" id="keysEmpty" hidden>
+        <strong>Пока нет ключей</strong>
+        <p>Купите ключ на главной — он появится здесь автоматически. Если ключ уже есть, добавьте его вручную.</p>
+        <a href="./#pricing" class="btn btn-primary">Выбрать тариф</a>
+      </div>
+
+      <details class="add-key" id="addKeyBox">
+        <summary>Добавить существующий ключ</summary>
+        <form id="addKeyForm">
+          <input id="addKeyInput" type="text" placeholder="XXXX-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false" maxlength="19" required />
+          <button type="submit" class="btn btn-ghost" id="addKeyBtn">Добавить</button>
+        </form>
+        <div class="form-msg" id="addKeyMsg" role="status" aria-live="polite"></div>
+      </details>
+
+      <div class="section-title" id="ordersTitle" hidden>
+        <h2>История покупок</h2>
+        <span class="count" id="ordersCount"></span>
+      </div>
+      <div class="orders" id="ordersList"></div>
+
+      <div style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="./#download" class="btn btn-ghost">Скачать приложение</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="container">
+    <span>© <span id="year">2026</span> VOIDTWEAKS</span>
+    <span><a href="./">На главную</a> · <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener">Поддержка</a></span>
+  </div>
+</footer>
+
+<script src="vendor/supabase.js"></script>
+<script>
+(() => {
+  'use strict';
+
+  const SUPABASE_URL = 'https://mzkvqlbcrxaibpizuuuk.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_ONhVp8Za-zzwpE7FMp7Nyg_ntPLMYp7';
+  const API = 'https://voidtweaks-api.vercel.app';
+  const ACCOUNT_URL = location.origin + location.pathname;
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+  });
+
+  const $ = id => document.getElementById(id);
+  const authPanel = $('authPanel');
+  const dashboard = $('dashboard');
+  const recoveryPanel = $('recoveryPanel');
+  const pageHead = $('pageHead');
+  const pageTitle = $('pageTitle');
+  const pageLead = $('pageLead');
+  const tabLogin = $('tabLogin');
+  const tabRegister = $('tabRegister');
+  const loginForm = $('loginForm');
+  const registerForm = $('registerForm');
+  const loginMsg = $('loginMsg');
+  const registerMsg = $('registerMsg');
+  const recoveryForm = $('recoveryForm');
+  const recoveryMsg = $('recoveryMsg');
+  const dashMsg = $('dashMsg');
+
+  let currentSession = null;
+  let profilePromise = null;
+  let profileQueued = false;
+  let claiming = false;
+
+  // Токен заказа из ссылки после оплаты. Сохраняем сразу, чтобы он не потерялся
+  // после подтверждения email или перезагрузки страницы.
+  try {
+    const fromUrl = new URLSearchParams(location.search).get('order');
+    if (fromUrl) localStorage.setItem('void-order', fromUrl);
+  } catch {}
+
+  function pendingOrder() {
+    try {
+      return new URLSearchParams(location.search).get('order') || localStorage.getItem('void-order') || '';
+    } catch {
+      return '';
+    }
+  }
+
+  function authRedirect() {
+    const order = pendingOrder();
+    return ACCOUNT_URL + (order ? '?order=' + encodeURIComponent(order) : '');
+  }
+
+  const planLabel = plan => ({ month: '1 месяц', half: '6 месяцев', forever: 'Навсегда' }[plan] || plan || '—');
+  const fmtDate = iso => {
+    if (!iso) return 'Бессрочно';
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return '—';
+    return d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  };
+  const fmtDateTime = iso => {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return '';
+    return d.toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  };
+  const shortHwid = hwid => {
+    if (!hwid) return 'Не привязан';
+    return hwid.length > 14 ? hwid.slice(0, 12) + '…' : hwid;
+  };
+  const licenseStatus = lic => {
+    if (!lic || lic.is_active === false) return { cls: 'inactive', label: 'Неактивен' };
+    if (lic.expires_at && new Date(lic.expires_at).getTime() < Date.now()) return { cls: 'expired', label: 'Истёк' };
+    return { cls: 'active', label: 'Активен' };
+  };
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  function msg(el, text, kind) {
+    if (!el) return;
+    el.textContent = text || '';
+    el.className = 'form-msg' + (text ? ' show ' + (kind || 'info') : '');
+  }
+  function clearMsg(el) { msg(el, '', ''); }
+
+  function setBusy(btn, busy, label) {
+    if (!btn) return;
+    if (busy) {
+      btn.dataset.label = btn.textContent;
+      btn.textContent = label || 'Подождите…';
+      btn.disabled = true;
+    } else {
+      btn.textContent = btn.dataset.label || btn.textContent;
+      btn.disabled = false;
+    }
+  }
+
+  function withTimeout(promise, ms = 20000) {
+    let timer;
+    const timeout = new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error('timeout')), ms);
+    });
+    return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+  }
+
+  function authError(err) {
+    const raw = (err && (err.message || err.error_description || err.msg)) || '';
+    const m = raw.toLowerCase();
+    if (m.includes('invalid login credentials') || m.includes('invalid_grant')) return 'Неверный email или пароль.';
+    if (m.includes('email not confirmed')) return 'Email не подтверждён. Проверьте почту и перейдите по ссылке.';
+    if (m.includes('user already registered') || m.includes('already registered')) return 'Этот email уже зарегистрирован. Войдите.';
+    if (m.includes('password should be at least') || m.includes('password is too short')) return 'Пароль должен быть не короче 6 символов.';
+    if (m.includes('unable to validate email') || m.includes('invalid email')) return 'Проверьте адрес email.';
+    if (m.includes('rate limit') || m.includes('for security purposes')) return 'Слишком много попыток. Подождите минуту и попробуйте снова.';
+    if (m.includes('failed to fetch') || m.includes('network')) return 'Не удалось связаться с сервером. Проверьте интернет и попробуйте снова.';
+    if (m.includes('timeout')) return 'Сервер долго не отвечает. Проверьте интернет и попробуйте снова.';
+    return raw || 'Что-то пошло не так. Попробуйте ещё раз.';
+  }
+
+  function showAuth(tab) {
+    currentSession = null;
+    authPanel.hidden = false;
+    dashboard.hidden = true;
+    recoveryPanel.hidden = true;
+    pageHead.hidden = false;
+    pageTitle.textContent = 'Мои ключи';
+    pageLead.textContent = 'Войдите, чтобы видеть свои лицензии, сроки и привязку к ПК.';
+    setTab(tab === 'register' ? 'register' : 'login');
+  }
+  function showDashboard(session) {
+    currentSession = session;
+    authPanel.hidden = true;
+    dashboard.hidden = false;
+    recoveryPanel.hidden = true;
+    pageHead.hidden = true;
+    $('userEmail').textContent = session.user.email || '—';
+    loadProfile();
+  }
+  function showRecovery() {
+    authPanel.hidden = true;
+    dashboard.hidden = true;
+    recoveryPanel.hidden = false;
+    pageHead.hidden = true;
+  }
+  function setTab(tab) {
+    const login = tab === 'login';
+    tabLogin.setAttribute('aria-selected', String(login));
+    tabRegister.setAttribute('aria-selected', String(!login));
+    loginForm.hidden = !login;
+    registerForm.hidden = login;
+    clearMsg(loginMsg);
+    clearMsg(registerMsg);
+  }
+
+  async function api(path, options = {}, retried = false) {
+    const session = currentSession || (await supabase.auth.getSession()).data.session;
+    if (!session) throw new Error('no_session');
+    const headers = Object.assign({ 'Content-Type': 'application/json' }, options.headers || {}, {
+      Authorization: 'Bearer ' + session.access_token
+    });
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    let res;
+    try {
+      res = await fetch(API + path, Object.assign({}, options, { headers, signal: controller.signal }));
+    } finally {
+      clearTimeout(timer);
+    }
+    if (res.status === 401 && !retried) {
+      const { data, error } = await withTimeout(supabase.auth.refreshSession());
+      if (!error && data.session) {
+        currentSession = data.session;
+        return api(path, options, true);
+      }
+    }
+    const data = await res.json().catch(() => null);
+    if (!res.ok) {
+      const err = new Error((data && data.error) || 'request_failed');
+      err.status = res.status;
+      throw err;
+    }
+    return data;
+  }
+
+  async function loadProfile() {
+    if (profilePromise) {
+      // профиль уже грузится — после него загрузим ещё раз,
+      // чтобы показать ключ, привязанный во время первой загрузки
+      profileQueued = true;
+      return profilePromise;
+    }
+    profilePromise = (async () => {
+      do {
+        profileQueued = false;
+        try {
+          const data = await api('/api/account/keys');
+          renderKeys(data.licenses || []);
+          renderOrders(data.orders || []);
+        } catch (e) {
+          if (e.message === 'no_session') return showAuth();
+          if (e.status === 401) {
+            await supabase.auth.signOut();
+            showAuth('login');
+            msg(loginMsg, 'Сессия истекла. Войдите снова.', 'info');
+            return;
+          }
+          const box = $('keysList');
+          box.innerHTML = '';
+          $('keysEmpty').hidden = false;
+          $('keysEmpty').querySelector('strong').textContent = 'Не удалось загрузить ключи';
+          $('keysEmpty').querySelector('p').textContent = 'Проверьте интернет и попробуйте снова.';
+          $('keysEmpty').querySelector('a').textContent = 'Повторить';
+          $('keysEmpty').querySelector('a').href = '#';
+          $('keysEmpty').querySelector('a').onclick = ev => { ev.preventDefault(); loadProfile(); };
+          return;
+        }
+      } while (profileQueued);
+    })();
+    try {
+      await profilePromise;
+    } finally {
+      profilePromise = null;
+    }
+  }
+
+  function renderKeys(list) {
+    const box = $('keysList');
+    const empty = $('keysEmpty');
+    box.innerHTML = '';
+    $('keysCount').textContent = list.length ? String(list.length) : '';
+    if (!list.length) {
+      empty.hidden = false;
+      empty.querySelector('strong').textContent = 'Пока нет ключей';
+      empty.querySelector('p').textContent = 'Купите ключ на главной — он появится здесь автоматически. Если ключ уже есть, добавьте его вручную.';
+      const a = empty.querySelector('a');
+      a.textContent = 'Выбрать тариф';
+      a.href = './#pricing';
+      a.onclick = null;
+      return;
+    }
+    empty.hidden = true;
+    for (const lic of list) {
+      const st = licenseStatus(lic);
+      const card = document.createElement('article');
+      card.className = 'key-card';
+      card.innerHTML =
+        '<div class="key-top">' +
+          '<div>' +
+            '<div class="key-value">' + esc(lic.license_key || '—') + '</div>' +
+            '<div class="key-plan">' + esc(planLabel(lic.plan)) + '</div>' +
+          '</div>' +
+          '<span class="key-badge ' + st.cls + '"><i></i>' + st.label + '</span>' +
+        '</div>' +
+        '<div class="key-meta">' +
+          '<div><span class="k">Действует до</span><span class="v">' + esc(fmtDate(lic.expires_at)) + '</span></div>' +
+          '<div><span class="k">Привязка</span><span class="v" title="' + esc(lic.hwid || '') + '">' + esc(shortHwid(lic.hwid)) + '</span></div>' +
+          '<div><span class="k">Куплен</span><span class="v">' + esc(fmtDateTime(lic.created_at) || '—') + '</span></div>' +
+        '</div>' +
+        '<div class="key-foot">' +
+          '<button type="button" class="btn btn-ghost" data-copy="' + esc(lic.license_key || '') + '">Скопировать ключ</button>' +
+          '<a class="btn btn-ghost" href="./#download">Скачать приложение</a>' +
+        '</div>';
+      box.appendChild(card);
+    }
+    box.querySelectorAll('[data-copy]').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const text = btn.dataset.copy || '';
+        try { await navigator.clipboard.writeText(text); }
+        catch {
+          const ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch {}
+          ta.remove();
+        }
+        const old = btn.textContent;
+        btn.textContent = 'Скопировано';
+        setTimeout(() => { btn.textContent = old; }, 1600);
+      });
+    });
+  }
+
+  function renderOrders(list) {
+    const box = $('ordersList');
+    const title = $('ordersTitle');
+    box.innerHTML = '';
+    if (!list.length) { title.hidden = true; return; }
+    title.hidden = false;
+    $('ordersCount').textContent = String(list.length);
+    for (const o of list) {
+      const row = document.createElement('div');
+      row.className = 'order-row';
+      const status = o.status === 'succeeded' ? 'Оплачен' : o.status === 'pending' ? 'Ожидает оплаты' : o.status === 'canceled' ? 'Отменён' : (o.status || '—');
+      row.innerHTML =
+        '<div class="left"><div class="plan">' + esc(planLabel(o.plan)) + '</div>' +
+        '<div class="date">' + esc(fmtDateTime(o.created_at) || '') + '</div></div>' +
+        '<div class="status">' + esc(status) + '</div>';
+      box.appendChild(row);
+    }
+  }
+
+  async function claim(payload) {
+    return api('/api/account/claim', { method: 'POST', body: JSON.stringify(payload) });
+  }
+
+  async function autoClaim() {
+    if (!currentSession || claiming) return;
+    claiming = true;
+    clearMsg(dashMsg);
+    const params = new URLSearchParams(location.search);
+    const token = params.get('order');
+    let result = null;
+    let error = null;
+    try {
+      if (token) {
+        result = await claim({ token });
+      } else {
+        let saved = '';
+        try { saved = localStorage.getItem('void-order') || ''; } catch {}
+        if (saved) result = await claim({ token: saved });
+      }
+    } catch (e) {
+      error = e;
+    } finally {
+      claiming = false;
+    }
+
+    if (result) {
+      if (token) history.replaceState(null, '', location.pathname + location.hash);
+      try { localStorage.removeItem('void-order'); } catch {}
+      if (result.pending) {
+        msg(dashMsg, 'Заказ привязан к профилю. Ключ появится здесь после оплаты.', 'info');
+      } else {
+        msg(dashMsg, 'Ключ добавлен в профиль.', 'ok');
+      }
+      await loadProfile();
+      return;
+    }
+
+    if (error) {
+      if (error.status === 404) {
+        msg(dashMsg, 'Заказ не найден. Если вы уже оплатили, напишите в поддержку.', 'err');
+      } else if (error.status === 409) {
+        msg(dashMsg, 'Этот заказ уже привязан к другому аккаунту.', 'err');
+      } else if (error.status !== 401) {
+        msg(dashMsg, 'Не удалось привязать заказ. Попробуйте открыть ссылку из письма ещё раз.', 'err');
+      }
+    }
+  }
+
+  // Tabs
+  tabLogin.addEventListener('click', () => setTab('login'));
+  tabRegister.addEventListener('click', () => setTab('register'));
+
+  // Login
+  loginForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    clearMsg(loginMsg);
+    const email = $('loginEmail').value.trim();
+    const password = $('loginPassword').value;
+    if (!email || !password) return msg(loginMsg, 'Заполните email и пароль.', 'err');
+    const btn = $('loginBtn');
+    setBusy(btn, true, 'Входим…');
+    try {
+      const { data, error } = await withTimeout(supabase.auth.signInWithPassword({ email, password }));
+      if (error) throw error;
+      if (data.session) { loginForm.reset(); showDashboard(data.session); await autoClaim(); }
+    } catch (err) {
+      msg(loginMsg, authError(err), 'err');
+    } finally {
+      setBusy(btn, false);
+    }
+  });
+
+  // Register
+  registerForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    clearMsg(registerMsg);
+    const email = $('regEmail').value.trim();
+    const password = $('regPassword').value;
+    const password2 = $('regPassword2').value;
+    if (!email || !password) return msg(registerMsg, 'Заполните email и пароль.', 'err');
+    if (password.length < 6) return msg(registerMsg, 'Пароль должен быть не короче 6 символов.', 'err');
+    if (password !== password2) return msg(registerMsg, 'Пароли не совпадают.', 'err');
+    const btn = $('registerBtn');
+    setBusy(btn, true, 'Создаём…');
+    try {
+      const { data, error } = await withTimeout(supabase.auth.signUp({
+        email, password,
+        options: { emailRedirectTo: authRedirect() }
+      }));
+      if (error) throw error;
+      if (data.session) {
+        registerForm.reset();
+        showDashboard(data.session);
+        await autoClaim();
+      } else {
+        registerForm.reset();
+        msg(registerMsg, 'Аккаунт создан. Мы отправили письмо на ' + email + ' — перейдите по ссылке, затем войдите.', 'ok');
+        setTab('login');
+        $('loginEmail').value = email;
+        msg(loginMsg, 'Подтвердите email, затем войдите.', 'info');
+      }
+    } catch (err) {
+      msg(registerMsg, authError(err), 'err');
+    } finally {
+      setBusy(btn, false);
+    }
+  });
+
+  // Forgot password
+  $('forgotBtn').addEventListener('click', async () => {
+    const email = ($('loginEmail').value || prompt('Введите email, указанный при регистрации:') || '').trim();
+    if (!email) return;
+    clearMsg(loginMsg);
+    try {
+      const { error } = await withTimeout(supabase.auth.resetPasswordForEmail(email, { redirectTo: ACCOUNT_URL }));
+      if (error) throw error;
+      msg(loginMsg, 'Если такой email зарегистрирован, мы отправили ссылку для сброса пароля.', 'ok');
+    } catch (err) {
+      msg(loginMsg, authError(err), 'err');
+    }
+  });
+
+  // Recovery form
+  recoveryForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    clearMsg(recoveryMsg);
+    const password = $('newPassword').value;
+    if (password.length < 6) return msg(recoveryMsg, 'Пароль должен быть не короче 6 символов.', 'err');
+    const btn = $('recoveryBtn');
+    setBusy(btn, true, 'Сохраняем…');
+    try {
+      const { error } = await withTimeout(supabase.auth.updateUser({ password }));
+      if (error) throw error;
+      recoveryForm.reset();
+      msg(recoveryMsg, 'Пароль обновлён. Войдите с новым паролем.', 'ok');
+      setTimeout(() => { supabase.auth.signOut(); showAuth('login'); }, 1200);
+    } catch (err) {
+      msg(recoveryMsg, authError(err), 'err');
+    } finally {
+      setBusy(btn, false);
+    }
+  });
+
+  // Add existing key
+  $('addKeyForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    clearMsg($('addKeyMsg'));
+    const input = $('addKeyInput');
+    let key = input.value.trim().toUpperCase();
+    if (!/^[A-Z0-9]{4}(-[A-Z0-9]{4}){3}$/.test(key)) {
+      return msg($('addKeyMsg'), 'Ключ должен быть в формате XXXX-XXXX-XXXX-XXXX.', 'err');
+    }
+    const btn = $('addKeyBtn');
+    setBusy(btn, true, 'Добавляем…');
+    try {
+      await claim({ key });
+      input.value = '';
+      msg($('addKeyMsg'), 'Ключ добавлен в профиль.', 'ok');
+      await loadProfile();
+    } catch (err) {
+      const map = {
+        not_found: 'Ключ не найден. Проверьте раскладку и символы.',
+        already_claimed: 'Этот ключ уже привязан к другому аккаунту.',
+        bad_key: 'Неверный формат ключа.'
+      };
+      msg($('addKeyMsg'), map[err.message] || 'Не удалось добавить ключ. Попробуйте ещё раз.', 'err');
+    } finally {
+      setBusy(btn, false);
+    }
+  });
+
+  // Logout
+  $('logoutBtn').addEventListener('click', async () => {
+    await supabase.auth.signOut();
+    showAuth('login');
+  });
+
+  // Auth state
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'PASSWORD_RECOVERY') { showRecovery(); return; }
+    if (session) {
+      currentSession = session;
+      if (dashboard.hidden) {
+        showDashboard(session);
+        autoClaim();
+      } else {
+        $('userEmail').textContent = session.user.email || '—';
+      }
+    } else if (!recoveryPanel.hidden) {
+      // stay on recovery until password is set
+    } else {
+      showAuth('login');
+    }
+  });
+
+  // Mobile menu
+  const burger = $('navBurger');
+  const drawer = $('navDrawer');
+  burger.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Init
+  $('year').textContent = String(new Date().getFullYear());
+  (async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (location.hash.includes('type=recovery')) {
+      showRecovery();
+    } else if (session) {
+      showDashboard(session);
+      await autoClaim();
+    } else {
+      showAuth('login');
+    }
+  })();
+})();
+</script>
+</body>
+</html>

@@ -12,6 +12,18 @@
 <meta name="theme-color" content="#030303" />
 <meta name="color-scheme" content="dark" />
 <script>document.documentElement.classList.add('js');try{var fxMode=new URLSearchParams(location.search).get('fx');if(fxMode==='off')document.documentElement.classList.add('fx-static');else if(fxMode==='full')document.documentElement.classList.add('fx-force');}catch(e){}window.setTimeout(function(){if(!window.__voidFx)document.documentElement.classList.remove('js');},2500);</script>
+<script>
+/* Если Supabase вернул подтверждение на главную вместо account.html,
+   передаём токены туда, где подключён supabase-js. */
+try {
+  var authHash = location.hash || '';
+  if (authHash.indexOf('access_token=') !== -1 ||
+      authHash.indexOf('error_description=') !== -1 ||
+      authHash.indexOf('type=recovery') !== -1) {
+    location.replace('account.html' + location.search + authHash);
+  }
+} catch (e) {}
+</script>
 <link rel="canonical" href="https://voidtweaksapp.github.io/voidtweaks/" />
 <link rel="sitemap" type="application/xml" title="Sitemap" href="https://voidtweaksapp.github.io/voidtweaks/sitemap.xml" />
 <meta property="og:type" content="website" />
@@ -792,6 +804,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
       <a href="#how" data-i18n="nav_how">Как это работает</a>
       <a href="#pricing" data-i18n="nav_pricing">Тарифы</a>
       <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="account.html" data-i18n="nav_account">Профиль</a>
     </nav>
     <div class="nav-cta">
       <button class="lang-toggle" id="langToggle" aria-label="Switch language" data-i18n-aria="lang_switch"><span id="langCurrent">RU</span></button>
@@ -808,6 +821,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
   <a href="#how" data-i18n="nav_how">Как это работает</a>
   <a href="#pricing" data-i18n="nav_pricing">Тарифы</a>
   <a href="#faq" data-i18n="nav_faq">FAQ</a>
+  <a href="account.html" data-i18n="nav_account">Профиль</a>
   <a href="#download" class="drawer-cta" data-i18n="nav_download">Скачать</a>
 </div>
 
@@ -1283,6 +1297,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
       <button type="button" class="btn btn-primary" id="ordCopy" data-i18n="ord_copy">Скопировать ключ</button>
       <ol class="ord-steps" data-i18n-html="ord_steps"><li>Скачайте и установите программу</li><li>Запустите VOIDTWEAKSInstaller.exe и нажмите «Запустить оптимизацию»</li><li>Вставьте ключ в появившееся окно</li><li>Нажмите «Активировать»</li></ol>
       <p class="ord-warn" data-i18n="ord_warn">Сохраните ключ сейчас — после закрытия окна он не покажется снова. Ключ привязывается к ПК при первой активации.</p>
+      <a href="account.html" class="btn btn-ghost" id="ordAccount" data-i18n="ord_account">Сохранить в профиль</a>
       <a href="#download" class="btn btn-ghost" data-ord-close data-i18n="ord_dl">Скачать приложение</a>
     </div>
     <div class="ord-state s-canceled">
@@ -1311,7 +1326,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
 ============================================================ */
 const I18N = {
   ru: {
-    nav_features: 'Возможности', nav_pricing: 'Тарифы', nav_faq: 'FAQ', nav_download: 'Скачать', nav_how: 'Как это работает', nav_menu: 'Меню',
+    nav_features: 'Возможности', nav_pricing: 'Тарифы', nav_faq: 'FAQ', nav_account: 'Профиль', nav_download: 'Скачать', nav_how: 'Как это работает', nav_menu: 'Меню',
     foot_telemetry: 'Гайд: телеметрия', foot_fps: 'Гайд: FPS в CS2',
     hero_badge: 'VOIDTWEAKS · версия',
     hero_title: '<span class="line">Чистая Windows.</span><span class="line muted">Больше FPS. Меньше задержек.</span>',
@@ -1412,6 +1427,7 @@ const I18N = {
     ord_steps: '<li>Скачайте и установите программу</li><li>Запустите VOIDTWEAKSInstaller.exe и нажмите «Запустить оптимизацию»</li><li>Вставьте ключ в появившееся окно</li><li>Нажмите «Активировать»</li>',
     ord_warn: 'Сохраните ключ сейчас — после закрытия окна он не покажется снова. Ключ привязывается к ПК при первой активации.',
     ord_dl: 'Скачать приложение',
+    ord_account: 'Сохранить в профиль',
     ord_canceled_t: 'Оплата не прошла', ord_canceled_d: 'Платёж отменён или истёк, деньги не списаны. Выберите тариф и попробуйте снова.', ord_pick: 'Выбрать тариф',
     ord_slow_t: 'Платёж ещё обрабатывается', ord_slow_d: 'Если вы уже оплатили, подождите минуту и проверьте снова. Ключ не пропадёт.', ord_retry: 'Проверить снова',
     ord_slow_net: 'Нет связи с сервером оплаты. Включите VPN и нажмите «Проверить снова». Если вы уже оплатили — ключ не пропадёт.',
@@ -1425,7 +1441,7 @@ const I18N = {
     ord_plan_month: '1 месяц', ord_plan_half: '6 месяцев', ord_plan_forever: 'Навсегда'
   },
   en: {
-    nav_features: 'Features', nav_pricing: 'Pricing', nav_faq: 'FAQ', nav_download: 'Download', nav_how: 'How it works', nav_menu: 'Menu',
+    nav_features: 'Features', nav_pricing: 'Pricing', nav_faq: 'FAQ', nav_account: 'Account', nav_download: 'Download', nav_how: 'How it works', nav_menu: 'Menu',
     foot_telemetry: 'Guide: telemetry', foot_fps: 'Guide: CS2 FPS',
     hero_badge: 'VOIDTWEAKS · version',
     hero_title: '<span class="line">Clean Windows.</span><span class="line muted">More FPS. Less latency.</span>',
@@ -1526,6 +1542,7 @@ const I18N = {
     ord_steps: '<li>Download and install the app</li><li>Launch it and click “Run optimization”</li><li>Paste the key into the window that appears</li><li>Click “Activate”</li>',
     ord_warn: 'Save the key now — it will not be shown again after you close this window. It binds to your PC on first activation.',
     ord_dl: 'Download the app',
+    ord_account: 'Save to account',
     ord_canceled_t: 'Payment did not go through', ord_canceled_d: 'The payment was canceled or expired and nothing was charged. Pick a plan and try again.', ord_pick: 'Pick a plan',
     ord_slow_t: 'Payment is still processing', ord_slow_d: 'If you already paid, wait a minute and check again. Your key is safe.', ord_retry: 'Check again',
     ord_slow_net: 'Cannot reach the payment server. Turn on a VPN and press "Check again". If you already paid, your key is safe.',
@@ -1719,6 +1736,8 @@ function applyLang(lang) {
   function poll(token, silent) {
     current = token;
     try { localStorage.setItem(STORE, token); } catch {}
+    const accountLink = $('ordAccount');
+    if (accountLink) accountLink.href = 'account.html?order=' + encodeURIComponent(token);
     clearTimeout(timer);
     const deadline = Date.now() + ORDER_LIMIT;
     let failures = 0, netFail = false;

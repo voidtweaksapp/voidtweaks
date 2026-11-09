@@ -9,7 +9,7 @@ function corsHeaders(origin) {
   return {
     'Access-Control-Allow-Origin': allow,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Max-Age': '86400',
     'Vary': 'Origin'
   };
@@ -49,6 +49,9 @@ async function relay(req, res, path) {
     headers: { 'Content-Type': 'application/json' },
     redirect: 'manual'
   };
+  if (req.headers.authorization) {
+    init.headers.Authorization = req.headers.authorization;
+  }
 
   try {
     if (req.method !== 'GET' && req.method !== 'HEAD') {
