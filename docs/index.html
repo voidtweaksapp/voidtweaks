@@ -1413,6 +1413,8 @@ const I18N = {
     ord_canceled_t: 'Оплата не прошла', ord_canceled_d: 'Платёж отменён или истёк, деньги не списаны. Выберите тариф и попробуйте снова.', ord_pick: 'Выбрать тариф',
     ord_slow_t: 'Платёж ещё обрабатывается', ord_slow_d: 'Если вы уже оплатили, подождите минуту и проверьте снова. Ключ не пропадёт.', ord_retry: 'Проверить снова',
     ord_err_t: 'Что-то пошло не так', ord_close: 'Закрыть', ord_until: 'до',
+    ord_connecting: 'Подключаем оплату…',
+    ord_err_timeout: 'Сервер оплаты не отвечает. Проверьте соединение и попробуйте ещё раз.',
     ord_err_create: 'Не удалось создать платёж. Попробуйте ещё раз через минуту.',
     ord_err_notfound: 'Заказ не найден. Если вы оплатили, напишите в поддержку.',
     ord_err_support: 'Платёж прошёл, но заказ не удалось подтвердить. Напишите в поддержку — выдадим ключ вручную.',
@@ -1523,6 +1525,8 @@ const I18N = {
     ord_canceled_t: 'Payment did not go through', ord_canceled_d: 'The payment was canceled or expired and nothing was charged. Pick a plan and try again.', ord_pick: 'Pick a plan',
     ord_slow_t: 'Payment is still processing', ord_slow_d: 'If you already paid, wait a minute and check again. Your key is safe.', ord_retry: 'Check again',
     ord_err_t: 'Something went wrong', ord_close: 'Close', ord_until: 'until',
+    ord_connecting: 'Connecting…',
+    ord_err_timeout: 'The payment server is not responding. Check your connection and try again.',
     ord_err_create: 'Could not create the payment. Try again in a minute.',
     ord_err_notfound: 'Order not found. If you paid, contact support.',
     ord_err_support: 'Payment went through but the order could not be confirmed. Contact support and we will issue the key manually.',
@@ -1618,6 +1622,26 @@ function applyLang(lang) {
   const t = k => I18N[lang()][k] || '';
   let timer = 0, current = '';
   let lastFocus = null, opened = false, scrollbarPad = '';
+  const CHECKOUT_TIMEOUT = 45000;
+  const ORDER_TIMEOUT = 15000;
+  const ORDER_LIMIT = 60000;
+  const fetchJSON = async (url, options = {}, ms = ORDER_TIMEOUT) => {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), ms);
+    try {
+      const r = await fetch(url, Object.assign({}, options, { signal: ctrl.signal }));
+      const text = await r.text();
+      let d = null;
+      try { d = text ? JSON.parse(text) : null; } catch {}
+      return { r, d };
+    } finally { clearTimeout(t); }
+  };
+  let warmed = false;
+  const warm = () => {
+    if (warmed) return;
+    warmed = true;
+    try { fetch(API + '/', { mode: 'no-cors', cache: 'no-store' }).catch(() => {}); } catch {}
+  };
   const pageChrome = [
     document.querySelector('header.nav'),
     document.querySelector('main'),
@@ -1669,12 +1693,12 @@ function applyLang(lang) {
     open('error');
     if (live) live.textContent = msg;
   };
-  const close = () => {
+  const close = keep => {
     clearTimeout(timer);
     modal.classList.remove('open');
     modal.setAttribute('aria-busy', 'false');
     deactivate();
-    try { localStorage.removeItem(STORE); } catch {}
+    if (!keep) { try { localStorage.removeItem(STORE); } catch {} }
     if (location.search.includes('order=')) history.replaceState(null, '', location.pathname + location.hash);
   };
 
@@ -1688,20 +1712,35 @@ function applyLang(lang) {
 
   function poll(token, silent) {
     current = token;
+    try { localStorage.setItem(STORE, token); } catch {}
     clearTimeout(timer);
-    let tries = 0;
+    const deadline = Date.now() + ORDER_LIMIT;
+    let failures = 0;
     if (!silent) open('wait');
+    const slow = () => { if (!silent) open('slow'); };
     const tick = async () => {
+      if (Date.now() > deadline) return slow();
+      let r, d;
       try {
-        const r = await fetch(API + '/api/order?token=' + encodeURIComponent(token));
-        const d = await r.json();
-        if (r.status === 404) return showErr(t('ord_err_notfound'));
-        if (r.status === 409) return showErr(t('ord_err_support'));
-        if (d.status === 'succeeded') return done(d);
-        if (d.status === 'canceled') return silent ? close() : open('canceled');
-      } catch {}
-      if (silent) return;
-      if (++tries > 100) return open('slow');
+        ({ r, d } = await fetchJSON(API + '/api/order?token=' + encodeURIComponent(token), {}, ORDER_TIMEOUT));
+      } catch {
+        if (silent) return;
+        if (++failures >= 3) return slow();
+        timer = setTimeout(tick, 3000);
+        return;
+      }
+      if (r.status === 404) return silent ? close() : showErr(t('ord_err_notfound'));
+      if (r.status === 409) return showErr(t('ord_err_support'));
+      if (r.status === 429 || r.status >= 500 || !d) {
+        if (silent) return;
+        if (++failures >= 3) return slow();
+        timer = setTimeout(tick, 3000);
+        return;
+      }
+      failures = 0;
+      if (d.status === 'succeeded') return done(d);
+      if (d.status === 'canceled') return silent ? close() : open('canceled');
+      if (d.status === 'error') return showErr(t('ord_err_support'));
       timer = setTimeout(tick, 3000);
     };
     tick();
@@ -1711,24 +1750,31 @@ function applyLang(lang) {
     const label = btn.textContent;
     btn.style.pointerEvents = 'none';
     btn.textContent = '…';
+    const notice = setTimeout(() => { if (btn.textContent === '…') btn.textContent = t('ord_connecting'); }, 8000);
     try {
-      const r = await fetch(API + '/api/checkout', {
+      const { r, d } = await fetchJSON(API + '/api/checkout', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan })
-      });
-      const d = await r.json();
-      if (!r.ok || !d.url) throw new Error('checkout');
+      }, CHECKOUT_TIMEOUT);
+      if (!r.ok || !d || !d.url) throw new Error('checkout');
       try { localStorage.setItem(STORE, d.token); } catch {}
       location.href = d.url;
-    } catch {
+    } catch (e) {
       btn.textContent = label;
       btn.style.pointerEvents = '';
-      showErr(t('ord_err_create'));
+      showErr(t(e && e.name === 'AbortError' ? 'ord_err_timeout' : 'ord_err_create'));
+    } finally {
+      clearTimeout(notice);
     }
   }
 
-  document.querySelectorAll('[data-buy]').forEach(a =>
-    a.addEventListener('click', e => { e.preventDefault(); buy(a.dataset.buy, a); }));
-  modal.querySelectorAll('[data-ord-close]').forEach(el => el.addEventListener('click', close));
+  document.querySelectorAll('[data-buy]').forEach(a => {
+    a.addEventListener('pointerenter', warm, { once: true, passive: true });
+    a.addEventListener('pointerdown', warm, { once: true, passive: true });
+    a.addEventListener('click', e => { e.preventDefault(); warm(); buy(a.dataset.buy, a); });
+  });
+  modal.querySelectorAll('[data-ord-close]').forEach(el => el.addEventListener('click', () => {
+    close(modal.dataset.state === 'wait' || modal.dataset.state === 'slow');
+  }));
   $('ordRetry').addEventListener('click', () => poll(current));
   $('ordCopy').addEventListener('click', async e => {
     const btn = e.currentTarget;
@@ -1765,10 +1811,11 @@ function applyLang(lang) {
       return;
     }
     const st = modal.dataset.state;
-    if (e.key === 'Escape' && st !== 'wait' && st !== 'done') close();
+    if (e.key === 'Escape' && st !== 'wait' && st !== 'done') close(st === 'slow');
   });
   window.addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
 
+  setTimeout(warm, 1200);
   const fromUrl = new URLSearchParams(location.search).get('order');
   let saved = '';
   try { saved = localStorage.getItem(STORE) || ''; } catch {}
