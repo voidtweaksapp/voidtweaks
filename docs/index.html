@@ -1292,7 +1292,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
     </div>
     <div class="ord-state s-slow">
       <h3 data-i18n="ord_slow_t">Платёж ещё обрабатывается</h3>
-      <p data-i18n="ord_slow_d">Если вы уже оплатили, подождите минуту и проверьте снова. Ключ не пропадёт.</p>
+      <p id="ordSlowText" data-i18n="ord_slow_d">Если вы уже оплатили, подождите минуту и проверьте снова. Ключ не пропадёт.</p>
       <button type="button" class="btn btn-primary" id="ordRetry" data-i18n="ord_retry">Проверить снова</button>
       <button type="button" class="btn btn-ghost" data-ord-close data-i18n="ord_close">Закрыть</button>
     </div>
@@ -1414,6 +1414,7 @@ const I18N = {
     ord_dl: 'Скачать приложение',
     ord_canceled_t: 'Оплата не прошла', ord_canceled_d: 'Платёж отменён или истёк, деньги не списаны. Выберите тариф и попробуйте снова.', ord_pick: 'Выбрать тариф',
     ord_slow_t: 'Платёж ещё обрабатывается', ord_slow_d: 'Если вы уже оплатили, подождите минуту и проверьте снова. Ключ не пропадёт.', ord_retry: 'Проверить снова',
+    ord_slow_net: 'Нет связи с сервером оплаты. Включите VPN и нажмите «Проверить снова». Если вы уже оплатили — ключ не пропадёт.',
     ord_err_t: 'Что-то пошло не так', ord_close: 'Закрыть', ord_until: 'до',
     ord_connecting: 'Подключаем оплату…',
     ord_err_timeout: 'Сервер оплаты не отвечает. Проверьте соединение и попробуйте ещё раз.',
@@ -1527,6 +1528,7 @@ const I18N = {
     ord_dl: 'Download the app',
     ord_canceled_t: 'Payment did not go through', ord_canceled_d: 'The payment was canceled or expired and nothing was charged. Pick a plan and try again.', ord_pick: 'Pick a plan',
     ord_slow_t: 'Payment is still processing', ord_slow_d: 'If you already paid, wait a minute and check again. Your key is safe.', ord_retry: 'Check again',
+    ord_slow_net: 'Cannot reach the payment server. Turn on a VPN and press "Check again". If you already paid, your key is safe.',
     ord_err_t: 'Something went wrong', ord_close: 'Close', ord_until: 'until',
     ord_connecting: 'Connecting…',
     ord_err_timeout: 'The payment server is not responding. Check your connection and try again.',
@@ -1719,20 +1721,27 @@ function applyLang(lang) {
     try { localStorage.setItem(STORE, token); } catch {}
     clearTimeout(timer);
     const deadline = Date.now() + ORDER_LIMIT;
-    let failures = 0;
+    let failures = 0, netFail = false;
     if (!silent) open('wait');
-    const slow = () => { if (!silent) open('slow'); };
+    const slow = net => {
+      if (silent) return;
+      const p = $('ordSlowText');
+      if (p) p.textContent = t(net ? 'ord_slow_net' : 'ord_slow_d');
+      open('slow');
+    };
     const tick = async () => {
-      if (Date.now() > deadline) return slow();
+      if (Date.now() > deadline) return slow(netFail);
       let r, d;
       try {
         ({ r, d } = await fetchJSON(API + '/api/order?token=' + encodeURIComponent(token), {}, ORDER_TIMEOUT));
       } catch {
+        netFail = true;
         if (silent) return;
-        if (++failures >= 3) return slow();
+        if (++failures >= 3) return slow(true);
         timer = setTimeout(tick, 3000);
         return;
       }
+      netFail = false;
       if (r.status === 404) return silent ? close() : showErr(t('ord_err_notfound'));
       if (r.status === 409) return showErr(t('ord_err_support'));
       if (r.status === 429 || r.status >= 500 || !d) {
