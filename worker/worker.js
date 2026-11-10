@@ -10,14 +10,19 @@ const ALLOWED_ORIGINS = new Set([
   'https://voidtweaksapp.github.io',
   'https://disxrm.github.io'
 ]);
-const API_PATHS = new Set(['/api/checkout', '/api/order']);
+const API_PATHS = new Set([
+  '/api/checkout',
+  '/api/order',
+  '/api/account/keys',
+  '/api/account/claim'
+]);
 
 function corsHeaders(origin) {
   const allow = ALLOWED_ORIGINS.has(origin) ? origin : 'https://voidtweaksapp.github.io';
   return {
     'Access-Control-Allow-Origin': allow,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Max-Age': '86400',
     'Vary': 'Origin'
   };
@@ -57,6 +62,8 @@ export default {
     const headers = new Headers();
     const contentType = request.headers.get('Content-Type');
     if (contentType) headers.set('Content-Type', contentType);
+    const authorization = request.headers.get('Authorization');
+    if (authorization) headers.set('Authorization', authorization);
 
     const init = { method: request.method, headers, redirect: 'manual' };
     if (request.method !== 'GET' && request.method !== 'HEAD') {
