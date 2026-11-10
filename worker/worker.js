@@ -87,5 +87,11 @@ export default {
     out.set('Cache-Control', 'no-store');
 
     return new Response(res.body, { status: res.status, headers: out });
+  },
+
+  // Cron Trigger: держим Render тёплым, чтобы кабинет и оплата
+  // не ждали холодный старт free-тарифа.
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(fetch(UPSTREAM + '/', { method: 'GET' }).catch(() => {}));
   }
 };

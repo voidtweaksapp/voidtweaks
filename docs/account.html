@@ -540,6 +540,9 @@ body::before {
   const SUPABASE_URL = 'https://mzkvqlbcrxaibpizuuuk.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_ONhVp8Za-zzwpE7FMp7Nyg_ntPLMYp7';
   const API = 'https://voidtweaks-api.voidtweaks.workers.dev';
+  // Render на free-тарифе засыпает. Будим его сразу, не дожидаясь входа:
+  // так к моменту загрузки ключей/админки он уже просыпается.
+  fetch(API + '/', { method: 'GET', mode: 'no-cors', cache: 'no-store' }).catch(() => {});
   const ACCOUNT_URL = location.origin + location.pathname;
 
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
@@ -709,10 +712,20 @@ body::before {
       Authorization: 'Bearer ' + session.access_token
     });
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 15000);
+    // Render на бесплатном тарифе просыпается до ~50 секунд.
+    const timer = setTimeout(() => controller.abort(), 60000);
     let res;
     try {
       res = await fetch(API + path, Object.assign({}, options, { headers, signal: controller.signal }));
+    } catch (e) {
+      clearTimeout(timer);
+      if (!retried) {
+        await new Promise(r => setTimeout(r, 1200));
+        return api(path, options, true);
+      }
+      const err = new Error(e && e.name === 'AbortError' ? 'timeout' : 'network');
+      err.status = 0;
+      throw err;
     } finally {
       clearTimeout(timer);
     }
@@ -759,7 +772,9 @@ body::before {
           box.innerHTML = '';
           $('keysEmpty').hidden = false;
           $('keysEmpty').querySelector('strong').textContent = 'Не удалось загрузить ключи';
-          $('keysEmpty').querySelector('p').textContent = 'Проверьте интернет и попробуйте снова.';
+          $('keysEmpty').querySelector('p').textContent = e.message === 'timeout'
+            ? 'Сервер просыпается дольше обычного. Подождите и нажмите «Повторить».'
+            : 'Проверьте интернет и попробуйте снова.';
           $('keysEmpty').querySelector('a').textContent = 'Повторить';
           $('keysEmpty').querySelector('a').href = '#';
           $('keysEmpty').querySelector('a').onclick = ev => { ev.preventDefault(); loadProfile(); };
@@ -955,7 +970,13 @@ body::before {
     if (!panel || adminLoaded) return;
     adminLoaded = true;
     panel.hidden = false;
-    $('adminTableWrap').innerHTML = '<div class="admin-empty">Загружаем данные…</div>';
+    const wrap = $('adminTableWrap');
+    wrap.innerHTML = '<div class="admin-empty">Загружаем данные…</div>';
+    const slowTimer = setTimeout(() => {
+      if (adminLoaded && !adminData) {
+        wrap.innerHTML = '<div class="admin-empty">Сервер просыпается…<br><span style="color:var(--text-3);font-size:12px">Обычно это занимает до минуты.</span></div>';
+      }
+    }, 5000);
     try {
       const data = await api('/api/admin/data');
       adminData = data;
@@ -964,8 +985,17 @@ body::before {
     } catch (e) {
       adminLoaded = false;
       adminData = null;
-      $('adminTableWrap').innerHTML = '<div class="admin-empty">Не удалось загрузить админку. ' +
-        (e.status === 403 ? 'Нет доступа.' : 'Проверьте интернет и обновите страницу.') + '</div>';
+      const reason = e.status === 403
+        ? 'Нет доступа.'
+        : e.message === 'timeout'
+          ? 'Сервер не ответил. Подождите и попробуйте снова.'
+          : 'Проверьте интернет и попробуйте снова.';
+      wrap.innerHTML = '<div class="admin-empty">Не удалось загрузить админку. ' + reason +
+        '<br><button type="button" class="mini-btn" id="adminRetry" style="margin-top:12px">Повторить</button></div>';
+      const retry = $('adminRetry');
+      if (retry) retry.addEventListener('click', () => { adminLoaded = false; loadAdmin(); });
+    } finally {
+      clearTimeout(slowTimer);
     }
   }
 

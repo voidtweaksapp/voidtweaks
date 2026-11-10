@@ -1658,8 +1658,8 @@ function applyLang(lang) {
   const t = k => I18N[lang()][k] || '';
   let timer = 0, current = '';
   let lastFocus = null, opened = false, scrollbarPad = '';
-  const CHECKOUT_TIMEOUT = 45000;
-  const ORDER_TIMEOUT = 15000;
+  const CHECKOUT_TIMEOUT = 60000;
+  const ORDER_TIMEOUT = 30000;
   const ORDER_LIMIT = 30000;
   const goAuth = plan => {
     location.href = 'account.html?buy=' + encodeURIComponent(plan);
