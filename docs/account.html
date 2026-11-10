@@ -1226,14 +1226,32 @@ body::before {
       btn.disabled = true;
       btn.textContent = '…';
       try {
-        await api('/api/admin/license', {
+        const result = await api('/api/admin/license', {
           method: 'POST',
           body: JSON.stringify({ license_key: key, action })
         });
         msg($('adminMsg'), action === 'toggle' ? 'Статус ключа обновлён.' : action === 'extend' ? 'Срок продлён на 30 дней.' : 'Ключ отвязан от ПК.', 'ok');
-        adminLoaded = false;
-        adminData = null;
-        await loadAdmin();
+
+        // Обновляем строку локально: не дёргаем весь /api/admin/data
+        // и не показываем «Загружаем…» после каждого действия.
+        const updated = result && result.license;
+        const list = adminData && Array.isArray(adminData.licenses) ? adminData.licenses : null;
+        const idx = list ? list.findIndex(l => l.license_key === key) : -1;
+        if (updated && list && idx >= 0) {
+          const wasActive = adminLicStatus(list[idx]).cls === 'ok';
+          const isActive = adminLicStatus(updated).cls === 'ok';
+          list[idx] = updated;
+          const stats = adminData.stats;
+          if (stats && wasActive !== isActive) {
+            stats.active_licenses = Math.max(0, Number(stats.active_licenses || 0) + (isActive ? 1 : -1));
+          }
+          renderAdminStats(adminData.stats || {});
+          renderAdminTable();
+        } else {
+          adminLoaded = false;
+          adminData = null;
+          await loadAdmin();
+        }
       } catch (err) {
         btn.disabled = false;
         btn.textContent = old;
