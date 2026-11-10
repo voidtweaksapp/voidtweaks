@@ -23,7 +23,7 @@
   --line-2: #2A2A2E;
   --text: #FFFFFF;
   --text-2: #A1A1AA;
-  --text-3: #71717A;
+  --text-3: #7C7C86;
   --radius: 16px;
 }
 
@@ -84,4 +84,116 @@ footer a:hover { color: var(--text); }
 @media (max-width: 560px) {
   .wrap { padding: 0 18px 56px; }
   td:first-child { width: 46%; }
+}
+
+/* ---------- contacts ---------- */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.wrap-wide { max-width: 1120px; }
+.intro { max-width: 760px; padding: 46px 0 38px; }
+.intro h1 { margin-bottom: 14px; }
+.lead {
+  max-width: 600px; margin: 0;
+  color: var(--text-2); font-size: 17px; line-height: 1.6;
+}
+
+.cards {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px; padding-bottom: 54px;
+}
+.card {
+  display: flex; flex-direction: column;
+  min-height: 232px; padding: 24px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  transition: border-color .2s ease, background .2s ease;
+}
+.card:hover { border-color: var(--line-2); background: #101013; }
+.card h2 {
+  display: flex; align-items: center; gap: 9px;
+  margin: 0 0 9px; font-size: 18px; letter-spacing: -0.01em;
+}
+.card h2 svg {
+  width: 18px; height: 18px; flex: 0 0 18px;
+  fill: none; stroke: currentColor; stroke-width: 1.7;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+.card p { margin: 0 0 18px; color: var(--text-2); font-size: 14px; line-height: 1.6; }
+.card a {
+  display: inline-flex; align-items: center; gap: 6px;
+  width: fit-content; margin-top: auto;
+  color: var(--text); font-size: 14px; font-weight: 600; text-decoration: none;
+}
+.card a svg {
+  width: 14px; height: 14px;
+  fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+  transition: transform .2s ease;
+}
+.card a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.card a:hover svg { transform: translateX(2px); }
+
+.req { padding-top: 34px; border-top: 1px solid var(--line); }
+.req h2 { margin: 0 0 6px; }
+.req .note { margin: 0 0 18px; }
+
+.req dl {
+  display: grid; grid-template-columns: minmax(160px, 220px) 1fr;
+  margin: 0; border-top: 1px solid var(--line);
+}
+.req dt, .req dd {
+  margin: 0; padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px; line-height: 1.55;
+}
+.req dt { color: var(--text-3); }
+.req dd { color: #D4D4D8; }
+.req dd a { color: #D4D4D8; }
+
+/* ---------- big footer ---------- */
+
+footer.bigfoot {
+  display: block;
+  margin-top: 54px; padding: 34px 34px 22px;
+  border: 1px solid var(--line); border-radius: 24px;
+}
+.bigfoot .cols {
+  display: grid; grid-template-columns: 1.3fr .9fr .9fr; gap: 28px;
+}
+.bigfoot .brand { margin-bottom: 18px; }
+.bigfoot h2 {
+  margin: 0 0 14px; font-size: 13px; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3);
+}
+.bigfoot nav { display: flex; flex-direction: column; gap: 10px; }
+.bigfoot nav a { color: var(--text-2); font-size: 14.5px; text-decoration: none; }
+.bigfoot nav a:hover { color: var(--text); }
+.bigfoot .bottom {
+  display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: space-between;
+  margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line);
+  color: var(--text-3); font-size: 13px;
+}
+.bigfoot .bottom a { color: var(--text-3); text-decoration: none; }
+.bigfoot .bottom a:hover { color: var(--text-2); }
+
+@media (max-width: 900px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bigfoot .cols { grid-template-columns: 1fr 1fr; }
+  .bigfoot .cols > section:first-child { grid-column: 1 / -1; }
+}
+
+@media (max-width: 560px) {
+  .intro { padding: 34px 0 28px; }
+  .cards { grid-template-columns: 1fr; padding-bottom: 38px; }
+  .card { min-height: 200px; }
+  .req dl { grid-template-columns: 1fr; }
+  .req dt { padding-bottom: 0; border-bottom: 0; }
+  .req dd { padding-top: 4px; }
+  footer.bigfoot { padding: 26px 22px 18px; }
+  .bigfoot .cols { grid-template-columns: 1fr; gap: 26px; }
 }
