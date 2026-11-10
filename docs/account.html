@@ -13,6 +13,8 @@
 <link rel="preload" href="fonts/onest-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/onest-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/onest-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://voidtweaks-api.voidtweaks.workers.dev" crossorigin>
+<link rel="preconnect" href="https://mzkvqlbcrxaibpizuuuk.supabase.co" crossorigin>
 <style>
 @font-face { font-family: 'Onest'; src: url('fonts/onest-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Onest'; src: url('fonts/onest-500.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
@@ -540,6 +542,7 @@ body::before {
   const SUPABASE_URL = 'https://mzkvqlbcrxaibpizuuuk.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_ONhVp8Za-zzwpE7FMp7Nyg_ntPLMYp7';
   const API = 'https://voidtweaks-api.voidtweaks.workers.dev';
+  const ADMIN_EMAIL = 'vit9aso2@gmail.com';
   // Render на free-тарифе засыпает. Будим его сразу, не дожидаясь входа:
   // так к моменту загрузки ключей/админки он уже просыпается.
   fetch(API + '/', { method: 'GET', mode: 'no-cors', cache: 'no-store' }).catch(() => {});
@@ -687,7 +690,14 @@ body::before {
     $('userEmail').textContent = email || '—';
     const avatar = $('userAvatar');
     if (avatar) avatar.textContent = (email[0] || 'V').toUpperCase();
+    const cachedKeys = readKeysCache(session.user.id);
+    if (cachedKeys) {
+      renderKeys(cachedKeys.licenses);
+      renderOrders(cachedKeys.orders);
+    }
     loadProfile();
+    // Админку грузим параллельно с ключами, а не после ответа профиля.
+    if (email.trim().toLowerCase() === ADMIN_EMAIL) setAdmin(true);
   }
   function showRecovery() {
     authPanel.hidden = true;
@@ -759,6 +769,9 @@ body::before {
           const data = await api('/api/account/keys');
           renderKeys(data.licenses || []);
           renderOrders(data.orders || []);
+          if (currentSession && currentSession.user) {
+            writeKeysCache(currentSession.user.id, data.licenses || [], data.orders || []);
+          }
           setAdmin(Boolean(data.is_admin));
         } catch (e) {
           if (e.message === 'no_session') return showAuth();
@@ -871,6 +884,24 @@ body::before {
   let adminTab = 'users';
   let adminQuery = '';
   const ADMIN_CACHE = 'void-admin-cache';
+  const KEYS_CACHE = 'void-keys-cache';
+
+  function readKeysCache(uid) {
+    try {
+      const raw = sessionStorage.getItem(KEYS_CACHE);
+      const saved = raw ? JSON.parse(raw) : null;
+      if (saved && saved.uid === uid && Date.now() - Number(saved.ts || 0) < 10 * 60 * 1000) {
+        return { licenses: saved.licenses || [], orders: saved.orders || [] };
+      }
+    } catch {}
+    return null;
+  }
+
+  function writeKeysCache(uid, licenses, orders) {
+    try {
+      sessionStorage.setItem(KEYS_CACHE, JSON.stringify({ uid, ts: Date.now(), licenses, orders }));
+    } catch {}
+  }
 
   function readAdminCache() {
     try {
@@ -1306,6 +1337,7 @@ body::before {
   // Logout
   $('logoutBtn').addEventListener('click', async () => {
     setAdmin(false);
+    try { sessionStorage.removeItem(KEYS_CACHE); } catch {}
     await supabase.auth.signOut();
     showAuth('login');
   });
