@@ -86,6 +86,20 @@ footer a:hover { color: var(--text); }
   td:first-child { width: 46%; }
 }
 
+/* ---------- guide ---------- */
+.toc { margin: 0 0 36px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.toc p { margin: 0 0 12px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-3); }
+.toc ol { margin: 0; padding-left: 20px; columns: 2; column-gap: 36px; }
+.toc li { margin: 0 0 8px; font-size: 14.5px; break-inside: avoid; }
+.toc a { color: var(--text-2); text-decoration: none; }
+.toc a:hover { color: #fff; }
+.steps-guide { counter-reset: step; list-style: none; padding: 0; margin: 0 0 16px; }
+.steps-guide li { position: relative; padding-left: 40px; margin-bottom: 16px; }
+.steps-guide li::before { counter-increment: step; content: counter(step); position: absolute; left: 0; top: 1px; width: 24px; height: 24px; border-radius: 8px; border: 1px solid var(--line-2); display: flex; align-items: center; justify-content: center; font-size: 12.5px; font-weight: 600; color: var(--text-2); }
+.kbd { font-family: ui-monospace, Consolas, monospace; font-size: 13px; padding: 2px 6px; border: 1px solid var(--line-2); border-radius: 5px; background: var(--surface); color: #fff; white-space: nowrap; }
+.guide-table td:first-child { width: 40%; }
+@media (max-width: 640px) { .toc ol { columns: 1; } }
+
 /* ---------- contacts ---------- */
 
 a:focus-visible,

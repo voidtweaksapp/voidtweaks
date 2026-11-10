@@ -425,6 +425,18 @@ section.block { padding: 96px 0; }
 .pro-list { margin: 26px auto 0; max-width: 820px; text-align: center; font-size: 14px; line-height: 1.7; color: var(--text-2); }
 .pro-list b { color: #fff; }
 .pay { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 22px; margin-top: 14px; font-size: 13px; color: var(--text-3); }
+.pay-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
+.pay-badge { display: inline-flex; align-items: center; height: 30px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; background: #0D0D0F; color: var(--text-2); font-size: 11.5px; font-weight: 700; letter-spacing: .04em; }
+.pay-legal { max-width: 820px; margin: 16px auto 0; text-align: center; font-size: 12.5px; line-height: 1.6; color: var(--text-3); }
+.pay-legal a { color: var(--text-2); text-decoration: underline; text-underline-offset: 2px; }
+.pay-legal a:hover { color: #fff; }
+.plan .inc { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.plan .inc li { position: relative; padding-left: 21px; font-size: 13px; line-height: 1.45; color: var(--text-2); }
+.plan .inc li::before { content: "✓"; position: absolute; left: 0; top: 0; font-size: 11px; font-weight: 800; color: #A1A1AA; }
+.plan.best .inc li::before { color: #fff; }
+.guarantee { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; max-width: 820px; margin: 18px auto 0; padding: 12px 18px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.02); font-size: 13.5px; line-height: 1.5; color: var(--text-2); text-align: center; }
+.guarantee svg { width: 17px; height: 17px; flex-shrink: 0; color: #fff; }
+.guarantee a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------- how it works ---------- */
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 32px; }
@@ -1098,6 +1110,11 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
         <div class="pr"><span class="amount">99</span><span class="cur">₽</span></div>
         <div class="per" data-i18n-html="p1_per">за 30 дней</div>
         <p class="ds" data-i18n="p1_desc">Чтобы попробовать все PRO-модули.</p>
+        <ul class="inc">
+          <li data-i18n="p1_i1">30 дней доступа</li>
+          <li data-i18n="p1_i2">Все PRO-модули</li>
+          <li data-i18n="p1_i3">Ключ привязывается к ПК</li>
+        </ul>
         <a href="#pricing" data-buy="month" class="btn btn-gray" data-i18n="p1_cta">Купить на месяц</a>
       </div>
       <div class="card plan">
@@ -1105,6 +1122,11 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
         <div class="pr"><span class="amount">299</span><span class="cur">₽</span><s>594 ₽</s></div>
         <div class="per" data-i18n-html="p2_per"><b>≈ 50 ₽</b> в месяц <span class="save">−50%</span></div>
         <p class="ds" data-i18n="p2_desc">В два раза дешевле помесячной оплаты.</p>
+        <ul class="inc">
+          <li data-i18n="p2_i1">180 дней доступа</li>
+          <li data-i18n="p2_i2">Все PRO-модули</li>
+          <li data-i18n="p2_i3">Выгода 295 ₽</li>
+        </ul>
         <a href="#pricing" data-buy="half" class="btn btn-gray" data-i18n="p2_cta">Купить на полгода</a>
       </div>
       <div class="card plan best">
@@ -1113,8 +1135,18 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
         <div class="pr"><span class="amount">499</span><span class="cur">₽</span></div>
         <div class="per" data-i18n-html="p3_per"><b>Без срока действия</b></div>
         <p class="ds" data-i18n="p3_desc">Один платёж — PRO навсегда. Дешевле, чем полгода на тарифе «Месяц».</p>
+        <ul class="inc">
+          <li data-i18n="p3_i1">Без срока действия</li>
+          <li data-i18n="p3_i2">Все PRO-модули</li>
+          <li data-i18n="p3_i3">Будущие обновления</li>
+        </ul>
         <a href="#pricing" data-buy="forever" class="btn btn-primary" data-i18n="p3_cta">Купить навсегда</a>
       </div>
+    </div>
+
+    <div class="guarantee">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v5.2c0 4.5 3 8.5 7.5 9.8 4.5-1.3 7.5-5.3 7.5-9.8V6L12 3Z"/><path d="m8.8 11.8 2.2 2.2 4.2-4.4"/></svg>
+      <span data-i18n-html="price_guarantee">14 дней на возврат, если ключ не активирован. <a href="refund.html">Условия возврата</a></span>
     </div>
 
     <p class="pro-list" data-i18n-html="pro_list"><b>PRO открывает:</b> управление прерываниями (MSI, IRQ), разделы NVIDIA и AMD, скрытые твики, бета-версии и приоритетные обновления.</p>
@@ -1170,6 +1202,13 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
     <p class="cmp-note" data-i18n="cmp_note">PRO — разовая оплата без автопродления. 99 ₽ за месяц, 299 ₽ за полгода или 499 ₽ навсегда.</p>
 
     <div class="pay"><span data-i18n="pay1">Оплата через ЮKassa — карты и СБП</span><span data-i18n="pay2">Ключ привязывается к ПК по HWID</span></div>
+    <div class="pay-badges" aria-label="Способы оплаты">
+      <span class="pay-badge">ЮKassa</span>
+      <span class="pay-badge">МИР</span>
+      <span class="pay-badge">СБП</span>
+      <span class="pay-badge">Visa · Mastercard</span>
+    </div>
+    <p class="pay-legal" data-i18n-html="pay_legal">Оплачивая заказ, вы принимаете <a href="offer.html">публичную оферту</a> и <a href="privacy.html">политику конфиденциальности</a>.</p>
   </div>
 </section>
 
@@ -1189,6 +1228,11 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
       <details><summary><span data-i18n="faq_q3">Windows пишет «Система Windows защитила ваш компьютер»</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a3">Это SmartScreen — он предупреждает о любых новых программах. Скачивайте установщик только с этой страницы или из GitHub Releases, нажмите «Подробнее» → «Выполнить в любом случае».</div></details>
       <details><summary><span data-i18n="faq_q4">Нужен ли PRO для обычной оптимизации?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a4">Нет. Твики, мониторинг, автозагрузка и встроенные утилиты бесплатны навсегда. PRO нужен для прерываний, GPU-разделов и раннего доступа.</div></details>
       <details><summary><span data-i18n="faq_q5">Как оплатить и получить ключ?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n-html="faq_a5">Покупка доступна после входа в аккаунт: ключ привязывается к нему. Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится на странице — вставьте его в приложение. Вопросы — в <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.</div></details>
+      <details><summary><span data-i18n="faq_q6">Как активировать ключ?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a6">После оплаты ключ появится в личном кабинете. Скопируйте его, запустите VOIDTWEAKS, вставьте в окно активации и нажмите «Активировать». При первой активации ключ привязывается к этому ПК.</div></details>
+      <details><summary><span data-i18n="faq_q7">Можно ли перенести ключ на другой ПК?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a7">Ключ привязывается к ПК по HWID при активации. Если вы сменили компьютер или железо, напишите на voidtweaksdev@gmail.com — поможем с переносом.</div></details>
+      <details><summary><span data-i18n="faq_q8">Оплатил, а ключ не появился</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n-html="faq_a8">Обновите страницу кабинета через минуту — обычно ключ появляется сразу после оплаты. Если его нет, напишите на <a href="mailto:voidtweaksdev@gmail.com">voidtweaksdev@gmail.com</a>: email аккаунта, дата и сумма оплаты. Проверим и выдадим ключ.</div></details>
+      <details><summary><span data-i18n="faq_q9">Что будет после окончания срока?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a9">PRO-модули перестанут работать, бесплатная версия продолжит работать без ограничений по времени. Ключ «Навсегда» действует без срока.</div></details>
+      <details><summary><span data-i18n="faq_q10">Можно ли вернуть деньги?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n-html="faq_a10">Да, если ключ не активирован — в течение 14 дней. Порядок описан в разделе <a href="refund.html">«Возврат и отмена»</a>. Активированный ключ возвращается только при неисправности по нашей вине.</div></details>
     </div>
     </div>
   </div>
@@ -1290,6 +1334,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
       <a href="https://www.youtube.com/@VoidTweaksApp" target="_blank" rel="noopener" data-i18n="foot_yt">YouTube</a>
       <a href="kak-otklyuchit-telemetriyu-windows-11.html" data-i18n="foot_telemetry">Гайд: телеметрия</a>
       <a href="kak-povysit-fps-v-cs2.html" data-i18n="foot_fps">Гайд: FPS в CS2</a>
+      <a href="guide.html" data-i18n="foot_guide">Установка и активация</a>
       <a href="offer.html" data-i18n="foot_offer">Оферта</a>
       <a href="privacy.html" data-i18n="foot_privacy">Конфиденциальность</a>
       <a href="refund.html" data-i18n="foot_refund">Возврат</a>
@@ -1424,6 +1469,21 @@ const I18N = {
     faq_a4: 'Нет. Твики, мониторинг, автозагрузка и встроенные утилиты бесплатны навсегда. PRO нужен для прерываний, GPU-разделов и раннего доступа.',
     faq_q5: 'Как оплатить и получить ключ?',
     faq_a5: 'Покупка доступна после входа в аккаунт: ключ привязывается к нему. Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится на странице — вставьте его в приложение. Вопросы — в <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.',
+    faq_q6: 'Как активировать ключ?',
+    faq_a6: 'После оплаты ключ появится в личном кабинете. Скопируйте его, запустите VOIDTWEAKS, вставьте в окно активации и нажмите «Активировать». При первой активации ключ привязывается к этому ПК.',
+    faq_q7: 'Можно ли перенести ключ на другой ПК?',
+    faq_a7: 'Ключ привязывается к ПК по HWID при активации. Если вы сменили компьютер или железо, напишите на voidtweaksdev@gmail.com — поможем с переносом.',
+    faq_q8: 'Оплатил, а ключ не появился',
+    faq_a8: 'Обновите страницу кабинета через минуту — обычно ключ появляется сразу после оплаты. Если его нет, напишите на <a href="mailto:voidtweaksdev@gmail.com">voidtweaksdev@gmail.com</a>: email аккаунта, дата и сумма оплаты. Проверим и выдадим ключ.',
+    faq_q9: 'Что будет после окончания срока?',
+    faq_a9: 'PRO-модули перестанут работать, бесплатная версия продолжит работать без ограничений по времени. Ключ «Навсегда» действует без срока.',
+    faq_q10: 'Можно ли вернуть деньги?',
+    faq_a10: 'Да, если ключ не активирован — в течение 14 дней. Порядок описан в разделе <a href="refund.html">«Возврат и отмена»</a>. Активированный ключ возвращается только при неисправности по нашей вине.',
+    p1_i1: '30 дней доступа', p1_i2: 'Все PRO-модули', p1_i3: 'Ключ привязывается к ПК',
+    p2_i1: '180 дней доступа', p2_i2: 'Все PRO-модули', p2_i3: 'Выгода 295 ₽',
+    p3_i1: 'Без срока действия', p3_i2: 'Все PRO-модули', p3_i3: 'Будущие обновления',
+    price_guarantee: '14 дней на возврат, если ключ не активирован. <a href="refund.html">Условия возврата</a>',
+    pay_legal: 'Оплачивая заказ, вы принимаете <a href="offer.html">публичную оферту</a> и <a href="privacy.html">политику конфиденциальности</a>.',
     dl_title: 'Скачать VOID TWEAKS', dl_version: 'Версия', dl_btn: 'Скачать установщик', dl_downloads: 'Скачано',
     file_title: 'Проверка файла', file_copy: 'Копировать', file_copied: 'Скопировано',
     file_note: 'Сверьте хеш после скачивания — так вы убедитесь, что файл не подменили.',
@@ -1446,6 +1506,7 @@ const I18N = {
     log_title: 'Что нового', log_loading: 'Загружаем релизы…',
     log_empty: 'Не удалось загрузить релизы.', log_all: 'Все версии на GitHub →',
     foot_support: 'Поддержка на GitHub', foot_yt: 'YouTube',
+    foot_guide: 'Установка и активация',
     foot_offer: 'Оферта', foot_privacy: 'Конфиденциальность', foot_refund: 'Возврат', foot_contacts: 'Контакты',
     ord_wait_t: 'Проверяем оплату…', ord_wait_d: 'Обычно это занимает несколько секунд. Не закрывайте страницу.',
     ord_done_t: 'Оплата прошла успешно', ord_copy: 'Скопировать ключ', ord_copied: 'Скопировано',
@@ -1541,6 +1602,21 @@ const I18N = {
     faq_a4: 'No. Tweaks, monitoring, startup manager and built-in utilities are free forever. PRO is for interrupts, GPU sections and early access.',
     faq_q5: 'How do I pay and get my key?',
     faq_a5: 'Purchases are available after signing in: the key is linked to your account. Payment goes through YooKassa. After paying you return to the site and the key appears on the page — paste it into the app. Questions — on <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.',
+    faq_q6: 'How do I activate the key?',
+    faq_a6: 'After payment the key appears in your account. Copy it, launch VOIDTWEAKS, paste it into the activation window and click “Activate”. On first activation the key is bound to this PC.',
+    faq_q7: 'Can I move the key to another PC?',
+    faq_a7: 'The key is bound to a PC by HWID on activation. If you changed your computer or hardware, email voidtweaksdev@gmail.com — we will help with the transfer.',
+    faq_q8: 'I paid but the key did not appear',
+    faq_a8: 'Refresh the account page after a minute — usually the key appears right after payment. If it is missing, email <a href="mailto:voidtweaksdev@gmail.com">voidtweaksdev@gmail.com</a> with your account email, payment date and amount. We will check and issue the key.',
+    faq_q9: 'What happens when the term ends?',
+    faq_a9: 'PRO modules stop working; the free version keeps working without a time limit. The “Forever” key has no expiry.',
+    faq_q10: 'Can I get a refund?',
+    faq_a10: 'Yes, if the key has not been activated — within 14 days. See <a href="refund.html">Refunds and cancellation</a>. An activated key is refunded only if it is faulty on our side.',
+    p1_i1: '30 days of access', p1_i2: 'All PRO modules', p1_i3: 'Bound to one PC',
+    p2_i1: '180 days of access', p2_i2: 'All PRO modules', p2_i3: 'Save 295 ₽',
+    p3_i1: 'No expiry', p3_i2: 'All PRO modules', p3_i3: 'Future updates',
+    price_guarantee: '14-day refund if the key is not activated. <a href="refund.html">Refund terms</a>',
+    pay_legal: 'By paying you accept the <a href="offer.html">public offer</a> and <a href="privacy.html">privacy policy</a>.',
     dl_title: 'Download VOID TWEAKS', dl_version: 'Version', dl_btn: 'Download installer', dl_downloads: 'Downloaded',
     file_title: 'File check', file_copy: 'Copy', file_copied: 'Copied',
     file_note: 'Compare the hash after downloading to make sure the file was not replaced.',
@@ -1563,6 +1639,7 @@ const I18N = {
     log_title: 'What’s new', log_loading: 'Loading releases…',
     log_empty: 'Could not load releases.', log_all: 'All versions on GitHub →',
     foot_support: 'GitHub support', foot_yt: 'YouTube',
+    foot_guide: 'Install & activation',
     foot_offer: 'Terms', foot_privacy: 'Privacy', foot_refund: 'Refunds', foot_contacts: 'Contacts',
     ord_wait_t: 'Checking your payment…', ord_wait_d: 'Usually takes a few seconds. Keep this page open.',
     ord_done_t: 'Payment received', ord_copy: 'Copy key', ord_copied: 'Copied',
