@@ -12,7 +12,7 @@
 <meta name="theme-color" content="#030303" />
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Referrer-Policy" content="no-referrer" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://voidtweaks-api.voidtweaks.workers.dev https://voidtweaks.onrender.com https://mzkvqlbcrxaibpizuuuk.supabase.co https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'self'" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://voidtweaks-api.voidtweaks.workers.dev https://voidtweaks.onrender.com https://mzkvqlbcrxaibpizuuuk.supabase.co https://api.github.com https://cloudflareinsights.com; base-uri 'none'; object-src 'none'; form-action 'self'" />
 <script>document.documentElement.classList.add('js');try{var fxMode=new URLSearchParams(location.search).get('fx');if(fxMode==='off')document.documentElement.classList.add('fx-static');else if(fxMode==='full')document.documentElement.classList.add('fx-force');}catch(e){}window.setTimeout(function(){if(!window.__voidFx)document.documentElement.classList.remove('js');},2500);</script>
 <script>
 /* Если Supabase вернул подтверждение на главную вместо account.html,
@@ -603,7 +603,7 @@ section.block { padding: 96px 0; }
 .log-empty { font-size: 14px; color: var(--text-3); }
 
 /* ---------- footer ---------- */
-footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden; }
+footer { border-top: 1px solid var(--line); padding: 28px 0 26px; overflow: hidden; }
 .wordmark {
   margin-top: 36px; text-align: center; white-space: nowrap; user-select: none;
   font-size: clamp(56px, 14.5vw, 210px); font-weight: 800; letter-spacing: -0.05em; line-height: 0.78;
@@ -612,6 +612,9 @@ footer { border-top: 1px solid var(--line); padding: 28px 0 0; overflow: hidden;
 .foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-3); }
 .foot .brand { font-size: 14px; color: #fff; }
 .foot .brand img { width: 24px; height: 24px; }
+.foot .foot-legal { flex-basis: 100%; font-size: 12px; line-height: 1.5; color: var(--text-3); }
+.foot .foot-legal a { color: var(--text-2); text-decoration: underline; text-underline-offset: 2px; }
+.foot .foot-legal a:hover { color: #fff; }
 .foot nav { display: flex; gap: 20px; flex-wrap: wrap; }
 .foot nav a:hover { color: #fff; }
 
@@ -958,7 +961,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
     </div>
     <figure class="shot">
       <img src="app-dashboard.webp" width="1440" height="840" alt="VOIDTWEAKS: мониторинг процессора, видеокарты, памяти и сети, состояние железа и диски" loading="lazy">
-      <figcaption data-i18n="shots_cap">Реальный экран приложения. Данные сняты на Ryzen 5 5600 и GTX 1650.</figcaption>
+      <figcaption data-i18n="shots_cap">Интерфейс VOIDTWEAKS: мониторинг, состояние железа и диски.</figcaption>
     </figure>
   </div>
 </section>
@@ -1359,6 +1362,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
       <a href="contacts.html" data-i18n="foot_contacts">Контакты</a>
     </nav>
     <span>© 2026 VoidTweaks</span>
+    <span class="foot-legal" data-i18n-html="foot_legal">Самозанятый Рой Виктор Алексеевич · ИНН 860505977479 · <a href="contacts.html">Реквизиты</a></span>
   </div>
   <div class="wordmark" aria-hidden="true">VOID TWEAKS</div>
 </footer>
@@ -1405,6 +1409,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
   </div>
 </div>
 
+<script src="analytics.js" defer></script>
 <script src="vendor/supabase.js" integrity="sha384-uteMfOloLDGt042uDz+xHGF3ym63/WQ6rFq7murQRG8Ih7QrXGEGNtWd8688sb4O"></script>
 <script>
 /* ============================================================
@@ -1504,7 +1509,7 @@ const I18N = {
     pay_legal: 'Оплачивая заказ, вы принимаете <a href="offer.html">публичную оферту</a> и <a href="privacy.html">политику конфиденциальности</a>.',
     shots_eyebrow: 'Интерфейс', shots_title: 'Всё в одном окне',
     shots_desc: 'Мониторинг, твики и состояние железа — без сторонних программ.',
-    shots_cap: 'Реальный экран приложения. Данные сняты на Ryzen 5 5600 и GTX 1650.',
+    shots_cap: 'Интерфейс VOIDTWEAKS: мониторинг, состояние железа и диски.',
     dl_title: 'Скачать VOID TWEAKS', dl_version: 'Версия', dl_btn: 'Скачать установщик', dl_downloads: 'Скачано',
     file_title: 'Проверка файла', file_copy: 'Копировать', file_copied: 'Скопировано',
     file_note: 'Сверьте хеш после скачивания — так вы убедитесь, что файл не подменили.',
@@ -1528,6 +1533,7 @@ const I18N = {
     log_empty: 'Не удалось загрузить релизы.', log_all: 'Все версии на GitHub →',
     foot_support: 'Поддержка на GitHub', foot_yt: 'YouTube',
     foot_guide: 'Установка и активация',
+    foot_legal: 'Самозанятый Рой Виктор Алексеевич · ИНН 860505977479 · <a href="contacts.html">Реквизиты</a>',
     foot_offer: 'Оферта', foot_privacy: 'Конфиденциальность', foot_refund: 'Возврат', foot_contacts: 'Контакты',
     ord_wait_t: 'Проверяем оплату…', ord_wait_d: 'Обычно это занимает несколько секунд. Не закрывайте страницу.',
     ord_done_t: 'Оплата прошла успешно', ord_copy: 'Скопировать ключ', ord_copied: 'Скопировано',
@@ -1640,7 +1646,7 @@ const I18N = {
     pay_legal: 'By paying you accept the <a href="offer.html">public offer</a> and <a href="privacy.html">privacy policy</a>.',
     shots_eyebrow: 'Interface', shots_title: 'Everything in one window',
     shots_desc: 'Monitoring, tweaks and hardware state — without third-party apps.',
-    shots_cap: 'A real app screen. Data captured on Ryzen 5 5600 and GTX 1650.',
+    shots_cap: 'VOIDTWEAKS interface: monitoring, hardware state and disks.',
     dl_title: 'Download VOID TWEAKS', dl_version: 'Version', dl_btn: 'Download installer', dl_downloads: 'Downloaded',
     file_title: 'File check', file_copy: 'Copy', file_copied: 'Copied',
     file_note: 'Compare the hash after downloading to make sure the file was not replaced.',
@@ -1664,6 +1670,7 @@ const I18N = {
     log_empty: 'Could not load releases.', log_all: 'All versions on GitHub →',
     foot_support: 'GitHub support', foot_yt: 'YouTube',
     foot_guide: 'Install & activation',
+    foot_legal: 'Self-employed Roy Viktor Alekseevich · INN 860505977479 · <a href="contacts.html">Details</a>',
     foot_offer: 'Terms', foot_privacy: 'Privacy', foot_refund: 'Refunds', foot_contacts: 'Contacts',
     ord_wait_t: 'Checking your payment…', ord_wait_d: 'Usually takes a few seconds. Keep this page open.',
     ord_done_t: 'Payment received', ord_copy: 'Copy key', ord_copied: 'Copied',

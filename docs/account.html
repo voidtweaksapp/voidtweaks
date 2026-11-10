@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#030303" />
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Referrer-Policy" content="no-referrer" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://voidtweaks-api.voidtweaks.workers.dev https://mzkvqlbcrxaibpizuuuk.supabase.co; base-uri 'none'; object-src 'none'; form-action 'self'" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://voidtweaks-api.voidtweaks.workers.dev https://mzkvqlbcrxaibpizuuuk.supabase.co https://cloudflareinsights.com; base-uri 'none'; object-src 'none'; form-action 'self'" />
 <link rel="icon" type="image/png" sizes="192x192" href="logo-192.png">
 <link rel="apple-touch-icon" href="logo-192.png">
 <link rel="preload" href="fonts/onest-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -537,6 +537,7 @@ body::before {
   </div>
 </footer>
 
+<script src="analytics.js" defer></script>
 <script src="vendor/supabase.js" integrity="sha384-uteMfOloLDGt042uDz+xHGF3ym63/WQ6rFq7murQRG8Ih7QrXGEGNtWd8688sb4O"></script>
 <script>
 (() => {
