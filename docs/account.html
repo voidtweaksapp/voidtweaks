@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Профиль — VOIDTWEAKS</title>
+<title>Профиль – VOIDTWEAKS</title>
 <meta name="description" content="Личный кабинет VOIDTWEAKS: вход, регистрация и ваши лицензионные ключи." />
 <meta name="robots" content="noindex, nofollow" />
 <meta name="theme-color" content="#030303" />
@@ -434,7 +434,7 @@ body::before {
         <p class="form-note">Регистрируясь, вы принимаете <a href="offer.html">оферту</a> и <a href="privacy.html">политику конфиденциальности</a>. Ключи привязываются к аккаунту, а не к email.</p>
       </form>
 
-      <div class="auth-alt" id="authAlt">Ключи привязываются к аккаунту — так их невозможно потерять.</div>
+      <div class="auth-alt" id="authAlt">Ключи привязываются к аккаунту – так их невозможно потерять.</div>
     </section>
 
     <!-- NEW PASSWORD (recovery) -->
@@ -458,7 +458,7 @@ body::before {
           <div class="avatar" id="userAvatar" aria-hidden="true">V</div>
           <div class="dash-user-info">
             <span class="label">Вы вошли как</span>
-            <div class="email" id="userEmail">—</div>
+            <div class="email" id="userEmail">–</div>
           </div>
         </div>
         <div class="dash-actions">
@@ -475,7 +475,7 @@ body::before {
       <div class="keys" id="keysList"></div>
       <div class="empty" id="keysEmpty" hidden>
         <strong>Пока нет ключей</strong>
-        <p>Купите ключ на главной — он появится здесь автоматически. Если ключ уже есть, добавьте его вручную.</p>
+        <p>Купите ключ на главной – он появится здесь автоматически. Если ключ уже есть, добавьте его вручную.</p>
         <a href="./#pricing" class="btn btn-primary">Выбрать тариф</a>
       </div>
 
@@ -615,11 +615,11 @@ body::before {
     return ACCOUNT_URL + (qs ? '?' + qs : '');
   }
 
-  const planLabel = plan => ({ month: '1 месяц', half: '6 месяцев', forever: 'Навсегда' }[plan] || plan || '—');
+  const planLabel = plan => ({ month: '1 месяц', half: '6 месяцев', forever: 'Навсегда' }[plan] || plan || '–');
   const fmtDate = iso => {
     if (!iso) return 'Бессрочно';
     const d = new Date(iso);
-    if (Number.isNaN(d.getTime())) return '—';
+    if (Number.isNaN(d.getTime())) return '–';
     return d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
   };
   const fmtDateTime = iso => {
@@ -697,7 +697,7 @@ body::before {
     recoveryPanel.hidden = true;
     pageHead.hidden = true;
     const email = session.user.email || '';
-    $('userEmail').textContent = email || '—';
+    $('userEmail').textContent = email || '–';
     const avatar = $('userAvatar');
     if (avatar) avatar.textContent = (email[0] || 'V').toUpperCase();
     const cachedKeys = readKeysCache(session.user.id);
@@ -765,7 +765,7 @@ body::before {
 
   async function loadProfile() {
     if (profilePromise) {
-      // профиль уже грузится — после него загрузим ещё раз,
+      // профиль уже грузится – после него загрузим ещё раз,
       // чтобы показать ключ, привязанный во время первой загрузки
       profileQueued = true;
       return profilePromise;
@@ -818,7 +818,7 @@ body::before {
     if (!list.length) {
       empty.hidden = false;
       empty.querySelector('strong').textContent = 'Пока нет ключей';
-      empty.querySelector('p').textContent = 'Купите ключ на главной — он появится здесь автоматически. Если ключ уже есть, добавьте его вручную.';
+      empty.querySelector('p').textContent = 'Купите ключ на главной – он появится здесь автоматически. Если ключ уже есть, добавьте его вручную.';
       const a = empty.querySelector('a');
       a.textContent = 'Выбрать тариф';
       a.href = './#pricing';
@@ -833,7 +833,7 @@ body::before {
       card.innerHTML =
         '<div class="key-top">' +
           '<div>' +
-            '<div class="key-value">' + esc(lic.license_key || '—') + '</div>' +
+            '<div class="key-value">' + esc(lic.license_key || '–') + '</div>' +
             '<div class="key-plan">' + esc(planLabel(lic.plan)) + '</div>' +
           '</div>' +
           '<span class="key-badge ' + st.cls + '"><i></i>' + st.label + '</span>' +
@@ -841,7 +841,7 @@ body::before {
         '<div class="key-meta">' +
           '<div><span class="k">Действует до</span><span class="v">' + esc(fmtDate(lic.expires_at)) + '</span></div>' +
           '<div><span class="k">Привязка</span><span class="v" title="' + esc(lic.hwid || '') + '">' + esc(shortHwid(lic.hwid)) + '</span></div>' +
-          '<div><span class="k">Куплен</span><span class="v">' + esc(fmtDateTime(lic.created_at) || '—') + '</span></div>' +
+          '<div><span class="k">Куплен</span><span class="v">' + esc(fmtDateTime(lic.created_at) || '–') + '</span></div>' +
         '</div>' +
         '<div class="key-foot">' +
           '<button type="button" class="btn btn-ghost" data-copy="' + esc(lic.license_key || '') + '">Скопировать ключ</button>' +
@@ -876,7 +876,7 @@ body::before {
     for (const o of list) {
       const row = document.createElement('div');
       row.className = 'order-row';
-      const status = o.status === 'succeeded' ? 'Оплачен' : o.status === 'pending' ? 'Ожидает оплаты' : o.status === 'canceled' ? 'Отменён' : (o.status || '—');
+      const status = o.status === 'succeeded' ? 'Оплачен' : o.status === 'pending' ? 'Ожидает оплаты' : o.status === 'canceled' ? 'Отменён' : (o.status || '–');
       const stCls = o.status === 'succeeded' ? 'ok' : o.status === 'pending' ? 'pending' : o.status === 'canceled' ? 'bad' : '';
       row.innerHTML =
         '<div class="left"><div class="plan">' + esc(planLabel(o.plan)) + '</div>' +
@@ -914,7 +914,7 @@ body::before {
   // они живут только в памяти вкладки.
 
   const money = n => Number(n || 0).toLocaleString('ru-RU') + ' ₽';
-  const adminStatusLabel = s => s === 'succeeded' ? 'Оплачен' : s === 'pending' ? 'Ожидает' : s === 'canceled' ? 'Отменён' : (s || '—');
+  const adminStatusLabel = s => s === 'succeeded' ? 'Оплачен' : s === 'pending' ? 'Ожидает' : s === 'canceled' ? 'Отменён' : (s || '–');
   const adminStatusClass = s => s === 'succeeded' ? 'ok' : s === 'pending' ? 'pending' : s === 'canceled' ? 'bad' : 'neutral';
   const adminLicStatus = lic => {
     if (lic.is_active === false) return { cls: 'bad', label: 'Выключен' };
@@ -950,15 +950,15 @@ body::before {
 
     if (adminTab === 'users') {
       const rows = (adminData.users || []).filter(u => hit(u.email, u.id)).map(u => [
-        '<span class="strong">' + esc(u.email || '—') + '</span>',
+        '<span class="strong">' + esc(u.email || '–') + '</span>',
         '<span class="muted">' + esc(fmtDate(u.created_at)) + '</span>',
         esc(String(u.license_count || 0)),
         esc(String(u.order_count || 0)),
         esc(money(u.spent)),
-        '<span class="muted">' + esc(fmtDateTime(u.last_sign_in_at) || '—') + '</span>'
+        '<span class="muted">' + esc(fmtDateTime(u.last_sign_in_at) || '–') + '</span>'
       ]);
       const note = adminData.users_error
-        ? '<div class="admin-empty" style="border-bottom:1px solid var(--line)">Не удалось получить список пользователей Supabase. Проверьте, что SUPABASE_KEY — service_role.</div>'
+        ? '<div class="admin-empty" style="border-bottom:1px solid var(--line)">Не удалось получить список пользователей Supabase. Проверьте, что SUPABASE_KEY – service_role.</div>'
         : '';
       wrap.innerHTML = note + adminTable(
         ['Email', 'Регистрация', 'Ключи', 'Заказы', 'Потрачено', 'Последний вход'],
@@ -982,8 +982,8 @@ body::before {
           esc(planLabel(l.plan)),
           '<span class="status-pill ' + st.cls + '">' + st.label + '</span>',
           esc(fmtDate(l.expires_at)),
-          '<span class="muted">' + esc(l.email || (l.user_id ? 'ID ' + String(l.user_id).slice(0, 8) : '—')) + '</span>',
-          '<span class="muted">' + esc(l.hwid || '—') + '</span>',
+          '<span class="muted">' + esc(l.email || (l.user_id ? 'ID ' + String(l.user_id).slice(0, 8) : '–')) + '</span>',
+          '<span class="muted">' + esc(l.hwid || '–') + '</span>',
           actions
         ];
       });
@@ -995,11 +995,11 @@ body::before {
     }
 
     const rows = (adminData.orders || []).filter(o => hit(o.email, o.license_key, o.plan, o.status)).map(o => [
-      '<span class="muted">' + esc(fmtDateTime(o.created_at) || '—') + '</span>',
+      '<span class="muted">' + esc(fmtDateTime(o.created_at) || '–') + '</span>',
       esc(planLabel(o.plan)),
       '<span class="status-pill ' + adminStatusClass(o.status) + '">' + esc(adminStatusLabel(o.status)) + '</span>',
-      '<span class="mono">' + esc(o.license_key || '—') + '</span>',
-      '<span class="muted">' + esc(o.email || '—') + '</span>'
+      '<span class="mono">' + esc(o.license_key || '–') + '</span>',
+      '<span class="muted">' + esc(o.email || '–') + '</span>'
     ]);
     wrap.innerHTML = adminTable(
       ['Дата', 'План', 'Статус', 'Ключ', 'Пользователь'],
@@ -1032,7 +1032,7 @@ body::before {
     } catch (e) {
       adminLoaded = false;
       if (adminData) {
-        msg($('adminMsg'), 'Не удалось обновить данные — показаны последние загруженные.', 'err');
+        msg($('adminMsg'), 'Не удалось обновить данные – показаны последние загруженные.', 'err');
         return;
       }
       const reason = e.status === 403
@@ -1166,7 +1166,7 @@ body::before {
         maybeBuy();
       } else {
         registerForm.reset();
-        msg(registerMsg, 'Аккаунт создан. Мы отправили письмо на ' + email + ' — перейдите по ссылке, затем войдите.', 'ok');
+        msg(registerMsg, 'Аккаунт создан. Мы отправили письмо на ' + email + ' – перейдите по ссылке, затем войдите.', 'ok');
         setTab('login');
         $('loginEmail').value = email;
         msg(loginMsg, 'Подтвердите email, затем войдите.', 'info');
@@ -1337,12 +1337,12 @@ body::before {
         showDashboard(session);
         autoClaim();
       } else {
-        $('userEmail').textContent = session.user.email || '—';
+        $('userEmail').textContent = session.user.email || '–';
       }
     } else if (!recoveryPanel.hidden) {
       // stay on recovery until password is set
     } else {
-      // Сессия истекла или выход в другой вкладке — чужие данные не оставляем.
+      // Сессия истекла или выход в другой вкладке – чужие данные не оставляем.
       clearSessionCaches();
       showAuth('login');
     }
