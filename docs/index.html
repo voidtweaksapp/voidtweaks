@@ -430,6 +430,9 @@ section.block { padding: 96px 0; }
 .pay-legal { max-width: 820px; margin: 16px auto 0; text-align: center; font-size: 12.5px; line-height: 1.6; color: var(--text-3); }
 .pay-legal a { color: var(--text-2); text-decoration: underline; text-underline-offset: 2px; }
 .pay-legal a:hover { color: #fff; }
+.shot { margin: 0; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: #0B0B0D; box-shadow: 0 40px 80px -50px rgba(0,0,0,.9); }
+.shot img { display: block; width: 100%; height: auto; }
+.shot figcaption { padding: 12px 16px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--text-3); }
 .plan .inc { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
 .plan .inc li { position: relative; padding-left: 21px; font-size: 13px; line-height: 1.45; color: var(--text-2); }
 .plan .inc li::before { content: "✓"; position: absolute; left: 0; top: 0; font-size: 11px; font-weight: 800; color: #A1A1AA; }
@@ -942,6 +945,21 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
         <div class="meta" data-i18n="step3_m">История изменений хранится локально</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ================= SCREENSHOT ================= -->
+<section class="block" id="screens" style="padding-bottom:0">
+  <div class="container">
+    <div class="head">
+      <div class="eyebrow" data-i18n="shots_eyebrow">Интерфейс</div>
+      <h2 data-i18n="shots_title">Всё в одном окне</h2>
+      <p data-i18n="shots_desc">Мониторинг, твики и состояние железа — без сторонних программ.</p>
+    </div>
+    <figure class="shot">
+      <img src="app-dashboard.webp" width="1440" height="840" alt="VOIDTWEAKS: мониторинг процессора, видеокарты, памяти и сети, состояние железа и диски" loading="lazy">
+      <figcaption data-i18n="shots_cap">Реальный экран приложения. Данные сняты на Ryzen 5 5600 и GTX 1650.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -1484,6 +1502,9 @@ const I18N = {
     p3_i1: 'Без срока действия', p3_i2: 'Все PRO-модули', p3_i3: 'Будущие обновления',
     price_guarantee: '14 дней на возврат, если ключ не активирован. <a href="refund.html">Условия возврата</a>',
     pay_legal: 'Оплачивая заказ, вы принимаете <a href="offer.html">публичную оферту</a> и <a href="privacy.html">политику конфиденциальности</a>.',
+    shots_eyebrow: 'Интерфейс', shots_title: 'Всё в одном окне',
+    shots_desc: 'Мониторинг, твики и состояние железа — без сторонних программ.',
+    shots_cap: 'Реальный экран приложения. Данные сняты на Ryzen 5 5600 и GTX 1650.',
     dl_title: 'Скачать VOID TWEAKS', dl_version: 'Версия', dl_btn: 'Скачать установщик', dl_downloads: 'Скачано',
     file_title: 'Проверка файла', file_copy: 'Копировать', file_copied: 'Скопировано',
     file_note: 'Сверьте хеш после скачивания — так вы убедитесь, что файл не подменили.',
@@ -1617,6 +1638,9 @@ const I18N = {
     p3_i1: 'No expiry', p3_i2: 'All PRO modules', p3_i3: 'Future updates',
     price_guarantee: '14-day refund if the key is not activated. <a href="refund.html">Refund terms</a>',
     pay_legal: 'By paying you accept the <a href="offer.html">public offer</a> and <a href="privacy.html">privacy policy</a>.',
+    shots_eyebrow: 'Interface', shots_title: 'Everything in one window',
+    shots_desc: 'Monitoring, tweaks and hardware state — without third-party apps.',
+    shots_cap: 'A real app screen. Data captured on Ryzen 5 5600 and GTX 1650.',
     dl_title: 'Download VOID TWEAKS', dl_version: 'Version', dl_btn: 'Download installer', dl_downloads: 'Downloaded',
     file_title: 'File check', file_copy: 'Copy', file_copied: 'Copied',
     file_note: 'Compare the hash after downloading to make sure the file was not replaced.',
