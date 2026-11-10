@@ -63,7 +63,7 @@ No. VOIDTWEAKS doesn't touch game files, doesn't inject into processes and doesn
 No. Tweaks, monitoring, startup manager and built-in tools are free forever. PRO unlocks interrupt management, GPU sections and early access.
 
 **How do I buy PRO?**
-Payment is processed via YooKassa on the website. After payment the key appears on the page — paste it into the app.
+Sign in or create an account in the [dashboard](https://voidtweaksapp.github.io/voidtweaks/account.html) first: purchases are available to accounts only, and the key is linked to yours. Payment is processed via YooKassa; after payment the key appears in the dashboard — paste it into the app.
 
 ## System requirements
 

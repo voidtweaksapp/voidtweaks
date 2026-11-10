@@ -8,6 +8,8 @@
 <meta name="robots" content="noindex, nofollow" />
 <meta name="theme-color" content="#030303" />
 <meta name="color-scheme" content="dark" />
+<meta http-equiv="Referrer-Policy" content="no-referrer" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://voidtweaks-api.voidtweaks.workers.dev https://mzkvqlbcrxaibpizuuuk.supabase.co; base-uri 'none'; object-src 'none'; form-action 'self'" />
 <link rel="icon" type="image/png" sizes="192x192" href="logo-192.png">
 <link rel="apple-touch-icon" href="logo-192.png">
 <link rel="preload" href="fonts/onest-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -420,7 +422,7 @@ body::before {
         </div>
         <div class="field">
           <label for="regPassword">Пароль</label>
-          <input id="regPassword" name="password" type="password" autocomplete="new-password" placeholder="Минимум 6 символов" minlength="6" required />
+          <input id="regPassword" name="password" type="password" autocomplete="new-password" placeholder="Минимум 8 символов" minlength="8" required />
         </div>
         <div class="field">
           <label for="regPassword2">Повторите пароль</label>
@@ -441,7 +443,7 @@ body::before {
       <form id="recoveryForm">
         <div class="field">
           <label for="newPassword">Новый пароль</label>
-          <input id="newPassword" type="password" autocomplete="new-password" placeholder="Минимум 6 символов" minlength="6" required />
+          <input id="newPassword" type="password" autocomplete="new-password" placeholder="Минимум 8 символов" minlength="8" required />
         </div>
         <button type="submit" class="btn btn-primary btn-block btn-lg" id="recoveryBtn">Сохранить пароль</button>
         <div class="form-msg" id="recoveryMsg" role="status" aria-live="polite"></div>
@@ -534,7 +536,7 @@ body::before {
   </div>
 </footer>
 
-<script src="vendor/supabase.js"></script>
+<script src="vendor/supabase.js" integrity="sha384-7ErumSGcZ+c9GIva9sgVdAxJD44766p52uHwQuDIawnbQdtbvv+s5UJdcQeqtrS5"></script>
 <script>
 (() => {
   'use strict';
@@ -542,7 +544,8 @@ body::before {
   const SUPABASE_URL = 'https://mzkvqlbcrxaibpizuuuk.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_ONhVp8Za-zzwpE7FMp7Nyg_ntPLMYp7';
   const API = 'https://voidtweaks-api.voidtweaks.workers.dev';
-  const ADMIN_EMAIL = 'vit9aso2@gmail.com';
+  // Признак админа приходит только с сервера (/api/account/keys), никаких
+  // зашитых email во фронтенде: подделка UI всё равно не даст доступ к API.
   // Render на free-тарифе засыпает. Будим его сразу, не дожидаясь входа:
   // так к моменту загрузки ключей/админки он уже просыпается.
   fetch(API + '/', { method: 'GET', mode: 'no-cors', cache: 'no-store' }).catch(() => {});
@@ -585,7 +588,12 @@ body::before {
   // после подтверждения email или перезагрузки страницы.
   try {
     const fromUrl = new URLSearchParams(location.search).get('order');
-    if (fromUrl) localStorage.setItem('void-order', fromUrl);
+    if (fromUrl) {
+      localStorage.setItem('void-order', fromUrl);
+      const clean = new URL(location.href);
+      clean.searchParams.delete('order');
+      history.replaceState(null, '', clean.pathname + (clean.search || '') + clean.hash);
+    }
   } catch {}
 
   function pendingOrder() {
@@ -662,7 +670,7 @@ body::before {
     if (m.includes('invalid login credentials') || m.includes('invalid_grant')) return 'Неверный email или пароль.';
     if (m.includes('email not confirmed')) return 'Email не подтверждён. Проверьте почту и перейдите по ссылке.';
     if (m.includes('user already registered') || m.includes('already registered')) return 'Этот email уже зарегистрирован. Войдите.';
-    if (m.includes('password should be at least') || m.includes('password is too short')) return 'Пароль должен быть не короче 6 символов.';
+    if (m.includes('password should be at least') || m.includes('password is too short')) return 'Пароль должен быть не короче 8 символов.';
     if (m.includes('unable to validate email') || m.includes('invalid email')) return 'Проверьте адрес email.';
     if (m.includes('rate limit') || m.includes('for security purposes')) return 'Слишком много попыток. Подождите минуту и попробуйте снова.';
     if (m.includes('failed to fetch') || m.includes('network')) return 'Не удалось связаться с сервером. Проверьте интернет и попробуйте снова.';
@@ -696,8 +704,6 @@ body::before {
       renderOrders(cachedKeys.orders);
     }
     loadProfile();
-    // Админку грузим параллельно с ключами, а не после ответа профиля.
-    if (email.trim().toLowerCase() === ADMIN_EMAIL) setAdmin(true);
   }
   function showRecovery() {
     authPanel.hidden = true;
@@ -883,7 +889,6 @@ body::before {
   let adminData = null;
   let adminTab = 'users';
   let adminQuery = '';
-  const ADMIN_CACHE = 'void-admin-cache';
   const KEYS_CACHE = 'void-keys-cache';
 
   function readKeysCache(uid) {
@@ -903,22 +908,8 @@ body::before {
     } catch {}
   }
 
-  function readAdminCache() {
-    try {
-      const raw = sessionStorage.getItem(ADMIN_CACHE);
-      const saved = raw ? JSON.parse(raw) : null;
-      if (saved && saved.data && Date.now() - Number(saved.ts || 0) < 10 * 60 * 1000) {
-        return saved.data;
-      }
-    } catch {}
-    return null;
-  }
-
-  function writeAdminCache(data) {
-    try {
-      sessionStorage.setItem(ADMIN_CACHE, JSON.stringify({ ts: Date.now(), data }));
-    } catch {}
-  }
+  // Данные админки (чужие email, ключи, платежи) не кэшируем в браузере:
+  // они живут только в памяти вкладки.
 
   const money = n => Number(n || 0).toLocaleString('ru-RU') + ' ₽';
   const adminStatusLabel = s => s === 'succeeded' ? 'Оплачен' : s === 'pending' ? 'Ожидает' : s === 'canceled' ? 'Отменён' : (s || '—');
@@ -1020,16 +1011,6 @@ body::before {
     adminLoaded = true;
     panel.hidden = false;
 
-    // Показываем последние данные сразу, а свежие подтягиваем в фоне.
-    if (!adminData) {
-      const cached = readAdminCache();
-      if (cached) {
-        adminData = cached;
-        renderAdminStats(cached.stats || {});
-        renderAdminTable();
-      }
-    }
-
     const wrap = $('adminTableWrap');
     const firstLoad = !adminData;
     let slowTimer = 0;
@@ -1044,7 +1025,6 @@ body::before {
     try {
       const data = await api('/api/admin/data');
       adminData = data;
-      writeAdminCache(data);
       renderAdminStats(data.stats || {});
       renderAdminTable();
     } catch (e) {
@@ -1074,7 +1054,6 @@ body::before {
       panel.hidden = true;
       adminData = null;
       adminLoaded = false;
-      try { sessionStorage.removeItem(ADMIN_CACHE); } catch {}
       return;
     }
     panel.hidden = false;
@@ -1168,7 +1147,7 @@ body::before {
     const password = $('regPassword').value;
     const password2 = $('regPassword2').value;
     if (!email || !password) return msg(registerMsg, 'Заполните email и пароль.', 'err');
-    if (password.length < 6) return msg(registerMsg, 'Пароль должен быть не короче 6 символов.', 'err');
+    if (password.length < 8) return msg(registerMsg, 'Пароль должен быть не короче 8 символов.', 'err');
     if (password !== password2) return msg(registerMsg, 'Пароли не совпадают.', 'err');
     const btn = $('registerBtn');
     setBusy(btn, true, 'Создаём…');
@@ -1216,7 +1195,7 @@ body::before {
     e.preventDefault();
     clearMsg(recoveryMsg);
     const password = $('newPassword').value;
-    if (password.length < 6) return msg(recoveryMsg, 'Пароль должен быть не короче 6 символов.', 'err');
+    if (password.length < 8) return msg(recoveryMsg, 'Пароль должен быть не короче 8 символов.', 'err');
     const btn = $('recoveryBtn');
     setBusy(btn, true, 'Сохраняем…');
     try {
@@ -1320,7 +1299,6 @@ body::before {
           }
           renderAdminStats(adminData.stats || {});
           renderAdminTable();
-          writeAdminCache(adminData);
         } else {
           adminLoaded = false;
           adminData = null;
@@ -1334,10 +1312,16 @@ body::before {
     });
   }
 
+  // Стираем всё, что относится к прошлой сессии: данные админки и кэш ключей.
+  function clearSessionCaches() {
+    setAdmin(false);
+    adminData = null;
+    try { sessionStorage.removeItem(KEYS_CACHE); } catch {}
+  }
+
   // Logout
   $('logoutBtn').addEventListener('click', async () => {
-    setAdmin(false);
-    try { sessionStorage.removeItem(KEYS_CACHE); } catch {}
+    clearSessionCaches();
     await supabase.auth.signOut();
     showAuth('login');
   });
@@ -1356,6 +1340,8 @@ body::before {
     } else if (!recoveryPanel.hidden) {
       // stay on recovery until password is set
     } else {
+      // Сессия истекла или выход в другой вкладке — чужие данные не оставляем.
+      clearSessionCaches();
       showAuth('login');
     }
   });

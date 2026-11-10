@@ -11,6 +11,8 @@
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 <meta name="theme-color" content="#030303" />
 <meta name="color-scheme" content="dark" />
+<meta http-equiv="Referrer-Policy" content="no-referrer" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://voidtweaks-api.voidtweaks.workers.dev https://voidtweaks.onrender.com https://mzkvqlbcrxaibpizuuuk.supabase.co https://api.github.com; base-uri 'none'; object-src 'none'; form-action 'self'" />
 <script>document.documentElement.classList.add('js');try{var fxMode=new URLSearchParams(location.search).get('fx');if(fxMode==='off')document.documentElement.classList.add('fx-static');else if(fxMode==='full')document.documentElement.classList.add('fx-force');}catch(e){}window.setTimeout(function(){if(!window.__voidFx)document.documentElement.classList.remove('js');},2500);</script>
 <script>
 /* Если Supabase вернул подтверждение на главную вместо account.html,
@@ -1177,7 +1179,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
       <details><summary><span data-i18n="faq_q2">Могут ли забанить в играх?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a2">Нет. VOID TWEAKS не трогает файлы игр, не внедряется в процессы и не меняет их память — только настройки системы и реестра.</div></details>
       <details><summary><span data-i18n="faq_q3">Windows пишет «Система Windows защитила ваш компьютер»</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a3">Это SmartScreen — он предупреждает о любых новых программах. Скачивайте установщик только с этой страницы или из GitHub Releases, нажмите «Подробнее» → «Выполнить в любом случае».</div></details>
       <details><summary><span data-i18n="faq_q4">Нужен ли PRO для обычной оптимизации?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n="faq_a4">Нет. Твики, мониторинг, автозагрузка и встроенные утилиты бесплатны навсегда. PRO нужен для прерываний, GPU-разделов и раннего доступа.</div></details>
-      <details><summary><span data-i18n="faq_q5">Как оплатить и получить ключ?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n-html="faq_a5">Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится прямо на странице — вставьте его в приложение. Вопросы — в <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.</div></details>
+      <details><summary><span data-i18n="faq_q5">Как оплатить и получить ключ?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary><div class="a" data-i18n-html="faq_a5">Покупка доступна после входа в аккаунт: ключ привязывается к нему. Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится на странице — вставьте его в приложение. Вопросы — в <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.</div></details>
     </div>
     </div>
   </div>
@@ -1327,7 +1329,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
   </div>
 </div>
 
-<script src="vendor/supabase.js"></script>
+<script src="vendor/supabase.js" integrity="sha384-7ErumSGcZ+c9GIva9sgVdAxJD44766p52uHwQuDIawnbQdtbvv+s5UJdcQeqtrS5"></script>
 <script>
 /* ============================================================
    I18N
@@ -1408,7 +1410,7 @@ const I18N = {
     faq_q4: 'Нужен ли PRO для обычной оптимизации?',
     faq_a4: 'Нет. Твики, мониторинг, автозагрузка и встроенные утилиты бесплатны навсегда. PRO нужен для прерываний, GPU-разделов и раннего доступа.',
     faq_q5: 'Как оплатить и получить ключ?',
-    faq_a5: 'Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится прямо на странице — вставьте его в приложение. Вопросы — в <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.',
+    faq_a5: 'Покупка доступна после входа в аккаунт: ключ привязывается к нему. Оплата через ЮKassa. После оплаты вы вернётесь на сайт, и ключ появится на странице — вставьте его в приложение. Вопросы — в <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.',
     dl_title: 'Скачать VOID TWEAKS', dl_version: 'Версия', dl_btn: 'Скачать установщик', dl_downloads: 'Скачано',
     file_title: 'Проверка файла', file_copy: 'Копировать', file_copied: 'Скопировано',
     file_note: 'Сверьте хеш после скачивания — так вы убедитесь, что файл не подменили.',
@@ -1524,7 +1526,7 @@ const I18N = {
     faq_q4: 'Do I need PRO for basic optimization?',
     faq_a4: 'No. Tweaks, monitoring, startup manager and built-in utilities are free forever. PRO is for interrupts, GPU sections and early access.',
     faq_q5: 'How do I pay and get my key?',
-    faq_a5: 'Payment goes through YooKassa. After paying you return to the site and the key appears right on the page — paste it into the app. Questions — on <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.',
+    faq_a5: 'Purchases are available after signing in: the key is linked to your account. Payment goes through YooKassa. After paying you return to the site and the key appears on the page — paste it into the app. Questions — on <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline">GitHub Issues</a>.',
     dl_title: 'Download VOID TWEAKS', dl_version: 'Version', dl_btn: 'Download installer', dl_downloads: 'Downloaded',
     file_title: 'File check', file_copy: 'Copy', file_copied: 'Copied',
     file_note: 'Compare the hash after downloading to make sure the file was not replaced.',
