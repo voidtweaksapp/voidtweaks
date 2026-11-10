@@ -180,6 +180,174 @@ button { cursor: pointer; }
 .foot { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--text-3); font-size: 12.5px; }
 .foot .container { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .foot a:hover { color: #fff; }
+
+/* ---------- visual polish ---------- */
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 58% 42% at 50% -10%, rgba(255,255,255,.10), transparent 68%),
+    radial-gradient(ellipse 42% 30% at 88% 8%, rgba(125,125,255,.06), transparent 70%),
+    radial-gradient(ellipse 40% 30% at 6% 28%, rgba(255,255,255,.035), transparent 70%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, #000 10%, transparent 78%);
+  mask-image: radial-gradient(ellipse 75% 55% at 50% 0%, #000 10%, transparent 78%);
+}
+.nav, main, .foot { position: relative; z-index: 1; }
+.nav { background: rgba(3,3,3,.72); }
+.account { padding: 64px 0 96px; }
+
+.account-head h1 {
+  background: linear-gradient(180deg, #fff 15%, #B9B9C4 115%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.account-head p { max-width: 520px; margin: 0 auto; }
+.eyebrow { color: #8A8A94; }
+.eyebrow::before { background: linear-gradient(90deg, transparent, #3A3A40); }
+.eyebrow::after { background: linear-gradient(90deg, #3A3A40, transparent); }
+
+.card {
+  background: linear-gradient(180deg, rgba(20,20,24,.94), rgba(11,11,13,.96));
+  border-color: #232329;
+  box-shadow: 0 30px 70px -40px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.055);
+}
+.btn { transition: background-color .18s ease, border-color .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease; }
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn-primary { box-shadow: 0 10px 30px -14px rgba(255,255,255,.55); }
+.btn-primary:hover { box-shadow: 0 14px 34px -14px rgba(255,255,255,.7); }
+
+.auth-card {
+  position: relative; padding: 30px; overflow: hidden;
+  background:
+    radial-gradient(ellipse 120% 70% at 50% -30%, rgba(255,255,255,.075), transparent 60%),
+    linear-gradient(180deg, rgba(18,18,22,.96), rgba(10,10,12,.98));
+}
+.auth-card::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  border: 1px solid transparent;
+  background: linear-gradient(140deg, rgba(255,255,255,.14), transparent 32%, transparent 68%, rgba(255,255,255,.06)) border-box;
+  -webkit-mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.auth-tabs { background: rgba(255,255,255,.028); }
+.auth-tab[aria-selected="true"] { background: linear-gradient(180deg, #26262C, #1A1A1F); box-shadow: 0 1px 0 rgba(255,255,255,.08) inset, 0 6px 16px -10px rgba(0,0,0,.9); }
+
+.dash-head {
+  align-items: center; padding: 18px 20px; margin-bottom: 10px;
+  border: 1px solid var(--line); border-radius: 16px;
+  background: linear-gradient(120deg, rgba(255,255,255,.05), rgba(255,255,255,.014) 46%, transparent 80%);
+}
+.dash-user { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.dash-user-info { min-width: 0; }
+.avatar {
+  width: 48px; height: 48px; flex-shrink: 0; border-radius: 15px;
+  display: grid; place-items: center; font-size: 18px; font-weight: 800; color: #09090B;
+  background: var(--grad-white); box-shadow: 0 10px 26px -12px rgba(255,255,255,.5);
+}
+.dash-user .email { font-size: 17px; }
+
+.section-title { margin: 34px 0 12px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.section-title h2 { font-size: 16px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-2); }
+
+.key-card {
+  position: relative; overflow: hidden; padding: 20px;
+  transition: border-color .22s ease, transform .22s ease, box-shadow .22s ease;
+}
+.key-card::after {
+  content: ""; position: absolute; top: -150px; right: -110px; width: 260px; height: 260px;
+  background: radial-gradient(circle, rgba(255,255,255,.07), transparent 68%); pointer-events: none;
+}
+.key-card:hover { transform: translateY(-2px); border-color: #34343B; box-shadow: 0 24px 50px -34px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.06); }
+.key-value { color: #fff; text-shadow: 0 0 22px rgba(255,255,255,.14); }
+.key-badge.active { box-shadow: 0 0 20px -7px rgba(74,222,128,.55); }
+
+.order-row { transition: border-color .18s ease, background-color .18s ease; }
+.order-row:hover { border-color: #2E2E35; background: #101013; }
+.order-status { display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+.order-status::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.order-status.ok { color: #86EFAC; background: rgba(74,222,128,.08); }
+.order-status.pending { color: #FCD34D; background: rgba(251,191,36,.08); }
+.order-status.bad { color: #FCA5A5; background: rgba(248,113,113,.08); }
+
+/* ---------- admin ---------- */
+.admin { margin-top: 46px; padding-top: 36px; border-top: 1px solid var(--line); }
+.admin-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+.admin-head h2 { margin: 0 0 6px; font-size: 24px; letter-spacing: -.02em; }
+.admin-head p { margin: 0; color: var(--text-3); font-size: 13.5px; }
+.admin-head .eyebrow { margin-bottom: 8px; }
+.admin-chip { display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; border-radius: 999px; border: 1px solid rgba(74,222,128,.24); background: rgba(74,222,128,.07); color: #86EFAC; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.admin-chip i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: pulse 2.2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(74,222,128,.5); } 70% { box-shadow: 0 0 0 7px rgba(74,222,128,0); } 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); } }
+
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 22px; }
+.stat { position: relative; overflow: hidden; padding: 16px; border-radius: 14px; border: 1px solid var(--line); background: linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.012) 55%, transparent); }
+.stat::after { content: ""; position: absolute; top: -60px; right: -50px; width: 130px; height: 130px; background: radial-gradient(circle, rgba(255,255,255,.06), transparent 70%); }
+.stat .k { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }
+.stat .v { display: block; margin-top: 8px; font-size: 26px; font-weight: 800; letter-spacing: -.03em; color: #fff; line-height: 1; }
+.stat .s { display: block; margin-top: 6px; font-size: 11.5px; color: var(--text-3); }
+@media (max-width: 760px) { .stats { grid-template-columns: 1fr 1fr; } }
+
+.admin-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.admin-tabs { display: flex; gap: 3px; padding: 4px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface-2); max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.admin-tabs::-webkit-scrollbar { display: none; }
+.admin-tab { border: 0; background: transparent; color: var(--text-3); padding: 7px 13px; border-radius: 8px; font-size: 13px; font-weight: 600; white-space: nowrap; transition: color .15s ease, background-color .15s ease; }
+.admin-tab:hover { color: #fff; }
+.admin-tab[aria-selected="true"] { background: #1E1E24; color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.06); }
+.admin-search { height: 40px; min-width: 200px; flex: 0 1 260px; padding: 0 13px; border-radius: 10px; border: 1px solid var(--line-2); background: #09090B; color: #fff; outline: none; font-size: 13px; }
+.admin-search::placeholder { color: #52525B; }
+.admin-search:focus { border-color: #52525B; box-shadow: 0 0 0 3px rgba(255,255,255,.05); }
+.admin-filters { display: flex; gap: 6px; align-items: center; flex: 0 1 auto; }
+.admin-filters .mini-btn { height: 40px; padding: 0 14px; border-radius: 10px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.admin-table { width: 100%; min-width: 680px; border-collapse: collapse; font-size: 13px; }
+.admin-table th { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.022); color: var(--text-3); font-size: 10.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; white-space: nowrap; }
+.admin-table td { padding: 11px 14px; border-bottom: 1px solid var(--line); color: var(--text-2); vertical-align: middle; }
+.admin-table tr:last-child td { border-bottom: 0; }
+.admin-table tbody tr { transition: background-color .15s ease; }
+.admin-table tbody tr:hover { background: rgba(255,255,255,.024); }
+.admin-table .mono { font-family: ui-monospace, SFMono-Regular, 'Cascadia Code', Consolas, monospace; color: #fff; font-size: 12px; letter-spacing: .04em; white-space: nowrap; }
+.admin-table .strong { color: #fff; font-weight: 600; }
+.admin-table .muted { color: var(--text-3); font-size: 12px; }
+.admin-table .empty-row td { padding: 28px 14px; text-align: center; color: var(--text-3); }
+.row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.mini-btn { height: 30px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line-2); background: transparent; color: var(--text-2); font-size: 12px; font-weight: 600; transition: color .15s ease, border-color .15s ease, background-color .15s ease; }
+.mini-btn:hover { color: #fff; border-color: #52525B; background: rgba(255,255,255,.03); }
+.mini-btn.danger:hover { color: #FCA5A5; border-color: rgba(248,113,113,.42); background: rgba(248,113,113,.06); }
+.mini-btn:disabled { opacity: .45; cursor: wait; }
+.status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.status-pill::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.status-pill.ok { color: #86EFAC; background: rgba(74,222,128,.08); }
+.status-pill.pending { color: #FCD34D; background: rgba(251,191,36,.08); }
+.status-pill.bad { color: #FCA5A5; background: rgba(248,113,113,.08); }
+.status-pill.neutral { color: var(--text-3); background: rgba(255,255,255,.05); }
+.admin-empty { padding: 30px 16px; text-align: center; color: var(--text-3); font-size: 13.5px; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.auth-card { animation: rise .55s var(--fx-ease) both; }
+#dashboard > * { animation: rise .5s var(--fx-ease) both; }
+#dashboard > *:nth-child(2) { animation-delay: .03s; }
+#dashboard > *:nth-child(3) { animation-delay: .06s; }
+#dashboard > *:nth-child(4) { animation-delay: .09s; }
+#dashboard > *:nth-child(5) { animation-delay: .12s; }
+#dashboard > *:nth-child(6) { animation-delay: .15s; }
+@media (max-width: 560px) {
+  .account { padding: 44px 0 72px; }
+  .dash-head { padding: 16px; }
+  .dash-actions { width: 100%; }
+  .dash-actions .btn { flex: 1; }
+  .avatar { width: 42px; height: 42px; border-radius: 13px; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
 [hidden] { display: none !important; }
 </style>
 </head>
@@ -261,7 +429,7 @@ button { cursor: pointer; }
         <p class="form-note">Регистрируясь, вы соглашаетесь с правилами сервиса. Ключи привязываются к аккаунту, а не к email.</p>
       </form>
 
-      <div class="auth-alt" id="authAlt">Купить ключ можно без регистрации — <a href="./#pricing">на главной</a>.</div>
+      <div class="auth-alt" id="authAlt">Ключи привязываются к аккаунту — так их невозможно потерять.</div>
     </section>
 
     <!-- NEW PASSWORD (recovery) -->
@@ -282,8 +450,11 @@ button { cursor: pointer; }
     <section id="dashboard" hidden>
       <div class="dash-head">
         <div class="dash-user">
-          <span class="label">Вы вошли как</span>
-          <div class="email" id="userEmail">—</div>
+          <div class="avatar" id="userAvatar" aria-hidden="true">V</div>
+          <div class="dash-user-info">
+            <span class="label">Вы вошли как</span>
+            <div class="email" id="userEmail">—</div>
+          </div>
         </div>
         <div class="dash-actions">
           <a href="./#pricing" class="btn btn-primary">Купить ещё</a>
@@ -317,6 +488,35 @@ button { cursor: pointer; }
         <span class="count" id="ordersCount"></span>
       </div>
       <div class="orders" id="ordersList"></div>
+
+      <section class="admin" id="adminPanel" hidden aria-labelledby="adminTitle">
+        <div class="admin-head">
+          <div>
+            <span class="eyebrow">Admin</span>
+            <h2 id="adminTitle">Панель управления</h2>
+            <p>Пользователи, ключи, заказы и выручка в реальном времени.</p>
+          </div>
+          <span class="admin-chip"><i></i>live</span>
+        </div>
+
+        <div class="stats" id="adminStats"></div>
+
+        <div class="admin-toolbar">
+          <div class="admin-tabs" role="tablist" aria-label="Разделы админки">
+            <button type="button" class="admin-tab" data-admin-tab="users" role="tab" aria-selected="true">Пользователи</button>
+            <button type="button" class="admin-tab" data-admin-tab="licenses" role="tab" aria-selected="false">Ключи</button>
+            <button type="button" class="admin-tab" data-admin-tab="orders" role="tab" aria-selected="false">Заказы</button>
+          </div>
+          <div class="admin-filters">
+            <input class="admin-search" id="adminSearch" type="search" placeholder="Поиск по email или ключу" aria-label="Поиск по админке" autocomplete="off" spellcheck="false" />
+            <button type="button" class="mini-btn" id="adminRefresh">Обновить</button>
+          </div>
+        </div>
+        <div class="table-wrap" id="adminTableWrap">
+          <div class="admin-empty">Загружаем данные…</div>
+        </div>
+        <div class="form-msg" id="adminMsg" role="status" aria-live="polite"></div>
+      </section>
 
       <div style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;">
         <a href="./#download" class="btn btn-ghost">Скачать приложение</a>
@@ -367,6 +567,13 @@ button { cursor: pointer; }
   let profilePromise = null;
   let profileQueued = false;
   let claiming = false;
+  const buyPlan = (() => {
+    try {
+      const p = new URLSearchParams(location.search).get('buy');
+      return /^(month|half|forever)$/.test(p || '') ? p : '';
+    } catch { return ''; }
+  })();
+  let buyRedirected = false;
 
   // Токен заказа из ссылки после оплаты. Сохраняем сразу, чтобы он не потерялся
   // после подтверждения email или перезагрузки страницы.
@@ -384,8 +591,12 @@ button { cursor: pointer; }
   }
 
   function authRedirect() {
+    const params = new URLSearchParams();
     const order = pendingOrder();
-    return ACCOUNT_URL + (order ? '?order=' + encodeURIComponent(order) : '');
+    if (order) params.set('order', order);
+    if (buyPlan) params.set('buy', buyPlan);
+    const qs = params.toString();
+    return ACCOUNT_URL + (qs ? '?' + qs : '');
   }
 
   const planLabel = plan => ({ month: '1 месяц', half: '6 месяцев', forever: 'Навсегда' }[plan] || plan || '—');
@@ -469,7 +680,10 @@ button { cursor: pointer; }
     dashboard.hidden = false;
     recoveryPanel.hidden = true;
     pageHead.hidden = true;
-    $('userEmail').textContent = session.user.email || '—';
+    const email = session.user.email || '';
+    $('userEmail').textContent = email || '—';
+    const avatar = $('userAvatar');
+    if (avatar) avatar.textContent = (email[0] || 'V').toUpperCase();
     loadProfile();
   }
   function showRecovery() {
@@ -532,6 +746,7 @@ button { cursor: pointer; }
           const data = await api('/api/account/keys');
           renderKeys(data.licenses || []);
           renderOrders(data.orders || []);
+          setAdmin(Boolean(data.is_admin));
         } catch (e) {
           if (e.message === 'no_session') return showAuth();
           if (e.status === 401) {
@@ -626,12 +841,146 @@ button { cursor: pointer; }
       const row = document.createElement('div');
       row.className = 'order-row';
       const status = o.status === 'succeeded' ? 'Оплачен' : o.status === 'pending' ? 'Ожидает оплаты' : o.status === 'canceled' ? 'Отменён' : (o.status || '—');
+      const stCls = o.status === 'succeeded' ? 'ok' : o.status === 'pending' ? 'pending' : o.status === 'canceled' ? 'bad' : '';
       row.innerHTML =
         '<div class="left"><div class="plan">' + esc(planLabel(o.plan)) + '</div>' +
         '<div class="date">' + esc(fmtDateTime(o.created_at) || '') + '</div></div>' +
-        '<div class="status">' + esc(status) + '</div>';
+        '<div class="status"><span class="order-status ' + stCls + '">' + esc(status) + '</span></div>';
       box.appendChild(row);
     }
+  }
+
+  /* ---------- admin ---------- */
+  let adminLoaded = false;
+  let adminData = null;
+  let adminTab = 'users';
+  let adminQuery = '';
+
+  const money = n => Number(n || 0).toLocaleString('ru-RU') + ' ₽';
+  const adminStatusLabel = s => s === 'succeeded' ? 'Оплачен' : s === 'pending' ? 'Ожидает' : s === 'canceled' ? 'Отменён' : (s || '—');
+  const adminStatusClass = s => s === 'succeeded' ? 'ok' : s === 'pending' ? 'pending' : s === 'canceled' ? 'bad' : 'neutral';
+  const adminLicStatus = lic => {
+    if (lic.is_active === false) return { cls: 'bad', label: 'Выключен' };
+    if (lic.expires_at && new Date(lic.expires_at).getTime() < Date.now()) return { cls: 'bad', label: 'Истёк' };
+    return { cls: 'ok', label: 'Активен' };
+  };
+
+  function adminTable(headers, rows, emptyText) {
+    const head = '<thead><tr>' + headers.map(h => '<th>' + esc(h) + '</th>').join('') + '</tr></thead>';
+    const body = rows.length
+      ? '<tbody>' + rows.map(cells => '<tr>' + cells.map(c => '<td>' + c + '</td>').join('') + '</tr>').join('') + '</tbody>'
+      : '<tbody><tr class="empty-row"><td colspan="' + headers.length + '">' + esc(emptyText) + '</td></tr></tbody>';
+    return '<table class="admin-table">' + head + body + '</table>';
+  }
+
+  function renderAdminStats(s) {
+    const items = [
+      ['Пользователи', s.users || 0, 'зарегистрировано'],
+      ['Активные ключи', s.active_licenses || 0, 'всего ' + (s.licenses || 0)],
+      ['Выручка', money(s.revenue), 'за месяц ' + money(s.revenue_month)],
+      ['Заказы', s.orders || 0, (s.pending_orders || 0) + ' ждут оплаты']
+    ];
+    $('adminStats').innerHTML = items.map(([k, v, sub]) =>
+      '<div class="stat"><span class="k">' + esc(k) + '</span><span class="v">' + esc(String(v)) + '</span><span class="s">' + esc(sub) + '</span></div>'
+    ).join('');
+  }
+
+  function renderAdminTable() {
+    const wrap = $('adminTableWrap');
+    if (!wrap || !adminData) return;
+    const q = adminQuery.trim().toLowerCase();
+    const hit = (...vals) => !q || vals.some(v => String(v || '').toLowerCase().includes(q));
+
+    if (adminTab === 'users') {
+      const rows = (adminData.users || []).filter(u => hit(u.email, u.id)).map(u => [
+        '<span class="strong">' + esc(u.email || '—') + '</span>',
+        '<span class="muted">' + esc(fmtDate(u.created_at)) + '</span>',
+        esc(String(u.license_count || 0)),
+        esc(String(u.order_count || 0)),
+        esc(money(u.spent)),
+        '<span class="muted">' + esc(fmtDateTime(u.last_sign_in_at) || '—') + '</span>'
+      ]);
+      const note = adminData.users_error
+        ? '<div class="admin-empty" style="border-bottom:1px solid var(--line)">Не удалось получить список пользователей Supabase. Проверьте, что SUPABASE_KEY — service_role.</div>'
+        : '';
+      wrap.innerHTML = note + adminTable(
+        ['Email', 'Регистрация', 'Ключи', 'Заказы', 'Потрачено', 'Последний вход'],
+        rows, q ? 'Ничего не найдено' : 'Пользователей пока нет'
+      );
+      return;
+    }
+
+    if (adminTab === 'licenses') {
+      const rows = (adminData.licenses || []).filter(l => hit(l.license_key, l.email, l.user_id)).map(l => {
+        const st = adminLicStatus(l);
+        const key = esc(l.license_key || '');
+        const actions =
+          '<div class="row-actions">' +
+            '<button type="button" class="mini-btn" data-admin-action="toggle" data-key="' + key + '">' + (l.is_active === false ? 'Включить' : 'Выключить') + '</button>' +
+            (l.expires_at ? '<button type="button" class="mini-btn" data-admin-action="extend" data-key="' + key + '">+30 дней</button>' : '') +
+            (l.hwid ? '<button type="button" class="mini-btn danger" data-admin-action="unbind" data-key="' + key + '">Отвязать</button>' : '') +
+          '</div>';
+        return [
+          '<span class="mono">' + key + '</span>',
+          esc(planLabel(l.plan)),
+          '<span class="status-pill ' + st.cls + '">' + st.label + '</span>',
+          esc(fmtDate(l.expires_at)),
+          '<span class="muted">' + esc(l.email || (l.user_id ? 'ID ' + String(l.user_id).slice(0, 8) : '—')) + '</span>',
+          '<span class="muted">' + esc(l.hwid || '—') + '</span>',
+          actions
+        ];
+      });
+      wrap.innerHTML = adminTable(
+        ['Ключ', 'План', 'Статус', 'Действует до', 'Владелец', 'HWID', 'Действия'],
+        rows, q ? 'Ничего не найдено' : 'Ключей пока нет'
+      );
+      return;
+    }
+
+    const rows = (adminData.orders || []).filter(o => hit(o.email, o.license_key, o.plan, o.status)).map(o => [
+      '<span class="muted">' + esc(fmtDateTime(o.created_at) || '—') + '</span>',
+      esc(planLabel(o.plan)),
+      '<span class="status-pill ' + adminStatusClass(o.status) + '">' + esc(adminStatusLabel(o.status)) + '</span>',
+      '<span class="mono">' + esc(o.license_key || '—') + '</span>',
+      '<span class="muted">' + esc(o.email || '—') + '</span>'
+    ]);
+    wrap.innerHTML = adminTable(
+      ['Дата', 'План', 'Статус', 'Ключ', 'Пользователь'],
+      rows, q ? 'Ничего не найдено' : 'Заказов пока нет'
+    );
+  }
+
+  async function loadAdmin() {
+    const panel = $('adminPanel');
+    if (!panel || adminLoaded) return;
+    adminLoaded = true;
+    panel.hidden = false;
+    $('adminTableWrap').innerHTML = '<div class="admin-empty">Загружаем данные…</div>';
+    try {
+      const data = await api('/api/admin/data');
+      adminData = data;
+      renderAdminStats(data.stats || {});
+      renderAdminTable();
+    } catch (e) {
+      adminLoaded = false;
+      adminData = null;
+      $('adminTableWrap').innerHTML = '<div class="admin-empty">Не удалось загрузить админку. ' +
+        (e.status === 403 ? 'Нет доступа.' : 'Проверьте интернет и обновите страницу.') + '</div>';
+    }
+  }
+
+  function setAdmin(on) {
+    const panel = $('adminPanel');
+    if (!panel) return;
+    if (!on) { panel.hidden = true; return; }
+    panel.hidden = false;
+    loadAdmin();
+  }
+
+  function maybeBuy() {
+    if (!buyPlan || buyRedirected) return;
+    buyRedirected = true;
+    location.href = './?buy=' + encodeURIComponent(buyPlan) + '#pricing';
   }
 
   async function claim(payload) {
@@ -699,7 +1048,7 @@ button { cursor: pointer; }
     try {
       const { data, error } = await withTimeout(supabase.auth.signInWithPassword({ email, password }));
       if (error) throw error;
-      if (data.session) { loginForm.reset(); showDashboard(data.session); await autoClaim(); }
+      if (data.session) { loginForm.reset(); showDashboard(data.session); await autoClaim(); maybeBuy(); }
     } catch (err) {
       msg(loginMsg, authError(err), 'err');
     } finally {
@@ -729,6 +1078,7 @@ button { cursor: pointer; }
         registerForm.reset();
         showDashboard(data.session);
         await autoClaim();
+        maybeBuy();
       } else {
         registerForm.reset();
         msg(registerMsg, 'Аккаунт создан. Мы отправили письмо на ' + email + ' — перейдите по ссылке, затем войдите.', 'ok');
@@ -806,6 +1156,62 @@ button { cursor: pointer; }
     }
   });
 
+  // Admin panel controls
+  document.querySelectorAll('[data-admin-tab]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      adminTab = btn.dataset.adminTab;
+      document.querySelectorAll('[data-admin-tab]').forEach(b => b.setAttribute('aria-selected', String(b === btn)));
+      renderAdminTable();
+    });
+  });
+
+  const adminSearch = $('adminSearch');
+  if (adminSearch) {
+    adminSearch.addEventListener('input', () => {
+      adminQuery = adminSearch.value;
+      renderAdminTable();
+    });
+  }
+
+  const adminRefresh = $('adminRefresh');
+  if (adminRefresh) {
+    adminRefresh.addEventListener('click', async () => {
+      clearMsg($('adminMsg'));
+      adminLoaded = false;
+      adminData = null;
+      await loadAdmin();
+    });
+  }
+
+  const adminTableWrap = $('adminTableWrap');
+  if (adminTableWrap) {
+    adminTableWrap.addEventListener('click', async e => {
+      const btn = e.target.closest('[data-admin-action]');
+      if (!btn) return;
+      const key = btn.dataset.key;
+      const action = btn.dataset.adminAction;
+      if (action === 'unbind' && !confirm('Отвязать ключ от текущего ПК? Пользователь сможет активировать его заново.')) return;
+      clearMsg($('adminMsg'));
+      const old = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = '…';
+      try {
+        await api('/api/admin/license', {
+          method: 'POST',
+          body: JSON.stringify({ license_key: key, action })
+        });
+        msg($('adminMsg'), action === 'toggle' ? 'Статус ключа обновлён.' : action === 'extend' ? 'Срок продлён на 30 дней.' : 'Ключ отвязан от ПК.', 'ok');
+        adminLoaded = false;
+        adminData = null;
+        await loadAdmin();
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = old;
+        msg($('adminMsg'), 'Не удалось обновить ключ. Попробуйте ещё раз.', 'err');
+      }
+    });
+  }
+
   // Logout
   $('logoutBtn').addEventListener('click', async () => {
     await supabase.auth.signOut();
@@ -851,8 +1257,14 @@ button { cursor: pointer; }
     } else if (session) {
       showDashboard(session);
       await autoClaim();
+      maybeBuy();
     } else {
       showAuth('login');
+      if (buyPlan) {
+        pageLead.textContent = 'Войдите или создайте аккаунт, чтобы продолжить покупку. Ключ сразу привяжется к профилю.';
+        const alt = $('authAlt');
+        if (alt) alt.textContent = 'После входа вы вернётесь к оплате выбранного тарифа.';
+      }
     }
   })();
 })();

@@ -2,7 +2,7 @@
  * VOIDTWEAKS API relay.
  *
  * The Render backend is blocked for some Russian ISPs, so the site talks to
- * this Worker instead. Only the two checkout endpoints are exposed.
+ * this Worker instead. Only the API routes used by the site are exposed.
  */
 
 const UPSTREAM = 'https://voidtweaks.onrender.com';
@@ -14,7 +14,9 @@ const API_PATHS = new Set([
   '/api/checkout',
   '/api/order',
   '/api/account/keys',
-  '/api/account/claim'
+  '/api/account/claim',
+  '/api/admin/data',
+  '/api/admin/license'
 ]);
 
 function corsHeaders(origin) {

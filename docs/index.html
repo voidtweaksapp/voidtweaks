@@ -342,6 +342,10 @@ section.block { padding: 96px 0; }
 .head { max-width: 640px; margin: 0 auto 44px; text-align: center; }
 .head h2 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.1; letter-spacing: -0.03em; font-weight: 800; margin: 0 0 12px; }
 .head p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--text-2); }
+.head .price-note { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.03); font-size: 12.5px; color: var(--text-3); line-height: 1.35; text-wrap: balance; }
+.head .price-note::before { content: ""; width: 6px; height: 6px; flex-shrink: 0; border-radius: 50%; background: var(--success); box-shadow: 0 0 10px rgba(74,222,128,.7); }
+.head .price-note a { color: var(--text-2); text-decoration: underline; text-underline-offset: 3px; }
+.head .price-note a:hover { color: #fff; }
 
 /* ---------- features ---------- */
 .features { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
@@ -1067,6 +1071,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
       <div class="eyebrow" data-i18n="nav_pricing">Тарифы</div>
       <h2 data-i18n="price_title">Начните бесплатно</h2>
       <p data-i18n="price_desc">PRO — когда захотите больше. Разовая оплата без автопродления, ключ сразу после оплаты.</p>
+      <p class="price-note" data-i18n-html="price_note">Покупка в профиле — ключ сразу привязывается к аккаунту. <a href="account.html">Войти или зарегистрироваться</a></p>
     </div>
 
     <div class="card free">
@@ -1320,6 +1325,7 @@ html.fx-force .hero h1 .line:first-child { animation: fxSheen 12s linear 2s infi
   </div>
 </div>
 
+<script src="vendor/supabase.js"></script>
 <script>
 /* ============================================================
    I18N
@@ -1359,6 +1365,7 @@ const I18N = {
     chip1: 'Visual C++ и DirectX', chip2: 'Zapret и TgWsProxy', chip5: '20+ программ в один клик', chip6: 'Конфиги для игр',
     price_title: 'Начните бесплатно',
     price_desc: 'PRO — когда захотите больше. Разовая оплата без автопродления, ключ сразу после оплаты.',
+    price_note: 'Покупка в профиле — ключ сразу привязывается к аккаунту. <a href="account.html">Войти или зарегистрироваться</a>',
     free_desc: 'Твики, мониторинг, автозагрузка и утилиты — навсегда.',
     p1_name: 'Месяц', p1_per: 'за 30 дней', p1_desc: 'Чтобы попробовать все PRO-модули.', p1_cta: 'Купить на месяц',
     p2_name: 'Полгода', p2_per: '<b>≈ 50 ₽</b> в месяц <span class="save">−50%</span>', p2_desc: 'В два раза дешевле помесячной оплаты.', p2_cta: 'Купить на полгода',
@@ -1427,7 +1434,7 @@ const I18N = {
     ord_steps: '<li>Скачайте и установите программу</li><li>Запустите VOIDTWEAKSInstaller.exe и нажмите «Запустить оптимизацию»</li><li>Вставьте ключ в появившееся окно</li><li>Нажмите «Активировать»</li>',
     ord_warn: 'Сохраните ключ сейчас — после закрытия окна он не покажется снова. Ключ привязывается к ПК при первой активации.',
     ord_dl: 'Скачать приложение',
-    ord_account: 'Сохранить в профиль',
+    ord_account: 'Открыть профиль',
     ord_canceled_t: 'Оплата не прошла', ord_canceled_d: 'Платёж отменён или истёк, деньги не списаны. Выберите тариф и попробуйте снова.', ord_pick: 'Выбрать тариф',
     ord_slow_t: 'Платёж ещё обрабатывается', ord_slow_d: 'Если вы уже оплатили, подождите минуту и проверьте снова. Ключ не пропадёт.', ord_retry: 'Проверить снова',
     ord_slow_net: 'Нет связи с сервером оплаты. Включите VPN и нажмите «Проверить снова». Если вы уже оплатили — ключ не пропадёт.',
@@ -1474,6 +1481,7 @@ const I18N = {
     chip1: 'Visual C++ & DirectX', chip2: 'Zapret & TgWsProxy', chip5: '20+ apps in one click', chip6: 'Game configs',
     price_title: 'Start free',
     price_desc: 'Go PRO when you want more. One-time payment, no auto-renewal, key right after payment.',
+    price_note: 'Buying in your account — the key is linked to it right away. <a href="account.html">Sign in or create one</a>',
     free_desc: 'Tweaks, monitoring, startup manager and utilities — forever.',
     p1_name: 'Month', p1_per: 'for 30 days', p1_desc: 'To try every PRO module.', p1_cta: 'Buy 1 month',
     p2_name: '6 months', p2_per: '<b>≈ 50 ₽</b> per month <span class="save">−50%</span>', p2_desc: 'Half the price of paying monthly.', p2_cta: 'Buy 6 months',
@@ -1542,7 +1550,7 @@ const I18N = {
     ord_steps: '<li>Download and install the app</li><li>Launch it and click “Run optimization”</li><li>Paste the key into the window that appears</li><li>Click “Activate”</li>',
     ord_warn: 'Save the key now — it will not be shown again after you close this window. It binds to your PC on first activation.',
     ord_dl: 'Download the app',
-    ord_account: 'Save to account',
+    ord_account: 'Open account',
     ord_canceled_t: 'Payment did not go through', ord_canceled_d: 'The payment was canceled or expired and nothing was charged. Pick a plan and try again.', ord_pick: 'Pick a plan',
     ord_slow_t: 'Payment is still processing', ord_slow_d: 'If you already paid, wait a minute and check again. Your key is safe.', ord_retry: 'Check again',
     ord_slow_net: 'Cannot reach the payment server. Turn on a VPN and press "Check again". If you already paid, your key is safe.',
@@ -1637,6 +1645,11 @@ function applyLang(lang) {
 ============================================================ */
 (() => {
   const API = 'https://voidtweaks-api.voidtweaks.workers.dev';
+  const SUPABASE_URL = 'https://mzkvqlbcrxaibpizuuuk.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_ONhVp8Za-zzwpE7FMp7Nyg_ntPLMYp7';
+  const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false }
+  }) : null;
   const STORE = 'void-order';
   const $ = id => document.getElementById(id);
   const modal = $('ordModal');
@@ -1648,6 +1661,23 @@ function applyLang(lang) {
   const CHECKOUT_TIMEOUT = 45000;
   const ORDER_TIMEOUT = 15000;
   const ORDER_LIMIT = 30000;
+  const goAuth = plan => {
+    location.href = 'account.html?buy=' + encodeURIComponent(plan);
+  };
+  async function authToken() {
+    if (!sb) return '';
+    try {
+      let { data } = await sb.auth.getSession();
+      let session = data && data.session;
+      if (session && session.expires_at && session.expires_at * 1000 < Date.now() + 30000) {
+        const { data: fresh } = await sb.auth.refreshSession();
+        if (fresh && fresh.session) session = fresh.session;
+      }
+      return session && session.access_token ? session.access_token : '';
+    } catch {
+      return '';
+    }
+  }
   const fetchJSON = async (url, options = {}, ms = ORDER_TIMEOUT) => {
     const ctrl = new AbortController();
     const t = setTimeout(() => ctrl.abort(), ms);
@@ -1779,14 +1809,23 @@ function applyLang(lang) {
   }
 
   async function buy(plan, btn) {
+    // Покупка только после входа: ключ сразу привязывается к аккаунту.
+    const token = await authToken();
+    if (!token) return goAuth(plan);
     const label = btn.textContent;
     btn.style.pointerEvents = 'none';
     btn.textContent = '…';
     const notice = setTimeout(() => { if (btn.textContent === '…') btn.textContent = t('ord_connecting'); }, 8000);
     try {
       const { r, d } = await fetchJSON(API + '/api/checkout', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ plan })
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: JSON.stringify({ plan })
       }, CHECKOUT_TIMEOUT);
+      if (r.status === 401) {
+        try { await sb.auth.signOut(); } catch {}
+        return goAuth(plan);
+      }
       if (!r.ok || !d || !d.url) throw new Error('checkout');
       try { localStorage.setItem(STORE, d.token); } catch {}
       location.href = d.url;
@@ -1851,10 +1890,19 @@ function applyLang(lang) {
   window.addEventListener('pageshow', e => { if (e.persisted) location.reload(); });
 
   setTimeout(warm, 1200);
-  const fromUrl = new URLSearchParams(location.search).get('order');
+  const params = new URLSearchParams(location.search);
+  const fromUrl = params.get('order');
+  const buyPlan = params.get('buy');
   let saved = '';
   try { saved = localStorage.getItem(STORE) || ''; } catch {}
-  if (fromUrl) poll(fromUrl); else if (saved) poll(saved, true);
+  if (buyPlan && ['month', 'half', 'forever'].includes(buyPlan)) {
+    history.replaceState(null, '', location.pathname + location.hash);
+    const btn = document.querySelector('[data-buy="' + buyPlan + '"]');
+    authToken().then(token => {
+      if (!token) return goAuth(buyPlan);
+      buy(buyPlan, btn || document.createElement('a'));
+    });
+  } else if (fromUrl) poll(fromUrl); else if (saved) poll(saved, true);
 })();
 </script>
 
