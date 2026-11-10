@@ -122,6 +122,7 @@ button { cursor: pointer; }
 .field input:focus { border-color: #52525B; box-shadow: 0 0 0 3px rgba(255,255,255,.06); }
 .field input:disabled { opacity: .6; }
 .form-note { margin: 12px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--text-3); }
+.form-note a { color: var(--text-2); text-decoration: underline; }
 .form-msg { display: none; margin: 14px 0 0; padding: 11px 13px; border-radius: 10px; font-size: 13.5px; line-height: 1.45; }
 .form-msg.show { display: block; }
 .form-msg.ok { background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.22); color: #BBF7D0; }
@@ -430,7 +431,7 @@ body::before {
         </div>
         <button type="submit" class="btn btn-primary btn-block btn-lg" id="registerBtn">Создать аккаунт</button>
         <div class="form-msg" id="registerMsg" role="status" aria-live="polite"></div>
-        <p class="form-note">Регистрируясь, вы соглашаетесь с правилами сервиса. Ключи привязываются к аккаунту, а не к email.</p>
+        <p class="form-note">Регистрируясь, вы принимаете <a href="offer.html">оферту</a> и <a href="privacy.html">политику конфиденциальности</a>. Ключи привязываются к аккаунту, а не к email.</p>
       </form>
 
       <div class="auth-alt" id="authAlt">Ключи привязываются к аккаунту — так их невозможно потерять.</div>
@@ -532,7 +533,7 @@ body::before {
 <footer class="foot">
   <div class="container">
     <span>© <span id="year">2026</span> VOIDTWEAKS</span>
-    <span><a href="./">На главную</a> · <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener">Поддержка</a></span>
+    <span><a href="./">На главную</a> · <a href="offer.html">Оферта</a> · <a href="privacy.html">Политика</a> · <a href="refund.html">Возврат</a> · <a href="contacts.html">Контакты</a> · <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener">Поддержка</a></span>
   </div>
 </footer>
 
