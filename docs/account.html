@@ -870,6 +870,24 @@ body::before {
   let adminData = null;
   let adminTab = 'users';
   let adminQuery = '';
+  const ADMIN_CACHE = 'void-admin-cache';
+
+  function readAdminCache() {
+    try {
+      const raw = sessionStorage.getItem(ADMIN_CACHE);
+      const saved = raw ? JSON.parse(raw) : null;
+      if (saved && saved.data && Date.now() - Number(saved.ts || 0) < 10 * 60 * 1000) {
+        return saved.data;
+      }
+    } catch {}
+    return null;
+  }
+
+  function writeAdminCache(data) {
+    try {
+      sessionStorage.setItem(ADMIN_CACHE, JSON.stringify({ ts: Date.now(), data }));
+    } catch {}
+  }
 
   const money = n => Number(n || 0).toLocaleString('ru-RU') + ' ₽';
   const adminStatusLabel = s => s === 'succeeded' ? 'Оплачен' : s === 'pending' ? 'Ожидает' : s === 'canceled' ? 'Отменён' : (s || '—');
@@ -970,21 +988,40 @@ body::before {
     if (!panel || adminLoaded) return;
     adminLoaded = true;
     panel.hidden = false;
-    const wrap = $('adminTableWrap');
-    wrap.innerHTML = '<div class="admin-empty">Загружаем данные…</div>';
-    const slowTimer = setTimeout(() => {
-      if (adminLoaded && !adminData) {
-        wrap.innerHTML = '<div class="admin-empty">Сервер просыпается…<br><span style="color:var(--text-3);font-size:12px">Обычно это занимает до минуты.</span></div>';
+
+    // Показываем последние данные сразу, а свежие подтягиваем в фоне.
+    if (!adminData) {
+      const cached = readAdminCache();
+      if (cached) {
+        adminData = cached;
+        renderAdminStats(cached.stats || {});
+        renderAdminTable();
       }
-    }, 5000);
+    }
+
+    const wrap = $('adminTableWrap');
+    const firstLoad = !adminData;
+    let slowTimer = 0;
+    if (firstLoad) {
+      wrap.innerHTML = '<div class="admin-empty">Загружаем данные…</div>';
+      slowTimer = setTimeout(() => {
+        if (adminLoaded && !adminData) {
+          wrap.innerHTML = '<div class="admin-empty">Сервер просыпается…<br><span style="color:var(--text-3);font-size:12px">Обычно это занимает до минуты.</span></div>';
+        }
+      }, 5000);
+    }
     try {
       const data = await api('/api/admin/data');
       adminData = data;
+      writeAdminCache(data);
       renderAdminStats(data.stats || {});
       renderAdminTable();
     } catch (e) {
       adminLoaded = false;
-      adminData = null;
+      if (adminData) {
+        msg($('adminMsg'), 'Не удалось обновить данные — показаны последние загруженные.', 'err');
+        return;
+      }
       const reason = e.status === 403
         ? 'Нет доступа.'
         : e.message === 'timeout'
@@ -1002,7 +1039,13 @@ body::before {
   function setAdmin(on) {
     const panel = $('adminPanel');
     if (!panel) return;
-    if (!on) { panel.hidden = true; return; }
+    if (!on) {
+      panel.hidden = true;
+      adminData = null;
+      adminLoaded = false;
+      try { sessionStorage.removeItem(ADMIN_CACHE); } catch {}
+      return;
+    }
     panel.hidden = false;
     loadAdmin();
   }
@@ -1208,7 +1251,6 @@ body::before {
     adminRefresh.addEventListener('click', async () => {
       clearMsg($('adminMsg'));
       adminLoaded = false;
-      adminData = null;
       await loadAdmin();
     });
   }
@@ -1247,6 +1289,7 @@ body::before {
           }
           renderAdminStats(adminData.stats || {});
           renderAdminTable();
+          writeAdminCache(adminData);
         } else {
           adminLoaded = false;
           adminData = null;
@@ -1262,6 +1305,7 @@ body::before {
 
   // Logout
   $('logoutBtn').addEventListener('click', async () => {
+    setAdmin(false);
     await supabase.auth.signOut();
     showAuth('login');
   });
