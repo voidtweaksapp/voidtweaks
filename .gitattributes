@@ -1,0 +1,3 @@
+# Сайт и документация не участвуют в статистике языков GitHub
+docs/** linguist-documentation
+*.md linguist-documentation
