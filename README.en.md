@@ -30,12 +30,6 @@ VOIDTWEAKS is a free Windows 10/11 optimizer for gaming: 180+ registry and servi
 
 Same PC (Ryzen 5 5600 + GTX 1650), stock Windows 11 vs Windows 11 after VOID TWEAKS. Metrics taken 3 minutes after boot.
 
-| Metric | Before | After |
-|---|---|---|
-| Processes | — | **−26%** |
-| Services | — | **−31%** |
-| RAM usage | — | **−402 MB** |
-
 > **Honest FPS note.** In CS2 (FPS Benchmark, Dust2, 1280×960, PresentMon, 3 runs) average FPS improved by **1.5%** (283 → 288); 1% low difference is within margin of error. We don't promise magic: VOIDTWEAKS reduces background load and system latency, it doesn't paint extra frames. The measurement method is open — reproduce it yourself.
 
 ## Features
