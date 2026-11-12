@@ -2,7 +2,7 @@
    Токен: dash.cloudflare.com → Analytics → Web Analytics → Add a site (voidtweaksapp.github.io).
    Пока токен пуст, скрипт ничего не загружает. */
 (function () {
-  var token = '62b259e85bbb42b287576fb5d65004a4';
+  var token = 'dfb2770701c435c947ed21e366b8251';
   if (!token) return;
   var s = document.createElement('script');
   s.defer = true;
