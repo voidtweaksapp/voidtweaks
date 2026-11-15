@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/readme/hero.png" alt="VOIDTWEAKS – free Windows 10/11 optimizer" width="100%">
+<img src="docs/readme/hero.png?v=3" alt="VOIDTWEAKS – free Windows 10/11 optimizer" width="100%">
 
 <br><br>
 
@@ -28,7 +28,7 @@ VOIDTWEAKS is a free Windows 10/11 optimizer for gaming: 180+ registry and servi
 
 ## Results
 
-<img src="docs/readme/stats.png" alt="−26% processes, −31% services, −402 MB RAM" width="100%">
+<img src="docs/readme/stats.png?v=3" alt="−26% processes, −31% services, −402 MB RAM" width="100%">
 
 Same PC (Ryzen 5 5600 + GTX 1650), stock Windows 11 vs Windows 11 after VOID TWEAKS. Metrics taken 3 minutes after boot.
 
@@ -36,9 +36,9 @@ Same PC (Ryzen 5 5600 + GTX 1650), stock Windows 11 vs Windows 11 after VOID TWE
 
 ## Features
 
-<img src="docs/readme/features.png" alt="VOIDTWEAKS features" width="100%">
+<img src="docs/readme/features.png?v=3" alt="VOIDTWEAKS features" width="100%">
 
-<img src="docs/readme/screenshot.png" alt="VOIDTWEAKS app window" width="100%">
+<img src="docs/readme/screenshot.png?v=3" alt="VOIDTWEAKS app window" width="100%">
 
 ## Safety and rollback
 
