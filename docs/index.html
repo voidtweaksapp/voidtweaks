@@ -624,6 +624,113 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
   .nav-right{gap:8px}
   #nav .nav-right a.icon-btn{display:none}
 }
+
+/* ---------- compact mobile: меньше вертикальной прокрутки ---------- */
+@media (max-width:640px){
+  section{padding:40px 0}
+  h2{margin-bottom:8px}
+  .sub{font-size:13.5px;line-height:1.45;margin-top:8px}
+
+  /* hero: убираем лишнюю высоту у макета */
+  #hero{padding:calc(var(--nav-h) + 24px) 0 36px}
+  .hero-grid{gap:24px}
+  #hero h1{margin:14px 0 10px}
+  .hero-sub{font-size:14px;line-height:1.45;margin-bottom:18px}
+  .hero-cta{gap:8px;margin-bottom:14px}
+  .hero-meta{font-size:12px;margin-bottom:10px}
+  .trust{gap:5px 12px}
+  .trust span{font-size:11.5px}
+  .mock-side,.mock-stats{display:none}
+  .mock-body{min-height:0}
+  .mock-main{padding:12px}
+  .metrics{gap:6px}
+  .metric{padding:8px}
+  .metric small{display:none}
+  .fchip{font-size:11px;padding:6px 10px}
+
+  /* результаты: 3 колонки и компактные строки */
+  .fps-panel{padding:14px 12px;margin-top:18px}
+  .fps-row{grid-template-columns:80px minmax(0,1fr) 48px;gap:8px;padding:8px 0}
+  .fps-name{font-size:11.5px}
+  .fps-delta{font-size:11px;justify-self:end;white-space:nowrap}
+  .fps-note,.fps-honest{font-size:11.5px;line-height:1.45}
+  .stats{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+  .stat{padding:10px 4px}
+  .stat .num{font-size:20px}
+  .stat small{font-size:10.5px;line-height:1.25}
+
+  /* возможности: горизонтальная лента вместо длинного столбца */
+  .bento{display:flex;overflow-x:auto;gap:10px;margin-top:20px;padding:2px 2px 8px;scroll-snap-type:x mandatory;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .bento::-webkit-scrollbar{display:none}
+  .bcard,.bcard.sp2{flex:0 0 84%;grid-column:auto;scroll-snap-align:start;padding:16px}
+  .bicon{width:34px;height:34px;margin-bottom:10px}
+  .bcard h3{font-size:14px}
+  .bcard p{font-size:12px;line-height:1.45;margin-bottom:10px}
+  .offlist span{font-size:11px}
+
+  /* демо: компактнее строки */
+  .demo-panel{padding:14px 12px;margin-top:18px}
+  .demo-top{gap:8px;margin-bottom:12px}
+  .demo-count{font-size:12px}
+  .tgrid{gap:6px}
+  .trow{padding:8px 10px;gap:8px}
+  .trow .tt b{font-size:12.5px}
+  .trow .tt small{font-size:10.5px;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .demo-hint{font-size:11px;margin-top:10px}
+
+  /* «как это работает»: сетка 2×2 вместо четырёх карточек в столбец */
+  .how-grid{display:block;margin-top:20px}
+  .how-visual{display:none}
+  .steps{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .steps::before{display:none}
+  .step{flex-direction:column;gap:8px;padding:12px}
+  .step-num{width:28px;height:28px;font-size:12px}
+  .step h3{font-size:13px;margin-bottom:3px}
+  .step p{font-size:11.5px;line-height:1.4;margin-bottom:0}
+
+  /* тарифы: свайп вместо двух карточек во всю высоту */
+  .price-grid{display:flex;overflow-x:auto;gap:10px;margin-top:20px;padding:14px 2px 8px;scroll-snap-type:x mandatory;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .price-grid::-webkit-scrollbar{display:none}
+  .plan{flex:0 0 86%;padding:18px;scroll-snap-align:start}
+  .plan-price{font-size:36px}
+  .plan ul{gap:7px;margin-bottom:18px}
+  .plan li{font-size:12.5px}
+  .cmp{padding:0 10px;margin-top:18px}
+  .cmp table{font-size:12px}
+  .cmp th{font-size:10.5px;padding:10px 4px}
+  .cmp td{padding:8px 4px}
+  .cmp-title{font-size:13px;padding:12px 4px 2px}
+  .pay-row{margin-top:16px}
+
+  /* сообщество: свайп */
+  .rev-grid{display:flex;overflow-x:auto;gap:10px;margin-top:20px;padding:2px 2px 8px;scroll-snap-type:x mandatory;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .rev-grid::-webkit-scrollbar{display:none}
+  .rev{flex:0 0 84%;padding:16px;scroll-snap-align:start}
+  .cm-mail{font-size:12px;margin-top:12px}
+
+  /* FAQ и требования */
+  .faq-list{margin-top:18px;gap:6px}
+  .fq{padding:13px 14px;font-size:13px;gap:10px}
+  .fa p{padding:0 14px 14px;font-size:12.5px}
+  .faq-ask{margin-top:14px;font-size:12.5px}
+  .req-grid{grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+  .req{padding:12px}
+  .req h3{font-size:11px;margin-bottom:10px}
+  .req .rrow{font-size:10.5px;gap:4px;padding:5px 0}
+  .req-note{font-size:11.5px;margin-top:12px}
+
+  /* подвал: 2 колонки */
+  footer{padding:30px 0 18px}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:16px 14px;margin-bottom:20px}
+  .ft-brand{grid-column:1/-1}
+  .ft-brand p{font-size:12px;margin-top:8px}
+  .ft-col h4{font-size:10px;margin-bottom:8px}
+  .ft-col a,.ft-col button{font-size:12px;padding:3px 0}
+  .ft-bottom{font-size:11px;padding-top:14px}
+}
 </style>
 </head>
 <body data-zone="mono">
