@@ -18,6 +18,11 @@ const API_PATHS = new Set([
   '/api/admin/data',
   '/api/admin/license'
 ]);
+// Пути для десктопного приложения: оно ходит без Origin, поэтому проверка
+// Origin к ним не применяется. Разрешён только POST.
+const APP_PATHS = new Set([
+  '/api/license/check'
+]);
 const ALLOWED_METHODS = new Set(['GET', 'HEAD', 'POST']);
 const MAX_BODY_BYTES = 16 * 1024;
 
@@ -86,17 +91,24 @@ export default {
       });
     }
 
-    if (!API_PATHS.has(url.pathname)) {
+    const isAppPath = APP_PATHS.has(url.pathname);
+    if (!API_PATHS.has(url.pathname) && !isAppPath) {
       return json({ error: 'not_found' }, 404, cors);
     }
 
-    // API используется только сайтом: запросы с чужим Origin не пускаем.
-    if (!isAllowedOrigin(origin)) {
-      return json({ error: 'forbidden_origin' }, 403, cors);
-    }
+    if (isAppPath) {
+      if (request.method !== 'POST') {
+        return json({ error: 'method_not_allowed' }, 405, cors);
+      }
+    } else {
+      // API используется только сайтом: запросы с чужим Origin не пускаем.
+      if (!isAllowedOrigin(origin)) {
+        return json({ error: 'forbidden_origin' }, 403, cors);
+      }
 
-    if (!ALLOWED_METHODS.has(request.method)) {
-      return json({ error: 'method_not_allowed' }, 405, cors);
+      if (!ALLOWED_METHODS.has(request.method)) {
+        return json({ error: 'method_not_allowed' }, 405, cors);
+      }
     }
 
     const declaredLength = Number(request.headers.get('Content-Length') || 0);
