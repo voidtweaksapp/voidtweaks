@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/readme/hero.png" alt="VOIDTWEAKS – бесплатный оптимизатор Windows 10 / 11" width="100%">
+<img src="docs/readme/hero.png?v=3" alt="VOIDTWEAKS – бесплатный оптимизатор Windows 10 / 11" width="100%">
 
 <br><br>
 
