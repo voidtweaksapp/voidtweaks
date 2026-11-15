@@ -28,7 +28,7 @@ VOIDTWEAKS – бесплатный оптимизатор Windows 10/11: 180+ �
 
 ## Что даёт
 
-<img src="docs/readme/stats.png" alt="−26% процессов, −31% служб, −402 МБ ОЗУ" width="100%">
+<img src="docs/readme/stats.png?v=2" alt="−26% процессов, −31% служб, −402 МБ ОЗУ" width="100%">
 
 Один и тот же ПК (Ryzen 5 5600 + GTX 1650), обычная Windows 11 против Windows 11 после VOID TWEAKS. Метрики сняты через 3 минуты после загрузки Windows.
 
@@ -36,9 +36,9 @@ VOIDTWEAKS – бесплатный оптимизатор Windows 10/11: 180+ �
 
 ## Возможности
 
-<img src="docs/readme/features.png" alt="Возможности VOIDTWEAKS" width="100%">
+<img src="docs/readme/features.png?v=2" alt="Возможности VOIDTWEAKS" width="100%">
 
-<img src="docs/readme/screenshot.png" alt="Окно VOIDTWEAKS" width="100%">
+<img src="docs/readme/screenshot.png?v=2" alt="Окно VOIDTWEAKS" width="100%">
 
 ## Безопасность и откат
 
