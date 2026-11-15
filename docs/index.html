@@ -435,7 +435,7 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
 .dlg-x{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:var(--t3);border:1px solid var(--brd);transition:.2s}
 .dlg-x:hover{color:#fff;border-color:rgba(255,255,255,.4)}
 .dlg-x svg{width:15px;height:15px}
-.dlg-head{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+.dlg-head{display:flex;align-items:center;gap:14px;margin-bottom:6px;padding-right:42px}
 .dlg-head .logo-v{width:44px;height:44px;border-radius:12px}
 .dlg-head h3{font-size:17px;font-weight:700}
 .dlg-meta{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
@@ -448,7 +448,7 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
 .copy-btn svg{width:12px;height:12px}
 .sha-val{font-family:ui-monospace,'Cascadia Mono',Consolas,monospace;font-size:11.5px;color:#d4d4d4;word-break:break-all;line-height:1.5}
 .ps-hint{margin-top:10px;font-size:11px;color:var(--t3)}
-.ps-hint code{display:block;margin-top:5px;font-family:ui-monospace,Consolas,monospace;font-size:11px;color:#c4c4c4;background:rgba(255,255,255,.05);padding:7px 9px;border-radius:7px;word-break:break-all}
+.ps-hint code{display:block;margin-top:5px;font-family:ui-monospace,Consolas,monospace;font-size:11px;color:#c4c4c4;background:rgba(255,255,255,.05);padding:7px 9px;border-radius:7px;white-space:pre;overflow-x:auto;word-break:normal}
 .smartscreen{display:flex;gap:10px;padding:12px 14px;border-radius:11px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);font-size:12px;color:var(--t2);margin-bottom:16px}
 .smartscreen svg{width:16px;height:16px;flex:none;color:#d4d4d4;margin-top:1px}
 .smartscreen b{color:#fff}
@@ -598,7 +598,9 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
   .fps-row{grid-template-columns:1fr;gap:8px}
   .fps-delta{justify-self:start}
   .metrics{grid-template-columns:repeat(2,1fr)}
-  .mock-body{grid-template-columns:1fr}
+  .mock-body{grid-template-columns:minmax(0,1fr)}
+  .mock-main,.mock-side{min-width:0}
+  .mock-head{flex-wrap:wrap;row-gap:2px}
   .mock-side{flex-direction:row;border-right:0;border-bottom:1px solid rgba(255,255,255,.08);overflow-x:auto}
   .mock-side span{white-space:nowrap}
   .mock-stats{grid-template-columns:repeat(2,1fr)}
@@ -606,7 +608,8 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
   .fchip.f1{right:4px;top:-14px}
   .fchip.f2{left:4px}
   .demo-actions{margin-left:0;width:100%}
-  .demo-actions .btn{flex:1}
+  .demo-actions{flex-wrap:wrap}
+  .demo-actions .btn{flex:1 1 140px;min-width:0}
   .stats{grid-template-columns:1fr}
   .cmp{padding:6px 14px}
   .cmp th:nth-child(2),.cmp th:nth-child(3),.cmp td:nth-child(2),.cmp td:nth-child(3){width:56px}
@@ -614,6 +617,12 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
   .hero-cta .btn{flex:1;justify-content:center}
   .ptabs button{font-size:11px}
   .overlay{padding-top:3vh}
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .nav-in{padding:0 16px;gap:10px}
+  .logo{font-size:13px;gap:8px;min-width:0}
+  .logo-v{width:28px;height:28px;border-radius:8px}
+  .nav-right{gap:8px}
+  #nav .nav-right a.icon-btn{display:none}
 }
 </style>
 </head>
