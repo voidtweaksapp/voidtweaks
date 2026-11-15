@@ -12,9 +12,11 @@ Only the API routes used by the site are proxied (`/api/checkout`, `/api/order`,
 as a pre-warm request. Other paths return 404, so the Worker cannot be used as
 an open proxy.
 
-Desktop clients have no `Origin` header, so `/api/license/check` is exposed
-separately: `POST` only, without the origin check. The backend rate-limits it
-per client IP (the Worker forwards `CF-Connecting-IP`).
+Desktop clients have no `Origin` header, so two account routes are exposed
+separately: `POST /api/license/check` and `GET /api/account/keys`. The backend
+rate-limits license checks per client IP (the Worker forwards
+`CF-Connecting-IP`), and the keys route still requires the user's Supabase
+access token.
 
 ## Deploy
 

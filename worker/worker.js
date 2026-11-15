@@ -19,8 +19,14 @@ const API_PATHS = new Set([
   '/api/admin/license'
 ]);
 // Пути для десктопного приложения: оно ходит без Origin, поэтому проверка
-// Origin к ним не применяется. Разрешён только POST.
+// Origin к ним не применяется. Ключи аккаунта защищены Bearer-токеном Supabase,
+// license/check — ключом и HWID.
 const APP_PATHS = new Set([
+  '/api/license/check',
+  '/api/account/keys'
+]);
+// Проверка лицензии принимает только POST; список ключей аккаунта — GET.
+const APP_POST_ONLY = new Set([
   '/api/license/check'
 ]);
 const ALLOWED_METHODS = new Set(['GET', 'HEAD', 'POST']);
@@ -97,7 +103,10 @@ export default {
     }
 
     if (isAppPath) {
-      if (request.method !== 'POST') {
+      if (APP_POST_ONLY.has(url.pathname) && request.method !== 'POST') {
+        return json({ error: 'method_not_allowed' }, 405, cors);
+      }
+      if (!ALLOWED_METHODS.has(request.method)) {
         return json({ error: 'method_not_allowed' }, 405, cors);
       }
     } else {
