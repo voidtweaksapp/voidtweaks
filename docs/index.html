@@ -2,7 +2,11 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://voidtweaks-api.voidtweaks.workers.dev https://mzkvqlbcrxaibpizuuuk.supabase.co https://cloudflareinsights.com; base-uri 'none'; object-src 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-attr 'none'; frame-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://voidtweaks-api.voidtweaks.workers.dev https://mzkvqlbcrxaibpizuuuk.supabase.co https://cloudflareinsights.com; base-uri 'none'; object-src 'none'; form-action 'self'">
+<meta http-equiv="Referrer-Policy" content="no-referrer">
+<script>
+(function(){try{if(window.top!==window.self){window.top.location=window.self.location}}catch(e){document.documentElement.style.display='none'}})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VOID TWEAKS — оптимизация Windows 10/11 для игр: больше FPS, меньше задержек</title>
 <meta name="description" content="VOID TWEAKS отключает телеметрию и лишние службы, настраивает Windows 10/11 под игры и откатывает любое изменение в один клик. Бесплатно навсегда. PRO от 99 ₽ разово.">
@@ -2120,7 +2124,7 @@ Object.assign(D,{
   "acct.errCred":["Неверный email или пароль.","Wrong email or password."],
   "acct.errConfirm":["Email ещё не подтверждён. Проверьте почту.","Email is not confirmed yet. Check your inbox."],
   "acct.errExists":["Аккаунт с таким email уже существует.","An account with this email already exists."],
-  "acct.errPass":["Пароль слишком короткий — минимум 6 символов.","Password is too short — at least 6 characters."],
+  "acct.errPass":["Пароль слишком короткий — минимум 8 символов.","Password is too short — at least 8 characters."],
   "acct.errMatch":["Пароли не совпадают.","Passwords do not match."],
   "acct.errRate":["Слишком много попыток. Подождите минуту.","Too many attempts. Wait a minute."],
   "acct.errNet":["Не удалось связаться с сервером. Проверьте интернет.","Cannot reach the server. Check your connection."],
@@ -2362,6 +2366,12 @@ function payCloseAccount(){
   if(payAcctOpener&&payAcctOpener.focus)try{payAcctOpener.focus()}catch(e){}
 }
 function payAfterAuth(){
+  var pendingOrder=payReadOrder();
+  if(pendingOrder){
+    payCloseAccount();
+    payPollOrder(pendingOrder,false);
+    return;
+  }
   if(payPendingPlan){
     var p=payPendingPlan;payPendingPlan='';
     payCloseAccount();
@@ -2438,7 +2448,15 @@ async function payPollOrder(token,silent){
   if(!token)return;
   payStoreOrder(token);
   clearTimeout(payPollTimer);
-  if(!silent)payOrderWait();
+  if(!silent){
+    var s=await payGetSession();
+    if(!s){
+      await payOpenAccount();
+      paySetMsg(t('acct.needLogin'),'info');
+      return;
+    }
+    payOrderWait();
+  }
   var deadline=Date.now()+30000,netFail=0;
   async function tick(){
     if(Date.now()>deadline){
@@ -2446,8 +2464,10 @@ async function payPollOrder(token,silent){
       return;
     }
     try{
-      var res=await payFetch(PAY_API+'/api/order?token='+encodeURIComponent(token),{},20000);
-      var d=await payJson(res);
+      // Ключ по заказу отдаёт только сервер после проверки Supabase-сессии
+      // и владельца заказа. Токен из URL сам по себе больше не достаточно.
+      var out=await payApi('/api/order?token='+encodeURIComponent(token),{},20000);
+      var res=out.r,d=out.d;
       if(res.status===404){if(!silent)payOrderError(t('ord.error'),t('ord.notFound'));return}
       if(res.status===409){if(!silent)payOrderError(t('ord.error'),t('ord.support'));return}
       if(res.status===429||res.status>=500){netFail++;if(netFail>=3){if(!silent)payOrderError(t('ord.slow'),t('ord.slowSub'));return}payPollTimer=setTimeout(tick,3000);return}
@@ -2456,6 +2476,10 @@ async function payPollOrder(token,silent){
       if(d&&d.status==='error'){if(!silent)payOrderError(t('ord.error'),t('ord.support'));return}
       netFail=0;payPollTimer=setTimeout(tick,3000);
     }catch(e){
+      if(e&&e.payAuth){
+        if(!silent){payCloseOrder();await payOpenAccount();paySetMsg(t('acct.needLogin'),'info')}
+        return;
+      }
       netFail++;
       if(netFail>=3){if(!silent)payOrderError(t('ord.error'),t('ord.netErr'));return}
       payPollTimer=setTimeout(tick,3000);
@@ -2488,7 +2512,7 @@ async function payLogin(email,password,btn){
 }
 async function payRegister(email,password,password2,btn){
   if(password!==password2){paySetMsg(t('acct.errMatch'),'err');return}
-  if(password.length<6){paySetMsg(t('acct.errPass'),'err');return}
+  if(password.length<8){paySetMsg(t('acct.errPass'),'err');return}
   payBtnBusy(btn,true);
   try{
     var dir=location.origin+location.pathname.replace(/[^/]*$/,'');
@@ -2522,7 +2546,17 @@ async function payBoot(){
   await payGetSession();
   var params=new URLSearchParams(location.search);
   var qOrder=params.get('order');
-  if(qOrder){payPollOrder(qOrder);return}
+  if(qOrder){
+    payStoreOrder(qOrder);
+    // Токен заказа больше не должен оставаться в истории/Referer.
+    try{
+      var clean=new URL(location.href);
+      clean.searchParams.delete('order');
+      history.replaceState(null,'',clean.pathname+(clean.search||'')+clean.hash);
+    }catch(e){}
+    payPollOrder(qOrder);
+    return;
+  }
   var savedOrder=payReadOrder();
   if(savedOrder)payPollOrder(savedOrder,true);
   var buy=params.get('buy');
