@@ -2375,6 +2375,16 @@ function payAddKeyMsg(text,kind){
   box.className='acct-msg'+(text?' show '+(kind||'info'):'');
   box.textContent=text||'';
 }
+function payFormatKeyInput(el){
+  var raw=(el.value||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,16);
+  var out=raw.replace(/(.{4})(?=.)/g,'$1-');
+  if(el.value===out)return;
+  var caret=el.selectionStart||0;
+  var before=(el.value.slice(0,caret).toUpperCase().match(/[A-Z0-9]/g)||[]).length;
+  el.value=out;
+  var pos=before+Math.floor(Math.max(0,before-1)/4);
+  try{el.setSelectionRange(pos,pos)}catch(e){}
+}
 function paySetTab(login){
   var lf=$('#acctLoginForm'),rf=$('#acctRegForm'),tl=$('#acctTabLogin'),tr=$('#acctTabReg');
   if(!lf||!rf)return;
@@ -2760,17 +2770,21 @@ $('#acctKeys').addEventListener('click',function(e){
 function fallbackCopy(txt){
   try{var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta)}catch(e){}
 }
+var acctAddKeyInput=$('#acctAddKeyInput');
+if(acctAddKeyInput)acctAddKeyInput.addEventListener('input',function(){payFormatKeyInput(this)});
 var acctAddKeyForm=$('#acctAddKeyForm');
 if(acctAddKeyForm){
   acctAddKeyForm.addEventListener('submit',async function(e){
     e.preventDefault();
     var input=$('#acctAddKeyInput'),btn=$('#acctAddKeyBtn');
-    var key=(input.value||'').trim().toUpperCase();
-    if(!/^[A-Z0-9]{4}(-[A-Z0-9]{4}){3}$/.test(key)){
+    var key=(input.value||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+    if(!/^[A-Z0-9]{16}$/.test(key)){
       payAddKeyMsg(t('acct.addKeyFormat'),'err');
       input.focus();
       return;
     }
+    key=key.replace(/(.{4})(?=.)/g,'$1-');
+    input.value=key;
     btn.disabled=true;
     payAddKeyMsg(t('acct.addKeyWait'),'info');
     try{
