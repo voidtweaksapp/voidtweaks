@@ -100,6 +100,7 @@ button { cursor: pointer; }
 .btn-lg { height: 52px; padding: 0 26px; font-size: 15px; }
 .btn-block { width: 100%; }
 .btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn[aria-busy="true"] { opacity: .85; cursor: wait; }
 
 /* ---------- layout ---------- */
 .account { padding: 56px 0 80px; }
@@ -133,6 +134,20 @@ button { cursor: pointer; }
 .form-msg.info { background: rgba(255,255,255,.04); border: 1px solid var(--line-2); color: var(--text-2); }
 .link-btn { display: inline; padding: 0; border: 0; background: none; color: var(--text-2); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
 .link-btn:hover { color: #fff; }
+.link-btn:disabled { color: var(--text-3); opacity: .85; cursor: default; }
+.pass-field { position: relative; }
+.pass-field input { padding-right: 46px; }
+.eye-btn { position: absolute; right: 7px; bottom: 7px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 8px; background: transparent; color: var(--text-3); cursor: pointer; transition: color .15s ease, background-color .15s ease; }
+.eye-btn:hover { color: #fff; background: rgba(255,255,255,.06); }
+.eye-btn:focus-visible { outline: 2px solid #52525B; outline-offset: 1px; }
+.eye-btn svg { width: 18px; height: 18px; }
+.eye-btn .eye-off { display: none; }
+.eye-btn.is-on { color: #fff; }
+.eye-btn.is-on .eye-open { display: none; }
+.eye-btn.is-on .eye-off { display: block; }
+.btn-spin { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(9,9,11,.25); border-top-color: currentColor; border-radius: 50%; animation: btnspin .7s linear infinite; }
+@keyframes btnspin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .btn-spin { animation-duration: 1.6s; } }
 .auth-alt { margin-top: 18px; text-align: center; font-size: 13px; color: var(--text-3); }
 
 /* ---------- social auth ---------- */
@@ -374,6 +389,10 @@ body::before {
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.7"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 6.1A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6a17.6 17.6 0 0 1-3.4 3.9"/><path d="M6.4 6.9C3.5 8.6 2.5 12 2.5 12S6 18 12 18c1.3 0 2.5-.3 3.6-.8"/></symbol>
+</svg>
 
 <header class="nav">
   <div class="container nav-inner">
@@ -437,29 +456,33 @@ body::before {
       <form id="loginForm" autocomplete="on">
         <div class="field">
           <label for="loginEmail">Email</label>
-          <input id="loginEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
+          <input id="loginEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@voidtweaks.app" required />
         </div>
-        <div class="field">
+        <div class="field pass-field">
           <label for="loginPassword">Пароль</label>
           <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required />
+          <button type="button" class="eye-btn" data-eye="loginPassword" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
         </div>
         <button type="submit" class="btn btn-primary btn-block btn-lg" id="loginBtn">Войти</button>
         <div class="form-msg" id="loginMsg" role="status" aria-live="polite"></div>
         <p class="form-note"><button type="button" class="link-btn" id="forgotBtn">Забыли пароль?</button></p>
+        <p class="form-note" id="resendNote" hidden><button type="button" class="link-btn" id="resendBtn">Не пришло письмо? Отправить ещё раз</button></p>
       </form>
 
       <form id="registerForm" autocomplete="on" hidden>
         <div class="field">
           <label for="regEmail">Email</label>
-          <input id="regEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required />
+          <input id="regEmail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@voidtweaks.app" required />
         </div>
-        <div class="field">
+        <div class="field pass-field">
           <label for="regPassword">Пароль</label>
           <input id="regPassword" name="password" type="password" autocomplete="new-password" placeholder="Минимум 8 символов" minlength="8" required />
+          <button type="button" class="eye-btn" data-eye="regPassword" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
         </div>
-        <div class="field">
+        <div class="field pass-field">
           <label for="regPassword2">Повторите пароль</label>
           <input id="regPassword2" name="password2" type="password" autocomplete="new-password" placeholder="Ещё раз" minlength="6" required />
+          <button type="button" class="eye-btn" data-eye="regPassword2" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
         </div>
         <button type="submit" class="btn btn-primary btn-block btn-lg" id="registerBtn">Создать аккаунт</button>
         <div class="form-msg" id="registerMsg" role="status" aria-live="polite"></div>
@@ -474,9 +497,10 @@ body::before {
       <h2 id="recoveryTitle" style="margin:0 0 8px;font-size:22px;">Новый пароль</h2>
       <p style="margin:0 0 20px;color:var(--text-2);font-size:14px;line-height:1.5;">Придумайте новый пароль для входа.</p>
       <form id="recoveryForm">
-        <div class="field">
+        <div class="field pass-field">
           <label for="newPassword">Новый пароль</label>
           <input id="newPassword" type="password" autocomplete="new-password" placeholder="Минимум 8 символов" minlength="8" required />
+          <button type="button" class="eye-btn" data-eye="newPassword" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
         </div>
         <button type="submit" class="btn btn-primary btn-block btn-lg" id="recoveryBtn">Сохранить пароль</button>
         <div class="form-msg" id="recoveryMsg" role="status" aria-live="polite"></div>
@@ -681,13 +705,23 @@ body::before {
 
   function setBusy(btn, busy, label) {
     if (!btn) return;
+    let spin = btn.querySelector('.btn-spin');
     if (busy) {
-      btn.dataset.label = btn.textContent;
+      if (!btn.dataset.label) btn.dataset.label = btn.textContent;
       btn.textContent = label || 'Подождите…';
+      if (!spin) {
+        spin = document.createElement('span');
+        spin.className = 'btn-spin';
+        spin.setAttribute('aria-hidden', 'true');
+        btn.appendChild(spin);
+      }
       btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
     } else {
+      if (spin) spin.remove();
       btn.textContent = btn.dataset.label || btn.textContent;
       btn.disabled = false;
+      btn.removeAttribute('aria-busy');
     }
   }
 
@@ -1155,6 +1189,20 @@ body::before {
   tabLogin.addEventListener('click', () => setTab('login'));
   tabRegister.addEventListener('click', () => setTab('register'));
 
+  // Show / hide password
+  document.querySelectorAll('[data-eye]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = $(btn.dataset.eye);
+      if (!input) return;
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.classList.toggle('is-on', show);
+      btn.setAttribute('aria-pressed', show ? 'true' : 'false');
+      btn.setAttribute('aria-label', show ? 'Скрыть пароль' : 'Показать пароль');
+      input.focus();
+    });
+  });
+
   // Social sign-in (Google + Yandex via Supabase custom provider)
   document.querySelectorAll('[data-oauth]').forEach(btn => {
     btn.addEventListener('click', async () => {
@@ -1255,19 +1303,49 @@ body::before {
     }
   });
 
-  // Forgot password
-  $('forgotBtn').addEventListener('click', async () => {
-    const email = ($('loginEmail').value || prompt('Введите email, указанный при регистрации:') || '').trim();
-    if (!email) return;
+  // Forgot password + resend
+  let resetEmail = '';
+  let resendTimer = 0;
+  const RESEND_TEXT = 'Не пришло письмо? Отправить ещё раз';
+  function armResend(email) {
+    resetEmail = email;
+    const note = $('resendNote'), btn = $('resendBtn');
+    if (!note || !btn) return;
+    note.hidden = false;
+    let left = 30;
+    clearInterval(resendTimer);
+    const paint = () => {
+      btn.disabled = left > 0;
+      btn.textContent = left > 0 ? `Отправить повторно через ${left} с` : RESEND_TEXT;
+    };
+    paint();
+    resendTimer = setInterval(() => {
+      left--;
+      if (left <= 0) { clearInterval(resendTimer); resendTimer = 0; }
+      paint();
+    }, 1000);
+  }
+  async function sendReset(email, btn) {
+    email = String(email || '').trim();
+    if (!email) {
+      msg(loginMsg, 'Введите email, указанный при регистрации.', 'err');
+      $('loginEmail').focus();
+      return;
+    }
     clearMsg(loginMsg);
+    if (btn) { btn.disabled = true; btn.textContent = 'Отправляем…'; }
     try {
       const { error } = await withTimeout(supabase.auth.resetPasswordForEmail(email, { redirectTo: ACCOUNT_URL }));
       if (error) throw error;
-      msg(loginMsg, 'Если такой email зарегистрирован, мы отправили ссылку для сброса пароля.', 'ok');
+      msg(loginMsg, 'Если такой email зарегистрирован, мы отправили ссылку для сброса пароля. Проверьте «Входящие» и «Спам».', 'ok');
+      armResend(email);
     } catch (err) {
       msg(loginMsg, authError(err), 'err');
+      if (btn) { btn.disabled = false; btn.textContent = RESEND_TEXT; }
     }
-  });
+  }
+  $('forgotBtn').addEventListener('click', () => sendReset($('loginEmail').value));
+  $('resendBtn').addEventListener('click', () => sendReset(resetEmail || $('loginEmail').value, $('resendBtn')));
 
   // Recovery form
   recoveryForm.addEventListener('submit', async e => {

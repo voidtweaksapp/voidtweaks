@@ -491,10 +491,31 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
 .acct-link{font-size:12px;color:var(--t3);text-align:center;margin-top:2px}
 .acct-link:hover{color:#fff}
 .acct-msg{display:none;padding:10px 12px;border-radius:9px;font-size:12.5px;line-height:1.45;border:1px solid transparent}
-.acct-msg.show{display:block}
+.acct-msg.show{display:block;margin-bottom:14px}
 .acct-msg.info{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);color:var(--t2)}
 .acct-msg.ok{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.22);color:var(--t1)}
-.acct-msg.err{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.18);color:#d4d4d4;border-left:3px solid #737373}
+.acct-msg.err{background:rgba(248,113,113,.08);border-color:rgba(248,113,113,.24);color:#FECACA;border-left:3px solid #F87171}
+.acct-pass{position:relative}
+.acct-pass input{padding-right:46px}
+.acct-eye{position:absolute;right:6px;bottom:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:0;border-radius:8px;background:transparent;color:var(--t3);cursor:pointer;transition:color .15s,background .15s}
+.acct-eye:hover{color:#fff;background:rgba(255,255,255,.06)}
+.acct-eye:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:1px}
+.acct-eye svg{width:17px;height:17px}
+.acct-eye .eye-off{display:none}
+.acct-eye.is-on{color:#fff}
+.acct-eye.is-on .eye-open{display:none}
+.acct-eye.is-on .eye-off{display:block}
+.acct-terms{font-size:11.5px;line-height:1.55;color:var(--t3);text-align:center;margin:2px 0 0}
+.acct-terms a{color:#BDBDBD;text-decoration:underline;text-underline-offset:2px}
+.acct-terms a:hover{color:#fff}
+.acct-resend{display:block;margin:4px auto 0}
+.acct-resend[hidden]{display:none}
+.acct-resend:disabled{color:var(--t3);opacity:1;cursor:default;-webkit-text-fill-color:var(--t3)}
+.btn.is-busy{opacity:.8;cursor:wait}
+.btn-spinner{display:none;width:14px;height:14px;border:2px solid rgba(0,0,0,.25);border-top-color:#000;border-radius:50%;animation:btnspin .7s linear infinite}
+.btn.is-busy .btn-spinner{display:inline-block}
+@keyframes btnspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.btn-spinner{animation-duration:1.6s}}
 .acct-user{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;border:1px solid var(--brd);background:rgba(255,255,255,.035);margin-bottom:16px}
 .acct-avatar{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:#fff;color:#000;font-family:var(--disp);font-weight:800;font-size:15px;flex:none}
 .acct-user-info{min-width:0;flex:1}
@@ -1425,6 +1446,11 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
   </div>
 </div>
 
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.7"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M3 3l18 18"/><path d="M10.6 6.1A10.8 10.8 0 0 1 12 6c6 0 9.5 6 9.5 6a17.6 17.6 0 0 1-3.4 3.9"/><path d="M6.4 6.9C3.5 8.6 2.5 12 2.5 12S6 18 12 18c1.3 0 2.5-.3 3.6-.8"/></symbol>
+</svg>
+
 <!-- ============ ACCOUNT MODAL ============ -->
 <div class="overlay" id="acctModal" role="dialog" aria-modal="true" aria-labelledby="acctTitle">
   <div class="dialog glass acct-dialog">
@@ -1455,36 +1481,41 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
         <button class="acct-tab" id="acctTabReg" role="tab" aria-selected="false" data-i18n="acct.register">Создать аккаунт</button>
       </div>
 
+      <div class="acct-msg" id="acctMsg" role="status" aria-live="polite"></div>
+
       <form class="acct-form" id="acctLoginForm" autocomplete="on">
         <div class="acct-field">
           <label for="acctLoginEmail" data-i18n="acct.email">Email</label>
-          <input id="acctLoginEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required data-i18n-ph="acct.emailPh">
+          <input id="acctLoginEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@voidtweaks.app" required data-i18n-ph="acct.emailPh">
         </div>
-        <div class="acct-field">
+        <div class="acct-field acct-pass">
           <label for="acctLoginPass" data-i18n="acct.password">Пароль</label>
           <input id="acctLoginPass" type="password" autocomplete="current-password" placeholder="••••••••" required data-i18n-ph="acct.passPh">
+          <button type="button" class="acct-eye" data-eye="acctLoginPass" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
         </div>
-        <button class="btn btn-p" id="acctLoginBtn" type="submit"><span data-i18n="acct.login">Войти</span></button>
+        <button class="btn btn-p" id="acctLoginBtn" type="submit"><span data-btn-label data-i18n="acct.login">Войти</span><span class="btn-spinner" aria-hidden="true"></span></button>
         <button class="acct-link" id="acctForgot" type="button" data-i18n="acct.forgot">Забыли пароль?</button>
+        <button class="acct-link acct-resend" id="acctResend" type="button" hidden></button>
       </form>
 
       <form class="acct-form" id="acctRegForm" autocomplete="on" hidden>
         <div class="acct-field">
           <label for="acctRegEmail" data-i18n="acct.email">Email</label>
-          <input id="acctRegEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required data-i18n-ph="acct.emailPh">
+          <input id="acctRegEmail" type="email" inputmode="email" autocomplete="email" placeholder="you@voidtweaks.app" required data-i18n-ph="acct.emailPh">
         </div>
-        <div class="acct-field">
+        <div class="acct-field acct-pass">
           <label for="acctRegPass" data-i18n="acct.password">Пароль</label>
           <input id="acctRegPass" type="password" autocomplete="new-password" placeholder="••••••••" minlength="6" required data-i18n-ph="acct.passPh">
+          <button type="button" class="acct-eye" data-eye="acctRegPass" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
         </div>
-        <div class="acct-field">
+        <div class="acct-field acct-pass">
           <label for="acctRegPass2" data-i18n="acct.password2">Повторите пароль</label>
           <input id="acctRegPass2" type="password" autocomplete="new-password" placeholder="••••••••" minlength="6" required data-i18n-ph="acct.passPh">
+          <button type="button" class="acct-eye" data-eye="acctRegPass2" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
         </div>
-        <button class="btn btn-p" id="acctRegBtn" type="submit"><span data-i18n="acct.register">Создать аккаунт</span></button>
+        <button class="btn btn-p" id="acctRegBtn" type="submit"><span data-btn-label data-i18n="acct.register">Создать аккаунт</span><span class="btn-spinner" aria-hidden="true"></span></button>
+        <p class="acct-terms" data-i18n-html="acct.terms">Создавая аккаунт, вы принимаете <a href="offer.html">оферту</a> и <a href="privacy.html">политику конфиденциальности</a>.</p>
       </form>
-
-      <div class="acct-msg" id="acctMsg" role="status" aria-live="polite"></div>
     </div>
 
     <div id="acctDashView" hidden>
@@ -2132,8 +2163,13 @@ Object.assign(D,{
   "acct.oauthWait":["Переходим к входу…","Redirecting…"],
   "acct.oauthOff":["Этот способ входа пока не подключён. Войдите по email.","This sign-in method is not configured yet. Use email."],
   "acct.oauthErr":["Не удалось открыть вход через соцсеть. Попробуйте ещё раз или войдите по email.","Could not open social sign-in. Try again or use email."],
-  "acct.emailPh":["you@example.com","you@example.com"],"acct.passPh":["••••••••","••••••••"],
+  "acct.emailPh":["you@voidtweaks.app","you@voidtweaks.app"],"acct.passPh":["••••••••","••••••••"],
   "acct.forgot":["Забыли пароль?","Forgot password?"],"acct.logout":["Выйти","Sign out"],
+  "acct.showPass":["Показать пароль","Show password"],"acct.hidePass":["Скрыть пароль","Hide password"],
+  "acct.loggingIn":["Входим…","Signing in…"],"acct.creating":["Создаём…","Creating…"],"acct.sending":["Отправляем…","Sending…"],
+  "acct.resend":["Не пришло письмо? Отправить ещё раз","Didn't get the email? Send again"],
+  "acct.resendWait":["Отправить повторно через {s} с","Send again in {s}s"],
+  "acct.terms":["Создавая аккаунт, вы принимаете <a href='offer.html'>оферту</a> и <a href='privacy.html'>политику конфиденциальности</a>.","By creating an account you accept the <a href='offer.html'>offer</a> and <a href='privacy.html'>privacy policy</a>."],
   "acct.bound":["Ключи привязаны к аккаунту","Keys are linked to your account"],
   "acct.myKeys":["Мои ключи","My keys"],"acct.orders":["Заказы","Orders"],
   "acct.admin":["Панель управления","Admin panel"],
@@ -2143,7 +2179,7 @@ Object.assign(D,{
   "acct.sub":["Ключи привязаны к аккаунту и ПК по HWID.","Keys are linked to your account and PC by HWID."],
   "acct.needLogin":["Войдите, чтобы продолжить покупку.","Sign in to continue your purchase."],
   "acct.checkEmail":["Аккаунт создан. Подтвердите email по ссылке из письма, затем войдите.","Account created. Confirm your email, then sign in."],
-  "acct.resetSent":["Письмо для сброса пароля отправлено. Проверьте почту.","Password reset email sent. Check your inbox."],
+  "acct.resetSent":["Письмо для сброса отправлено. Проверьте «Входящие» и «Спам».","Password reset email sent. Check your inbox and spam folder."],
   "acct.errEmail":["Введите корректный email.","Enter a valid email."],
   "acct.errCred":["Неверный email или пароль.","Wrong email or password."],
   "acct.errConfirm":["Email ещё не подтверждён. Проверьте почту.","Email is not confirmed yet. Check your inbox."],
@@ -2540,18 +2576,29 @@ function payAuthError(e){
   if(/failed to fetch|network/i.test(m))return t('acct.errNet');
   return m||t('acct.errNet');
 }
-function payBtnBusy(btn,busy){if(!btn)return;btn.disabled=!!busy}
+function payBtnBusy(btn,busy,label){
+  if(!btn)return;
+  btn.disabled=!!busy;
+  btn.classList.toggle('is-busy',!!busy);
+  btn.setAttribute('aria-busy',busy?'true':'false');
+  var lab=btn.querySelector('[data-btn-label]');
+  if(!lab)return;
+  if(busy){btn._idleLabel=lab.textContent;if(label)lab.textContent=label}
+  else if(btn._idleLabel){lab.textContent=btn._idleLabel;btn._idleLabel=''}
+}
 async function payLogin(email,password,btn){
-  payBtnBusy(btn,true);
+  paySetMsg('');
+  payBtnBusy(btn,true,t('acct.loggingIn'));
   try{
     var data=await paySb('/auth/v1/token?grant_type=password',{email:email,password:password});
     paySaveSession(data);await payLoadUser();payAfterAuth();
   }catch(e){paySetMsg(payAuthError(e),'err')}finally{payBtnBusy(btn,false)}
 }
 async function payRegister(email,password,password2,btn){
+  paySetMsg('');
   if(password!==password2){paySetMsg(t('acct.errMatch'),'err');return}
   if(password.length<8){paySetMsg(t('acct.errPass'),'err');return}
-  payBtnBusy(btn,true);
+  payBtnBusy(btn,true,t('acct.creating'));
   try{
     var dir=location.origin+location.pathname.replace(/[^/]*$/,'');
     var data=await paySb('/auth/v1/signup?redirect_to='+encodeURIComponent(dir),{email:email,password:password});
@@ -2564,20 +2611,46 @@ async function payRegister(email,password,password2,btn){
     }
   }catch(e){paySetMsg(payAuthError(e),'err')}finally{payBtnBusy(btn,false)}
 }
+var payResetEmail='',payResendTimer=0;
+function payArmResend(email){
+  payResetEmail=email;
+  var b=$('#acctResend');if(!b)return;
+  b.hidden=false;
+  var left=30;
+  clearInterval(payResendTimer);
+  function paint(){
+    if(left>0){b.textContent=t('acct.resendWait').replace('{s}',left);b.disabled=true}
+    else{b.textContent=t('acct.resend');b.disabled=false}
+  }
+  paint();
+  payResendTimer=setInterval(function(){left--;if(left<=0){clearInterval(payResendTimer);payResendTimer=0}paint()},1000);
+}
+async function payForgot(email,btn){
+  email=String(email||'').trim();
+  if(!email){paySetMsg(t('acct.errEmail'),'err');var f=$('#acctLoginEmail');if(f)f.focus();return false}
+  var forgot=btn?null:$('#acctForgot');
+  if(forgot){forgot.disabled=true;forgot.textContent=t('acct.sending')}
+  if(btn){btn.disabled=true;btn.textContent=t('acct.sending')}
+  try{
+    var dir=location.origin+location.pathname.replace(/[^/]*$/,'');
+    await paySb('/auth/v1/recover?redirect_to='+encodeURIComponent(dir),{email:email});
+    paySetMsg(t('acct.resetSent'),'ok');
+    payArmResend(email);
+    return true;
+  }catch(e){
+    paySetMsg(payAuthError(e),'err');
+    if(btn){btn.disabled=false;btn.textContent=t('acct.resend')}
+    return false;
+  }finally{
+    if(forgot){forgot.disabled=false;forgot.textContent=t('acct.forgot')}
+  }
+}
 async function payLogout(){
   var s=await payGetSession();
   if(s&&s.access_token){
     try{await payFetch(PAY_SB+'/auth/v1/logout',{method:'POST',headers:{'apikey':PAY_KEY,'Authorization':'Bearer '+s.access_token}},10000)}catch(e){}
   }
   payClearSession();payShowAuth();toast('info',t('acct.logout'));
-}
-async function payForgot(email){
-  if(!email){paySetMsg(t('acct.errEmail'),'err');return}
-  try{
-    var dir=location.origin+location.pathname.replace(/[^/]*$/,'');
-    await paySb('/auth/v1/recover?redirect_to='+encodeURIComponent(dir),{email:email});
-    paySetMsg(t('acct.resetSent'),'ok');
-  }catch(e){paySetMsg(payAuthError(e),'err')}
 }
 async function payBoot(){
   var oauthSession=payParseHash();
@@ -2626,6 +2699,16 @@ $('#acctRegForm').addEventListener('submit',function(e){
   payRegister($('#acctRegEmail').value.trim(),$('#acctRegPass').value,$('#acctRegPass2').value,$('#acctRegBtn'));
 });
 $('#acctForgot').addEventListener('click',function(){payForgot($('#acctLoginEmail').value.trim())});
+$('#acctResend').addEventListener('click',function(){payForgot(payResetEmail||$('#acctLoginEmail').value.trim(),this)});
+$$('[data-eye]').forEach(function(b){b.addEventListener('click',function(){
+  var input=$('#'+b.getAttribute('data-eye'));if(!input)return;
+  var show=input.type==='password';
+  input.type=show?'text':'password';
+  b.classList.toggle('is-on',show);
+  b.setAttribute('aria-pressed',show?'true':'false');
+  b.setAttribute('aria-label',t(show?'acct.hidePass':'acct.showPass'));
+  input.focus();
+})});
 $('#acctLogout').addEventListener('click',payLogout);
 $('#acctKeys').addEventListener('click',function(e){
   var b=e.target.closest('[data-copy-key]');if(!b)return;
