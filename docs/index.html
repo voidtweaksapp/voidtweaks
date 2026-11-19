@@ -473,6 +473,13 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
 .acct-tabs{display:flex;gap:6px;padding:4px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid var(--brd);margin-bottom:18px}
 .acct-tab{flex:1;padding:9px 12px;border-radius:8px;font-size:13px;font-weight:600;color:var(--t3);transition:.2s}
 .acct-tab[aria-selected="true"]{background:#fff;color:#000}
+.acct-social{display:grid;gap:9px;margin-bottom:14px}
+.acct-social-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;height:44px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);color:#fff;font-size:13px;font-weight:600;transition:background .15s,border-color .15s}
+.acct-social-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.28)}
+.acct-social-btn svg,.acct-social-btn .social-ya{width:17px;height:17px;flex:0 0 auto}
+.social-ya{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#FC3F1D;color:#fff;font-size:10px;font-weight:800;line-height:1}
+.acct-or{display:flex;align-items:center;gap:10px;color:var(--t3);font-size:11.5px;margin:2px 0 14px}
+.acct-or::before,.acct-or::after{content:"";height:1px;flex:1;background:rgba(255,255,255,.1)}
 .acct-form{display:flex;flex-direction:column;gap:12px}
 .acct-form[hidden]{display:none!important}
 .acct-field{display:flex;flex-direction:column;gap:6px}
@@ -1431,6 +1438,18 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
     </div>
 
     <div id="acctAuthView">
+      <div class="acct-social">
+        <button type="button" class="acct-social-btn" data-oauth="google">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47a5.53 5.53 0 0 1-2.4 3.63v3h3.88c2.27-2.09 3.54-5.17 3.54-8.87z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.94-2.91l-3.88-3c-1.08.72-2.45 1.16-4.06 1.16-3.12 0-5.77-2.11-6.71-4.96H1.28v3.09A11.99 11.99 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.29 14.29a7.2 7.2 0 0 1 0-4.58V6.62H1.28a12 12 0 0 0 0 10.76l4.01-3.09z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0 7.7 0 3.99 2.47 1.28 6.62l4.01 3.09C6.23 6.86 8.88 4.75 12 4.75z"/></svg>
+          <span data-i18n="acct.google">Продолжить с Google</span>
+        </button>
+        <button type="button" class="acct-social-btn" data-oauth="custom:yandex">
+          <span class="social-ya" aria-hidden="true">Я</span>
+          <span data-i18n="acct.yandex">Продолжить с Яндексом</span>
+        </button>
+      </div>
+      <div class="acct-or"><span data-i18n="acct.or">или по почте</span></div>
+
       <div class="acct-tabs" role="tablist">
         <button class="acct-tab" id="acctTabLogin" role="tab" aria-selected="true" data-i18n="acct.login">Войти</button>
         <button class="acct-tab" id="acctTabReg" role="tab" aria-selected="false" data-i18n="acct.register">Создать аккаунт</button>
@@ -2108,6 +2127,8 @@ var paySession=null,payPendingPlan='',payOrderToken='',payPollTimer=0,payAcctOpe
 Object.assign(D,{
   "acct.login":["Войти","Sign in"],"acct.register":["Создать аккаунт","Create account"],
   "acct.email":["Email","Email"],"acct.password":["Пароль","Password"],"acct.password2":["Повторите пароль","Repeat password"],
+  "acct.google":["Продолжить с Google","Continue with Google"],"acct.yandex":["Продолжить с Яндексом","Continue with Yandex"],
+  "acct.or":["или по почте","or use email"],
   "acct.emailPh":["you@example.com","you@example.com"],"acct.passPh":["••••••••","••••••••"],
   "acct.forgot":["Забыли пароль?","Forgot password?"],"acct.logout":["Выйти","Sign out"],
   "acct.bound":["Ключи привязаны к аккаунту","Keys are linked to your account"],
@@ -2360,6 +2381,13 @@ async function payOpenAccount(){
   }
   setTimeout(function(){var f=$('#acctLoginEmail');if(f&&!$('#acctAuthView').hidden)f.focus()},80);
 }
+function payOAuth(provider){
+  if(!provider)return;
+  paySetMsg('');
+  var base=location.origin+location.pathname;
+  if(payPendingPlan)base+='?buy='+encodeURIComponent(payPendingPlan);
+  location.href=PAY_SB+'/auth/v1/authorize?provider='+encodeURIComponent(provider)+'&redirect_to='+encodeURIComponent(base);
+}
 function payCloseAccount(){
   $('#acctModal').classList.remove('open');
   if(!$('#ordModal').classList.contains('open'))document.body.classList.remove('locked');
@@ -2542,7 +2570,7 @@ async function payForgot(email){
   }catch(e){paySetMsg(payAuthError(e),'err')}
 }
 async function payBoot(){
-  payParseHash();
+  var oauthSession=payParseHash();
   await payGetSession();
   var params=new URLSearchParams(location.search);
   var qOrder=params.get('order');
@@ -2567,6 +2595,7 @@ async function payBoot(){
     return;
   }
   if(paySession&&paySession.access_token){await payLoadUser()}
+  if(oauthSession){await payOpenAccount()}
 }
 
 /* account listeners */
@@ -2577,6 +2606,7 @@ $('#acctModal').addEventListener('click',function(e){if(e.target===$('#acctModal
 $('#ordModal').addEventListener('click',function(e){if(e.target===$('#ordModal'))payCloseOrder()});
 $('#acctTabLogin').addEventListener('click',function(){paySetTab(true)});
 $('#acctTabReg').addEventListener('click',function(){paySetTab(false)});
+$$('[data-oauth]').forEach(function(b){b.addEventListener('click',function(){payOAuth(b.getAttribute('data-oauth'))})});
 $('#acctLoginForm').addEventListener('submit',function(e){
   e.preventDefault();
   payLogin($('#acctLoginEmail').value.trim(),$('#acctLoginPass').value,$('#acctLoginBtn'));

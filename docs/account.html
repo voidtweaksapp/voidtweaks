@@ -135,6 +135,17 @@ button { cursor: pointer; }
 .link-btn:hover { color: #fff; }
 .auth-alt { margin-top: 18px; text-align: center; font-size: 13px; color: var(--text-3); }
 
+/* ---------- social auth ---------- */
+.auth-social { display: grid; gap: 10px; }
+.social-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 48px; padding: 0 16px; border-radius: 11px; border: 1px solid var(--line-2); background: #0E0E11; color: #fff; font-size: 14px; font-weight: 600; transition: background-color .15s ease, border-color .15s ease, opacity .15s ease; }
+.social-btn:hover { background: #151518; border-color: #3F3F46; }
+.social-btn:disabled { opacity: .55; cursor: progress; }
+.social-btn svg, .social-btn .social-ya { width: 18px; height: 18px; flex: 0 0 auto; }
+.social-ya { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: #FC3F1D; color: #fff; font-size: 10.5px; font-weight: 800; line-height: 1; }
+.auth-divider { display: flex; align-items: center; gap: 12px; margin: 20px 0 18px; color: var(--text-3); font-size: 12px; }
+.auth-divider::before, .auth-divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.auth-social .form-msg { margin-top: 0; }
+
 /* ---------- dashboard ---------- */
 .dash-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
 .dash-user { min-width: 0; }
@@ -400,6 +411,21 @@ body::before {
     <!-- AUTH -->
     <section class="card auth-card" id="authPanel" aria-labelledby="authTitle">
       <h2 class="sr-only" id="authTitle">Вход и регистрация</h2>
+
+      <div class="auth-social">
+        <button type="button" class="social-btn" data-oauth="google">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47a5.53 5.53 0 0 1-2.4 3.63v3h3.88c2.27-2.09 3.54-5.17 3.54-8.87z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.94-2.91l-3.88-3c-1.08.72-2.45 1.16-4.06 1.16-3.12 0-5.77-2.11-6.71-4.96H1.28v3.09A11.99 11.99 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.29 14.29a7.2 7.2 0 0 1 0-4.58V6.62H1.28a12 12 0 0 0 0 10.76l4.01-3.09z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0 7.7 0 3.99 2.47 1.28 6.62l4.01 3.09C6.23 6.86 8.88 4.75 12 4.75z"/></svg>
+          <span>Продолжить с Google</span>
+        </button>
+        <button type="button" class="social-btn" data-oauth="custom:yandex">
+          <span class="social-ya" aria-hidden="true">Я</span>
+          <span>Продолжить с Яндексом</span>
+        </button>
+        <div class="form-msg" id="oauthMsg" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="auth-divider"><span>или по почте</span></div>
+
       <div class="auth-tabs" role="tablist" aria-label="Вход или регистрация">
         <button type="button" class="auth-tab" id="tabLogin" role="tab" aria-selected="true" aria-controls="loginForm">Вход</button>
         <button type="button" class="auth-tab" id="tabRegister" role="tab" aria-selected="false" aria-controls="registerForm">Регистрация</button>
@@ -576,6 +602,7 @@ body::before {
   const recoveryForm = $('recoveryForm');
   const recoveryMsg = $('recoveryMsg');
   const dashMsg = $('dashMsg');
+  const oauthMsg = $('oauthMsg');
 
   let currentSession = null;
   let profilePromise = null;
@@ -1124,6 +1151,32 @@ body::before {
   // Tabs
   tabLogin.addEventListener('click', () => setTab('login'));
   tabRegister.addEventListener('click', () => setTab('register'));
+
+  // Social sign-in (Google + Yandex via Supabase custom provider)
+  document.querySelectorAll('[data-oauth]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      clearMsg(oauthMsg);
+      const provider = btn.dataset.oauth;
+      const name = provider === 'google' ? 'Google' : provider === 'custom:yandex' ? 'Яндекс' : 'сервис';
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+      try {
+        const { error } = await withTimeout(supabase.auth.signInWithOAuth({
+          provider,
+          options: { redirectTo: authRedirect() }
+        }));
+        if (error) throw error;
+      } catch (err) {
+        btn.disabled = false;
+        btn.removeAttribute('aria-busy');
+        const text = String((err && err.message) || err || '');
+        const unavailable = /not enabled|not found|unsupported provider/i.test(text);
+        msg(oauthMsg, unavailable
+          ? 'Вход через ' + name + ' пока не подключён. Используйте вход по email.'
+          : 'Не удалось войти через ' + name + '. Попробуйте ещё раз или используйте email.', 'err');
+      }
+    });
+  });
 
   // Login
   loginForm.addEventListener('submit', async e => {
