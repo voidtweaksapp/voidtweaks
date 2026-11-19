@@ -552,6 +552,20 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
 .acct-order .s.pending{background:rgba(255,255,255,.12);color:var(--t1)}
 .acct-empty{padding:26px 16px;text-align:center;border:1px dashed var(--brd);border-radius:12px;color:var(--t3);font-size:13px;line-height:1.55}
 .acct-empty b{display:block;color:var(--t2);font-size:14px;margin-bottom:5px}
+.acct-add-key{margin-top:12px;padding:14px;border:1px solid var(--brd);border-radius:12px;background:rgba(255,255,255,.025)}
+.acct-add-key summary{display:flex;align-items:center;gap:7px;cursor:pointer;font-size:12.5px;font-weight:600;color:var(--t2);list-style:none}
+.acct-add-key summary::-webkit-details-marker{display:none}
+.acct-add-key summary::before{content:"+";width:12px;text-align:center;color:var(--t3);font-weight:700}
+.acct-add-key[open] summary::before{content:"−"}
+.acct-add-key form{display:flex;gap:8px;margin-top:10px}
+.acct-add-key input{flex:1;min-width:0;height:40px;padding:0 11px;border-radius:9px;border:1px solid var(--brd);background:rgba(0,0,0,.25);color:var(--t1);font-family:ui-monospace,'Cascadia Mono',Consolas,monospace;font-size:13px;letter-spacing:.04em;text-transform:uppercase;outline:none}
+.acct-add-key input:focus{border-color:rgba(255,255,255,.45)}
+.acct-add-key button{height:40px;padding:0 14px;border-radius:9px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:12.5px;font-weight:600;white-space:nowrap}
+.acct-add-key button:hover{background:rgba(255,255,255,.14)}
+.acct-add-key button:disabled{opacity:.6;cursor:wait}
+.acct-add-key .acct-msg{margin:8px 0 0}
+.acct-add-key .acct-msg.show{margin:8px 0 0}
+@media (max-width:560px){.acct-add-key form{flex-direction:column}.acct-add-key button{width:100%}}
 .acct-note{font-size:11px;color:var(--t3);line-height:1.5;margin-top:14px;text-align:center}
 .ord-card{max-width:500px;text-align:center}
 .ord-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;margin:2px auto 16px;border:1px solid var(--brd);background:rgba(255,255,255,.05)}
@@ -1536,6 +1550,14 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
       </a>
       <div class="acct-section" data-i18n="acct.myKeys">Мои ключи</div>
       <div class="acct-list" id="acctKeys"></div>
+      <details class="acct-add-key" id="acctAddKeyBox">
+        <summary data-i18n="acct.addKey">Добавить существующий ключ</summary>
+        <form id="acctAddKeyForm" autocomplete="off">
+          <input id="acctAddKeyInput" type="text" inputmode="text" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19" spellcheck="false" required>
+          <button type="submit" id="acctAddKeyBtn"><span data-btn-label data-i18n="acct.addKeyBtn">Добавить</span></button>
+        </form>
+        <div class="acct-msg" id="acctAddKeyMsg" role="status" aria-live="polite"></div>
+      </details>
       <div id="acctOrdersWrap" hidden>
         <div class="acct-section" data-i18n="acct.orders">Заказы</div>
         <div class="acct-list" id="acctOrders"></div>
@@ -2192,6 +2214,15 @@ Object.assign(D,{
   "acct.loading":["Загружаем ключи…","Loading keys…"],
   "acct.emptyTitle":["Пока нет ключей","No keys yet"],
   "acct.empty":["Купите PRO — ключ появится здесь и привяжется к аккаунту.","Buy PRO — your key will appear here and bind to your account."],
+  "acct.addKey":["Добавить существующий ключ","Add an existing key"],
+  "acct.addKeyBtn":["Добавить","Add"],
+  "acct.addKeyWait":["Добавляем…","Adding…"],
+  "acct.addKeyOk":["Ключ добавлен в профиль.","Key added to your account."],
+  "acct.addKeyFormat":["Ключ должен быть в формате XXXX-XXXX-XXXX-XXXX.","Key must be in XXXX-XXXX-XXXX-XXXX format."],
+  "acct.addKeyNotFound":["Ключ не найден. Проверьте раскладку и символы.","Key not found. Check the characters."],
+  "acct.addKeyClaimed":["Этот ключ уже привязан к другому аккаунту.","This key is already linked to another account."],
+  "acct.addKeyBad":["Неверный формат ключа.","Invalid key format."],
+  "acct.addKeyErr":["Не удалось добавить ключ. Попробуйте ещё раз.","Could not add the key. Try again."],
   "acct.ordersEmpty":["Заказов пока нет.","No orders yet."],
   "acct.copy":["Скопировать","Copy"],"acct.copied":["Скопировано ✓","Copied ✓"],
   "acct.active":["активен","active"],"acct.inactive":["неактивен","inactive"],
@@ -2339,6 +2370,11 @@ function paySetMsg(text,kind){
   box.className='acct-msg'+(text?' show '+(kind||'info'):'');
   box.textContent=text||'';
 }
+function payAddKeyMsg(text,kind){
+  var box=$('#acctAddKeyMsg');if(!box)return;
+  box.className='acct-msg'+(text?' show '+(kind||'info'):'');
+  box.textContent=text||'';
+}
 function paySetTab(login){
   var lf=$('#acctLoginForm'),rf=$('#acctRegForm'),tl=$('#acctTabLogin'),tr=$('#acctTabReg');
   if(!lf||!rf)return;
@@ -2371,6 +2407,7 @@ function payShowDash(user){
   var email=(user&&user.email)||'—';
   $('#acctEmail').textContent=email;
   $('#acctAvatar').textContent=(email[0]||'V').toUpperCase();
+  payAddKeyMsg('');
   payLoadKeys();
 }
 async function payLoadKeys(){
@@ -2394,6 +2431,8 @@ async function payLoadKeys(){
       }).join('');
     }
     var wrap=$('#acctOrdersWrap');wrap.hidden=!orders.length;
+    var addBox=$('#acctAddKeyBox');
+    if(addBox&&!keys.length)addBox.open=true;
     if(orders.length){
       $('#acctOrders').innerHTML=orders.slice(0,8).map(function(o){
         var st=o.status||'pending';
@@ -2720,6 +2759,37 @@ $('#acctKeys').addEventListener('click',function(e){
 });
 function fallbackCopy(txt){
   try{var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta)}catch(e){}
+}
+var acctAddKeyForm=$('#acctAddKeyForm');
+if(acctAddKeyForm){
+  acctAddKeyForm.addEventListener('submit',async function(e){
+    e.preventDefault();
+    var input=$('#acctAddKeyInput'),btn=$('#acctAddKeyBtn');
+    var key=(input.value||'').trim().toUpperCase();
+    if(!/^[A-Z0-9]{4}(-[A-Z0-9]{4}){3}$/.test(key)){
+      payAddKeyMsg(t('acct.addKeyFormat'),'err');
+      input.focus();
+      return;
+    }
+    btn.disabled=true;
+    payAddKeyMsg(t('acct.addKeyWait'),'info');
+    try{
+      var out=await payApi('/api/account/claim',{method:'POST',body:JSON.stringify({key:key})});
+      if(!out.r.ok){
+        var code=String((out.d&&(out.d.error||out.d.message))||'');
+        var map={not_found:t('acct.addKeyNotFound'),already_claimed:t('acct.addKeyClaimed'),bad_key:t('acct.addKeyBad')};
+        throw new Error(map[code]||t('acct.addKeyErr'));
+      }
+      input.value='';
+      payAddKeyMsg(t('acct.addKeyOk'),'ok');
+      await payLoadKeys();
+    }catch(err){
+      if(err&&err.payAuth){payClearSession();payShowAuth();paySetMsg(t('acct.needLogin'),'info');return}
+      payAddKeyMsg(String((err&&err.message)||t('acct.addKeyErr')),'err');
+    }finally{
+      btn.disabled=false;
+    }
+  });
 }
 $('#buyPro').addEventListener('click',function(e){e.preventDefault();payStartCheckout(PAY_PLANS[plan])});
 $('#ordRetry').addEventListener('click',function(){if(payOrderToken)payPollOrder(payOrderToken)});
