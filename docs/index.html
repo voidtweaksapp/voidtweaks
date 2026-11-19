@@ -2129,6 +2129,9 @@ Object.assign(D,{
   "acct.email":["Email","Email"],"acct.password":["Пароль","Password"],"acct.password2":["Повторите пароль","Repeat password"],
   "acct.google":["Продолжить с Google","Continue with Google"],"acct.yandex":["Продолжить с Яндексом","Continue with Yandex"],
   "acct.or":["или по почте","or use email"],
+  "acct.oauthWait":["Переходим к входу…","Redirecting…"],
+  "acct.oauthOff":["Этот способ входа пока не подключён. Войдите по email.","This sign-in method is not configured yet. Use email."],
+  "acct.oauthErr":["Не удалось открыть вход через соцсеть. Попробуйте ещё раз или войдите по email.","Could not open social sign-in. Try again or use email."],
   "acct.emailPh":["you@example.com","you@example.com"],"acct.passPh":["••••••••","••••••••"],
   "acct.forgot":["Забыли пароль?","Forgot password?"],"acct.logout":["Выйти","Sign out"],
   "acct.bound":["Ключи привязаны к аккаунту","Keys are linked to your account"],
@@ -2383,10 +2386,17 @@ async function payOpenAccount(){
 }
 function payOAuth(provider){
   if(!provider)return;
-  paySetMsg('');
+  paySetMsg(t('acct.oauthWait'),'info');
   var base=location.origin+location.pathname;
   if(payPendingPlan)base+='?buy='+encodeURIComponent(payPendingPlan);
-  location.href=PAY_SB+'/auth/v1/authorize?provider='+encodeURIComponent(provider)+'&redirect_to='+encodeURIComponent(base);
+  var url=PAY_SB+'/auth/v1/authorize?provider='+encodeURIComponent(provider)+'&redirect_to='+encodeURIComponent(base);
+  payFetch(url,{method:'GET',redirect:'manual',cache:'no-store'},15000).then(function(res){
+    if(res.type==='opaqueredirect'||res.status===0){location.href=url;return null}
+    return payJson(res).then(function(d){throw new Error(payError(d))});
+  }).catch(function(e){
+    var m=String(e&&e.message||e||'');
+    paySetMsg(/not enabled|not found|unsupported provider/i.test(m)?t('acct.oauthOff'):t('acct.oauthErr'),'err');
+  });
 }
 function payCloseAccount(){
   $('#acctModal').classList.remove('open');

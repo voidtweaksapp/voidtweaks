@@ -145,6 +145,9 @@ button { cursor: pointer; }
 .auth-divider { display: flex; align-items: center; gap: 12px; margin: 20px 0 18px; color: var(--text-3); font-size: 12px; }
 .auth-divider::before, .auth-divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 .auth-social .form-msg { margin-top: 0; }
+@media (max-width: 400px) {
+  .social-btn { height: 46px; padding: 0 12px; gap: 8px; font-size: 13px; }
+}
 
 /* ---------- dashboard ---------- */
 .dash-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
