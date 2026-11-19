@@ -1164,11 +1164,28 @@ body::before {
       btn.disabled = true;
       btn.setAttribute('aria-busy', 'true');
       try {
-        const { error } = await withTimeout(supabase.auth.signInWithOAuth({
+        const { data, error } = await withTimeout(supabase.auth.signInWithOAuth({
           provider,
-          options: { redirectTo: authRedirect() }
+          options: { redirectTo: authRedirect(), skipBrowserRedirect: true }
         }));
         if (error) throw error;
+        const url = data && data.url;
+        if (!url) throw new Error('OAuth URL is missing');
+        let res = null;
+        try {
+          res = await fetch(url, { method: 'GET', redirect: 'manual', cache: 'no-store' });
+        } catch (e) {
+          // Сеть или CORS: не блокируем вход, если провайдер настроен.
+          location.href = url;
+          return;
+        }
+        if (res.type === 'opaqueredirect' || res.status === 0) {
+          location.href = url;
+          return;
+        }
+        let payload = null;
+        try { payload = await res.json(); } catch {}
+        throw new Error((payload && (payload.msg || payload.message || payload.error)) || ('HTTP ' + res.status));
       } catch (err) {
         btn.disabled = false;
         btn.removeAttribute('aria-busy');
