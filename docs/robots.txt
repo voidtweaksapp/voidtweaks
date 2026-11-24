@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://voidtweaksapp.github.io/voidtweaks/sitemap.xml
+Sitemap: https://voidtweaks.ru/sitemap.xml
