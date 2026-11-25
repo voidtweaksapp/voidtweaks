@@ -5,7 +5,7 @@
 <br><br>
 
 <a href="https://github.com/voidtweaksapp/voidtweaks/releases/latest/download/VOIDTWEAKSInstaller.exe"><img src="docs/readme/btn_download.png" alt="Скачать для Windows" height="48"></a>&nbsp;
-<a href="https://voidtweaksapp.github.io/voidtweaks/"><img src="docs/readme/btn_site.png" alt="VOIDTWEAKS – официальный сайт" height="48"></a>&nbsp;
+<a href="https://voidtweaks.ru/"><img src="docs/readme/btn_site.png" alt="VOIDTWEAKS – официальный сайт" height="48"></a>&nbsp;
 <a href="https://www.youtube.com/@VoidTweaksApp"><img src="docs/readme/btn_youtube.png" alt="YouTube" height="48"></a>
 
 <br>
@@ -20,9 +20,9 @@
 
 </div>
 
-**Официальный сайт: [VOIDTWEAKS – оптимизатор Windows 10/11](https://voidtweaksapp.github.io/voidtweaks/)**
+**Официальный сайт: [VOIDTWEAKS – оптимизатор Windows 10/11](https://voidtweaks.ru/)**
 
-**Документация:** [установка и активация](https://voidtweaksapp.github.io/voidtweaks/guide.html) · [история изменений](https://github.com/voidtweaksapp/voidtweaks/releases)
+**Документация:** [установка и активация](https://voidtweaks.ru/guide.html) · [история изменений](https://github.com/voidtweaksapp/voidtweaks/releases)
 
 VOIDTWEAKS – бесплатный оптимизатор Windows 10/11: 180+ твиков реестра и служб, управление прерываниями, мониторинг железа, Game Configs и установка драйверов NVIDIA и AMD. Любое изменение откатывается в один клик.
 
@@ -59,7 +59,7 @@ VOIDTWEAKS – бесплатный оптимизатор Windows 10/11: 180+ �
 Нет. Твики, мониторинг, автозагрузка и встроенные утилиты бесплатны навсегда. PRO нужен для управления прерываниями, GPU-разделов и раннего доступа.
 
 **Как купить PRO?**
-Сначала войди или зарегистрируйся в [личном кабинете](https://voidtweaksapp.github.io/voidtweaks/account.html): покупка доступна только аккаунтам, ключ привязывается к нему. Оплата через ЮKassa; после оплаты ключ появляется в кабинете – вставь его в приложение.
+Сначала войди или зарегистрируйся в [личном кабинете](https://voidtweaks.ru/account.html): покупка доступна только аккаунтам, ключ привязывается к нему. Оплата через ЮKassa; после оплаты ключ появляется в кабинете – вставь его в приложение.
 
 ## Системные требования
 

@@ -5,7 +5,7 @@
 <br><br>
 
 <a href="https://github.com/voidtweaksapp/voidtweaks/releases/latest/download/VOIDTWEAKSInstaller.exe"><img src="docs/readme/btn_download.png" alt="Download for Windows" height="48"></a>&nbsp;
-<a href="https://voidtweaksapp.github.io/voidtweaks/"><img src="docs/readme/btn_site.png" alt="VOIDTWEAKS – official website" height="48"></a>&nbsp;
+<a href="https://voidtweaks.ru/"><img src="docs/readme/btn_site.png" alt="VOIDTWEAKS – official website" height="48"></a>&nbsp;
 <a href="https://www.youtube.com/@VoidTweaksApp"><img src="docs/readme/btn_youtube.png" alt="YouTube" height="48"></a>
 
 <br>
@@ -20,9 +20,9 @@
 
 </div>
 
-**Official website: [VOIDTWEAKS – Windows 10/11 optimizer](https://voidtweaksapp.github.io/voidtweaks/)**
+**Official website: [VOIDTWEAKS – Windows 10/11 optimizer](https://voidtweaks.ru/)**
 
-**Documentation:** [install & activation](https://voidtweaksapp.github.io/voidtweaks/guide.html) · [release history](https://github.com/voidtweaksapp/voidtweaks/releases)
+**Documentation:** [install & activation](https://voidtweaks.ru/guide.html) · [release history](https://github.com/voidtweaksapp/voidtweaks/releases)
 
 VOIDTWEAKS is a free Windows 10/11 optimizer for gaming: 180+ registry and service tweaks, interrupt management, hardware monitoring, game configs and NVIDIA/AMD driver setup. Every change can be rolled back in one click.
 
@@ -59,7 +59,7 @@ No. VOIDTWEAKS doesn't touch game files, doesn't inject into processes and doesn
 No. Tweaks, monitoring, startup manager and built-in tools are free forever. PRO unlocks interrupt management, GPU sections and early access.
 
 **How do I buy PRO?**
-Sign in or create an account in the [dashboard](https://voidtweaksapp.github.io/voidtweaks/account.html) first: purchases are available to accounts only, and the key is linked to yours. Payment is processed via YooKassa; after payment the key appears in the dashboard – paste it into the app.
+Sign in or create an account in the [dashboard](https://voidtweaks.ru/account.html) first: purchases are available to accounts only, and the key is linked to yours. Payment is processed via YooKassa; after payment the key appears in the dashboard – paste it into the app.
 
 ## System requirements
 

@@ -1,5 +1,5 @@
 /* Cloudflare Web Analytics – обезличенная статистика без cookie.
-   Токен: dash.cloudflare.com → Analytics → Web Analytics → Add a site (voidtweaksapp.github.io).
+   Токен: dash.cloudflare.com → Analytics → Web Analytics → Add a site (voidtweaks.ru).
    Пока токен пуст, скрипт ничего не загружает. */
 (function () {
   var token = 'c3a1790ce1e04afd97eb039edd1dcee9';
