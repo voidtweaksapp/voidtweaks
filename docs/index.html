@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-attr 'none'; frame-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://api.voidtweaks.ru https://mzkvqlbcrxaibpizuuuk.supabase.co https://cloudflareinsights.com; base-uri 'none'; object-src 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-attr 'none'; frame-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.voidtweaks.ru https://mzkvqlbcrxaibpizuuuk.supabase.co https://cloudflareinsights.com; base-uri 'none'; object-src 'none'; form-action 'self'">
 <meta http-equiv="Referrer-Policy" content="no-referrer">
 <script>
 (function(){try{if(window.top!==window.self){window.top.location=window.self.location}}catch(e){document.documentElement.style.display='none'}})();
@@ -20,9 +20,9 @@
 <meta name="twitter:card" content="summary">
 <link rel="icon" type="image/png" sizes="192x192" href="logo-192.png">
 <link rel="apple-touch-icon" href="logo-192.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
 <!--
   Изменения:
   1) Убран «фонарик» за курсором (cursor-glow удалён полностью).
@@ -218,8 +218,8 @@ h2{font-size:clamp(23px,3vw,36px);font-weight:700;line-height:1.18;margin-bottom
 .mock-stats b{display:block;font-family:var(--disp);font-size:13px;color:#fff}
 .mock-stats small{font-size:9.5px;color:var(--t3);line-height:1.3;display:block}
 .fchip{position:absolute;z-index:3;padding:8px 14px;border-radius:12px;font-family:var(--disp);font-size:12px;font-weight:600;animation:float 5.5s ease-in-out infinite}
-.fchip.f1{top:-16px;right:-8px;color:#fff;border:1px solid rgba(255,255,255,.3);background:rgba(8,8,8,.85);backdrop-filter:blur(8px);box-shadow:0 0 26px rgba(255,255,255,.12)}
-.fchip.f2{bottom:-14px;left:-10px;color:#e5e5e5;border:1px solid rgba(255,255,255,.25);background:rgba(8,8,8,.85);backdrop-filter:blur(8px);box-shadow:0 0 26px rgba(255,255,255,.1);animation-delay:-2.6s}
+.fchip.f1{top:-36px;right:-8px;color:#fff;border:1px solid rgba(255,255,255,.3);background:rgba(8,8,8,.85);backdrop-filter:blur(8px);box-shadow:0 0 26px rgba(255,255,255,.12)}
+.fchip.f2{bottom:-40px;left:-10px;color:#e5e5e5;border:1px solid rgba(255,255,255,.25);background:rgba(8,8,8,.85);backdrop-filter:blur(8px);box-shadow:0 0 26px rgba(255,255,255,.1);animation-delay:-2.6s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 
 /* ---------- marquee (не останавливается при hover) ---------- */
@@ -430,6 +430,26 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
 .ft-col a:hover,.ft-col button:hover{color:#fff}
 .ft-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--t3)}
 
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:32px;align-items:start}
+.about-copy p{color:var(--t2);line-height:1.7;max-width:680px}
+.about-copy p+p{margin-top:12px}
+.about-en{font-size:12.5px;color:var(--t3);border-left:2px solid rgba(255,255,255,.15);padding-left:14px;margin-top:18px;line-height:1.6}
+.about-card{padding:22px}
+.about-row{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:13px}
+.about-row:first-child{padding-top:0}
+.about-row:last-child{border-bottom:0;padding-bottom:0}
+.about-row span{color:var(--t3)}
+.about-row b{font-weight:600;color:var(--t1);text-align:right}
+.about-card .btn{width:100%;margin-top:16px}
+.plan-guide a{color:var(--t2);text-decoration:underline;text-underline-offset:2px}
+.plan-guide a:hover{color:#fff}
+.fa a{color:#fff;text-decoration:underline;text-underline-offset:2px}
+@media (max-width:900px){
+  .about-grid{grid-template-columns:1fr;gap:24px}
+  .about-copy p{max-width:none}
+}
+
 /* ---------- modal ---------- */
 .overlay{position:fixed;inset:0;z-index:400;display:none;align-items:flex-start;justify-content:center;padding:6vh 18px 18px;overflow-y:auto;
   background:rgba(0,0,0,.78);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
@@ -615,7 +635,8 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
   section{padding:72px 0}
   .nav-links{display:none}
   #nav .btn{display:none}
-  #burger{display:flex}
+  #burger{display:flex;width:44px;height:44px}
+  #langBtn{min-width:44px;height:44px;padding:0 10px}
   #hero{min-height:0;padding-top:calc(var(--nav-h) + 40px)}
   .hero-grid{grid-template-columns:1fr;gap:40px}
   .hero-sub{max-width:none}
@@ -651,8 +672,8 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
   .mock-side span{white-space:nowrap}
   .mock-stats{grid-template-columns:repeat(2,1fr)}
   .mock-stats div:nth-child(2){border-right:0}
-  .fchip.f1{right:4px;top:-14px}
-  .fchip.f2{left:4px}
+  .fchip.f1{display:none}
+  .fchip.f2{left:4px;bottom:-36px}
   .demo-actions{margin-left:0;width:100%}
   .demo-actions{flex-wrap:wrap}
   .demo-actions .btn{flex:1 1 140px;min-width:0}
@@ -776,6 +797,12 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
   .ft-col h4{font-size:10px;margin-bottom:8px}
   .ft-col a,.ft-col button{font-size:12px;padding:3px 0}
   .ft-bottom{font-size:11px;padding-top:14px}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .blob,.mq-track,.badge .dot,.live i,.fchip{animation:none!important}
+  [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}
+  .btn,.mock,.mtrow,.sw,.plan{transition:none!important}
 }
 </style>
 </head>
@@ -1190,6 +1217,7 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
         </ul>
         <a class="btn btn-p btn-lg magnetic" id="buyPro" href="account.html?buy=forever"><span data-i18n="pr.pro.cta">Купить PRO</span></a>
         <p class="plan-note" style="margin:12px 0 0;text-align:center" data-i18n="pr.pro.note">Покупка в профиле — ключ привязывается к аккаунту и ПК по HWID</p>
+        <p class="plan-note plan-guide" style="margin:6px 0 0;text-align:center"><a href="guide.html" data-i18n="pr.guide">Как активировать ключ</a></p>
       </div>
     </div>
 
@@ -1316,6 +1344,10 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
         <div class="fa" id="fa5" role="region"><div><p data-i18n="fq.a5">Войдите в профиль на сайте, выберите тариф (99 ₽ за месяц, 299 ₽ за полгода или 499 ₽ навсегда — разово, без подписки) и оплатите через ЮKassa: карты, МИР, СБП. Ключ появится в кабинете сразу после оплаты — вставьте его в приложение. При активации ключ привязывается к ПК по HWID.</p></div></div>
       </div>
       <div class="fitem glass" data-reveal>
+        <button class="fq" aria-expanded="false" aria-controls="fa8"><span data-i18n="fq.q8">Как активировать ключ?</span><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
+        <div class="fa" id="fa8" role="region"><div><p data-i18n-html="fq.a8">Скачайте установщик, войдите в профиль и скопируйте ключ из раздела «Ключи». В приложении откройте активацию, вставьте ключ — он привяжется к этому ПК по HWID. Пошагово: <a href='guide.html'>инструкция по активации</a>.</p></div></div>
+      </div>
+      <div class="fitem glass" data-reveal>
         <button class="fq" aria-expanded="false" aria-controls="fa6"><span data-i18n="fq.q6">Работает на Windows 11 24H2 / 25H2?</span><span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></button>
         <div class="fa" id="fa6" role="region"><div><p data-i18n="fq.a6">Да. Поддерживаются Windows 10 и 11 x64, включая актуальные сборки 24H2 и 25H2: твики используют официальные API и проверяются на новых версиях. Если что-то пойдёт не так — откат в один клик.</p></div></div>
       </div>
@@ -1373,13 +1405,22 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
 <!-- ============ ABOUT (static, for OAuth brand verification) ============ -->
 <section id="about" aria-labelledby="about-title" style="padding-top:0">
   <div class="wrap">
-    <h2 id="about-title" style="font-size:22px;letter-spacing:.02em;margin-bottom:12px">About VOIDTWEAKS</h2>
-    <p style="max-width:860px;color:var(--t2);line-height:1.7">
-      VOIDTWEAKS is a Windows 10/11 optimization utility for gamers. It disables telemetry and unnecessary services, applies safe system tweaks to improve FPS and reduce input latency, and can revert every change in one click. The website is publicly available without an account; signing in is optional and only needed to manage a PRO license. Google Sign-In is used only for authentication; we receive your email address, name and profile picture.
-    </p>
-    <p lang="ru" style="max-width:860px;color:var(--t2);line-height:1.7;margin-top:10px">
-      VOIDTWEAKS — оптимизатор Windows 10/11 для игр. Отключает телеметрию и лишние службы, применяет безопасные твики для роста FPS и снижения задержек, откатывает изменения в один клик. Сайт доступен без регистрации; вход нужен только для управления лицензией PRO. Вход через Google используется только для аутентификации; мы получаем email, имя и фото профиля.
-    </p>
+    <div class="about-grid">
+      <div class="about-copy">
+        <span class="kicker">О проекте</span>
+        <h2 id="about-title" style="font-size:clamp(22px,3vw,32px);letter-spacing:-.01em;margin:10px 0 14px">Один разработчик.<br><span class="grad">Без подписок и телеметрии.</span></h2>
+        <p>VOIDTWEAKS — независимый проект одного разработчика. Приложение отключает телеметрию и лишние службы, применяет безопасные твики для фона и задержек и откатывает любое изменение в один клик. Написано на C# и работает локально: настройки применяются на вашем ПК, а не на сервере.</p>
+        <p>Сайт открыт без регистрации. Вход нужен только для лицензии PRO: ключ хранится в профиле и привязывается к ПК по HWID. Вход через Google используется только для аутентификации — мы получаем email, имя и фото профиля.</p>
+        <p class="about-en" lang="en">VOIDTWEAKS is a Windows 10/11 optimization utility for gamers. It disables telemetry and unnecessary services, applies safe system tweaks, and reverts every change in one click. Sign-in is optional and only needed to manage a PRO license; Google Sign-In is used solely for authentication (email, name and profile picture).</p>
+      </div>
+      <aside class="about-card glass">
+        <div class="about-row"><span>Разработчик</span><b>Виктор Рой</b></div>
+        <div class="about-row"><span>Платформа</span><b>Windows 10 / 11 x64</b></div>
+        <div class="about-row"><span>Стек</span><b>C# · .NET 10</b></div>
+        <div class="about-row"><span>Поддержка</span><b><a href="mailto:voidtweaksdev@gmail.com">Email</a></b></div>
+        <a class="btn btn-g" href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener">GitHub Issues</a>
+      </aside>
+    </div>
   </div>
 </section>
 
@@ -1407,6 +1448,9 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
         <h4 data-i18n="ft.resources">Ресурсы</h4>
         <a href="https://github.com/voidtweaksapp/voidtweaks" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/voidtweaksapp/voidtweaks/releases" target="_blank" rel="noopener">Releases</a>
+        <a href="guide.html" data-i18n="ft.guide">Как активировать ключ</a>
+        <a href="kak-otklyuchit-telemetriyu-windows-11.html" data-i18n="ft.telemetry">Отключить телеметрию</a>
+        <a href="kak-povysit-fps-v-cs2.html" data-i18n="ft.fps">Поднять FPS в CS2</a>
         <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener" data-i18n="ft.issue">Задать вопрос</a>
         <a href="https://www.youtube.com/@VoidTweaksApp" target="_blank" rel="noopener">YouTube</a>
         <a href="account.html" data-open-account data-i18n="nav.profile">Профиль</a>
@@ -1495,10 +1539,6 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
         <button type="button" class="acct-social-btn" data-oauth="google">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47a5.53 5.53 0 0 1-2.4 3.63v3h3.88c2.27-2.09 3.54-5.17 3.54-8.87z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.94-2.91l-3.88-3c-1.08.72-2.45 1.16-4.06 1.16-3.12 0-5.77-2.11-6.71-4.96H1.28v3.09A11.99 11.99 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.29 14.29a7.2 7.2 0 0 1 0-4.58V6.62H1.28a12 12 0 0 0 0 10.76l4.01-3.09z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0 7.7 0 3.99 2.47 1.28 6.62l4.01 3.09C6.23 6.86 8.88 4.75 12 4.75z"/></svg>
           <span data-i18n="acct.google">Продолжить с Google</span>
-        </button>
-        <button type="button" class="acct-social-btn" data-oauth="custom:yandex">
-          <span class="social-ya" aria-hidden="true">Я</span>
-          <span data-i18n="acct.yandex">Продолжить с Яндексом</span>
         </button>
       </div>
       <div class="acct-or"><span data-i18n="acct.or">или по почте</span></div>
@@ -1617,7 +1657,8 @@ footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backd
 /* ================= helpers ================= */
 var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
 var fine=window.matchMedia('(pointer: fine)').matches;
-var reduced=false; /* анимации всегда включены, независимо от настройки ОС */
+var motionMQ=window.matchMedia('(prefers-reduced-motion: reduce)');
+var reduced=motionMQ.matches;
 var SHA='0ae13d440ba01027e104af779df6c600d0e1d593c47cd2b38e3e2b3effa27ac5';
 
 /* ================= i18n ================= */
@@ -1703,7 +1744,7 @@ var D={
 "pr.per0":["за 30 дней · все PRO-модули","for 30 days · all PRO modules"],"pr.per1":["за 180 дней · ≈ 50 ₽ в месяц","for 180 days · ≈ 50 ₽/month"],"pr.per2":["без срока действия · будущие обновления","no expiration · future updates"],
 "pr.save1":["−50% · выгода 295 ₽","−50% · save 295 ₽"],"pr.save2":["Дешевле, чем полгода помесячно","Cheaper than 6 monthly payments"],
 "pr.p0":["Всё из FREE","Everything in FREE"],"pr.p1":["Управление прерываниями (MSI, IRQ)","Interrupt management (MSI, IRQ)"],"pr.p2":["Разделы NVIDIA и AMD","NVIDIA & AMD sections"],"pr.p3":["Скрытые твики","Hidden tweaks"],"pr.p4":["Бета-версии и приоритетные обновления","Beta builds & priority updates"],
-"pr.pro.cta":["Купить PRO","Buy PRO"],"pr.pro.note":["Покупка в профиле — ключ привязывается к аккаунту и ПК по HWID","Purchase in your profile — the key binds to your account and PC via HWID"],
+"pr.pro.cta":["Купить PRO","Buy PRO"],"pr.pro.note":["Покупка в профиле — ключ привязывается к аккаунту и ПК по HWID","Purchase in your profile — the key binds to your account and PC via HWID"],"pr.guide":["Как активировать ключ","How to activate a key"],
 "pr.cmp":["Что входит в FREE и PRO","What's in FREE and PRO"],"pr.th.feature":["Возможность","Feature"],
 "pr.r1":["180+ твиков реестра и служб","180+ registry & service tweaks"],"pr.r2":["Мониторинг CPU, GPU, ОЗУ и пинга","CPU, GPU, RAM & ping monitoring"],"pr.r3":["Менеджер автозагрузки","Startup manager"],"pr.r4":["Утилиты и Game Configs","Utilities & Game Configs"],"pr.r5":["Управление прерываниями (MSI, IRQ)","Interrupt management (MSI, IRQ)"],"pr.r6":["Разделы NVIDIA и AMD","NVIDIA & AMD sections"],"pr.r7":["Скрытые твики","Hidden tweaks"],"pr.r8":["Бета-версии и приоритетные обновления","Beta builds & priority updates"],
 "pr.refund":["14 дней на возврат, если ключ не активирован.","14-day refund if the key is not activated."],"pr.refund.link":["Условия возврата","Refund terms"],"pr.offer":["Оферта","Terms of sale"],"pr.privacy":["Политика конфиденциальности","Privacy policy"],
@@ -1738,6 +1779,8 @@ var D={
 "fq.a6":["Да. Поддерживаются Windows 10 и 11 x64, включая актуальные сборки 24H2 и 25H2: твики используют официальные API и проверяются на новых версиях. Если что-то пойдёт не так — откат в один клик.","Yes. Windows 10 and 11 x64 are supported, including the latest 24H2 and 25H2 builds: tweaks use official APIs and are tested on new versions. If anything goes wrong — one-click rollback."],
 "fq.q7":["Обновления платные? Что с файлами игр?","Are updates paid? What about game files?"],
 "fq.a7":["Бесплатная версия обновляется бесплатно и работает без ограничений по времени. Ключ «Навсегда» включает все будущие PRO-обновления. Файлы игр приложение не трогает никогда — только системные настройки.","The free version gets free updates and works with no time limits. The Lifetime key includes all future PRO updates. The app never touches game files — system settings only."],
+"fq.q8":["Как активировать ключ?","How do I activate the key?"],
+"fq.a8":["Скачайте установщик, войдите в профиль и скопируйте ключ из раздела «Ключи». В приложении откройте активацию, вставьте ключ — он привяжется к этому ПК по HWID. Пошагово: <a href='guide.html'>инструкция по активации</a>.","Download the installer, sign in and copy the key from the Keys section. Open activation in the app and paste the key — it binds to this PC via HWID. Step by step: <a href='guide.html'>activation guide</a>."],
 "fq.ask":["Не нашли ответ? Откройте issue на GitHub — ответим там.","No answer? Open an issue on GitHub — we'll reply there."],"fq.askbtn":["Задать вопрос на GitHub","Ask on GitHub"],
 "rq.kicker":["Системные требования","System requirements"],"rq.title":["Запустится <span class='gradl'>почти на всём</span>","Runs on <span class='gradl'>almost anything</span>"],
 "rq.min":["Минимальные","Minimum"],"rq.rec":["Рекомендуемые","Recommended"],
@@ -1748,7 +1791,7 @@ var D={
 "rq.cta":["Скачать v1.0.5 · 111 МБ","Download v1.0.5 · 111 MB"],
 "ft.desc":["Оптимизатор Windows 10/11 для геймеров. Написан на C#, распространяется бесплатно, PRO — разово и без подписки.","A Windows 10/11 optimizer for gamers. Written in C#, distributed free; PRO is one-time, no subscription."],
 "ft.product":["Продукт","Product"],"ft.resources":["Ресурсы","Resources"],"ft.legal":["Документы","Legal"],
-"ft.download":["Скачать","Download"],"ft.issue":["Задать вопрос","Ask a question"],"ft.privacy":["Политика конфиденциальности","Privacy policy"],"ft.offer":["Публичная оферта","Terms of sale"],"ft.refund":["Возврат и отмена","Refunds & cancellation"],
+"ft.download":["Скачать","Download"],"ft.issue":["Задать вопрос","Ask a question"],"ft.privacy":["Политика конфиденциальности","Privacy policy"],"ft.offer":["Публичная оферта","Terms of sale"],"ft.refund":["Возврат и отмена","Refunds & cancellation"],"ft.guide":["Как активировать ключ","How to activate a key"],"ft.telemetry":["Отключить телеметрию","Disable telemetry"],"ft.fps":["Поднять FPS в CS2","Boost FPS in CS2"],
 "ft.copy":["© 2026 VOID TWEAKS. Все права защищены.","© 2026 VOID TWEAKS. All rights reserved."],"ft.made":["Сделано для геймеров. Не аффилирован с Microsoft.","Made for gamers. Not affiliated with Microsoft."],
 "dl.title":["Скачать VOID TWEAKS","Download VOID TWEAKS"],"dl.close":["Закрыть","Close"],"dl.free":["Бесплатно","Free"],
 "dl.btn":["Скачать установщик","Download installer"],"dl.copy":["Копировать","Copy"],"dl.copied":["Скопировано ✓","Copied ✓"],
@@ -1852,6 +1895,7 @@ function drawNet(){
   }
 }
 function stepNet(now,dt){
+  if(reduced)return;
   var k=dt/16.6;
   for(var i=0;i<parts.length;i++){
     var p=parts[i];
@@ -1865,6 +1909,12 @@ function stepNet(now,dt){
 }
 sizeCanvas();drawNet();
 tasks.add(stepNet);
+function syncMotion(e){
+  reduced=e.matches;
+  if(reduced)drawNet();
+}
+if(motionMQ.addEventListener)motionMQ.addEventListener('change',syncMotion);
+else if(motionMQ.addListener)motionMQ.addListener(syncMotion);
 
 /* ================= scroll UI / parallax ================= */
 var nav=$('#nav'),prog=$('#progress'),aurora=$('#aurora'),grid=$('#grid3d');
@@ -2002,7 +2052,11 @@ function updateMetrics(){
   },function(){cur=to;drawSpark()});
 }
 sizeSpark();
-tasks.add(function(now,dt){acc+=dt;if(acc>=1700){acc=0;updateMetrics()}});
+var sparkVisible=true;
+if('IntersectionObserver' in window){
+  new IntersectionObserver(function(es){sparkVisible=es[0].isIntersecting},{threshold:0}).observe(spark);
+}
+tasks.add(function(now,dt){acc+=dt;if(acc>=1700){acc=0;if(!reduced&&sparkVisible)updateMetrics()}});
 $$('.mtrow').forEach(function(row){
   row.addEventListener('click',function(){
     if(row.dataset.mock==='pro'){toast('info',t('mock.proToast'));return}

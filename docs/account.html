@@ -69,6 +69,9 @@ button { cursor: pointer; }
 .nav-links a.active { color: #fff; }
 .nav-cta { display: flex; align-items: center; gap: 8px; }
 .nav .btn { height: 38px; padding: 0 16px; font-size: 13.5px; border-radius: 10px; }
+.nav-icon { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line-2); color: var(--text-2); transition: color .15s ease, border-color .15s ease; }
+.nav-icon:hover { color: #fff; border-color: #52525B; }
+.nav-icon svg { width: 18px; height: 18px; }
 .nav-burger { display: none; width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line-2); background: transparent; position: relative; flex-shrink: 0; }
 .nav-burger span { position: absolute; left: 10px; right: 10px; height: 1.5px; border-radius: 2px; background: #fff; transition: transform .3s var(--fx-ease), opacity .2s ease; }
 .nav-burger span:nth-child(1) { top: 13px; }
@@ -80,6 +83,7 @@ button { cursor: pointer; }
 .nav-drawer { display: none; }
 @media (max-width: 760px) {
   .nav-links { display: none; }
+  .nav-icon { display: none; }
   .nav-burger { display: block; }
   .nav-drawer.open {
     display: block; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
@@ -214,9 +218,20 @@ button { cursor: pointer; }
 .order-row .plan { font-weight: 600; color: var(--text-2); }
 .order-row .date { color: var(--text-3); font-size: 12px; margin-top: 2px; }
 .order-row .status { color: var(--text-3); font-size: 12px; white-space: nowrap; }
-.foot { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--text-3); font-size: 12.5px; }
-.foot .container { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.foot { border-top: 1px solid var(--line); padding: 40px 0 28px; color: var(--text-3); font-size: 12.5px; }
+.foot-main { display: grid; grid-template-columns: 1.4fr 1.8fr; gap: 32px; }
+.foot-brand .brand { margin-bottom: 10px; }
+.foot-brand p { margin: 0; max-width: 300px; line-height: 1.6; font-size: 13px; }
+.foot-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.foot-cols h4 { margin: 0 0 10px; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-2); }
+.foot-cols a { display: block; padding: 4px 0; color: var(--text-3); }
+.foot-cols a:hover { color: #fff; }
+.foot-bottom { border-top: 1px solid var(--line); margin-top: 28px; padding-top: 18px; display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; font-size: 12px; }
 .foot a:hover { color: #fff; }
+@media (max-width: 760px) {
+  .foot-main { grid-template-columns: 1fr; gap: 24px; }
+  .foot-cols { grid-template-columns: 1fr 1fr; gap: 16px; }
+}
 
 /* ---------- visual polish ---------- */
 body {
@@ -405,6 +420,9 @@ body::before {
       <a href="account.html" class="active" aria-current="page">Профиль</a>
     </nav>
     <div class="nav-cta">
+      <a class="nav-icon" href="https://github.com/voidtweaksapp/voidtweaks" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.41.35.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+      </a>
       <a href="./#download" class="btn btn-primary">Скачать</a>
       <button type="button" class="nav-burger" id="navBurger" aria-label="Меню" aria-controls="navDrawer" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -419,6 +437,7 @@ body::before {
   <a href="./#pricing">Тарифы</a>
   <a href="./#faq">FAQ</a>
   <a href="account.html">Профиль</a>
+  <a href="https://github.com/voidtweaksapp/voidtweaks" target="_blank" rel="noopener">GitHub</a>
   <a href="./#download" class="drawer-cta">Скачать</a>
 </div>
 
@@ -438,10 +457,6 @@ body::before {
         <button type="button" class="social-btn" data-oauth="google">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47a5.53 5.53 0 0 1-2.4 3.63v3h3.88c2.27-2.09 3.54-5.17 3.54-8.87z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.94-2.91l-3.88-3c-1.08.72-2.45 1.16-4.06 1.16-3.12 0-5.77-2.11-6.71-4.96H1.28v3.09A11.99 11.99 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.29 14.29a7.2 7.2 0 0 1 0-4.58V6.62H1.28a12 12 0 0 0 0 10.76l4.01-3.09z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0 7.7 0 3.99 2.47 1.28 6.62l4.01 3.09C6.23 6.86 8.88 4.75 12 4.75z"/></svg>
           <span>Продолжить с Google</span>
-        </button>
-        <button type="button" class="social-btn" data-oauth="custom:yandex">
-          <span class="social-ya" aria-hidden="true">Я</span>
-          <span>Продолжить с Яндексом</span>
         </button>
         <div class="form-msg" id="oauthMsg" role="status" aria-live="polite"></div>
       </div>
@@ -587,9 +602,36 @@ body::before {
 </main>
 
 <footer class="foot">
-  <div class="container">
+  <div class="container foot-main">
+    <div class="foot-brand">
+      <a href="./" class="brand"><img src="logo-112.png" alt="" width="28" height="28"><span>VOID TWEAKS</span></a>
+      <p>Оптимизатор Windows 10/11 для геймеров. Написан на C#, PRO — разово и без подписки.</p>
+    </div>
+    <div class="foot-cols">
+      <div>
+        <h4>Продукт</h4>
+        <a href="./#features">Возможности</a>
+        <a href="./#pricing">Тарифы</a>
+        <a href="./#download">Скачать</a>
+      </div>
+      <div>
+        <h4>Помощь</h4>
+        <a href="guide.html">Активация ключа</a>
+        <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener">GitHub Issues</a>
+        <a href="mailto:voidtweaksdev@gmail.com">Email</a>
+      </div>
+      <div>
+        <h4>Документы</h4>
+        <a href="offer.html">Оферта</a>
+        <a href="privacy.html">Политика</a>
+        <a href="refund.html">Возврат</a>
+        <a href="contacts.html">Контакты</a>
+      </div>
+    </div>
+  </div>
+  <div class="container foot-bottom">
     <span>© <span id="year">2026</span> VOIDTWEAKS</span>
-    <span><a href="./">На главную</a> · <a href="offer.html">Оферта</a> · <a href="privacy.html">Политика</a> · <a href="refund.html">Возврат</a> · <a href="contacts.html">Контакты</a> · <a href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener">Поддержка</a></span>
+    <span><a href="https://github.com/voidtweaksapp/voidtweaks" target="_blank" rel="noopener">GitHub</a> · <a href="https://www.youtube.com/@VoidTweaksApp" target="_blank" rel="noopener">YouTube</a> · <a href="kak-otklyuchit-telemetriyu-windows-11.html">Телеметрия</a> · <a href="kak-povysit-fps-v-cs2.html">FPS в CS2</a></span>
   </div>
 </footer>
 
