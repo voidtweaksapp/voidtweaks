@@ -72,6 +72,8 @@ button { cursor: pointer; }
 .nav-icon { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line-2); color: var(--text-2); transition: color .15s ease, border-color .15s ease; }
 .nav-icon:hover { color: #fff; border-color: #52525B; }
 .nav-icon svg { width: 18px; height: 18px; }
+.nav-lang { display: inline-flex; align-items: center; justify-content: center; min-width: 38px; height: 38px; padding: 0 9px; border-radius: 10px; border: 1px solid var(--line-2); background: transparent; color: var(--text-2); font-size: 11px; font-weight: 700; letter-spacing: .08em; transition: color .15s ease, border-color .15s ease; }
+.nav-lang:hover { color: #fff; border-color: #52525B; }
 .nav-burger { display: none; width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line-2); background: transparent; position: relative; flex-shrink: 0; }
 .nav-burger span { position: absolute; left: 10px; right: 10px; height: 1.5px; border-radius: 2px; background: #fff; transition: transform .3s var(--fx-ease), opacity .2s ease; }
 .nav-burger span:nth-child(1) { top: 13px; }
@@ -85,6 +87,14 @@ button { cursor: pointer; }
   .nav-links { display: none; }
   .nav-icon { display: none; }
   .nav-burger { display: block; }
+  .nav .btn { height: 44px; padding: 0 18px; }
+  .nav-lang, .nav-burger { width: 44px; height: 44px; }
+  .nav-burger span { left: 11px; right: 11px; }
+  .nav-burger span:nth-child(1) { top: 15px; }
+  .nav-burger span:nth-child(2) { top: 21px; }
+  .nav-burger span:nth-child(3) { top: 27px; }
+  .nav-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
   .nav-drawer.open {
     display: block; position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
     background: #070708; border-bottom: 1px solid var(--line);
@@ -94,6 +104,7 @@ button { cursor: pointer; }
   .nav-drawer.open a:hover { color: #fff; }
   .nav-drawer.open .drawer-cta { margin-top: 14px; border: 0; border-radius: 12px; text-align: center; background: var(--grad-white); color: #09090B; font-weight: 700; padding: 14px 16px; }
 }
+@media (max-width: 400px) { .nav-cta .btn { display: none; } }
 
 /* ---------- buttons ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; height: 48px; padding: 0 22px; border-radius: 12px; border: 1px solid transparent; font-weight: 600; font-size: 14.5px; white-space: nowrap; transition: background-color .15s ease, border-color .15s ease, color .15s ease, opacity .15s ease; }
@@ -420,6 +431,7 @@ body::before {
       <a href="account.html" class="active" aria-current="page">Профиль</a>
     </nav>
     <div class="nav-cta">
+      <button type="button" class="nav-lang" id="langBtn" aria-label="Switch to English">EN</button>
       <a class="nav-icon" href="https://github.com/voidtweaksapp/voidtweaks" target="_blank" rel="noopener" aria-label="GitHub">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.41.35.78 1.05.78 2.12v3.14c0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
       </a>
@@ -641,6 +653,319 @@ body::before {
 (() => {
   'use strict';
 
+  /* ---------- language (RU/EN) ---------- */
+  const LANG_KEY = 'vt-lang';
+  let lang = 'ru';
+  var lastLicenses = null;
+  var lastOrders = null;
+  try { lang = localStorage.getItem(LANG_KEY) === 'en' ? 'en' : 'ru'; } catch (e) {}
+
+  const EN = {
+    "Возможности": "Features",
+    "Как это работает": "How it works",
+    "Тарифы": "Pricing",
+    "Профиль": "Profile",
+    "Скачать": "Download",
+    "Разделы": "Sections",
+    "Меню": "Menu",
+    "Личный кабинет": "Account",
+    "Мои ключи": "My keys",
+    "Войдите, чтобы видеть свои лицензии, сроки и привязку к ПК.": "Sign in to see your licenses, expiry dates and PC binding.",
+    "Вход и регистрация": "Sign in or sign up",
+    "Продолжить с Google": "Continue with Google",
+    "или по почте": "or with email",
+    "Вход": "Sign in",
+    "Регистрация": "Sign up",
+    "Пароль": "Password",
+    "Войти": "Sign in",
+    "Забыли пароль?": "Forgot password?",
+    "Не пришло письмо? Отправить ещё раз": "Didn't get the email? Send again",
+    "Повторите пароль": "Repeat password",
+    "Создать аккаунт": "Create account",
+    "Регистрируясь, вы принимаете": "By signing up you accept",
+    "оферту": "the offer",
+    "и": "and",
+    "политику конфиденциальности": "privacy policy",
+    ". Ключи привязываются к аккаунту, а не к email.": ". Keys are bound to your account, not your email.",
+    "Ключи привязываются к аккаунту – так их невозможно потерять.": "Keys are bound to your account, so you can't lose them.",
+    "Новый пароль": "New password",
+    "Придумайте новый пароль для входа.": "Choose a new password for signing in.",
+    "Сохранить пароль": "Save password",
+    "Вы вошли как": "Signed in as",
+    "Купить ещё": "Buy more",
+    "Выйти": "Sign out",
+    "Ключи": "Keys",
+    "Пока нет ключей": "No keys yet",
+    "Купите ключ на главной – он появится здесь автоматически. Если ключ уже есть, добавьте его вручную.": "Buy a key on the main page — it will appear here automatically. If you already have one, add it manually.",
+    "Выбрать тариф": "Choose a plan",
+    "Добавить существующий ключ": "Add an existing key",
+    "Добавить": "Add",
+    "История покупок": "Purchase history",
+    "Панель управления": "Admin panel",
+    "Пользователи, ключи, заказы и выручка в реальном времени.": "Users, keys, orders and revenue in real time.",
+    "Пользователи": "Users",
+    "Заказы": "Orders",
+    "Обновить": "Refresh",
+    "Загружаем данные…": "Loading data…",
+    "Скачать приложение": "Download app",
+    "Оптимизатор Windows 10/11 для геймеров. Написан на C#, PRO — разово и без подписки.": "Windows 10/11 optimizer for gamers. Written in C#, PRO is a one-time purchase with no subscription.",
+    "Продукт": "Product",
+    "Помощь": "Help",
+    "Активация ключа": "Key activation",
+    "Документы": "Legal",
+    "Оферта": "Offer",
+    "Политика": "Privacy",
+    "Возврат": "Refunds",
+    "Контакты": "Contacts",
+    "Телеметрия": "Telemetry",
+    "FPS в CS2": "FPS in CS2",
+    "Личный кабинет VOIDTWEAKS: вход, регистрация и ваши лицензионные ключи.": "VOIDTWEAKS account: sign in, sign up and your license keys.",
+    "Вход или регистрация": "Sign in or sign up",
+    "Минимум 8 символов": "At least 8 characters",
+    "Ещё раз": "Repeat",
+    "Показать пароль": "Show password",
+    "Скрыть пароль": "Hide password",
+    "Поиск по email или ключу": "Search by email or key",
+    "Поиск по админке": "Search admin",
+    "Разделы админки": "Admin sections",
+    "Действует до": "Valid until",
+    "Привязка": "Binding",
+    "Куплен": "Purchased",
+    "Скопировать ключ": "Copy key",
+    "Не привязан": "Not bound",
+    "Неактивен": "Inactive",
+    "Истёк": "Expired",
+    "Активен": "Active",
+    "Бессрочно": "Lifetime",
+    "1 месяц": "1 month",
+    "6 месяцев": "6 months",
+    "Навсегда": "Lifetime",
+    "Заказ привязан к профилю. Ключ появится здесь после оплаты.": "Order linked to your profile. The key will appear here after payment.",
+    "Ключ добавлен в профиль.": "Key added to your profile.",
+    "Заказ не найден. Если вы уже оплатили, напишите в поддержку.": "Order not found. If you already paid, contact support.",
+    "Этот заказ уже привязан к другому аккаунту.": "This order is already linked to another account.",
+    "Не удалось привязать заказ. Попробуйте открыть ссылку из письма ещё раз.": "Could not link the order. Try opening the link from the email again.",
+    "Сессия истекла. Войдите снова.": "Session expired. Sign in again.",
+    "Не удалось загрузить ключи": "Could not load keys",
+    "Сервер просыпается дольше обычного. Подождите и нажмите «Повторить».": "The server is taking longer than usual. Wait and press “Retry”.",
+    "Проверьте интернет и попробуйте снова.": "Check your connection and try again.",
+    "Повторить": "Retry",
+    "Скопировано": "Copied",
+    "Оплачен": "Paid",
+    "Ожидает оплаты": "Awaiting payment",
+    "Отменён": "Canceled",
+    "Ожидает": "Pending",
+    "Выключен": "Disabled",
+    "Выручка": "Revenue",
+    "зарегистрировано": "registered",
+    "Активные ключи": "Active keys",
+    "всего": "total",
+    "за месяц": "this month",
+    "ждут оплаты": "awaiting payment",
+    "Потрачено": "Spent",
+    "Последний вход": "Last sign-in",
+    "Ничего не найдено": "Nothing found",
+    "Пользователей пока нет": "No users yet",
+    "Включить": "Enable",
+    "Выключить": "Disable",
+    "+30 дней": "+30 days",
+    "Отвязать": "Unbind",
+    "Ключ": "Key",
+    "План": "Plan",
+    "Статус": "Status",
+    "Владелец": "Owner",
+    "Действия": "Actions",
+    "Ключей пока нет": "No keys yet",
+    "Дата": "Date",
+    "Пользователь": "User",
+    "Заказов пока нет": "No orders yet",
+    "Сервер просыпается…": "Server is waking up…",
+    "Обычно это занимает до минуты.": "Usually takes up to a minute.",
+    "Не удалось обновить данные – показаны последние загруженные.": "Could not refresh data — showing the last loaded.",
+    "Нет доступа.": "Access denied.",
+    "Сервер не ответил. Подождите и попробуйте снова.": "The server did not respond. Wait and try again.",
+    "Не удалось загрузить админку.": "Could not load the admin panel.",
+    "Не удалось получить список пользователей Supabase. Проверьте, что SUPABASE_KEY – service_role.": "Could not fetch the Supabase user list. Check that SUPABASE_KEY is service_role.",
+    "Неверный email или пароль.": "Invalid email or password.",
+    "Email не подтверждён. Проверьте почту и перейдите по ссылке.": "Email not confirmed. Check your inbox and follow the link.",
+    "Этот email уже зарегистрирован. Войдите.": "This email is already registered. Sign in.",
+    "Пароль должен быть не короче 8 символов.": "Password must be at least 8 characters.",
+    "Проверьте адрес email.": "Check the email address.",
+    "Слишком много попыток. Подождите минуту и попробуйте снова.": "Too many attempts. Wait a minute and try again.",
+    "Не удалось связаться с сервером. Проверьте интернет и попробуйте снова.": "Could not reach the server. Check your connection and try again.",
+    "Сервер долго не отвечает. Проверьте интернет и попробуйте снова.": "The server is not responding. Check your connection and try again.",
+    "Что-то пошло не так. Попробуйте ещё раз.": "Something went wrong. Try again.",
+    "Подождите…": "Please wait…",
+    "Заполните email и пароль.": "Enter your email and password.",
+    "Входим…": "Signing in…",
+    "Пароли не совпадают.": "Passwords do not match.",
+    "Создаём…": "Creating…",
+    "Подтвердите email, затем войдите.": "Confirm your email, then sign in.",
+    "Введите email, указанный при регистрации.": "Enter the email you signed up with.",
+    "Отправляем…": "Sending…",
+    "Если такой email зарегистрирован, мы отправили ссылку для сброса пароля. Проверьте «Входящие» и «Спам».": "If this email is registered, we sent a password reset link. Check your inbox and spam folder.",
+    "Сохраняем…": "Saving…",
+    "Пароль обновлён. Войдите с новым паролем.": "Password updated. Sign in with your new password.",
+    "Ключ должен быть в формате XXXX-XXXX-XXXX-XXXX.": "Key must be in the format XXXX-XXXX-XXXX-XXXX.",
+    "Добавляем…": "Adding…",
+    "Ключ не найден. Проверьте раскладку и символы.": "Key not found. Check the keyboard layout and characters.",
+    "Этот ключ уже привязан к другому аккаунту.": "This key is already bound to another account.",
+    "Неверный формат ключа.": "Invalid key format.",
+    "Не удалось добавить ключ. Попробуйте ещё раз.": "Could not add the key. Try again.",
+    "Отвязать ключ от текущего ПК? Пользователь сможет активировать его заново.": "Unbind the key from the current PC? The user will be able to activate it again.",
+    "Статус ключа обновлён.": "Key status updated.",
+    "Срок продлён на 30 дней.": "Extended by 30 days.",
+    "Ключ отвязан от ПК.": "Key unbound from the PC.",
+    "Не удалось обновить ключ. Попробуйте ещё раз.": "Could not update the key. Try again.",
+    "Войдите или создайте аккаунт, чтобы продолжить покупку. Ключ сразу привяжется к профилю.": "Sign in or create an account to continue. The key will be linked to your profile.",
+    "После входа вы вернётесь к оплате выбранного тарифа.": "After signing in you will return to payment for the selected plan.",
+    "Яндекс": "Yandex",
+    "сервис": "service"
+  };
+
+  function normKey(s) {
+    return String(s).replace(/\s+/g, ' ').replace(/[\u2013\u2014\u2212]/g, '-').trim();
+  }
+  const EN_NORM = {};
+  for (const k in EN) EN_NORM[normKey(k)] = EN[k];
+
+  function enText(raw) {
+    const key = normKey(raw);
+    if (EN_NORM[key]) return EN_NORM[key];
+    let m;
+    if ((m = key.match(/^Аккаунт создан\. Мы отправили письмо на (.+) - перейдите по ссылке, затем войдите\.$/)))
+      return 'Account created. We sent an email to ' + m[1] + ' — follow the link, then sign in.';
+    if ((m = key.match(/^Вход через (.+) пока не подключён\. Используйте вход по email\.$/)))
+      return 'Sign-in with ' + m[1] + ' is not available yet. Use email sign-in.';
+    if ((m = key.match(/^Не удалось войти через (.+)\. Попробуйте ещё раз или используйте email\.$/)))
+      return 'Could not sign in with ' + m[1] + '. Try again or use email.';
+    return null;
+  }
+
+  const textOrigin = new Map();
+  const attrOrigin = new Map();
+  const ATTRS = ['placeholder', 'aria-label', 'title', 'alt'];
+
+  function translateTextNode(node) {
+    const value = node.nodeValue;
+    if (!value || !/[А-Яа-яЁё]/.test(value)) return;
+    const t = enText(value);
+    if (t == null) return;
+    const lead = value.match(/^\s*/)[0];
+    const trail = value.match(/\s*$/)[0];
+    textOrigin.set(node, value);
+    node.nodeValue = lead + t + trail;
+  }
+
+  function translateAttrs(el) {
+    if (!el || el.nodeType !== 1) return;
+    for (const a of ATTRS) {
+      const v = el.getAttribute(a);
+      if (!v || !/[А-Яа-яЁё]/.test(v)) continue;
+      const t = enText(v);
+      if (t == null) continue;
+      let store = attrOrigin.get(el);
+      if (!store) { store = {}; attrOrigin.set(el, store); }
+      store[a] = v;
+      el.setAttribute(a, t);
+    }
+  }
+
+  function translateTree(root) {
+    if (!root) return;
+    if (root.nodeType === 3) { translateTextNode(root); return; }
+    if (root.nodeType !== 1) return;
+    if (/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA)$/.test(root.tagName)) return;
+    translateAttrs(root);
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT, {
+      acceptNode(node) {
+        if (node.nodeType === 1 && /^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA)$/.test(node.tagName)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    let n;
+    while ((n = walker.nextNode())) {
+      if (n.nodeType === 3) translateTextNode(n);
+      else translateAttrs(n);
+    }
+  }
+
+  function restoreAll() {
+    textOrigin.forEach((value, node) => { if (node.isConnected) node.nodeValue = value; });
+    textOrigin.clear();
+    attrOrigin.forEach((store, el) => {
+      if (!el.isConnected) return;
+      for (const a in store) el.setAttribute(a, store[a]);
+    });
+    attrOrigin.clear();
+  }
+
+  let pendingRoots = new Set();
+  let sweepTimer = null;
+
+  function startObserver() {
+    mo.observe(document.body, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ATTRS
+    });
+  }
+
+  function flushTranslations() {
+    sweepTimer = null;
+    if (lang !== 'en' || !pendingRoots.size) return;
+    const roots = Array.from(pendingRoots);
+    pendingRoots.clear();
+    mo.disconnect();
+    roots.forEach(root => { if (root && root.isConnected) translateTree(root); });
+    startObserver();
+  }
+
+  const mo = new MutationObserver(mutations => {
+    if (lang !== 'en') return;
+    for (const m of mutations) {
+      if (m.type === 'characterData') {
+        if (m.target.parentElement) pendingRoots.add(m.target.parentElement);
+      } else if (m.type === 'attributes') {
+        pendingRoots.add(m.target);
+      } else {
+        m.addedNodes.forEach(n => {
+          if (n.nodeType === 1) pendingRoots.add(n);
+          else if (n.nodeType === 3 && n.parentElement) pendingRoots.add(n.parentElement);
+        });
+      }
+    }
+    if (!sweepTimer) sweepTimer = setTimeout(flushTranslations, 30);
+  });
+
+  function applyLang(next) {
+    lang = next === 'en' ? 'en' : 'ru';
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+    document.documentElement.lang = lang;
+    document.title = lang === 'en' ? 'Profile – VOIDTWEAKS' : 'Профиль – VOIDTWEAKS';
+    const btn = document.getElementById('langBtn');
+    if (btn) {
+      btn.textContent = lang === 'en' ? 'RU' : 'EN';
+      btn.setAttribute('aria-label', lang === 'en' ? 'Switch to Russian' : 'Переключить на английский');
+    }
+    mo.disconnect();
+    restoreAll();
+    if (lastLicenses) {
+      renderKeys(lastLicenses);
+      renderOrders(lastOrders || []);
+    }
+    if (adminData) renderAdminTable();
+    if (lang === 'en') translateTree(document.body);
+    startObserver();
+  }
+
+  startObserver();
+  applyLang(lang);
+  const langBtn = document.getElementById('langBtn');
+  if (langBtn) langBtn.addEventListener('click', () => applyLang(lang === 'ru' ? 'en' : 'ru'));
+
   const SUPABASE_URL = 'https://mzkvqlbcrxaibpizuuuk.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_ONhVp8Za-zzwpE7FMp7Nyg_ntPLMYp7';
   const API = 'https://api.voidtweaks.ru';
@@ -714,18 +1039,23 @@ body::before {
     return ACCOUNT_URL + (qs ? '?' + qs : '');
   }
 
-  const planLabel = plan => ({ month: '1 месяц', half: '6 месяцев', forever: 'Навсегда' }[plan] || plan || '–');
+  const planLabel = plan => {
+    const labels = lang === 'en'
+      ? { month: '1 month', half: '6 months', forever: 'Lifetime' }
+      : { month: '1 месяц', half: '6 месяцев', forever: 'Навсегда' };
+    return labels[plan] || plan || '–';
+  };
   const fmtDate = iso => {
-    if (!iso) return 'Бессрочно';
+    if (!iso) return lang === 'en' ? 'Lifetime' : 'Бессрочно';
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return '–';
-    return d.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    return d.toLocaleDateString(lang === 'en' ? 'en-GB' : 'ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
   };
   const fmtDateTime = iso => {
     if (!iso) return '';
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return '';
-    return d.toLocaleString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    return d.toLocaleString(lang === 'en' ? 'en-GB' : 'ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
   };
   const shortHwid = hwid => {
     if (!hwid) return 'Не привязан';
@@ -791,6 +1121,9 @@ body::before {
 
   function showAuth(tab) {
     currentSession = null;
+    lastLicenses = null;
+    lastOrders = null;
+    adminData = null;
     authPanel.hidden = false;
     dashboard.hidden = true;
     recoveryPanel.hidden = true;
@@ -811,8 +1144,10 @@ body::before {
     if (avatar) avatar.textContent = (email[0] || 'V').toUpperCase();
     const cachedKeys = readKeysCache(session.user.id);
     if (cachedKeys) {
-      renderKeys(cachedKeys.licenses);
-      renderOrders(cachedKeys.orders);
+      lastLicenses = cachedKeys.licenses || [];
+      lastOrders = cachedKeys.orders || [];
+      renderKeys(lastLicenses);
+      renderOrders(lastOrders);
     }
     loadProfile();
   }
@@ -884,10 +1219,12 @@ body::before {
         profileQueued = false;
         try {
           const data = await api('/api/account/keys');
-          renderKeys(data.licenses || []);
-          renderOrders(data.orders || []);
+          lastLicenses = data.licenses || [];
+          lastOrders = data.orders || [];
+          renderKeys(lastLicenses);
+          renderOrders(lastOrders);
           if (currentSession && currentSession.user) {
-            writeKeysCache(currentSession.user.id, data.licenses || [], data.orders || []);
+            writeKeysCache(currentSession.user.id, lastLicenses, lastOrders);
           }
           setAdmin(Boolean(data.is_admin));
         } catch (e) {
@@ -997,7 +1334,7 @@ body::before {
 
   /* ---------- admin ---------- */
   let adminLoaded = false;
-  let adminData = null;
+  var adminData = null;
   let adminTab = 'users';
   let adminQuery = '';
   const KEYS_CACHE = 'void-keys-cache';
@@ -1172,10 +1509,18 @@ body::before {
     loadAdmin();
   }
 
-  function maybeBuy() {
-    if (!buyPlan || buyRedirected) return;
+  async function maybeBuy() {
+    if (!buyPlan || buyRedirected || !currentSession) return;
     buyRedirected = true;
-    location.href = './?buy=' + encodeURIComponent(buyPlan) + '#pricing';
+    try {
+      const out = await api('/api/checkout', { method: 'POST', body: JSON.stringify({ plan: buyPlan }) });
+      if (!out || !out.url) throw new Error((out && out.error) || 'checkout_failed');
+      location.href = out.url;
+    } catch (e) {
+      // Фолбэк: старый путь через главную, если прямой запрос не прошёл.
+      buyRedirected = false;
+      location.href = './?buy=' + encodeURIComponent(buyPlan) + '#pricing';
+    }
   }
 
   async function claim(payload) {
@@ -1550,6 +1895,7 @@ body::before {
       } else {
         $('userEmail').textContent = session.user.email || '–';
       }
+      maybeBuy();
     } else if (!recoveryPanel.hidden) {
       // stay on recovery until password is set
     } else {

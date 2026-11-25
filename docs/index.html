@@ -16,8 +16,87 @@
 <meta property="og:description" content="Оптимизатор Windows 10/11 для геймеров: телеметрия off, 180+ твиков, откат в один клик. Бесплатно навсегда.">
 <meta property="og:url" content="https://voidtweaks.ru/">
 <link rel="canonical" href="https://voidtweaks.ru/">
-<meta property="og:image" content="https://github.com/voidtweaksapp.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://voidtweaks.ru/og-editorial.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="VOID TWEAKS — чистая Windows, больше FPS, меньше задержек">
+<meta property="og:site_name" content="VOID TWEAKS">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VOID TWEAKS — оптимизация Windows 10/11 для игр">
+<meta name="twitter:description" content="Телеметрия off, 180+ твиков, откат в один клик. Бесплатно навсегда, PRO от 99 ₽.">
+<meta name="twitter:image" content="https://voidtweaks.ru/og-editorial.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "VOID TWEAKS",
+      "alternateName": "VOIDTWEAKS",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Windows 10, Windows 11",
+      "softwareVersion": "1.0.5",
+      "url": "https://voidtweaks.ru/",
+      "downloadUrl": "https://github.com/voidtweaksapp/voidtweaks/releases/latest",
+      "image": "https://voidtweaks.ru/og-editorial.png",
+      "description": "Оптимизатор Windows 10/11 для геймеров: отключает телеметрию и лишние службы, настраивает систему под игры и откатывает любое изменение в один клик.",
+      "offers": [
+        { "@type": "Offer", "name": "PRO на 30 дней", "price": "99", "priceCurrency": "RUB", "availability": "https://schema.org/InStock", "url": "https://voidtweaks.ru/#pricing" },
+        { "@type": "Offer", "name": "PRO на 6 месяцев", "price": "299", "priceCurrency": "RUB", "availability": "https://schema.org/InStock", "url": "https://voidtweaks.ru/#pricing" },
+        { "@type": "Offer", "name": "PRO навсегда", "price": "499", "priceCurrency": "RUB", "availability": "https://schema.org/InStock", "url": "https://voidtweaks.ru/#pricing" }
+      ],
+      "publisher": { "@type": "Organization", "name": "VOID TWEAKS", "url": "https://voidtweaks.ru/" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Это безопасно для системы?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Да. Твики применяются через официальные API Windows, а перед первым изменением создаётся точка восстановления. Откатить можно отдельный твик или всю сессию." }
+        },
+        {
+          "@type": "Question",
+          "name": "Могут ли забанить в играх?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Нет. VOID TWEAKS не трогает файлы игр, не внедряется в процессы и не меняет их память — только настройки системы и реестра. Античиты это не затрагивает." }
+        },
+        {
+          "@type": "Question",
+          "name": "Антивирус или SmartScreen ругается — что делать?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Установщик без платной цифровой подписи, поэтому SmartScreen предупреждает о нём, как о любой новой программе. Скачивайте только с этого сайта или GitHub Releases, сверьте SHA-256 из окна «Скачать», затем «Подробнее» → «Выполнить в любом случае». Отключать антивирус не нужно." }
+        },
+        {
+          "@type": "Question",
+          "name": "Как откатить изменения?",
+          "acceptedAnswer": { "@type": "Answer", "text": "В приложении есть история изменений: любой твик откатывается в один клик, можно вернуть и всю сессию. Дополнительно перед первым применением создаётся точка восстановления Windows." }
+        },
+        {
+          "@type": "Question",
+          "name": "Как оплатить PRO и получить ключ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Войдите в профиль на сайте, выберите тариф (99 ₽ за месяц, 299 ₽ за полгода или 499 ₽ навсегда — разово, без подписки) и оплатите через ЮKassa: карты, МИР, СБП. Ключ появится в кабинете сразу после оплаты — вставьте его в приложение. При активации ключ привязывается к ПК по HWID." }
+        },
+        {
+          "@type": "Question",
+          "name": "Как активировать ключ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Скачайте установщик, войдите в профиль и скопируйте ключ из раздела «Ключи». В приложении откройте активацию, вставьте ключ — он привяжется к этому ПК по HWID. Пошагово: https://voidtweaks.ru/guide.html" }
+        },
+        {
+          "@type": "Question",
+          "name": "Работает на Windows 11 24H2 / 25H2?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Да. Поддерживаются Windows 10 и 11 x64, включая актуальные сборки 24H2 и 25H2: твики используют официальные API и проверяются на новых версиях. Если что-то пойдёт не так — откат в один клик." }
+        },
+        {
+          "@type": "Question",
+          "name": "Обновления платные? Что с файлами игр?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Бесплатная версия обновляется бесплатно и работает без ограничений по времени. Ключ «Навсегда» включает все будущие PRO-обновления. Файлы игр приложение не трогает никогда — только системные настройки." }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="icon" type="image/png" sizes="192x192" href="logo-192.png">
 <link rel="apple-touch-icon" href="logo-192.png">
 <link rel="preload" href="fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
