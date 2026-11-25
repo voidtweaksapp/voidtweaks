@@ -819,7 +819,6 @@ body::before {
     "Не удалось обновить ключ. Попробуйте ещё раз.": "Could not update the key. Try again.",
     "Войдите или создайте аккаунт, чтобы продолжить покупку. Ключ сразу привяжется к профилю.": "Sign in or create an account to continue. The key will be linked to your profile.",
     "После входа вы вернётесь к оплате выбранного тарифа.": "After signing in you will return to payment for the selected plan.",
-    "Яндекс": "Yandex",
     "сервис": "service"
   };
 
@@ -1590,12 +1589,12 @@ body::before {
     });
   });
 
-  // Social sign-in (Google + Yandex via Supabase custom provider)
+  // Social sign-in (Google via Supabase)
   document.querySelectorAll('[data-oauth]').forEach(btn => {
     btn.addEventListener('click', async () => {
       clearMsg(oauthMsg);
       const provider = btn.dataset.oauth;
-      const name = provider === 'google' ? 'Google' : provider === 'custom:yandex' ? 'Яндекс' : 'сервис';
+      const name = provider === 'google' ? 'Google' : 'сервис';
       btn.disabled = true;
       btn.setAttribute('aria-busy', 'true');
       try {

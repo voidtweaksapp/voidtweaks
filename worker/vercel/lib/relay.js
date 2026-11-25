@@ -1,11 +1,12 @@
 const UPSTREAM = 'https://voidtweaks.onrender.com';
 const ALLOWED_ORIGINS = new Set([
+  'https://voidtweaks.ru',
   'https://voidtweaksapp.github.io',
   'https://disxrm.github.io'
 ]);
 
 function corsHeaders(origin) {
-  const allow = ALLOWED_ORIGINS.has(origin) ? origin : 'https://voidtweaksapp.github.io';
+  const allow = ALLOWED_ORIGINS.has(origin) ? origin : 'https://voidtweaks.ru';
   return {
     'Access-Control-Allow-Origin': allow,
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',

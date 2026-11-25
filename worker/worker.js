@@ -7,6 +7,7 @@
 
 const UPSTREAM = 'https://voidtweaks.onrender.com';
 const ALLOWED_ORIGINS = new Set([
+  'https://voidtweaks.ru',
   'https://voidtweaksapp.github.io',
   'https://disxrm.github.io'
 ]);

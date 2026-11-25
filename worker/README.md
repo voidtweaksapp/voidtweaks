@@ -37,8 +37,9 @@ const API = 'https://voidtweaks-api.<subdomain>.workers.dev';
 
 Allowed origins:
 
+- `https://voidtweaks.ru`
 - `https://voidtweaksapp.github.io`
 - `https://disxrm.github.io`
 
-Requests from other origins get the GitHub Pages origin in
+Requests from other origins get the production origin in
 `Access-Control-Allow-Origin`.
