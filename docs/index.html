@@ -102,19 +102,6 @@
 <link rel="preload" href="fonts/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="fonts.css">
-<!--
-  Изменения:
-  1) Убран «фонарик» за курсором (cursor-glow удалён полностью).
-  2) Лента игр не останавливается при наведении.
-  3) Bento «Всё нужное — в одном окне» и демо-каталог построены на РЕАЛЬНЫХ твиках
-     из TweakDefinitions.cs / TweakDefinitions.BoosterX.cs: MMCSS (авто),
-     Сетевой адаптер (авто) + nic-backup.json, HAGS с проверкой GPU, FTH,
-     GameDVR/GameBar/GameMode/FSO, мышь 1:1, KeyboardDelay, USB-бэкап,
-     Recall/Copilot/Widgets, очистка 30+ инструментов и т.д.
-  4) Кнопки «анимации» и «поиск» удалены (command palette удалена целиком).
-  Цифры замеров — из README: 110→81 процессов, 75→52 служб, 3646→3244 МБ,
-  CS2 283→288 FPS (+1.5%), PresentMon, Dust2 1280×960, R5 5600 + GTX 1650.
--->
 <style>
 :root{
   --bg0:#000000; --bg1:#060606;
@@ -405,7 +392,7 @@ h2{font-size:clamp(23px,3vw,36px);font-weight:700;line-height:1.18;margin-bottom
 .step p{font-size:13.5px;color:var(--t2);margin-bottom:10px}
 
 /* ---------- pricing ---------- */
-.price-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:18px;margin-top:36px;align-items:start}
+.price-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:18px;margin-top:36px;align-items:stretch}
 .plan{padding:28px;display:flex;flex-direction:column}
 .plan-pro{background:linear-gradient(160deg,rgba(22,22,22,.9),rgba(10,10,10,.75)) padding-box,
   linear-gradient(135deg,#fff,#525252 50%,#262626) border-box;
@@ -423,6 +410,10 @@ h2{font-size:clamp(23px,3vw,36px);font-weight:700;line-height:1.18;margin-bottom
 .plan li{display:flex;gap:10px;font-size:13.5px;color:var(--t2);align-items:flex-start}
 .plan li svg{width:15px;height:15px;flex:none;margin-top:3px;color:#fff}
 .plan li.plus{color:var(--t1);font-weight:600}
+.plan .pf{display:block;min-width:0}
+.plan li small{display:block;font-size:11px;line-height:1.4;color:var(--t3);margin-top:3px;font-weight:400}
+.plan-free ul{gap:12px;margin-bottom:0}
+.plan-free>.plan-note{margin:8px 0 0;text-align:center;font-size:11px}
 .ptabs{display:flex;gap:6px;padding:5px;border-radius:12px;background:rgba(8,8,8,.6);border:1px solid rgba(255,255,255,.14);margin-bottom:18px}
 .ptabs button{flex:1;padding:9px 6px;border-radius:9px;font-size:12.5px;font-weight:600;color:var(--t3);transition:.2s;font-family:var(--disp)}
 .ptabs button[aria-pressed="true"]{background:rgba(255,255,255,.14);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
@@ -902,7 +893,8 @@ html[lang="en"] .about-en{display:none}
       <span class="logo-v"><img src="logo-112.png" alt=""></span>
       VOID<b>TWEAKS</b>
     </a>
-    <nav class="nav-links" aria-label="Основная навигация">
+    <nav class="nav-links" data-i18n-aria="nav.main" aria-label="Основная навигация">
+
       <a href="#features" data-nav="features" data-i18n="nav.features">Возможности</a>
       <a href="#pricing" data-nav="pricing" data-i18n="nav.pricing">Тарифы</a>
       <a href="#faq" data-nav="faq" data-i18n="nav.faq">FAQ</a>
@@ -912,7 +904,7 @@ html[lang="en"] .about-en{display:none}
       <a class="icon-btn" href="https://github.com/voidtweaksapp/voidtweaks" target="_blank" rel="noopener" data-i18n-aria="nav.github" aria-label="GitHub">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.14c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
       </a>
-      <button class="icon-btn" id="langBtn" data-i18n-aria="nav.lang" aria-label="Switch language">EN</button>
+      <button class="icon-btn" id="langBtn" data-i18n-aria="nav.lang" aria-label="Переключить на английский">EN</button>
       <button class="btn btn-p magnetic" data-open-download>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
         <span data-i18n="nav.download">Скачать</span>
@@ -923,6 +915,7 @@ html[lang="en"] .about-en{display:none}
 </header>
 
 <div id="mmenu" class="glass">
+
   <a class="mlink" href="#features" data-i18n="nav.features">Возможности</a>
   <a class="mlink" href="#pricing" data-i18n="nav.pricing">Тарифы</a>
   <a class="mlink" href="#faq" data-i18n="nav.faq">FAQ</a>
@@ -987,13 +980,13 @@ html[lang="en"] .about-en{display:none}
             <canvas id="spark" height="38" aria-hidden="true"></canvas>
             <div class="mtoggles">
               <button class="mtrow" role="switch" aria-checked="true" data-mock="1">
-                <span class="mt-t"><b data-i18n="mock.t1">Отключить телеметрию</b><small data-i18n="mock.t1d">DiagTrack, Diagsvc, dmwappushservice</small></span><span class="sw"></span>
+                <span class="mt-t"><b data-i18n="mock.t1">Отключить телеметрию</b><small data-i18n="mock.t1d">Службы диагностики и отчёты</small></span><span class="sw"></span>
               </button>
               <button class="mtrow" role="switch" aria-checked="true" data-mock="1">
-                <span class="mt-t"><b data-i18n="mock.t2">Win32PrioritySeparation</b><small data-i18n="mock.t2d">Короткие кванты с бустом активного окна 3:1</small></span><span class="sw"></span>
+                <span class="mt-t"><b data-i18n="mock.t2">Приоритет игр</b><small data-i18n="mock.t2d">Короткие кванты с бустом активного окна 3:1</small></span><span class="sw"></span>
               </button>
               <button class="mtrow" role="switch" aria-checked="false" data-mock="pro">
-                <span class="mt-t"><b><span data-i18n="mock.t3">MSI-режим для видеокарты</span> <span class="chip pro">PRO</span></b><small data-i18n="mock.t3d">Меньше задержка прерываний</small></span><span class="sw"></span>
+                <span class="mt-t"><b><span data-i18n="mock.t3">MSI-режим для видеокарты</span> <span class="chip pro">PRO</span></b><small data-i18n="mock.t3d">Ниже задержка прерываний</small></span><span class="sw"></span>
               </button>
             </div>
           </div>
@@ -1012,7 +1005,7 @@ html[lang="en"] .about-en{display:none}
 <!-- ============ MARQUEE ============ -->
 <div class="mq-sec" data-zone="mono">
   <p class="mq-label" data-i18n="mq.label">Оптимизировано под ваши игры</p>
-  <div class="mq" aria-label="Поддерживаемые игры">
+  <div class="mq" data-i18n-aria="res.games" aria-label="Поддерживаемые игры">
     <div class="mq-track">
       <div class="mq-group">
         <span>CS2</span><span>Dota 2</span><span>Fortnite</span><span>Valorant</span><span>Apex Legends</span><span>Rust</span><span>GTA V</span><span>Brawl Stars (LDPlayer)</span><span>Minecraft</span><span>Warzone</span>
@@ -1083,65 +1076,65 @@ html[lang="en"] .about-en{display:none}
   </div>
 </section>
 
-<!-- ============ FEATURES (реальные твики из TweakDefinitions.cs) ============ -->
+<!-- ============ FEATURES ============ -->
 <section id="features" data-zone="mono">
   <div class="wrap">
     <span class="kicker" data-reveal data-i18n="feat.kicker">Возможности</span>
     <h2 data-reveal style="--d:.06s" data-i18n-html="feat.title">Всё нужное — <span class="grad">в одном окне</span></h2>
-    <p class="sub" data-reveal style="--d:.12s" data-i18n="feat.sub">Реальные твики из каталога приложения: каждый — с описанием, проверкой состояния и откатом. Ничего выдуманного.</p>
+    <p class="sub" data-reveal style="--d:.12s" data-i18n="feat.sub">Реальные твики из каталога приложения: описание, проверка состояния и откат. Ничего выдуманного.</p>
 
     <div class="bento">
       <article class="bcard glass sp2 spot tilt" data-reveal>
         <div class="bicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7c2.2 0 4.1.8 5.7 1.9M22 12s-3.5 7-10 7c-2.2 0-4.1-.8-5.7-1.9M3 3l18 18"/></svg></div>
         <h3 data-i18n="f1.t">Телеметрия — off</h3>
-        <p data-i18n="f1.d">Службы DiagTrack, Diagsvc и dmwappushservice, задачи CEIP и Compatibility Appraiser, политика AllowTelemetry = 0 и 9 ETW-автологгеров — одной группой.</p>
+        <p data-i18n="f1.d">Отключает сбор диагностики и фоновые отчёты. Любое изменение возвращается одной кнопкой.</p>
         <div class="offlist">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg>DiagTrack · Diagsvc · dmwappushservice<b>OFF</b></span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><i data-i18n="f1.i2" style="font-style:normal">CEIP · Appraiser · Inventory</i><b>OFF</b></span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><i data-i18n="f1.i3" style="font-style:normal">ETW-автологгеры · 9 сессий</i><b>OFF</b></span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><i data-i18n="f1.i1" style="font-style:normal">Сбор диагностики</i><b>OFF</b></span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><i data-i18n="f1.i2" style="font-style:normal">Фоновые отчёты</i><b>OFF</b></span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg><i data-i18n="f1.i3" style="font-style:normal">Отправка данных</i><b>OFF</b></span>
         </div>
       </article>
       <article class="bcard glass spot tilt" data-reveal style="--d:.06s">
         <div class="bicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg></div>
         <h3 data-i18n="f2.t">MMCSS (авто)</h3>
-        <p data-i18n="f2.d">Определяет тип сетевого драйвера (NDIS или NetAdapterCx) и подбирает профиль планировщика мультимедиа. «+ Аудио-фикс» — только при статтерах звука.</p>
-        <div class="bviz"><span class="chip cy">SystemResponsiveness 20→10</span><span class="chip cy">Games 2→6</span></div>
+        <p data-i18n="f2.d">Подбирает профиль планировщика под игры и звук. Без ручной настройки.</p>
+        <div class="bviz"><span class="chip cy">MMCSS</span><span class="chip cy" data-i18n="f2.c1">Игры</span><span class="chip cy" data-i18n="f2.c2">Аудио</span></div>
       </article>
       <article class="bcard glass spot tilt" data-reveal style="--d:.12s">
         <div class="bicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div>
         <h3 data-i18n="f3.t">Сетевой адаптер (авто)</h3>
-        <p data-i18n="f3.d">Меняет только параметры, которые реально поддерживает ваш драйвер: оффлоады, RSS, RSC, прерывания, буферы. Исходные значения — в nic-backup.json, Wake-on-LAN не трогается.</p>
-        <div class="bviz"><span class="chip">RSC off</span><span class="chip">EEE off</span><span class="chip lm" data-i18n="f3.c">Откат из бэкапа</span></div>
+        <p data-i18n="f3.d">Настраивает сеть под ваш драйвер: меньше задержек и потерь. Исходные параметры сохраняются.</p>
+        <div class="bviz"><span class="chip" data-i18n="f3.c1">Авто</span><span class="chip" data-i18n="f3.c2">Пинг</span><span class="chip lm" data-i18n="f3.c3">Бэкап</span></div>
       </article>
       <article class="bcard glass spot tilt" data-reveal>
         <div class="bicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h4m-2-2v4m7-1h.01M18 10h.01M7 5h10a5 5 0 0 1 5 5v4a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5v-4a5 5 0 0 1 5-5Z"/></svg></div>
         <h3 data-i18n="f4.t">Игровой режим</h3>
-        <p data-i18n="f4.d">Game Mode включён, GameDVR и Xbox Game Bar выключены, оптимизации полноэкранного режима (FSO) отключены — меньше оверлеев и фоновой записи.</p>
-        <div class="bviz"><span class="chip">GameDVR off</span><span class="chip">FSO off</span></div>
+        <p data-i18n="f4.d">Включает игровой режим и убирает лишние оверлеи и фоновую запись.</p>
+        <div class="bviz"><span class="chip">Game Mode</span><span class="chip" data-i18n="f4.c1">Оверлеи</span><span class="chip" data-i18n="f4.c2">Запись</span></div>
       </article>
       <article class="bcard glass spot tilt" data-reveal style="--d:.06s">
         <div class="bicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h9M19 8h1M4 16h1M11 16h9"/><circle cx="16" cy="8" r="2.5"/><circle cx="8" cy="16" r="2.5"/></svg></div>
         <h3 data-i18n="f5.t">GPU: NVIDIA и AMD</h3>
-        <p data-i18n="f5.d">HAGS с проверкой совместимости GPU, Force P0-State и PowerMizer для NVIDIA, Anti-Lag и ULPS off для AMD, MPO off при мерцании. Разделы скрыты, если карты нет в системе.</p>
-        <div class="bviz"><span class="chip cy">HAGS</span><span class="chip cy">P0-State</span><span class="chip cy">Anti-Lag</span></div>
+        <p data-i18n="f5.d">Профили для NVIDIA и AMD: меньше задержек и стабильнее кадры. Только для вашей видеокарты.</p>
+        <div class="bviz"><span class="chip cy">NVIDIA</span><span class="chip cy">AMD</span><span class="chip cy" data-i18n="f5.c1">Авто</span></div>
       </article>
       <article class="bcard glass sp2 spot tilt" data-reveal style="--d:.12s">
         <div class="bicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v4"/></svg></div>
         <h3 data-i18n="f6.t">Периферия без задержек</h3>
-        <p data-i18n="f6.d">Мышь 1:1 (ускорение off), KeyboardDelay 0, Raw Input без троттлинга. Энергосбережение USB отключается целиком — с резервной копией всех исходных значений и точным откатом. USB 3 U1/U2 — off.</p>
-        <div class="bviz"><span class="chip">Mouse 1:1</span><span class="chip">KeyboardDelay 0</span><span class="chip lm" data-i18n="f6.c">USB-бэкап и откат</span></div>
+        <p data-i18n="f6.d">Мышь и клавиатура без ускорения и лишних задержек. USB-энергосбережение отключается с резервной копией.</p>
+        <div class="bviz"><span class="chip" data-i18n="f6.c1">Мышь 1:1</span><span class="chip">Raw Input</span><span class="chip lm" data-i18n="f6.c2">USB-бэкап</span></div>
       </article>
       <article class="bcard glass sp2 spot tilt" data-reveal>
         <div class="bicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v6m4-6v6"/></svg></div>
         <h3 data-i18n="f7.t">Очистка: 30+ инструментов</h3>
-        <p data-i18n="f7.d">Временные файлы, DirectX Shader Cache, кэши браузеров и лаунчеров (Steam, Epic, Battle.net), WinSxS через DISM, Windows.old, дампы сбоев. Игры, сохранения, пароли и настройки не затрагиваются.</p>
-        <div class="bviz"><span class="chip">WinSxS · DISM</span><span class="chip">Shader Cache</span><span class="chip" data-i18n="f7.c">Кэш лаунчеров</span></div>
+        <p data-i18n="f7.d">Временные файлы, кэши и логи. Игры, сохранения, пароли и настройки не затрагиваются.</p>
+        <div class="bviz"><span class="chip" data-i18n="f7.c1">Кэш</span><span class="chip" data-i18n="f7.c2">Логи</span><span class="chip" data-i18n="f7.c3">Безопасно</span></div>
       </article>
       <article class="bcard glass sp2 spot tilt" data-reveal style="--d:.06s">
         <div class="bicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6l-8-4Z"/><path d="m9 12 2 2 4-4"/></svg></div>
         <h3 data-i18n="f8.t">Приватность Windows 10/11</h3>
-        <p data-i18n="f8.d">Recall (24H2+), Copilot и Widgets — off. Рекламный ID, Spotlight, Bing в поиске, облачная синхронизация и доступ UWP-приложений к камере, геолокации и файлам — под вашим контролем.</p>
-        <div class="bviz"><span class="chip lm">Recall off</span><span class="chip lm">Copilot off</span><span class="chip">Bing off</span></div>
+        <p data-i18n="f8.d">Отключает Recall, Copilot и рекламные рекомендации. Доступ к камере, геолокации и файлам — под вашим контролем.</p>
+        <div class="bviz"><span class="chip lm">Recall off</span><span class="chip lm">Copilot off</span><span class="chip" data-i18n="f8.c1">Реклама off</span></div>
       </article>
     </div>
   </div>
@@ -1155,24 +1148,25 @@ html[lang="en"] .about-en{display:none}
     <p class="sub" data-reveal style="--d:.12s" data-i18n="pr.sub">Разовая оплата без автопродления и подписок. Ключ сразу после оплаты — в личном кабинете.</p>
 
     <div class="price-grid">
-      <div class="plan glass" data-reveal>
+      <div class="plan plan-free glass" data-reveal>
         <p class="plan-name">FREE</p>
         <p class="plan-price">0 ₽</p>
         <p class="plan-per" data-i18n="pr.free.per">навсегда, без ограничений по времени</p>
         <p class="plan-save">&nbsp;</p>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span data-i18n="pr.f1">180+ твиков реестра и служб</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span data-i18n="pr.f2">Мониторинг CPU, GPU, ОЗУ и пинга</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span data-i18n="pr.f3">Менеджер автозагрузки</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span data-i18n="pr.f4">Встроенные утилиты и Game Configs</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span data-i18n="pr.f5">Откат и точка восстановления</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span class="pf"><span data-i18n="pr.f1">180+ твиков реестра и служб</span><small data-i18n="pr.fd1">Безопасные настройки Windows</small></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span class="pf"><span data-i18n="pr.f2">Мониторинг CPU, GPU, ОЗУ и пинга</span><small data-i18n="pr.fd2">Показатели в реальном времени</small></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span class="pf"><span data-i18n="pr.f3">Менеджер автозагрузки</span><small data-i18n="pr.fd3">Управление программами при старте</small></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span class="pf"><span data-i18n="pr.f4">Встроенные утилиты и Game Configs</span><small data-i18n="pr.fd4">Готовые профили для игр</small></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span class="pf"><span data-i18n="pr.f5">Откат и точка восстановления</span><small data-i18n="pr.fd5">Изменения откатываются в один клик</small></span></li>
         </ul>
+        <p class="plan-note" data-i18n="pr.free.note">Без ключа и регистрации</p>
       </div>
 
       <div class="plan plan-pro glass" data-reveal style="--d:.08s">
         <span class="plan-badge" data-i18n="pr.badge">Выгодно</span>
         <p class="plan-name">PRO</p>
-        <div class="ptabs" role="group" aria-label="Период PRO">
+        <div class="ptabs" role="group" data-i18n-aria="pr.period" aria-label="Период PRO">
           <button data-plan="0" aria-pressed="false" data-i18n="pr.tab1">Месяц</button>
           <button data-plan="1" aria-pressed="false" data-i18n="pr.tab2">Полгода</button>
           <button data-plan="2" aria-pressed="true" data-i18n="pr.tab3">Навсегда</button>
@@ -1191,23 +1185,6 @@ html[lang="en"] .about-en{display:none}
         <p class="plan-note" style="margin:12px 0 0;text-align:center" data-i18n="pr.pro.note">Покупка в профиле — ключ привязывается к аккаунту и ПК по HWID</p>
         <p class="plan-note plan-guide" style="margin:6px 0 0;text-align:center"><a href="guide.html" data-i18n="pr.guide">Как активировать ключ</a></p>
       </div>
-    </div>
-
-    <div class="cmp glass" data-reveal>
-      <p class="cmp-title" data-i18n="pr.cmp">Что входит в FREE и PRO</p>
-      <table>
-        <thead><tr><th data-i18n="pr.th.feature">Возможность</th><th>FREE</th><th>PRO</th></tr></thead>
-        <tbody>
-          <tr><td data-i18n="pr.r1">180+ твиков реестра и служб</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td data-i18n="pr.r2">Мониторинг CPU, GPU, ОЗУ и пинга</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td data-i18n="pr.r3">Менеджер автозагрузки</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td data-i18n="pr.r4">Утилиты и Game Configs</td><td class="yes">✓</td><td class="yes">✓</td></tr>
-          <tr><td data-i18n="pr.r5">Управление прерываниями (MSI, IRQ)</td><td class="no">—</td><td class="yes">✓</td></tr>
-          <tr><td data-i18n="pr.r6">Разделы NVIDIA и AMD</td><td class="no">—</td><td class="yes">✓</td></tr>
-          <tr><td data-i18n="pr.r7">Скрытые твики</td><td class="no">—</td><td class="yes">✓</td></tr>
-          <tr><td data-i18n="pr.r8">Бета-версии и приоритетные обновления</td><td class="no">—</td><td class="yes">✓</td></tr>
-        </tbody>
-      </table>
     </div>
 
     <div class="pay-row" data-reveal>
@@ -1351,6 +1328,7 @@ html[lang="en"] .about-en{display:none}
       </div>
       <div class="ft-col">
         <h4 data-i18n="ft.product">Продукт</h4>
+
         <a href="#features" data-i18n="nav.features">Возможности</a>
         <a href="#pricing" data-i18n="nav.pricing">Тарифы</a>
         <a href="#changelog">Changelog</a>
@@ -1436,7 +1414,7 @@ html[lang="en"] .about-en{display:none}
 <!-- ============ ACCOUNT MODAL ============ -->
 <div class="overlay" id="acctModal" role="dialog" aria-modal="true" aria-labelledby="acctTitle">
   <div class="dialog glass acct-dialog">
-    <button class="dlg-x" data-close-acct aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg></button>
+    <button class="dlg-x" data-close-acct data-i18n-aria="dl.close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg></button>
     <div class="acct-head">
       <span class="logo-v"><img src="logo-112.png" alt=""></span>
       <div>
@@ -1469,7 +1447,7 @@ html[lang="en"] .about-en{display:none}
         <div class="acct-field acct-pass">
           <label for="acctLoginPass" data-i18n="acct.password">Пароль</label>
           <input id="acctLoginPass" type="password" autocomplete="current-password" placeholder="••••••••" required data-i18n-ph="acct.passPh">
-          <button type="button" class="acct-eye" data-eye="acctLoginPass" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
+          <button type="button" class="acct-eye" data-i18n-aria="acct.showPass" data-eye="acctLoginPass" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
         </div>
         <button class="btn btn-p" id="acctLoginBtn" type="submit"><span data-btn-label data-i18n="acct.login">Войти</span><span class="btn-spinner" aria-hidden="true"></span></button>
         <button class="acct-link" id="acctForgot" type="button" data-i18n="acct.forgot">Забыли пароль?</button>
@@ -1484,12 +1462,12 @@ html[lang="en"] .about-en{display:none}
         <div class="acct-field acct-pass">
           <label for="acctRegPass" data-i18n="acct.password">Пароль</label>
           <input id="acctRegPass" type="password" autocomplete="new-password" placeholder="••••••••" minlength="6" required data-i18n-ph="acct.passPh">
-          <button type="button" class="acct-eye" data-eye="acctRegPass" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
+          <button type="button" class="acct-eye" data-i18n-aria="acct.showPass" data-eye="acctRegPass" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
         </div>
         <div class="acct-field acct-pass">
           <label for="acctRegPass2" data-i18n="acct.password2">Повторите пароль</label>
           <input id="acctRegPass2" type="password" autocomplete="new-password" placeholder="••••••••" minlength="6" required data-i18n-ph="acct.passPh">
-          <button type="button" class="acct-eye" data-eye="acctRegPass2" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
+          <button type="button" class="acct-eye" data-i18n-aria="acct.showPass" data-eye="acctRegPass2" aria-label="Показать пароль" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye"/></svg><svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><use href="#i-eye-off"/></svg></button>
         </div>
         <button class="btn btn-p" id="acctRegBtn" type="submit"><span data-btn-label data-i18n="acct.register">Создать аккаунт</span><span class="btn-spinner" aria-hidden="true"></span></button>
         <p class="acct-terms" data-i18n-html="acct.terms">Создавая аккаунт, вы принимаете <a href="offer.html">оферту</a> и <a href="privacy.html">политику конфиденциальности</a>.</p>
@@ -1534,7 +1512,7 @@ html[lang="en"] .about-en{display:none}
 <!-- ============ ORDER MODAL ============ -->
 <div class="overlay" id="ordModal" role="dialog" aria-modal="true" aria-labelledby="ordTitle">
   <div class="dialog glass ord-card">
-    <button class="dlg-x" data-close-ord aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg></button>
+    <button class="dlg-x" data-close-ord data-i18n-aria="dl.close" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg></button>
     <div class="ord-icon spin" id="ordIcon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-6.2-8.6"/></svg>
     </div>
@@ -1577,7 +1555,7 @@ var D={
 "seo.title":["VOID TWEAKS — оптимизация Windows 10/11 для игр: больше FPS, меньше задержек","VOID TWEAKS — Windows 10/11 gaming optimizer: more FPS, less latency"],
 "seo.desc":["VOID TWEAKS отключает телеметрию и лишние службы, настраивает Windows 10/11 под игры и откатывает любое изменение в один клик. Бесплатно навсегда. PRO от 99 ₽ разово.","VOID TWEAKS disables telemetry and bloat services, tunes Windows 10/11 for gaming and rolls back any change in one click. Free forever. PRO from 99 ₽ one-time."],
 "nav.features":["Возможности","Features"],"nav.how":["Как это работает","How it works"],"nav.pricing":["Тарифы","Pricing"],"nav.faq":["FAQ","FAQ"],"nav.profile":["Профиль","Profile"],"nav.download":["Скачать","Download"],
-"nav.menu":["Меню","Menu"],"nav.github":["GitHub репозиторий","GitHub repository"],"nav.lang":["Switch language","Сменить язык"],
+"nav.menu":["Меню","Menu"],"nav.github":["GitHub репозиторий","GitHub repository"],"nav.lang":["Переключить на английский","Switch to Russian"],"nav.main":["Основная навигация","Main navigation"],"res.games":["Поддерживаемые игры","Supported games"],"pr.period":["Период PRO","PRO period"],
 "hero.badge":["версия 1.0.5","version 1.0.5"],
 "hero.title":["Чистая Windows.<br><span class='grad'>Больше FPS.</span><br>Меньше <span class='grad2'>задержек.</span>","Clean Windows.<br><span class='grad'>More FPS.</span><br>Less <span class='grad2'>latency.</span>"],
 "hero.sub":["VOID TWEAKS отключает телеметрию и лишние службы, настраивает систему под игры и откатывает любое изменение в один клик.","VOID TWEAKS disables telemetry and bloat services, tunes your system for gaming and rolls back any change in one click."],
@@ -1587,9 +1565,9 @@ var D={
 "mock.chip1":["−402 МБ ОЗУ","−402 MB RAM"],"mock.chip2":["телеметрия: off","telemetry: off"],
 "mock.home":["Главная","Home"],"mock.opt":["Оптимизация","Optimize"],"mock.tools":["Инструменты","Tools"],
 "mock.monitor":["Мониторинг","Monitoring"],"mock.live":["в реальном времени","real-time"],"mock.ram":["ОЗУ","RAM"],"mock.ping":["Пинг","Ping"],
-"mock.t1":["Отключить телеметрию","Disable telemetry"],"mock.t1d":["DiagTrack, Diagsvc, dmwappushservice","DiagTrack, Diagsvc, dmwappushservice"],
-"mock.t2":["Win32PrioritySeparation","Win32PrioritySeparation"],"mock.t2d":["Короткие кванты с бустом активного окна 3:1","Short quanta with a 3:1 foreground boost"],
-"mock.t3":["MSI-режим для видеокарты","GPU MSI mode"],"mock.t3d":["Меньше задержка прерываний","Lower interrupt latency"],
+"mock.t1":["Отключить телеметрию","Disable telemetry"],"mock.t1d":["Службы диагностики и отчёты","Diagnostic services and reports"],
+"mock.t2":["Приоритет игр","Game priority"],"mock.t2d":["Короткие кванты с бустом активного окна 3:1","Short quanta with a 3:1 foreground boost"],
+"mock.t3":["MSI-режим для видеокарты","GPU MSI mode"],"mock.t3d":["Ниже задержка прерываний","Lower interrupt latency"],
 "mock.s1":["твиков системы","system tweaks"],"mock.s2n":["1 клик","1 click"],"mock.s2":["откат изменений","change rollback"],"mock.s3n":["Авто","Auto"],"mock.s3":["точка восстановления","restore point"],"mock.s4":["файлов игр затронуто","game files touched"],
 "mock.proToast":["MSI-режим — PRO-модуль. Смотрите тарифы ниже.","MSI mode is a PRO module. See pricing below."],
 "mq.label":["Оптимизировано под ваши игры","Tuned for your games"],
@@ -1600,56 +1578,47 @@ var D={
 "res.note":["Ryzen 5 5600 + GTX 1650, Windows 11 · метрики сняты через 3 минуты после загрузки · CS2: FPS Benchmark, Dust2, 1280×960, PresentMon, 3 прогона. Результат зависит от конфигурации.","Ryzen 5 5600 + GTX 1650, Windows 11 · metrics taken 3 minutes after boot · CS2: FPS Benchmark, Dust2, 1280×960, PresentMon, 3 runs. Results depend on your hardware."],
 "res.honest":["<b>Про FPS честно:</b> +1.5% в CS2 (283 → 288), 1% low — в пределах погрешности. Без обещаний +40%: VOID TWEAKS снижает фон и задержки системы, а не рисует лишние кадры. Методика открыта — повтори её сам.","<b>Honest about FPS:</b> +1.5% in CS2 (283 → 288), 1% lows within margin of error. No +40% promises: VOID TWEAKS reduces background load and system latency, it doesn't draw extra frames. The methodology is open — repeat it yourself."],
 "stat.1":["твиков реестра и служб","registry & service tweaks"],"stat.2":["фоновых процессов","background processes"],"stat.3":["ОЗУ после загрузки","RAM after boot"],
-"feat.kicker":["Возможности","Features"],"feat.title":["Всё нужное — <span class='grad'>в одном окне</span>","Everything you need — <span class='grad'>in one window</span>"],
-"feat.sub":["Реальные твики из каталога приложения: каждый — с описанием, проверкой состояния и откатом. Ничего выдуманного.","Real tweaks from the app catalog: each with a description, a state check and a rollback. Nothing made up."],
+"feat.kicker":["Возможности","Features"],
+"feat.title":["Всё нужное — <span class='grad'>в одном окне</span>","Everything you need — <span class='grad'>in one window</span>"],
+"feat.sub":["Реальные твики из каталога приложения: описание, проверка состояния и откат. Ничего выдуманного.","Real tweaks from the app catalog: a description, a state check and a rollback. Nothing made up."],
 "f1.t":["Телеметрия — off","Telemetry — off"],
-"f1.d":["Службы DiagTrack, Diagsvc и dmwappushservice, задачи CEIP и Compatibility Appraiser, политика AllowTelemetry = 0 и 9 ETW-автологгеров — одной группой.","DiagTrack, Diagsvc and dmwappushservice services, CEIP and Compatibility Appraiser tasks, the AllowTelemetry = 0 policy and 9 ETW autologgers — as one group."],
-"f1.i2":["CEIP · Appraiser · Inventory","CEIP · Appraiser · Inventory"],"f1.i3":["ETW-автологгеры · 9 сессий","ETW autologgers · 9 sessions"],
+"f1.d":["Отключает сбор диагностики и фоновые отчёты. Любое изменение возвращается одной кнопкой.","Turns off diagnostic collection and background reports. Any change can be reverted in one click."],
+"f1.i1":["Сбор диагностики","Diagnostic collection"],
+"f1.i2":["Фоновые отчёты","Background reports"],
+"f1.i3":["Отправка данных","Data upload"],
 "f2.t":["MMCSS (авто)","MMCSS (auto)"],
-"f2.d":["Определяет тип сетевого драйвера (NDIS или NetAdapterCx) и подбирает профиль планировщика мультимедиа. «+ Аудио-фикс» — только при статтерах звука.","Detects your NIC driver type (NDIS or NetAdapterCx) and picks a multimedia scheduler profile. “+ Audio fix” is for audio stutters only."],
+"f2.d":["Подбирает профиль планировщика под игры и звук. Без ручной настройки.","Picks a scheduler profile for games and audio. No manual tuning."],
+"f2.c1":["Игры","Games"],
+"f2.c2":["Аудио","Audio"],
 "f3.t":["Сетевой адаптер (авто)","Network adapter (auto)"],
-"f3.d":["Меняет только параметры, которые реально поддерживает ваш драйвер: оффлоады, RSS, RSC, прерывания, буферы. Исходные значения — в nic-backup.json, Wake-on-LAN не трогается.","Tunes only the parameters your driver actually supports: offloads, RSS, RSC, interrupts, buffers. Originals are saved to nic-backup.json; Wake-on-LAN is untouched."],
-"f3.c":["Откат из бэкапа","Backup rollback"],
+"f3.d":["Настраивает сеть под ваш драйвер: меньше задержек и потерь. Исходные параметры сохраняются.","Tunes the network for your driver: lower latency and fewer drops. Original settings are saved."],
+"f3.c1":["Авто","Auto"],
+"f3.c2":["Пинг","Ping"],
+"f3.c3":["Бэкап","Backup"],
 "f4.t":["Игровой режим","Gaming mode"],
-"f4.d":["Game Mode включён, GameDVR и Xbox Game Bar выключены, оптимизации полноэкранного режима (FSO) отключены — меньше оверлеев и фоновой записи.","Game Mode on, GameDVR and Xbox Game Bar off, Fullscreen Optimizations (FSO) disabled — fewer overlays and background recording."],
+"f4.d":["Включает игровой режим и убирает лишние оверлеи и фоновую запись.","Turns on Game Mode and removes extra overlays and background recording."],
+"f4.c1":["Оверлеи","Overlays"],
+"f4.c2":["Запись","Recording"],
 "f5.t":["GPU: NVIDIA и AMD","GPU: NVIDIA & AMD"],
-"f5.d":["HAGS с проверкой совместимости GPU, Force P0-State и PowerMizer для NVIDIA, Anti-Lag и ULPS off для AMD, MPO off при мерцании. Разделы скрыты, если карты нет в системе.","HAGS with a GPU compatibility check, Force P0-State and PowerMizer for NVIDIA, Anti-Lag and ULPS off for AMD, MPO off for flickering. Vendor sections are hidden when the GPU is absent."],
+"f5.d":["Профили для NVIDIA и AMD: меньше задержек и стабильнее кадры. Только для вашей видеокарты.","Profiles for NVIDIA and AMD: lower latency and steadier frames. Only for your GPU."],
+"f5.c1":["Авто","Auto"],
 "f6.t":["Периферия без задержек","Lag-free peripherals"],
-"f6.d":["Мышь 1:1 (ускорение off), KeyboardDelay 0, Raw Input без троттлинга. Энергосбережение USB отключается целиком — с резервной копией всех исходных значений и точным откатом. USB 3 U1/U2 — off.","1:1 mouse (acceleration off), KeyboardDelay 0, unthrottled Raw Input. USB power saving is disabled entirely — with a backup of every original value and an exact rollback. USB 3 U1/U2 — off."],
-"f6.c":["USB-бэкап и откат","USB backup & rollback"],
+"f6.d":["Мышь и клавиатура без ускорения и лишних задержек. USB-энергосбережение отключается с резервной копией.","Mouse and keyboard without acceleration or extra latency. USB power saving is disabled with a backup."],
+"f6.c1":["Мышь 1:1","Mouse 1:1"],
+"f6.c2":["USB-бэкап","USB backup"],
 "f7.t":["Очистка: 30+ инструментов","Cleanup: 30+ tools"],
-"f7.d":["Временные файлы, DirectX Shader Cache, кэши браузеров и лаунчеров (Steam, Epic, Battle.net), WinSxS через DISM, Windows.old, дампы сбоев. Игры, сохранения, пароли и настройки не затрагиваются.","Temp files, DirectX shader cache, browser and launcher caches (Steam, Epic, Battle.net), WinSxS via DISM, Windows.old, crash dumps. Games, saves, passwords and settings are untouched."],
-"f7.c":["Кэш лаунчеров","Launcher cache"],
+"f7.d":["Временные файлы, кэши и логи. Игры, сохранения, пароли и настройки не затрагиваются.","Temp files, caches and logs. Games, saves, passwords and settings are untouched."],
+"f7.c1":["Кэш","Cache"],
+"f7.c2":["Логи","Logs"],
+"f7.c3":["Безопасно","Safe"],
 "f8.t":["Приватность Windows 10/11","Windows 10/11 privacy"],
-"f8.d":["Recall (24H2+), Copilot и Widgets — off. Рекламный ID, Spotlight, Bing в поиске, облачная синхронизация и доступ UWP-приложений к камере, геолокации и файлам — под вашим контролем.","Recall (24H2+), Copilot and Widgets — off. Advertising ID, Spotlight, Bing in Search, cloud sync and UWP access to camera, location and files — under your control."],
-"demo.kicker":["Интерактивное демо","Interactive demo"],"demo.title":["Каталог твиков — <span class='grad'>попробуйте здесь</span>","Tweak catalog — <span class='grad'>try it here</span>"],
-"demo.sub":["Настоящие твики из каталога приложения — с описанием и уровнем риска, как в VOID TWEAKS. Это демо: на вашем ПК ничего не меняется.","Real tweaks from the app catalog — with descriptions and risk levels, just like in VOID TWEAKS. It's a demo: nothing changes on your PC."],
-"demo.selected":["Выбрано","Selected"],"demo.apply":["Применить","Apply"],"demo.reset":["Сбросить","Reset"],
-"demo.safe":["безопасно","safe"],"demo.adv":["с осторожностью","use with care"],
-"demo.p1":["Создаём точку восстановления…","Creating a restore point…"],"demo.p2":["Применяем твики…","Applying tweaks…"],"demo.done":["Готово ✓","Done ✓"],
-"demo.toast":["Твики применены (демо)","Tweaks applied (demo)"],"demo.empty":["Выберите хотя бы один твик","Select at least one tweak"],"demo.resetToast":["Демо сброшено к значениям по умолчанию","Demo reset to defaults"],
-"demo.hint":["В приложении перед первым применением автоматически создаётся точка восстановления, а каждый твик можно откатить.","In the app, a restore point is created automatically before the first apply, and every tweak can be rolled back."],
-"tw1.t":["Отключить GameDVR","Disable GameDVR"],"tw1.d":["Фоновая запись игр и захват — меньше нагрузка","Background game recording and capture — less load"],
-"tw2.t":["Включить Game Mode","Enable Game Mode"],"tw2.d":["Игровой режим Windows: AutoGameModeEnabled = 1","Windows Game Mode: AutoGameModeEnabled = 1"],
-"tw3.t":["Отключить Game Bar","Disable Game Bar"],"tw3.d":["Xbox Game Bar и игровой оверлей Windows","Xbox Game Bar and the Windows game overlay"],
-"tw4.t":["Мышь: Enable 1:1 Movement","Mouse: Enable 1:1 Movement"],"tw4.d":["Ускорение и пороги чувствительности = 0","Acceleration and sensitivity thresholds = 0"],
-"tw5.t":["Reduce Keyboard Delay","Reduce Keyboard Delay"],"tw5.d":["Задержка повтора клавиш: KeyboardDelay = 0","Key repeat delay: KeyboardDelay = 0"],
-"tw6.t":["Ускорить появление меню","Faster menus"],"tw6.d":["MenuShowDelay: 400 → 0 мс","MenuShowDelay: 400 → 0 ms"],
-"tw7.t":["Отключить FTH","Disable FTH"],"tw7.d":["Fault Tolerant Heap — частая причина микрофризов в CS2","Fault Tolerant Heap — a common cause of micro-stutters in CS2"],
-"tw8.t":["Отключить SuperFetch (SSD)","Disable SuperFetch (SSD)"],"tw8.d":["SysMain: полезно отключить на SSD, на HDD — не стоит","SysMain: worth disabling on SSD, keep it on HDD"],
-"tw9.t":["Отключить Background Apps","Disable Background Apps"],"tw9.d":["Store-приложения в фоне: −50–120 МБ ОЗУ","Background Store apps: −50–120 MB RAM"],
-"tw10.t":["Отключить энергосбережение USB","Disable USB power saving"],"tw10.d":["Запрет авто-отключения USB; откат из резервной копии","No USB auto-suspend; rollback from a backup"],
-"how.kicker":["Как это работает","How it works"],"how.title":["Четыре шага до <span class='grad'>чистой системы</span>","Four steps to a <span class='grad'>clean system</span>"],
-"how.sub":["Вы сами выбираете, что менять. Любое изменение можно откатить — история хранится локально.","You choose what to change. Everything is reversible — history is stored locally."],
-"how.step":["Шаг","Step"],"how.note":["История изменений хранится локально. Ничего не уходит на сервер.","Change history is stored locally. Nothing is sent to a server."],
-"how.s1t":["Скачайте и запустите","Download & run"],"how.s1d":["Установщик 111 МБ для Windows 10/11 x64. Права администратора нужны только для применения твиков.","111 MB installer for Windows 10/11 x64. Admin rights are only needed to apply tweaks."],
-"how.s2t":["Выберите твики","Pick your tweaks"],"how.s2d":["180+ настроек с описанием: что меняется и зачем. Включайте по одной или целыми группами.","180+ settings with descriptions: what changes and why. Enable one by one or in groups."],"how.s2c":["Реестр · службы · питание · таймеры","Registry · services · power · timers"],
-"how.s3t":["Примените","Apply"],"how.s3d":["Перед первым изменением автоматически создаётся точка восстановления. Применение занимает секунды.","A restore point is created automatically before the first change. Applying takes seconds."],"how.s3c":["Точка восстановления — авто","Restore point — auto"],
-"how.s4t":["Откатите, если что","Roll back anytime"],"how.s4d":["Любой твик или всю сессию — в один клик. Не понравилось, как стало? Верните как было.","Any tweak or the whole session — in one click. Don't like the result? Restore it."],"how.s4c":["1 клик","1 click"],
+"f8.d":["Отключает Recall, Copilot и рекламные рекомендации. Доступ к камере, геолокации и файлам — под вашим контролем.","Turns off Recall, Copilot and ad recommendations. Camera, location and file access stay under your control."],
+"f8.c1":["Реклама off","Ads off"],
 "pr.kicker":["Тарифы","Pricing"],"pr.title":["Начните бесплатно. <span class='grad'>PRO — от 99 ₽</span>","Start free. <span class='grad'>PRO from 99 ₽</span>"],
 "pr.sub":["Разовая оплата без автопродления и подписок. Ключ сразу после оплаты — в личном кабинете.","One-time payment, no auto-renewal or subscriptions. The key appears in your account right after payment."],
-"pr.free.per":["навсегда, без ограничений по времени","forever, no time limits"],"pr.free.cta":["Скачать бесплатно","Download free"],
+"pr.free.per":["навсегда, без ограничений по времени","forever, no time limits"],"pr.free.note":["Без ключа и регистрации","No key or sign-up required"],
 "pr.f1":["180+ твиков реестра и служб","180+ registry & service tweaks"],"pr.f2":["Мониторинг CPU, GPU, ОЗУ и пинга","CPU, GPU, RAM & ping monitoring"],"pr.f3":["Менеджер автозагрузки","Startup manager"],"pr.f4":["Встроенные утилиты и Game Configs","Built-in utilities & Game Configs"],"pr.f5":["Откат и точка восстановления","Rollback & restore point"],
+"pr.fd1":["Безопасные настройки Windows","Safe Windows tweaks"],"pr.fd2":["Показатели в реальном времени","Real-time monitoring"],"pr.fd3":["Управление программами при старте","Manage startup apps"],"pr.fd4":["Готовые профили для игр","Ready-made game profiles"],"pr.fd5":["Изменения откатываются в один клик","Changes roll back in one click"],
 "pr.badge":["Выгодно","Best value"],"pr.tab1":["Месяц","Month"],"pr.tab2":["Полгода","6 months"],"pr.tab3":["Навсегда","Lifetime"],
 "pr.per0":["за 30 дней · все PRO-модули","for 30 days · all PRO modules"],"pr.per1":["за 180 дней · ≈ 50 ₽ в месяц","for 180 days · ≈ 50 ₽/month"],"pr.per2":["без срока действия · будущие обновления","no expiration · future updates"],
 "pr.save1":["−50% · выгода 295 ₽","−50% · save 295 ₽"],"pr.save2":["Дешевле, чем полгода помесячно","Cheaper than 6 monthly payments"],
@@ -2055,10 +2024,15 @@ function setLang(l){
   $$('[data-i18n-html]').forEach(function(el){el.innerHTML=t(el.dataset.i18nHtml)});
   $$('[data-i18n-ph]').forEach(function(el){el.placeholder=t(el.dataset.i18nPh)});
   $$('[data-i18n-aria]').forEach(function(el){el.setAttribute('aria-label',t(el.dataset.i18nAria))});
+  $$('[data-eye]').forEach(function(el){el.setAttribute('aria-label',t(el.getAttribute('aria-pressed')==='true'?'acct.hidePass':'acct.showPass'))});
   document.title=t('seo.title');
   var md=document.querySelector('meta[name="description"]');if(md)md.setAttribute('content',t('seo.desc'));
   $('#langBtn').textContent=l==='ru'?'EN':'RU';
-  $$('[data-count]').forEach(function(el){if(el.dataset.done)renderCount(el,parseFloat(el.dataset.count))});
+  $$('[data-count]').forEach(function(el){
+    var suf=lang==='en'&&el.dataset.suffixEn?el.dataset.suffixEn:(el.dataset.suffix||'');
+    if(el.dataset.done)renderCount(el,parseFloat(el.dataset.count));
+    else el.textContent=(el.dataset.prefix||'')+el.dataset.count+suf;
+  });
   $$('.fps-val').forEach(function(v){if(v.closest('.fps-row').classList.contains('go'))v.textContent=fmt(parseInt(v.dataset.val,10))});
   updPricing();
 }
