@@ -405,7 +405,7 @@ h2{font-size:clamp(23px,3vw,36px);font-weight:700;line-height:1.18;margin-bottom
 .step p{font-size:13.5px;color:var(--t2);margin-bottom:10px}
 
 /* ---------- pricing ---------- */
-.price-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:18px;margin-top:36px;align-items:stretch}
+.price-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:18px;margin-top:36px;align-items:start}
 .plan{padding:28px;display:flex;flex-direction:column}
 .plan-pro{background:linear-gradient(160deg,rgba(22,22,22,.9),rgba(10,10,10,.75)) padding-box,
   linear-gradient(135deg,#fff,#525252 50%,#262626) border-box;
@@ -504,6 +504,7 @@ h2{font-size:clamp(23px,3vw,36px);font-weight:700;line-height:1.18;margin-bottom
 footer{border-top:1px solid rgba(255,255,255,.1);background:rgba(4,4,4,.8);backdrop-filter:blur(10px);padding:52px 0 28px;margin-top:20px}
 .ft-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px;margin-bottom:36px}
 .ft-brand p{font-size:13px;color:var(--t3);margin-top:12px;max-width:280px}
+.ft-about-en{font-size:11px!important;line-height:1.55;color:var(--t3);opacity:.72;margin-top:8px!important;max-width:360px!important}
 .ft-col h4{font-family:var(--disp);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--t2);margin-bottom:14px}
 .ft-col a,.ft-col button{display:block;font-size:13.5px;color:var(--t3);padding:5px 0;transition:color .2s;text-align:left}
 .ft-col a:hover,.ft-col button:hover{color:#fff}
@@ -878,12 +879,6 @@ html[lang="en"] .about-en{display:none}
   .ft-col a,.ft-col button{font-size:12px;padding:3px 0}
   .ft-bottom{font-size:11px;padding-top:14px}
 }
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto}
-  .blob,.mq-track,.badge .dot,.live i,.fchip{animation:none!important}
-  [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}
-  .btn,.mock,.mtrow,.sw,.plan{transition:none!important}
-}
 </style>
 </head>
 <body data-zone="mono">
@@ -909,7 +904,6 @@ html[lang="en"] .about-en{display:none}
     </a>
     <nav class="nav-links" aria-label="Основная навигация">
       <a href="#features" data-nav="features" data-i18n="nav.features">Возможности</a>
-      <a href="#how" data-nav="how" data-i18n="nav.how">Как это работает</a>
       <a href="#pricing" data-nav="pricing" data-i18n="nav.pricing">Тарифы</a>
       <a href="#faq" data-nav="faq" data-i18n="nav.faq">FAQ</a>
       <a href="account.html" data-open-account data-i18n="nav.profile">Профиль</a>
@@ -930,7 +924,6 @@ html[lang="en"] .about-en{display:none}
 
 <div id="mmenu" class="glass">
   <a class="mlink" href="#features" data-i18n="nav.features">Возможности</a>
-  <a class="mlink" href="#how" data-i18n="nav.how">Как это работает</a>
   <a class="mlink" href="#pricing" data-i18n="nav.pricing">Тарифы</a>
   <a class="mlink" href="#faq" data-i18n="nav.faq">FAQ</a>
   <a class="mlink" href="account.html" data-open-account data-i18n="nav.profile">Профиль</a>
@@ -954,7 +947,7 @@ html[lang="en"] .about-en{display:none}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
           <span data-i18n="hero.cta1">Скачать бесплатно</span>
         </button>
-        <a class="btn btn-g btn-lg magnetic" href="#how"><span data-i18n="hero.cta2">Как это работает</span></a>
+        <a class="btn btn-g btn-lg magnetic" href="#pricing"><span data-i18n="hero.cta2">Тарифы</span></a>
       </div>
       <p class="hero-meta staged" style="--d:.42s" data-i18n-html="hero.meta">Бесплатная версия навсегда · <b>Windows 10 / 11 x64</b> · PRO от <b>99 ₽</b> разово</p>
       <div class="trust staged" style="--d:.5s">
@@ -1154,106 +1147,6 @@ html[lang="en"] .about-en{display:none}
   </div>
 </section>
 
-<!-- ============ DEMO (реальные твики из каталога) ============ -->
-<section id="demo" data-zone="mono">
-  <div class="wrap">
-    <span class="kicker" data-reveal data-i18n="demo.kicker">Интерактивное демо</span>
-    <h2 data-reveal style="--d:.06s" data-i18n-html="demo.title">Каталог твиков — <span class="grad">попробуйте здесь</span></h2>
-    <p class="sub" data-reveal style="--d:.12s" data-i18n="demo.sub">Настоящие твики из каталога приложения — с описанием и уровнем риска, как в VOID TWEAKS. Это демо: на вашем ПК ничего не меняется.</p>
-
-    <div class="demo-panel glass" data-reveal style="--d:.16s">
-      <div class="demo-top">
-        <span class="demo-count"><span data-i18n="demo.selected">Выбрано</span>: <b id="demoCount">6</b> / 10</span>
-        <div class="demo-actions">
-          <button class="btn btn-g" id="demoReset"><span data-i18n="demo.reset">Сбросить</span></button>
-          <button class="btn btn-p magnetic" id="demoApply">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg>
-            <span id="demoApplyLabel" data-i18n="demo.apply">Применить</span>
-          </button>
-        </div>
-      </div>
-      <div class="tgrid" id="tgrid">
-        <button class="trow" role="switch" aria-checked="true" data-def="1"><span class="tt"><b><span data-i18n="tw1.t">Отключить GameDVR</span><span class="tag safe" data-i18n="demo.safe">безопасно</span></b><small data-i18n="tw1.d">Фоновая запись игр и захват — меньше нагрузка</small></span><span class="sw"></span></button>
-        <button class="trow" role="switch" aria-checked="true" data-def="1"><span class="tt"><b><span data-i18n="tw2.t">Включить Game Mode</span><span class="tag safe" data-i18n="demo.safe">безопасно</span></b><small data-i18n="tw2.d">Игровой режим Windows: AutoGameModeEnabled = 1</small></span><span class="sw"></span></button>
-        <button class="trow" role="switch" aria-checked="true" data-def="1"><span class="tt"><b><span data-i18n="tw3.t">Отключить Game Bar</span><span class="tag safe" data-i18n="demo.safe">безопасно</span></b><small data-i18n="tw3.d">Xbox Game Bar и игровой оверлей Windows</small></span><span class="sw"></span></button>
-        <button class="trow" role="switch" aria-checked="true" data-def="1"><span class="tt"><b><span data-i18n="tw4.t">Мышь: Enable 1:1 Movement</span><span class="tag safe" data-i18n="demo.safe">безопасно</span></b><small data-i18n="tw4.d">Ускорение и пороги чувствительности = 0</small></span><span class="sw"></span></button>
-        <button class="trow" role="switch" aria-checked="true" data-def="1"><span class="tt"><b><span data-i18n="tw5.t">Reduce Keyboard Delay</span><span class="tag safe" data-i18n="demo.safe">безопасно</span></b><small data-i18n="tw5.d">Задержка повтора клавиш: KeyboardDelay = 0</small></span><span class="sw"></span></button>
-        <button class="trow" role="switch" aria-checked="false" data-def="0"><span class="tt"><b><span data-i18n="tw6.t">Ускорить появление меню</span><span class="tag safe" data-i18n="demo.safe">безопасно</span></b><small data-i18n="tw6.d">MenuShowDelay: 400 → 0 мс</small></span><span class="sw"></span></button>
-        <button class="trow" role="switch" aria-checked="true" data-def="1"><span class="tt"><b><span data-i18n="tw7.t">Отключить FTH</span><span class="tag safe" data-i18n="demo.safe">безопасно</span></b><small data-i18n="tw7.d">Fault Tolerant Heap — частая причина микрофризов в CS2</small></span><span class="sw"></span></button>
-        <button class="trow" role="switch" aria-checked="false" data-def="0"><span class="tt"><b><span data-i18n="tw8.t">Отключить SuperFetch (SSD)</span><span class="tag adv" data-i18n="demo.adv">с осторожностью</span></b><small data-i18n="tw8.d">SysMain: полезно отключить на SSD, на HDD — не стоит</small></span><span class="sw"></span></button>
-        <button class="trow" role="switch" aria-checked="false" data-def="0"><span class="tt"><b><span data-i18n="tw9.t">Отключить Background Apps</span><span class="tag adv" data-i18n="demo.adv">с осторожностью</span></b><small data-i18n="tw9.d">Store-приложения в фоне: −50–120 МБ ОЗУ</small></span><span class="sw"></span></button>
-        <button class="trow" role="switch" aria-checked="false" data-def="0"><span class="tt"><b><span data-i18n="tw10.t">Отключить энергосбережение USB</span><span class="tag adv" data-i18n="demo.adv">с осторожностью</span></b><small data-i18n="tw10.d">Запрет авто-отключения USB; откат из резервной копии</small></span><span class="sw"></span></button>
-      </div>
-      <div class="demo-progress" id="demoProgress">
-        <div class="dp-track"><div class="dp-fill" id="demoFill"></div></div>
-        <div class="dp-label"><span id="demoPhase">…</span><span id="demoPct">0%</span></div>
-      </div>
-      <p class="demo-hint" data-i18n="demo.hint">В приложении перед первым применением автоматически создаётся точка восстановления, а каждый твик можно откатить.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ HOW ============ -->
-<section id="how" data-zone="mono">
-  <div class="wrap">
-    <span class="kicker" data-reveal data-i18n="how.kicker">Как это работает</span>
-    <h2 data-reveal style="--d:.06s" data-i18n-html="how.title">Четыре шага до <span class="grad">чистой системы</span></h2>
-    <p class="sub" data-reveal style="--d:.12s" data-i18n="how.sub">Вы сами выбираете, что менять. Любое изменение можно откатить — история хранится локально.</p>
-
-    <div class="how-grid">
-      <div class="how-visual glass" data-reveal>
-        <div class="ring-wrap">
-          <svg viewBox="0 0 120 120">
-            <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".6" stop-color="#a3a3a3"/><stop offset="1" stop-color="#6b6b6b"/></linearGradient></defs>
-            <circle class="ring-bg" cx="60" cy="60" r="52"/>
-            <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="52"/>
-          </svg>
-          <span class="ring-num grad" id="stepNum">1</span>
-        </div>
-        <div>
-          <p class="how-step-label"><span data-i18n="how.step">Шаг</span> <span id="stepOf">1 / 4</span></p>
-          <h3 id="stepTitle">Скачайте и запустите</h3>
-          <p data-i18n="how.note">История изменений хранится локально. Ничего не уходит на сервер.</p>
-        </div>
-      </div>
-      <div class="steps">
-        <div class="step glass" data-step="0" data-reveal>
-          <span class="step-num">1</span>
-          <div>
-            <h3 data-i18n="how.s1t">Скачайте и запустите</h3>
-            <p data-i18n="how.s1d">Установщик 111 МБ для Windows 10/11 x64. Права администратора нужны только для применения твиков.</p>
-            <span class="chip cy">Windows 10 / 11 x64</span>
-          </div>
-        </div>
-        <div class="step glass" data-step="1" data-reveal style="--d:.06s">
-          <span class="step-num">2</span>
-          <div>
-            <h3 data-i18n="how.s2t">Выберите твики</h3>
-            <p data-i18n="how.s2d">180+ настроек с описанием: что меняется и зачем. Включайте по одной или целыми группами.</p>
-            <span class="chip" data-i18n="how.s2c">Реестр · службы · питание · таймеры</span>
-          </div>
-        </div>
-        <div class="step glass" data-step="2" data-reveal style="--d:.12s">
-          <span class="step-num">3</span>
-          <div>
-            <h3 data-i18n="how.s3t">Примените</h3>
-            <p data-i18n="how.s3d">Перед первым изменением автоматически создаётся точка восстановления. Применение занимает секунды.</p>
-            <span class="chip lm" data-i18n="how.s3c">Точка восстановления — авто</span>
-          </div>
-        </div>
-        <div class="step glass" data-step="3" data-reveal style="--d:.18s">
-          <span class="step-num">4</span>
-          <div>
-            <h3 data-i18n="how.s4t">Откатите, если что</h3>
-            <p data-i18n="how.s4d">Любой твик или всю сессию — в один клик. Не понравилось, как стало? Верните как было.</p>
-            <span class="chip lm" data-i18n="how.s4c">1 клик</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ PRICING ============ -->
 <section id="pricing" data-zone="mono">
   <div class="wrap">
@@ -1274,7 +1167,6 @@ html[lang="en"] .about-en{display:none}
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span data-i18n="pr.f4">Встроенные утилиты и Game Configs</span></li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12.5 5 5L20 6.5"/></svg><span data-i18n="pr.f5">Откат и точка восстановления</span></li>
         </ul>
-        <button class="btn btn-g btn-lg magnetic" data-open-download><span data-i18n="pr.free.cta">Скачать бесплатно</span></button>
       </div>
 
       <div class="plan plan-pro glass" data-reveal style="--d:.08s">
@@ -1443,67 +1335,6 @@ html[lang="en"] .about-en{display:none}
   </div>
 </section>
 
-<!-- ============ REQUIREMENTS ============ -->
-<section id="requirements" data-zone="mono">
-  <div class="wrap">
-    <span class="kicker" data-reveal data-i18n="rq.kicker">Системные требования</span>
-    <h2 data-reveal style="--d:.06s" data-i18n-html="rq.title">Запустится <span class="gradl">почти на всём</span></h2>
-    <div class="req-grid">
-      <div class="req rmin glass" data-reveal>
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg><span data-i18n="rq.min">Минимальные</span></h3>
-        <dl>
-          <div class="rrow"><dt data-i18n="rq.os">Система</dt><dd data-i18n="rq.min.os">Windows 10 x64 (1909+)</dd></div>
-          <div class="rrow"><dt data-i18n="rq.cpu">Процессор</dt><dd data-i18n="rq.min.cpu">2 ядра · 2 ГГц</dd></div>
-          <div class="rrow"><dt data-i18n="rq.ram">Память</dt><dd data-i18n="rq.min.ram">4 ГБ ОЗУ</dd></div>
-          <div class="rrow"><dt data-i18n="rq.disk">Диск</dt><dd data-i18n="rq.min.disk">250 МБ свободно</dd></div>
-        </dl>
-      </div>
-      <div class="req rrec glass" data-reveal style="--d:.08s">
-        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></svg><span data-i18n="rq.rec">Рекомендуемые</span></h3>
-        <dl>
-          <div class="rrow"><dt data-i18n="rq.os">Система</dt><dd data-i18n="rq.rec.os">Windows 11 23H2+ x64</dd></div>
-          <div class="rrow"><dt data-i18n="rq.cpu">Процессор</dt><dd data-i18n="rq.rec.cpu">4 ядра · 3 ГГц и выше</dd></div>
-          <div class="rrow"><dt data-i18n="rq.ram">Память</dt><dd data-i18n="rq.rec.ram">8 ГБ ОЗУ и больше</dd></div>
-          <div class="rrow"><dt data-i18n="rq.disk">Диск</dt><dd data-i18n="rq.rec.disk">500 МБ · SSD</dd></div>
-        </dl>
-      </div>
-    </div>
-    <p class="req-note" data-reveal>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M12 11v5"/></svg>
-      <span data-i18n="rq.note">.NET 10 и драйвер PawnIO устанавливаются автоматически. Для применения твиков нужны права администратора; для мониторинга — нет.</span>
-    </p>
-    <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap" data-reveal>
-      <button class="btn btn-p btn-lg magnetic" data-open-download>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 21h16"/></svg>
-        <span data-i18n="rq.cta">Скачать v1.0.5 · 111 МБ</span>
-      </button>
-      <a class="btn btn-g btn-lg magnetic" href="https://github.com/voidtweaksapp/voidtweaks/releases" target="_blank" rel="noopener">GitHub Releases</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ABOUT (static, for OAuth brand verification) ============ -->
-<section id="about" aria-labelledby="about-title" style="padding-top:0">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-copy">
-        <span class="kicker" data-i18n="ab.kicker">О проекте</span>
-        <h2 id="about-title" style="font-size:clamp(22px,3vw,32px);letter-spacing:-.01em;margin:10px 0 14px" data-i18n-html="ab.title">Один разработчик.<br><span class="grad">Без подписок и телеметрии.</span></h2>
-        <p data-i18n="ab.p1">VOIDTWEAKS — независимый проект одного разработчика. Приложение отключает телеметрию и лишние службы, применяет безопасные твики для фона и задержек и откатывает любое изменение в один клик. Написано на C# и работает локально: настройки применяются на вашем ПК, а не на сервере.</p>
-        <p data-i18n="ab.p2">Сайт открыт без регистрации. Вход нужен только для лицензии PRO: ключ хранится в профиле и привязывается к ПК по HWID. Вход через Google используется только для аутентификации — мы получаем email, имя и фото профиля.</p>
-        <p class="about-en" lang="en">VOIDTWEAKS is a Windows 10/11 optimization utility for gamers. It disables telemetry and unnecessary services, applies safe system tweaks, and reverts every change in one click. Sign-in is optional and only needed to manage a PRO license; Google Sign-In is used solely for authentication (email, name and profile picture).</p>
-      </div>
-      <aside class="about-card glass">
-        <div class="about-row"><span data-i18n="ab.dev">Разработчик</span><b data-i18n="ab.author">Виктор Рой</b></div>
-        <div class="about-row"><span data-i18n="ab.platform">Платформа</span><b>Windows 10 / 11 x64</b></div>
-        <div class="about-row"><span data-i18n="ab.stack">Стек</span><b>C# · .NET 10</b></div>
-        <div class="about-row"><span data-i18n="ab.support">Поддержка</span><b><a href="mailto:voidtweaksdev@gmail.com">Email</a></b></div>
-        <a class="btn btn-g" href="https://github.com/voidtweaksapp/voidtweaks/issues" target="_blank" rel="noopener">GitHub Issues</a>
-      </aside>
-    </div>
-  </div>
-</section>
-
 </main>
 
 <!-- ============ FOOTER ============ -->
@@ -1516,10 +1347,10 @@ html[lang="en"] .about-en{display:none}
           VOID<b>TWEAKS</b>
         </a>
         <p data-i18n="ft.desc">Оптимизатор Windows 10/11 для геймеров. Написан на C#, распространяется бесплатно, PRO — разово и без подписки.</p>
+        <p class="ft-about-en" lang="en">VOIDTWEAKS is a Windows 10/11 optimization utility for gamers. It disables telemetry and unnecessary services, applies safe system tweaks, and reverts every change in one click. Sign-in is optional and only needed to manage a PRO license.</p>
       </div>
       <div class="ft-col">
         <h4 data-i18n="ft.product">Продукт</h4>
-        <button data-open-download data-i18n="ft.download">Скачать</button>
         <a href="#features" data-i18n="nav.features">Возможности</a>
         <a href="#pricing" data-i18n="nav.pricing">Тарифы</a>
         <a href="#changelog">Changelog</a>
@@ -1737,8 +1568,7 @@ html[lang="en"] .about-en{display:none}
 /* ================= helpers ================= */
 var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
 var fine=window.matchMedia('(pointer: fine)').matches;
-var motionMQ=window.matchMedia('(prefers-reduced-motion: reduce)');
-var reduced=motionMQ.matches;
+var reduced=false; /* animations stay on even if the OS asks for reduced motion */
 var SHA='0ae13d440ba01027e104af779df6c600d0e1d593c47cd2b38e3e2b3effa27ac5';
 
 /* ================= i18n ================= */
@@ -1751,7 +1581,7 @@ var D={
 "hero.badge":["версия 1.0.5","version 1.0.5"],
 "hero.title":["Чистая Windows.<br><span class='grad'>Больше FPS.</span><br>Меньше <span class='grad2'>задержек.</span>","Clean Windows.<br><span class='grad'>More FPS.</span><br>Less <span class='grad2'>latency.</span>"],
 "hero.sub":["VOID TWEAKS отключает телеметрию и лишние службы, настраивает систему под игры и откатывает любое изменение в один клик.","VOID TWEAKS disables telemetry and bloat services, tunes your system for gaming and rolls back any change in one click."],
-"hero.cta1":["Скачать бесплатно","Download free"],"hero.cta2":["Как это работает","How it works"],
+"hero.cta1":["Скачать бесплатно","Download free"],"hero.cta2":["Тарифы","Pricing"],
 "hero.meta":["Бесплатная версия навсегда · <b>Windows 10 / 11 x64</b> · PRO от <b>99 ₽</b> разово","Free version forever · <b>Windows 10 / 11 x64</b> · PRO from <b>99 ₽</b> one-time"],
 "hero.tr1":["Откат в один клик","One-click rollback"],"hero.tr2":["Точка восстановления","Restore point"],"hero.tr3":["Не трогает файлы игр","Game files untouched"],"hero.tr4":["Без подписки","No subscription"],
 "mock.chip1":["−402 МБ ОЗУ","−402 MB RAM"],"mock.chip2":["телеметрия: off","telemetry: off"],
@@ -1989,12 +1819,6 @@ function stepNet(now,dt){
 }
 sizeCanvas();drawNet();
 tasks.add(stepNet);
-function syncMotion(e){
-  reduced=e.matches;
-  if(reduced)drawNet();
-}
-if(motionMQ.addEventListener)motionMQ.addEventListener('change',syncMotion);
-else if(motionMQ.addListener)motionMQ.addListener(syncMotion);
 
 /* ================= scroll UI / parallax ================= */
 var nav=$('#nav'),prog=$('#progress'),aurora=$('#aurora'),grid=$('#grid3d');
@@ -2049,7 +1873,7 @@ var revealIO=new IntersectionObserver(function(es){
 },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
 $$('[data-reveal]').forEach(function(el){revealIO.observe(el)});
 
-var navMap={features:'features',how:'how',pricing:'pricing',faq:'faq'};
+var navMap={features:'features',pricing:'pricing',faq:'faq'};
 var zoneIO=new IntersectionObserver(function(es){
   es.forEach(function(en){
     if(en.isIntersecting){
@@ -2144,65 +1968,6 @@ $$('.mtrow').forEach(function(row){
   });
 });
 
-/* ================= demo catalog ================= */
-var trows=$$('#tgrid .trow'),demoCount=$('#demoCount'),applyBtn=$('#demoApply'),applyLabel=$('#demoApplyLabel');
-var demoProg=$('#demoProgress'),demoFill=$('#demoFill'),demoPhase=$('#demoPhase'),demoPct=$('#demoPct');
-var demoRunning=false,demoDoneTimer=null;
-function updDemoCount(){
-  var n=trows.filter(function(r){return r.getAttribute('aria-checked')==='true'}).length;
-  demoCount.textContent=n;return n;
-}
-trows.forEach(function(r){
-  r.addEventListener('click',function(){
-    if(demoRunning)return;
-    r.setAttribute('aria-checked',r.getAttribute('aria-checked')==='true'?'false':'true');
-    updDemoCount();
-  });
-});
-$('#demoReset').addEventListener('click',function(){
-  if(demoRunning)return;
-  trows.forEach(function(r){r.setAttribute('aria-checked',r.dataset.def==='1'?'true':'false')});
-  updDemoCount();demoProg.classList.remove('show');
-  toast('info',t('demo.resetToast'));
-});
-applyBtn.addEventListener('click',function(){
-  if(demoRunning)return;
-  var n=updDemoCount();
-  if(n===0){toast('warning',t('demo.empty'));return}
-  demoRunning=true;applyBtn.disabled=true;applyBtn.setAttribute('aria-busy','true');
-  if(demoDoneTimer){clearTimeout(demoDoneTimer);demoDoneTimer=null}
-  demoProg.classList.add('show');demoFill.style.width='0%';demoPct.textContent='0%';
-  demoPhase.textContent=t('demo.p1');
-  tween(1900,function(p){
-    demoFill.style.width=(p*100).toFixed(1)+'%';
-    demoPct.textContent=Math.round(p*100)+'%';
-    demoPhase.textContent=p<.32?t('demo.p1'):t('demo.p2');
-  },function(){
-    demoPhase.textContent=t('demo.done');
-    applyLabel.textContent=t('demo.done');
-    toast('success',t('demo.toast'));
-    demoRunning=false;applyBtn.disabled=false;applyBtn.removeAttribute('aria-busy');
-    demoDoneTimer=setTimeout(function(){applyLabel.textContent=t('demo.apply');demoDoneTimer=null},1800);
-  });
-});
-
-/* ================= how-it-works sticky ================= */
-var stepKeys=['how.s1t','how.s2t','how.s3t','how.s4t'];
-var stepNum=$('#stepNum'),stepOf=$('#stepOf'),stepTitle=$('#stepTitle'),ringFg=$('#ringFg');
-var curStep=0,CIRC=326.7;
-function setStep(i){
-  curStep=i;
-  stepNum.textContent=i+1;stepOf.textContent=(i+1)+' / 4';
-  stepTitle.textContent=t(stepKeys[i]);
-  ringFg.style.strokeDashoffset=(CIRC*(1-(i+1)/4)).toFixed(1);
-  $$('.step').forEach(function(s){s.classList.toggle('active',parseInt(s.dataset.step,10)===i)});
-}
-var stepIO=new IntersectionObserver(function(es){
-  es.forEach(function(en){if(en.isIntersecting)setStep(parseInt(en.target.dataset.step,10))});
-},{rootMargin:'-40% 0px -50% 0px',threshold:0});
-$$('.step').forEach(function(s){stepIO.observe(s)});
-setStep(0);
-
 /* ================= pricing ================= */
 var plan=2,PLANS=[{price:'99 ₽'},{price:'299 ₽',old:'594 ₽'},{price:'499 ₽'}];
 function updPricing(){
@@ -2295,8 +2060,7 @@ function setLang(l){
   $('#langBtn').textContent=l==='ru'?'EN':'RU';
   $$('[data-count]').forEach(function(el){if(el.dataset.done)renderCount(el,parseFloat(el.dataset.count))});
   $$('.fps-val').forEach(function(v){if(v.closest('.fps-row').classList.contains('go'))v.textContent=fmt(parseInt(v.dataset.val,10))});
-  updDemoCount();updPricing();setStep(curStep);
-  if(!demoRunning&&!demoDoneTimer)applyLabel.textContent=t('demo.apply');
+  updPricing();
 }
 $('#langBtn').addEventListener('click',function(){
   setLang(lang==='ru'?'en':'ru');
@@ -2976,7 +2740,6 @@ document.addEventListener('keydown',function(e){
 
 /* ================= init ================= */
 setLang(lang);
-updDemoCount();
 payBoot();
 })();
 </script>
