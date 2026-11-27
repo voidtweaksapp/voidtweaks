@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-attr 'none'; frame-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.voidtweaks.ru https://mzkvqlbcrxaibpizuuuk.supabase.co https://cloudflareinsights.com; base-uri 'none'; object-src 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-attr 'none'; frame-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.voidtweaks.ru https://voidtweaks.onrender.com https://mzkvqlbcrxaibpizuuuk.supabase.co https://cloudflareinsights.com; base-uri 'none'; object-src 'none'; form-action 'self'">
 <meta http-equiv="Referrer-Policy" content="no-referrer">
 <script>
 (function(){try{if(window.top!==window.self){window.top.location=window.self.location}}catch(e){document.documentElement.style.display='none'}})();
@@ -2056,6 +2056,7 @@ document.addEventListener('visibilitychange',function(){lastT=performance.now()}
 var PAY_SB='https://mzkvqlbcrxaibpizuuuk.supabase.co';
 var PAY_KEY='sb_publishable_ONhVp8Za-zzwpE7FMp7Nyg_ntPLMYp7';
 var PAY_API='https://api.voidtweaks.ru';
+var PAY_API_FALLBACK='https://voidtweaks.onrender.com';
 var PAY_PLANS=['month','half','forever'];
 var PAY_STORE='void-auth-v1';
 var PAY_ALT='sb-mzkvqlbcrxaibpizuuuk-auth-token';
@@ -2227,17 +2228,23 @@ async function payApi(path,opts,ms){
   opts=opts||{};
   var s=await payGetSession();
   if(!s)throw {payAuth:true};
-  async function run(token){
+  async function run(token,base){
     var headers={'Authorization':'Bearer '+token};
     var o={method:opts.method||'GET',headers:headers};
     if(opts.body){headers['Content-Type']='application/json';o.body=typeof opts.body==='string'?opts.body:JSON.stringify(opts.body)}
-    var res=await payFetch(PAY_API+path,o,ms||60000);
+    var res=await payFetch(base+path,o,ms||60000);
     return {r:res,d:await payJson(res)};
   }
-  var out=await run(s.access_token);
+  var base=PAY_API;
+  var out;
+  try{out=await run(s.access_token,base)}
+  catch(e){base=PAY_API_FALLBACK;out=await run(s.access_token,base)}
+  if(out.r.status>=500||out.r.status===404||out.r.status===403){
+    try{base=PAY_API_FALLBACK;out=await run(s.access_token,base)}catch(e){}
+  }
   if(out.r.status===401){
     var fresh=await payRefreshSession();
-    if(fresh)out=await run(fresh.access_token);
+    if(fresh)out=await run(fresh.access_token,base);
     else{payClearSession();throw {payAuth:true}}
   }
   return out;

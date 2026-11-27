@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#030303" />
 <meta name="color-scheme" content="dark" />
 <meta http-equiv="Referrer-Policy" content="no-referrer" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-attr 'none'; frame-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.voidtweaks.ru https://mzkvqlbcrxaibpizuuuk.supabase.co https://cloudflareinsights.com; base-uri 'none'; object-src 'none'; form-action 'self'" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; script-src-attr 'none'; frame-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.voidtweaks.ru https://voidtweaks.onrender.com https://mzkvqlbcrxaibpizuuuk.supabase.co https://cloudflareinsights.com; base-uri 'none'; object-src 'none'; form-action 'self'" />
 <script>
 (function(){try{if(window.top!==window.self){window.top.location=window.self.location}}catch(e){document.documentElement.style.display='none'}})();
 </script>
@@ -19,6 +19,7 @@
 <link rel="preload" href="fonts/onest-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/onest-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://api.voidtweaks.ru" crossorigin>
+<link rel="preconnect" href="https://voidtweaks.onrender.com" crossorigin>
 <link rel="preconnect" href="https://mzkvqlbcrxaibpizuuuk.supabase.co" crossorigin>
 <style>
 @font-face { font-family: 'Onest'; src: url('fonts/onest-400.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
@@ -963,6 +964,7 @@ body::before {
   const SUPABASE_URL = 'https://mzkvqlbcrxaibpizuuuk.supabase.co';
   const SUPABASE_KEY = 'sb_publishable_ONhVp8Za-zzwpE7FMp7Nyg_ntPLMYp7';
   const API = 'https://api.voidtweaks.ru';
+  const API_FALLBACK = 'https://voidtweaks.onrender.com';
   // Признак админа приходит только с сервера (/api/account/keys), никаких
   // зашитых email во фронтенде: подделка UI всё равно не даст доступ к API.
   // Render на free-тарифе засыпает. Будим его сразу, не дожидаясь входа:
@@ -1161,29 +1163,45 @@ body::before {
     clearMsg(registerMsg);
   }
 
+  async function fetchWithTimeout(url, opts, ms) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), ms);
+    try {
+      return await fetch(url, Object.assign({}, opts, { signal: controller.signal }));
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   async function api(path, options = {}, retried = false) {
     const session = currentSession || (await supabase.auth.getSession()).data.session;
     if (!session) throw new Error('no_session');
     const headers = Object.assign({ 'Content-Type': 'application/json' }, options.headers || {}, {
       Authorization: 'Bearer ' + session.access_token
     });
-    const controller = new AbortController();
-    // Render на бесплатном тарифе просыпается до ~50 секунд.
-    const timer = setTimeout(() => controller.abort(), 60000);
+    const opts = Object.assign({}, options, { headers });
     let res;
     try {
-      res = await fetch(API + path, Object.assign({}, options, { headers, signal: controller.signal }));
+      res = await fetchWithTimeout(API + path, opts, 15000);
     } catch (e) {
-      clearTimeout(timer);
-      if (!retried) {
-        await new Promise(r => setTimeout(r, 1200));
-        return api(path, options, true);
+      try {
+        res = await fetchWithTimeout(API_FALLBACK + path, opts, 60000);
+      } catch (e2) {
+        if (!retried) {
+          await new Promise(r => setTimeout(r, 1200));
+          return api(path, options, true);
+        }
+        const err = new Error(e2 && e2.name === 'AbortError' ? 'timeout' : 'network');
+        err.status = 0;
+        throw err;
       }
-      const err = new Error(e && e.name === 'AbortError' ? 'timeout' : 'network');
-      err.status = 0;
-      throw err;
-    } finally {
-      clearTimeout(timer);
+    }
+    if (res.status >= 500 || res.status === 404 || res.status === 403) {
+      try {
+        res = await fetchWithTimeout(API_FALLBACK + path, opts, 60000);
+      } catch (e) {
+        // Оставляем ответ основного API: он информативнее сетевой ошибки.
+      }
     }
     if (res.status === 401 && !retried) {
       const { data, error } = await withTimeout(supabase.auth.refreshSession());
